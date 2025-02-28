@@ -25,7 +25,7 @@ author:
   avatar           : "yuxuan.png"
   name             : "Yuxuan FAN / 樊宇轩"
   pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
+  bio              : #"Short biography for the left-hand sidebar"
   location         : "Sichuan"
   employer         : "HKUST(GZ)" 
   uri              : # https://yuxuanfanOrion.github.io

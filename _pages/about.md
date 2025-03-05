@@ -15,6 +15,7 @@ Big fan of astronomy. An **Astronomy enthusiast** and **Stargazer**. Really want
 
 News
 ======
+- [2025.03] Luckily, there was no paper rejected this month!!!
 - [2025.03.05] I'm feeling a bit overwhelmed today!!!
 - [2025.02] Three paper were rejected by CVPR'25!!!
 - [2025.01] One paper was rejected by TII!!!

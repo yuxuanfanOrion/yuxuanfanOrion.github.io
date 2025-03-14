@@ -9,7 +9,6 @@ redirect_from:
 
 Welcome to Yuxuan FAN'S Homepage
 ======
-Big fan of astronomy. An **Astronomy enthusiast** and **Stargazer**. Really want to do AI model for Astronomy!
 
 > <span style="color: red">I am open to Research Internships in 2025 Summer and PhD position in 2026 Fall. If you have any opportunities, please do not hesitate to contact me!</span>
 

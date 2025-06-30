@@ -10,10 +10,13 @@ redirect_from:
 Welcome to Yuxuan FAN'S Homepage
 ======
 
-> <span style="color: red">I am open to Research Internships in 2025 Summer and PhD position in 2026 Fall. If you have any opportunities, please do not hesitate to contact me!</span>
+> <span style="color: red">I am joining AMAP, ALIBABA as a intern this summer.</span>
 
 News
 ======
+- [2025.06] Three paper were rejected by ICCV'25!!!
+- [2025.06] A paper received a very low score in EMNLP.
+- [2025.06] A paper received a very low score in CoRL.
 - [2025.03] Luckily, there was no paper rejected this month!!!
 - [2025.03.05] I'm feeling a bit overwhelmed today!!!
 - [2025.02] Three paper were rejected by CVPR'25!!!

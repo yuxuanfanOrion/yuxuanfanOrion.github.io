@@ -10,7 +10,7 @@ redirect_from:
 Welcome to Yuxuan FAN'S Homepage
 ======
 
-> <span style="color: red">I am joining AMAP, ALIBABA as a intern this summer.</span>
+> <span style="color: red">I am joining AMAP, ALIBABA as an intern this summer.</span>
 
 News
 ======

@@ -10,7 +10,7 @@ redirect_from:
 Welcome to Yuxuan FAN'S Homepage
 ======
 
-> <span style="color: red">I'm looking for opportunities to do astrophotography in the wild (both planetary photography and deep space photography are fine). If you're also interested, feel free to contact me.</span>
+> <span style="color: red">I'm looking for opportunities to do astrophotography in the wild (both planetary photography and deep space photography are fine). If you're also interested, feel free to contact me. (Better around beijing)</span>
 
 > <span style="color: red">I am joining AMAP, ALIBABA as an intern this summer.</span>
 

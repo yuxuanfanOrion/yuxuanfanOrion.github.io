@@ -16,9 +16,9 @@ Welcome to Yuxuan FAN'S Homepage
 
 News
 ======
+- [2025.08] A paper was rejected by CORL'25!!!
+- [2025.07] We withdrew our paper in EMNLP!!!
 - [2025.06] Three paper were rejected by ICCV'25!!!
-- [2025.06] A paper received a very low score in EMNLP.
-- [2025.06] A paper received a very low score in CoRL.
 - [2025.05] Luckily, there was no paper rejected this month!!!
 - [2025.04] Luckily, there was no paper rejected this month!!!
 - [2025.03] Luckily, there was no paper rejected this month!!!

@@ -12,8 +12,9 @@ Welcome to Yuxuan FAN'S Homepage
 
 > <span style="color: red">0.0.Thanks for your time~</span>
 
-News
+🚨Academic Rejection Hall of Fame 🚨
 ======
+- [2025.09] A paper was rejected by NeurIPS'25!!!
 - [2025.08] A paper was rejected by CORL'25!!!
 - [2025.07] We withdrew our paper in EMNLP!!!
 - [2025.06] Three paper were rejected by ICCV'25!!!

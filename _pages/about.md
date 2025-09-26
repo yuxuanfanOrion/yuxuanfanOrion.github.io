@@ -7,12 +7,12 @@ redirect_from:
   - /about.html
 ---
 
-Welcome to Yuxuan FAN'S Homepage
+# Welcome to Yuxuan FAN'S Homepage
 ======
 
 > <span style="color: red">0.0.Thanks for your time~</span>
 
-🚨Academic Rejection Hall of Fame 🚨
+# 🚨Academic Rejection Hall of Fame 🚨
 ======
 - [2025.09] A paper was rejected by NeurIPS'25!!!
 - [2025.08] A paper was rejected by CORL'25!!!
@@ -25,3 +25,6 @@ Welcome to Yuxuan FAN'S Homepage
 - [2025.01] One paper was rejected by TII!!!
 
 
+# Service
+- Reviewer of KDD conference.
+- Reviewer of TIST Journal.

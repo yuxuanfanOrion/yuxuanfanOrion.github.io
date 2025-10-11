@@ -7,12 +7,17 @@ redirect_from:
   - /about.html
 ---
 
-# Welcome to Yuxuan FAN'S Homepage
+## Welcome to Yuxuan FAN'S homepage
+
+I'm currently a $2$-year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/), supervised by [Prof. Hao LIU](https://raymondhliu.github.io/) and [Xuming HU](https://xuminghu.github.io/). I received my bachelor degree of School of Advanced Engineering from USTB(https://www.ustb.edu.cn/) in 2024. 
+
+My current research interests include multimodal LLM, Video Understanding and Unified Model.
+
 ======
 
 > <span style="color: red">0.0.Thanks for your time~</span>
 
-# 🚨Academic Rejection Hall of Fame 🚨
+# 🚨Good News🚨
 ======
 - [2025.09] A paper was rejected by NeurIPS'25!!!
 - [2025.08] A paper was rejected by CORL'25!!!

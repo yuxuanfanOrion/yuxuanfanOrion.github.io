@@ -33,3 +33,6 @@ My current research interests include multimodal LLM, Video Understanding and Un
 # Service
 - Reviewer of KDD conference.
 - Reviewer of TIST Journal.
+
+# Hobbies
+I am a big fan of Chelsea and Oklahoma city thunder.

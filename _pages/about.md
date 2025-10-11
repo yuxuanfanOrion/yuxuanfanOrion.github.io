@@ -9,7 +9,7 @@ redirect_from:
 
 ## Welcome to Yuxuan FAN'S homepage
 
-I'm currently a $2$-year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/), supervised by [Prof. Hao LIU](https://raymondhliu.github.io/) and [Xuming HU](https://xuminghu.github.io/). I received my bachelor degree of School of Advanced Engineering from USTB(https://www.ustb.edu.cn/) in 2024. 
+I'm currently a 2-year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of School of Advanced Engineering from USTB(https://www.ustb.edu.cn/) in 2024. 
 
 My current research interests include multimodal LLM, Video Understanding and Unified Model.
 

@@ -39,7 +39,7 @@ Instruction Dataset for Panoramic X-ray Analysis.
 - **[Preprint]** Yuxuan Fan, Hao Zhao, Hao Tang. RCI: Robust, Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits.
 - **[Preprint]** Jiayu Yang\*, Yuxuan Fan\*, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue. KAKE: Knowledge Attribution-Guided Knowledge Editing for Multi-hop Factual Recall.
 - **[Preprint]** Jirong Zha\*, Yuxuan Fan\*, tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen. AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning.
---!>
+-->
 
 # Service
 - Reviewer of KDD conference.

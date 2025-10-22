@@ -17,7 +17,7 @@ My current research interests include multimodal LLM, Video Understanding and Un
 
 > <span style="color: red">0.0.Thanks for your time~</span>
 
-# 🚨Good News🚨
+# 🚨News🚨
 ======
 - [2025.09] A paper was rejected by NeurIPS'25!!!
 - [2025.08] A paper was rejected by CORL'25!!!
@@ -29,6 +29,16 @@ My current research interests include multimodal LLM, Video Understanding and Un
 - [2025.02] Three paper were rejected by CVPR'25!!!
 - [2025.01] One paper was rejected by TII!!!
 
+
+# Publications
+- **[NeurIPS 2025]** Tianyi Bai\*, Yuxuan Fan\*, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan. HALLUCINATION ATA GLANCE: Controlled Visual Editing
+and Fine-Grained Multimodal Learning.
+- **[NeurIPS 2025]** Jing Hao\*, Yuxuan Fan\*, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai,Lun M. Wong, Hao Tang, Kuo Feng Hung. Towards Better Dental AI: A Multimodal Benchmark and
+Instruction Dataset for Panoramic X-ray Analysis.
+- **[IJCAI 2025]** Jirong Zha\*, Yuxuan Fan\*, Xiao Yang, Chen Gao, Xinlei Chen. How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM.
+- **[Preprint]** Yuxuan Fan, Hao Zhao, Hao Tang. RCI: Robust, Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits.
+- **[Preprint]** Jiayu Yang\*, Yuxuan Fan\*, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue. KAKE: Knowledge Attribution-Guided Knowledge Editing for Multi-hop Factual Recall.
+- **[Preprint]** Jirong Zha\*, Yuxuan Fan\*, tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen. AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning.
 
 # Service
 - Reviewer of KDD conference.

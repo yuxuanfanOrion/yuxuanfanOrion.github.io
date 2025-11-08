@@ -47,15 +47,15 @@ My current research interests include multimodal LLM, Video Understanding and Un
   list-style: disc;
   display: none;
 }
-.news-toggle .news-list.accepted {
+.news-toggle .news-list.rejected {
   display: block;
-}
-.news-toggle:hover .news-list.accepted,
-.news-toggle:focus-within .news-list.accepted {
-  display: none;
 }
 .news-toggle:hover .news-list.rejected,
 .news-toggle:focus-within .news-list.rejected {
+  display: none;
+}
+.news-toggle:hover .news-list.accepted,
+.news-toggle:focus-within .news-list.accepted {
   display: block;
 }
 .news-toggle .news-list.rejected:before {
@@ -75,7 +75,7 @@ My current research interests include multimodal LLM, Video Understanding and Un
 </style>
 <div class="news-toggle" role="region" aria-label="News updates" tabindex="0">
   <div class="news-label">Latest updates</div>
-  <div class="news-instruction">Hover or focus to switch between accepted and rejected papers.</div>
+  <div class="news-instruction">Hover or focus to switch from rejected to accepted papers.</div>
   <ul class="news-list rejected">
     <li>[2025.09] A paper was rejected by NeurIPS'25!!!</li>
     <li>[2025.08] A paper was rejected by CORL'25!!!</li>
@@ -87,7 +87,7 @@ My current research interests include multimodal LLM, Video Understanding and Un
     <li>[2025.02] Three paper were rejected by CVPR'25!!!</li>
     <li>[2025.01] One paper was rejected by TII!!!</li>
   </ul>
-    <ul class="news-list accepted">
+  <ul class="news-list accepted">
     <li>[2025.11] Four paper were accepted by AAAI'26!!! </li>
     <li>[2025.11] One paper was accepted by Expert Systems with Applications (JCR Q1, IF: 7.5)!!! </li>
     <li>[2025.09] Two paper were accepted by NeurIPS'25!!! </li>

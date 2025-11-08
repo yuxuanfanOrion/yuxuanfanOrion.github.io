@@ -19,16 +19,83 @@ My current research interests include multimodal LLM, Video Understanding and Un
 
 # 🚨News🚨
 ======
-- [2025.11] Four paper were accepted by AAAI'26!!! Thanks for my coauthors!
-- [2025.09] A paper was rejected by NeurIPS'25!!!
-- [2025.08] A paper was rejected by CORL'25!!!
-- [2025.07] We withdrew our paper in EMNLP!!!
-- [2025.06] Three paper were rejected by ICCV'25!!!
-- [2025.05] Luckily, there was no paper rejected this month!!!
-- [2025.04] Luckily, there was no paper rejected this month!!!
-- [2025.03] Luckily, there was no paper rejected this month!!!
-- [2025.02] Three paper were rejected by CVPR'25!!!
-- [2025.01] One paper was rejected by TII!!!
+<style>
+.news-toggle {
+  position: relative;
+  border: 1px solid #d7d7d7;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  background: #fafafa;
+  transition: background 0.3s ease;
+}
+.news-toggle:hover,
+.news-toggle:focus-within {
+  background: #fff5f5;
+}
+.news-toggle .news-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.news-toggle .news-instruction {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+}
+.news-toggle .news-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+  display: none;
+}
+.news-toggle .news-list.accepted {
+  display: block;
+}
+.news-toggle:hover .news-list.accepted,
+.news-toggle:focus-within .news-list.accepted {
+  display: none;
+}
+.news-toggle:hover .news-list.rejected,
+.news-toggle:focus-within .news-list.rejected {
+  display: block;
+}
+.news-toggle .news-list.rejected:before {
+  content: "Rejected papers";
+  display: block;
+  font-weight: 600;
+  margin-left: -1.25rem;
+  margin-bottom: 0.25rem;
+}
+.news-toggle .news-list.accepted:before {
+  content: "Accepted papers";
+  display: block;
+  font-weight: 600;
+  margin-left: -1.25rem;
+  margin-bottom: 0.25rem;
+}
+</style>
+<div class="news-toggle" role="region" aria-label="News updates" tabindex="0">
+  <div class="news-label">Latest updates</div>
+  <div class="news-instruction">Hover or focus to switch between accepted and rejected papers.</div>
+  <ul class="news-list accepted">
+    <li>[2025.11] Four paper were accepted by AAAI'26!!! Thanks for my coauthors!</li>
+    <li>[2025.09] TWO paper were accepted by NeurIPS'25!!! Thanks for my coauthors!</li>
+    <li>[2025.06] One paper were accepted by ACM MM'25!!! Thanks for my coauthors!</li>
+    <li>[2025.05] One paper were accepted by IJCAI'25!!! Thanks for my coauthors!</li>
+  </ul>
+  <ul class="news-list rejected">
+    <li>[2025.09] A paper was rejected by NeurIPS'25!!!</li>
+    <li>[2025.08] A paper was rejected by CORL'25!!!</li>
+    <li>[2025.07] We withdrew our paper in EMNLP!!!</li>
+    <li>[2025.06] Three paper were rejected by ICCV'25!!!</li>
+    <li>[2025.05] Luckily, there was no paper rejected this month!!!</li>
+    <li>[2025.04] Luckily, there was no paper rejected this month!!!</li>
+    <li>[2025.03] Luckily, there was no paper rejected this month!!!</li>
+    <li>[2025.02] Three paper were rejected by CVPR'25!!!</li>
+    <li>[2025.01] One paper was rejected by TII!!!</li>
+  </ul>
+</div>
+
+
 
 <!--
 # Publications
@@ -43,7 +110,7 @@ Instruction Dataset for Panoramic X-ray Analysis.
 -->
 
 # Service
-- Reviewer of KDD conference.
+- Reviewer of KDD, IV conference.
 - Reviewer of TIST Journal.
 
 # Hobbies

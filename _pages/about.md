@@ -19,6 +19,7 @@ My current research interests include multimodal LLM, Video Understanding and Un
 
 # 🚨News🚨
 ======
+- [2025.11] Four paper were accepted by AAAI'26!!! Thanks for my coauthors!
 - [2025.09] A paper was rejected by NeurIPS'25!!!
 - [2025.08] A paper was rejected by CORL'25!!!
 - [2025.07] We withdrew our paper in EMNLP!!!

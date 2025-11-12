@@ -111,7 +111,7 @@ Instruction Dataset for Panoramic X-ray Analysis.
 -->
 
 # Service
-- Reviewer of KDD, IV conference.
+- Reviewer of CVPR, KDD, IV conference.
 - Reviewer of TIST Journal.
 
 # Hobbies

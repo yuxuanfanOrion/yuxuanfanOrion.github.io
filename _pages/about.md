@@ -11,7 +11,7 @@ redirect_from:
 
 I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of School of Advanced Engineering from [USTB](https://www.ustb.edu.cn/) in 2024. 
 
-My current research interests include multimodal LLM, Video Understanding and Unified Model.
+My current research interests include multimodal LLM, Video Understanding, Unified Model and their application in Healthcare.
 
 ======
 
@@ -116,3 +116,5 @@ Instruction Dataset for Panoramic X-ray Analysis.
 
 # Hobbies
 I am a big fan of Chelsea and Oklahoma city thunder.
+
+I am also a starry sky and astronomy enthusiast, and I love looking up at the stars at night.

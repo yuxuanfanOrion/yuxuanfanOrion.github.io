@@ -15,7 +15,7 @@ My current research interests include multimodal LLM, Video Understanding and Un
 
 ======
 
-> <span style="color: red">0.0.Thanks for your time~</span>
+> <span style="color: red">0.0.I am looking for PhD positions in 2026 Fall.~</span>
 
 # 🚨News🚨
 ======

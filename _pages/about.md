@@ -98,17 +98,19 @@ My current research interests include multimodal LLM, Video Understanding, Unifi
 
 
 
-<!--
+
 # Publications
-- **[NeurIPS 2025]** Tianyi Bai\*, Yuxuan Fan\*, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan. HALLUCINATION ATA GLANCE: Controlled Visual Editing
-and Fine-Grained Multimodal Learning.
-- **[NeurIPS 2025]** Jing Hao\*, Yuxuan Fan\*, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai,Lun M. Wong, Hao Tang, Kuo Feng Hung. Towards Better Dental AI: A Multimodal Benchmark and
-Instruction Dataset for Panoramic X-ray Analysis.
-- **[IJCAI 2025]** Jirong Zha\*, Yuxuan Fan\*, Xiao Yang, Chen Gao, Xinlei Chen. How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM.
-- **[Preprint]** Yuxuan Fan, Hao Zhao, Hao Tang. RCI: Robust, Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits.
-- **[Preprint]** Jiayu Yang\*, Yuxuan Fan\*, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue. KAKE: Knowledge Attribution-Guided Knowledge Editing for Multi-hop Factual Recall.
-- **[Preprint]** Jirong Zha\*, Yuxuan Fan\*, tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen. AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning.
--->
+- **[Under Review]** **Yuxuan Fan**, Jing Hao, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang. OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis.
+- **[Under Review]** **Yuxuan Fan**, Hao Zhao, Hao Tang. RCI: Robust, Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits.
+- **[NeurIPS’25](https://arxiv.org/pdf/2506.07227)** Tianyi Bai\*, **Yuxuan Fan\***, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan. HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning. 
+- **[NeurIPS’25](https://arxiv.org/pdf/2509.09254)** Jing Hao\*, **Yuxuan Fan\***, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung. Towards Better Dental AI: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis.
+- **[IJCAI'25](https://arxiv.org/pdf/2504.05786)** Jirong Zha\*, **Yuxuan Fan\***, Xiao Yang, Chen Gao, Xinlei Chen. How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM. 
+- **[AAAI'26](https://arxiv.org/abs/2511.11025)** Jirong Zha, **Yuxuan Fan\***, tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen. AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning.
+- **[AAAI'26](https://arxiv.org/pdf/2505.12340)** Jirong Zha, **Yuxuan Fan**, Kai Li, Han Li, Chen Gao, Xinlei Chen. DIMM: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning.
+- **[Under Review](https://arxiv.org/abs/2510.07896)** Jiayu Yang\*, **Yuxuan Fan\***, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue. ACE: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall. 
+
+(\* means equal contribution)
+
 
 # Service
 - Reviewer of CVPR, KDD, IV conference.

@@ -99,7 +99,7 @@ My current research interests include multimodal LLM, Video Understanding, Unifi
 
 
 
-# Publications
+# Selected Publications
 - **[Under Review]** **Yuxuan Fan**, Jing Hao, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang. OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis.
 - **[Under Review]** **Yuxuan Fan**, Hao Zhao, Hao Tang. RCI: Robust, Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits.
 - **[NeurIPS’25](https://arxiv.org/pdf/2506.07227)** Tianyi Bai\*, **Yuxuan Fan\***, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan. HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning. 

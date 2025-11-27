@@ -13,6 +13,8 @@ I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https:
 
 My current research interests include multimodal LLM, Video Understanding, Unified Model.
 
+I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.
+
 ======
 
 > <span style="color: red">0.0.I am looking for PhD positions in 2026 Fall.~</span>

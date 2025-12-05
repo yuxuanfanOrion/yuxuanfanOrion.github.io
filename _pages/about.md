@@ -107,9 +107,10 @@ I believe the meaning of life lies in experiencing a wealth of things, and in al
 - **[NeurIPS’25](https://arxiv.org/pdf/2506.07227)** Tianyi Bai\*, **Yuxuan Fan\***, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan. HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning. 
 - **[NeurIPS’25](https://arxiv.org/pdf/2509.09254)** Jing Hao\*, **Yuxuan Fan\***, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung. Towards Better Dental AI: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis.
 - **[IJCAI'25](https://arxiv.org/pdf/2504.05786)** Jirong Zha\*, **Yuxuan Fan\***, Xiao Yang, Chen Gao, Xinlei Chen. How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM. 
-- **[AAAI'26](https://arxiv.org/abs/2511.11025)** Jirong Zha, **Yuxuan Fan\***, tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen. AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning.
-- **[AAAI'26](https://arxiv.org/pdf/2505.12340)** Jirong Zha, **Yuxuan Fan**, Kai Li, Han Li, Chen Gao, Xinlei Chen. DIMM: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning.
-- **[Under Review](https://arxiv.org/abs/2510.07896)** Jiayu Yang\*, **Yuxuan Fan\***, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue. ACE: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall. 
+- **[AAAI'26](https://arxiv.org/abs/2511.11025)** Jirong Zha\*, **Yuxuan Fan\***, tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen. AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning.
+- **[AAAI'26](https://arxiv.org/pdf/2505.12340)** Jirong Zha, **Yuxuan Fan**, Kai Li, Han Li, Chen Gao, Xinlei Chen. DIMM: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning.  
+- **[Under Review](https://arxiv.org/abs/2510.07896)** Jiayu Yang\*, **Yuxuan Fan\***, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue. ACE: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall.
+- **[Under Review](https://arxiv.org/abs/2511.22055)** Jing Hao, Yuci Liang, Lizhuo Lin, **Yuxuan Fan**, Wenkai Zhou, Kaixin Guo, Zanting Ye, Yanpeng Sun, Xinyu Zhang, Yanqi Yang, Qiankun Li, Hao Tang, James Kit-Hon Tsoi, Linlin Shen, Kuo Feng Hung. OralGPT-Omni: A Versatile Dental Multimodal Large Language Model.
 
 (\* means equal contribution)
 

@@ -11,7 +11,7 @@ redirect_from:
 
 I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of School of Advanced Engineering from [USTB](https://www.ustb.edu.cn/) in 2024. 
 
-My current research interests include multimodal LLM, Unified Model and its application in 3d understanding.
+My current research interests focus on agentic MLLMs.
 
 I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.
 

@@ -7,13 +7,13 @@ redirect_from:
   - /about.html
 ---
 
-## Welcome to Yuxuan FAN'S homepage
+## ✋🏻Welcome to Yuxuan FAN'S homepage
 
-I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of School of Advanced Engineering from [USTB](https://www.ustb.edu.cn/) in 2024. 
+🧑‍🎓 I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of School of Advanced Engineering from [USTB](https://www.ustb.edu.cn/) in 2024. 
 
-My current research interests focus on agentic MLLMs.
+✨ My current research interests focus on agentic MLLMs.
 
-I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.
+💼 Now I am a Research Intern at [Inclusion AI](https://github.com/inclusionAI), Ant Group, foucusing on enhancing the visual reasoning ability of Ming-Flash-Omni model.
 
 ======
 
@@ -120,6 +120,8 @@ I believe the meaning of life lies in experiencing a wealth of things, and in al
 - Reviewer of TIST Journal.
 
 # Hobbies
+I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.
+
 I am a big fan of Chelsea and Oklahoma city thunder.
 
 I am also a starry sky and astronomy enthusiast, and I love looking up at the stars at night.

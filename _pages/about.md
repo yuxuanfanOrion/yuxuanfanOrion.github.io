@@ -116,7 +116,7 @@ redirect_from:
 
 
 # Service
-- Reviewer of CVPR, KDD, IV conference.
+- Reviewer of CVPR, KDD, IV and ITSC conference.
 - Reviewer of TIST Journal.
 
 # Hobbies

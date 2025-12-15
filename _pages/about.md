@@ -100,6 +100,7 @@ redirect_from:
 
 
 # Selected Publications
+(\* means equal contribution)
 - **[Under Review]** **Yuxuan Fan**, Jing Hao, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang. _OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis_.
 - **[Under Review]** **Yuxuan Fan**, Hao Zhao, Hao Tang. RCI: Robust, _Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits_.
 - **[NeurIPS’25](https://arxiv.org/pdf/2506.07227)** Tianyi Bai\*, **Yuxuan Fan\***, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan. _HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning_. 
@@ -111,8 +112,6 @@ redirect_from:
 - **[Under Review](https://arxiv.org/abs/2511.22055)** Jing Hao, Yuci Liang, Lizhuo Lin, **Yuxuan Fan**, Wenkai Zhou, Kaixin Guo, Zanting Ye, Yanpeng Sun, Xinyu Zhang, Yanqi Yang, Qiankun Li, Hao Tang, James Kit-Hon Tsoi, Linlin Shen, Kuo Feng Hung. _OralGPT-Omni: A Versatile Dental Multimodal Large Language Model_.
 - **[Under Review](https://arxiv.org/abs/2507.07908)** Xiao Yang, Jiyao Wang, **Yuxuan Fan**, Can Liu, Houcheng Su, Weichen Guo, Zitong Yu, Dengbo He, Kaishun Wu. _Not Only Consistency: Enhance Test-Time Adaptation with Spatio-temporal Inconsistency for Remote Physiological Measurement_
 - **[Under Review](https://arxiv.org/abs/2505.07455)** Shulong Jiang, Shiqi Zhao, **Yuxuan Fan**, Peng Yin. _GelFusion: Enhancing Robotic Manipulation under Visual Constraints via Visuotactile Fusion_.
-
-(\* means equal contribution)
 
 
 # Service

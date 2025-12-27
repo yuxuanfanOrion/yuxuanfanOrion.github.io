@@ -114,13 +114,13 @@ redirect_from:
 
 
 
-# Service
+# 🧧 Service
 - Reviewer of CVPR, KDD, IV and ITSC conference.
 - Reviewer of TIST Journal.
 
-# Hobbies
+# ✨ Hobbies
 I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.
 
 I am a big fan of Chelsea and Oklahoma city thunder.
 
-I am also a starry sky and astronomy enthusiast, and I love looking up at the stars at night.
+I am also a starry sky and astronomy enthusiast, and I love looking up at the stars at night. I’m really into science fiction.

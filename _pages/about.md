@@ -7,20 +7,18 @@ redirect_from:
   - /about.html
 ---
 
-## ✋🏻Welcome to Yuxuan FAN'S homepage
+## ✋🏻 Welcome to Yuxuan FAN'S homepage
 
-🧑‍🎓 I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of School of Advanced Engineering from [USTB](https://www.ustb.edu.cn/) in 2024. 
+🧑‍🎓 I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of [School of Advanced Engineering, USTB](https://www.ustb.edu.cn/) in 2024. I also had a chance to study Economy in [National School of Development, Peking University](https://nsd.pku.edu.cn/).
 
-<!--
+
 💼 Now I am a Research Intern at [Inclusion AI](https://github.com/inclusionAI), Ant Group, focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model.
--->
 
-======
 
 > <span style="color: red">0.0.I am looking for PhD positions in 2026 Fall.~</span>
 
-# 🚨News🚨
-======
+# 🚨 News
+
 <style>
 .news-toggle {
   position: relative;
@@ -99,7 +97,7 @@ redirect_from:
 </div>
 
 
-# Selected Publications
+# 📚 Selected Publications
 (\* means equal contribution)
 - **[Under Review]** **Yuxuan Fan**, Jing Hao, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang. _OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis_.
 - **[Under Review]** **Yuxuan Fan**, Hao Zhao, Hao Tang. RCI: Robust, _Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits_.

@@ -77,6 +77,10 @@ redirect_from:
   <div class="info-box">
     <h2>Internship</h2>
     <div class="info-item">
+      <div><span class="degree-icon">🎓</span><span class="degree-title">Research Intern in Inclusion AI</span></div>
+      <div class="degree-detail">Ant Group (2025.10 - present)</div>
+    </div>
+    <div class="info-item">
       <div><span class="degree-icon">🎓</span><span class="degree-title">Research Intern in CV Lab</span></div>
       <div class="degree-detail">Amap, Alibaba (2025.6 - 2025.9)</div>
     </div>

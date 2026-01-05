@@ -18,6 +18,73 @@ redirect_from:
 
 > <span style="color: red">0.0.I am looking for PhD positions in 2026 Fall.~</span>
 
+<style>
+.info-container {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.info-box {
+  flex: 1;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #fafafa;
+}
+.info-box h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+.info-item {
+  margin-bottom: 1.5rem;
+}
+.info-item:last-child {
+  margin-bottom: 0;
+}
+.degree-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+.degree-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.degree-detail {
+  color: #555;
+  line-height: 1.6;
+}
+@media (max-width: 768px) {
+  .info-container {
+    flex-direction: column;
+  }
+}
+</style>
+
+<div class="info-container">
+  <div class="info-box">
+    <h2>Education</h2>
+    <div class="info-item">
+      <div><span class="degree-icon">🎓</span><span class="degree-title">MPhil in Artificial Intelligence</span></div>
+      <div class="degree-detail">the Hong Kong University of Science and Technology, Guangzhou (2024 - 2026)</div>
+    </div>
+    <div class="info-item">
+      <div><span class="degree-icon">🎓</span><span class="degree-title">Bachelor in Information Engineering</span></div>
+      <div class="degree-detail">the China University of Mining and Technology, Beijing (2020 - 2024)</div>
+    </div>
+  </div>
+  <div class="info-box">
+    <h2>Visiting & Internship</h2>
+    <div class="info-item">
+      <div><span class="degree-icon">🎓</span><span class="degree-title">Visiting in SPIC Lab</span></div>
+      <div class="degree-detail">Shanghai Jiao Tong University (2025.6 - 2025.9) Supervisor: <a href="https://linfengzhang.github.io/">Prof. Linfeng ZHANG @ SJTU</a></div>
+    </div>
+  </div>
+</div>
+
 # 🚨 News
 
 <style>

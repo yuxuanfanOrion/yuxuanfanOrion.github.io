@@ -33,25 +33,23 @@ redirect_from:
 }
 .info-box h2 {
   margin-top: 0;
-  font-size: 1.8rem;
+  font-size: 1.25rem;
   font-weight: bold;
   border-bottom: 2px solid #333;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
 }
 .info-item {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .info-item:last-child {
   margin-bottom: 0;
 }
 .degree-icon {
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
+  margin-right: 0.3rem;
 }
 .degree-title {
   font-weight: bold;
-  font-size: 1.1rem;
 }
 .degree-detail {
   color: #555;
@@ -69,18 +67,17 @@ redirect_from:
     <h2>Education</h2>
     <div class="info-item">
       <div><span class="degree-icon">🎓</span><span class="degree-title">MPhil in Artificial Intelligence</span></div>
-      <div class="degree-detail">the Hong Kong University of Science and Technology, Guangzhou (2024 - 2026)</div>
+      <div class="degree-detail"The Hong Kong University of Science and Technology, Guangzhou (2024 - 2026)</div>
     </div>
     <div class="info-item">
-      <div><span class="degree-icon">🎓</span><span class="degree-title">Bachelor in Information Engineering</span></div>
-      <div class="degree-detail">the China University of Mining and Technology, Beijing (2020 - 2024)</div>
+      <div><span class="degree-icon">🎓</span><span class="degree-title">Bachelor in Robotics and Mechanical Engineering</span></div>
+      <div class="degree-detail">University of Science and Technology, Beijing (2020 - 2024)</div>
     </div>
   </div>
   <div class="info-box">
-    <h2>Visiting & Internship</h2>
-    <div class="info-item">
-      <div><span class="degree-icon">🎓</span><span class="degree-title">Visiting in SPIC Lab</span></div>
-      <div class="degree-detail">Shanghai Jiao Tong University (2025.6 - 2025.9) Supervisor: <a href="https://linfengzhang.github.io/">Prof. Linfeng ZHANG @ SJTU</a></div>
+    <h2>Internship</h2>
+    <div class="info-item">Research Intern in CV Lab</span></div>
+      <div class="degree-detail">Amap, Alibaba (2025.6 - 2025.9)</a></div>
     </div>
   </div>
 </div>

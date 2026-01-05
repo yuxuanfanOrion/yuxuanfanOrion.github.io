@@ -67,7 +67,7 @@ redirect_from:
     <h2>Education</h2>
     <div class="info-item">
       <div><span class="degree-icon">🎓</span><span class="degree-title">MPhil in Artificial Intelligence</span></div>
-      <div class="degree-detail"The Hong Kong University of Science and Technology, Guangzhou (2024 - 2026)</div>
+      <div class="degree-detail">The Hong Kong University of Science and Technology, Guangzhou (2024 - 2026)</div>
     </div>
     <div class="info-item">
       <div><span class="degree-icon">🎓</span><span class="degree-title">Bachelor in Robotics and Mechanical Engineering</span></div>
@@ -76,8 +76,9 @@ redirect_from:
   </div>
   <div class="info-box">
     <h2>Internship</h2>
-    <div class="info-item">Research Intern in CV Lab</span></div>
-      <div class="degree-detail">Amap, Alibaba (2025.6 - 2025.9)</a></div>
+    <div class="info-item">
+      <div><span class="degree-icon">🎓</span><span class="degree-title">Research Intern in CV Lab</span></div>
+      <div class="degree-detail">Amap, Alibaba (2025.6 - 2025.9)</div>
     </div>
   </div>
 </div>

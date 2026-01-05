@@ -30,10 +30,11 @@ redirect_from:
   border-radius: 8px;
   padding: 1.5rem;
   background: #fafafa;
+  font-size: 0.95rem;
 }
 .info-box h2 {
   margin-top: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: bold;
   border-bottom: 2px solid #333;
   padding-bottom: 0.5rem;
@@ -46,14 +47,17 @@ redirect_from:
   margin-bottom: 0;
 }
 .degree-icon {
+  font-size: 1rem;
   margin-right: 0.3rem;
 }
 .degree-title {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1.02rem;
 }
 .degree-detail {
   color: #555;
   line-height: 1.6;
+  font-size: 0.95rem;
 }
 @media (max-width: 768px) {
   .info-container {

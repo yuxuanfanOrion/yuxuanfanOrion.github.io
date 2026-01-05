@@ -11,6 +11,7 @@ redirect_from:
 
 🧑‍🎓 I'm currently a seond year M.Phil student at [AI Thrust, Information Hub](https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/), [The Hong Kong University of Science and Technology (Guangzhou)](https://hkust-gz.edu.cn/),  I received my bachelor degree of [School of Advanced Engineering, USTB](https://www.ustb.edu.cn/) in 2024. I also had a chance to study Economy in [National School of Development, Peking University](https://nsd.pku.edu.cn/).
 
+📢 I am passionate about contributing to large-scale, impactful open-source projects.
 
 💼 Now I am a Research Intern at [Inclusion AI](https://github.com/inclusionAI), Ant Group, focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model.
 

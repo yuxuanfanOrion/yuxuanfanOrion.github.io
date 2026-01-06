@@ -15,10 +15,6 @@ redirect_from:
 
 💼 Now I am a Research Intern at [Inclusion AI](https://github.com/inclusionAI), Ant Group, focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model.
 
-<--
-> <span style="color: red">0.0.I am looking for PhD positions in 2026 Fall.~</span>
--->
-
 
 <style>
 .info-container {

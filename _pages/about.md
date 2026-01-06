@@ -26,19 +26,14 @@ redirect_from:
 }
 .info-box {
   flex: 1;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1.5rem;
-  background: #fafafa;
+  padding: 0;
   font-size: 0.95rem;
 }
 .info-box h2 {
   margin-top: 0;
   font-size: 1.1rem;
   font-weight: bold;
-  border-bottom: 2px solid #333;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 .info-item {
   margin-bottom: 1rem;

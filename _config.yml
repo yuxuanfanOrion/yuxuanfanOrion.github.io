@@ -28,7 +28,7 @@ author:
   bio              : #"Short biography for the left-hand sidebar"
   location         : "Sichuan"
   employer         : "HKUST(GZ)" 
-  uri              : https://github.com/yuxuanfanOrion
+  uri              : https://yuxuanfanOrion.github.io
   email            : "orionisfan@outlook.com" 
 
   # Academic websites
@@ -45,7 +45,7 @@ author:
   bitbucket        : # Username - Update with your username on the site
   codepen          : # Username
   dribbble         : # Username
-  github           : https://github.com/yuxuanfanOrion #"academicpages"
+  github           : "yuxuanfanOrion"
   kaggle           : # Username  
   stackoverflow    : # User number or user number and name (i.e., use "1" or "1/jeff-atwood")    
 

@@ -144,6 +144,8 @@ redirect_from:
   <div class="news-label">Latest updates</div>
   <div class="news-instruction">Hover or focus to switch from rejected to accepted papers.</div>
   <ul class="news-list rejected">
+    <li>[2026.01] A paper was rejected by ICASSP'26!!!</li>
+    <li>[2025.12] We withdrew 1 paper in ICLR'26!!!</li>
     <li>[2025.09] A paper was rejected by NeurIPS'25!!!</li>
     <li>[2025.08] A paper was rejected by CORL'25!!!</li>
     <li>[2025.07] We withdrew our paper in EMNLP!!!</li>

@@ -165,6 +165,8 @@ redirect_from:
   </ul>
 </div>
 
+# 🚀 Open-sourced Projects
+- **[Notion-Workshop](https://github.com/yuxuanfanOrion/Notion-Workshop): A VsCode Extension for Notion Note Editing.** 
 
 # 📚 Selected Publications
 (\* means equal contribution)

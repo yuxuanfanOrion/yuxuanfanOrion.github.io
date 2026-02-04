@@ -19,38 +19,53 @@ redirect_from:
 <style>
 .info-container {
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   margin: 2rem 0;
 }
 .info-box {
   flex: 1;
-  padding: 0;
+  padding: 1.25rem;
   font-size: 0.95rem;
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  border-radius: 12px;
+  border-left: 4px solid #2b6cb0;
+  box-shadow: 0 2px 8px rgba(26, 54, 93, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.info-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(26, 54, 93, 0.12);
 }
 .info-box h2 {
   margin-top: 0;
   font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a365d;
+  border-bottom: none;
+  padding-bottom: 0;
 }
 .info-item {
   margin-bottom: 1rem;
+  padding-left: 0.5rem;
 }
 .info-item:last-child {
   margin-bottom: 0;
 }
 .degree-icon {
   font-size: 1rem;
-  margin-right: 0.3rem;
+  margin-right: 0.4rem;
 }
 .degree-title {
   font-weight: 600;
-  font-size: 1.02rem;
+  font-size: 1rem;
+  color: #2d3748;
 }
 .degree-detail {
-  color: #555;
+  color: #4a5568;
   line-height: 1.6;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
 }
 @media (max-width: 768px) {
   .info-container {
@@ -89,30 +104,48 @@ redirect_from:
 <style>
 .news-toggle {
   position: relative;
-  border: 1px solid #d7d7d7;
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  background: #fafafa;
-  transition: background 0.3s ease;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(26, 54, 93, 0.06);
 }
 .news-toggle:hover,
 .news-toggle:focus-within {
-  background: #fff5f5;
+  background: linear-gradient(135deg, #ebf8ff 0%, #e6fffa 100%);
+  border-color: #38b2ac;
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.15);
 }
 .news-toggle .news-label {
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.5rem;
+  color: #1a365d;
+  font-size: 1.05rem;
 }
 .news-toggle .news-instruction {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: #4a5568;
+  margin-bottom: 1rem;
+  font-style: italic;
 }
 .news-toggle .news-list {
   margin: 0;
   padding-left: 1.25rem;
-  list-style: disc;
+  list-style: none;
   display: none;
+}
+.news-toggle .news-list li {
+  position: relative;
+  padding: 0.4rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid #e2e8f0;
+  margin-left: 0.5rem;
+  font-size: 0.92rem;
+  color: #2d3748;
+}
+.news-toggle .news-list li:hover {
+  border-left-color: #2b6cb0;
 }
 .news-toggle .news-list.rejected {
   display: block;
@@ -129,15 +162,19 @@ redirect_from:
   content: "Rejected papers";
   display: block;
   font-weight: 600;
-  margin-left: -1.25rem;
-  margin-bottom: 0.25rem;
+  margin-left: -0.5rem;
+  margin-bottom: 0.5rem;
+  color: #e53e3e;
+  font-size: 0.9rem;
 }
 .news-toggle .news-list.accepted:before {
   content: "Accepted papers";
   display: block;
   font-weight: 600;
-  margin-left: -1.25rem;
-  margin-bottom: 0.25rem;
+  margin-left: -0.5rem;
+  margin-bottom: 0.5rem;
+  color: #38a169;
+  font-size: 0.9rem;
 }
 </style>
 <div class="news-toggle" role="region" aria-label="News updates" tabindex="0">
@@ -167,6 +204,33 @@ redirect_from:
 </div>
 
 # 🚀 Open-sourced Projects
+
+<style>
+.pub-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #edf2f7;
+}
+.pub-item:last-child {
+  border-bottom: none;
+}
+.pub-venue {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+.venue-top {
+  background: linear-gradient(135deg, #1a365d, #2b6cb0);
+  color: white;
+}
+.venue-review {
+  background: #edf2f7;
+  color: #4a5568;
+}
+</style>
+
 - **[Notion-Workshop](https://github.com/yuxuanfanOrion/Notion-Workshop): A VsCode Extension for Notion Note Editing.** 
 
 # 📚 Selected Publications

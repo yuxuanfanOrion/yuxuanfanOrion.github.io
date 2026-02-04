@@ -157,6 +157,7 @@ redirect_from:
     <li>[2025.01] One paper was rejected by TII!!!</li>
   </ul>
   <ul class="news-list accepted">
+    <li>[2026.01] One paper was accepted by ICLR'26!!! </li>
     <li>[2025.11] Four paper were accepted by AAAI'26!!! </li>
     <li>[2025.11] One paper was accepted by Expert Systems with Applications (JCR Q1, IF: 7.5)!!! </li>
     <li>[2025.09] Two paper were accepted by NeurIPS'25!!! </li>

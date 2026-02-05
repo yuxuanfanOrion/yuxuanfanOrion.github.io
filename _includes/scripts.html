@@ -61,22 +61,33 @@ $(document).ready(function() {
 
     var layer1 = cover.find('.bg-layer-1');
     var layer2 = cover.find('.bg-layer-2');
-    var activeLayer = layer1;
-    var inactiveLayer = layer2;
 
-    layer1.css('background-image', 'url(' + starImages[0] + ')');
-    layer1.css('opacity', 1);
-    layer2.css('opacity', 0);
+    // 初始化：layer1在底层显示，layer2在上层隐藏
+    layer1.css({
+      'background-image': 'url(' + starImages[0] + ')',
+      'opacity': 1,
+      'z-index': 1
+    });
+    layer2.css({
+      'opacity': 0,
+      'z-index': 2
+    });
 
     setInterval(function() {
       currentIndex = (currentIndex + 1) % starImages.length;
-      inactiveLayer.css('background-image', 'url(' + starImages[currentIndex] + ')');
-      activeLayer.animate({opacity: 0}, 1500);
-      inactiveLayer.animate({opacity: 1}, 1500);
 
-      var temp = activeLayer;
-      activeLayer = inactiveLayer;
-      inactiveLayer = temp;
+      // 预加载新图片
+      var img = new Image();
+      img.onload = function() {
+        // 设置上层图片并淡入
+        layer2.css('background-image', 'url(' + starImages[currentIndex] + ')');
+        layer2.animate({opacity: 1}, 2000, function() {
+          // 淡入完成后，把新图片设置到底层，重置上层
+          layer1.css('background-image', 'url(' + starImages[currentIndex] + ')');
+          layer2.css('opacity', 0);
+        });
+      };
+      img.src = starImages[currentIndex];
     }, 10000);
   }
 });

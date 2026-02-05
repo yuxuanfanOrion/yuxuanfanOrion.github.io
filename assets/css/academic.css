@@ -169,7 +169,7 @@ a:hover {
   background-image: url('/images/stars-bg/star-01.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center 40%;
+  background-position: center 80%;
 }
 
 @media screen and (max-width: 600px) {

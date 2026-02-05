@@ -1,8 +1,17 @@
 $(document).ready(function() {
   var starImages = [];
+  var preloadedImages = [];
+
+  // 生成图片路径并预加载所有图片
   for (var i = 1; i <= 20; i++) {
     var num = i < 10 ? '0' + i : '' + i;
-    starImages.push('/images/stars-bg/star-' + num + '.jpg');
+    var path = '/images/stars-bg/star-' + num + '.jpg';
+    starImages.push(path);
+
+    // 预加载图片
+    var img = new Image();
+    img.src = path;
+    preloadedImages.push(img);
   }
 
   var currentIndex = 0;
@@ -22,13 +31,11 @@ $(document).ready(function() {
       currentIndex = (currentIndex + 1) % starImages.length;
 
       if (activeLayer === 1) {
-        // 在 layer2 上设置新图片，然后显示它
         layer2.style.backgroundImage = 'url(' + starImages[currentIndex] + ')';
         layer2.style.opacity = '1';
         layer1.style.opacity = '0';
         activeLayer = 2;
       } else {
-        // 在 layer1 上设置新图片，然后显示它
         layer1.style.backgroundImage = 'url(' + starImages[currentIndex] + ')';
         layer1.style.opacity = '1';
         layer2.style.opacity = '0';

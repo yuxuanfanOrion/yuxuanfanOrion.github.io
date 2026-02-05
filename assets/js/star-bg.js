@@ -1,59 +1,39 @@
 $(document).ready(function() {
-  var starImages = [
-    '/images/stars-bg/star-01.jpg',
-    '/images/stars-bg/star-02.jpg',
-    '/images/stars-bg/star-03.jpg',
-    '/images/stars-bg/star-04.jpg',
-    '/images/stars-bg/star-05.jpg',
-    '/images/stars-bg/star-06.jpg',
-    '/images/stars-bg/star-07.jpg',
-    '/images/stars-bg/star-08.jpg',
-    '/images/stars-bg/star-09.jpg',
-    '/images/stars-bg/star-10.jpg',
-    '/images/stars-bg/star-11.jpg',
-    '/images/stars-bg/star-12.jpg',
-    '/images/stars-bg/star-13.jpg',
-    '/images/stars-bg/star-14.jpg',
-    '/images/stars-bg/star-15.jpg',
-    '/images/stars-bg/star-16.jpg',
-    '/images/stars-bg/star-17.jpg',
-    '/images/stars-bg/star-18.jpg',
-    '/images/stars-bg/star-19.jpg',
-    '/images/stars-bg/star-20.jpg'
-  ];
+  var starImages = [];
+  for (var i = 1; i <= 20; i++) {
+    var num = i < 10 ? '0' + i : '' + i;
+    starImages.push('/images/stars-bg/star-' + num + '.jpg');
+  }
 
   var currentIndex = 0;
   var layer1 = document.getElementById('bg-layer-1');
   var layer2 = document.getElementById('bg-layer-2');
 
   if (layer1 && layer2) {
+    // 初始化：layer1 显示第一张
     layer1.style.backgroundImage = 'url(' + starImages[0] + ')';
     layer1.style.opacity = '1';
-    layer2.style.backgroundImage = 'url(' + starImages[1] + ')';
     layer2.style.opacity = '0';
 
-    var showingLayer1 = true;
+    var activeLayer = 1;
 
     setInterval(function() {
+      // 切换到下一张图片
       currentIndex = (currentIndex + 1) % starImages.length;
-      var nextIndex = (currentIndex + 1) % starImages.length;
 
-      if (showingLayer1) {
+      if (activeLayer === 1) {
+        // 在 layer2 上设置新图片，然后显示它
         layer2.style.backgroundImage = 'url(' + starImages[currentIndex] + ')';
-        layer1.style.opacity = '0';
         layer2.style.opacity = '1';
-        setTimeout(function() {
-          layer1.style.backgroundImage = 'url(' + starImages[nextIndex] + ')';
-        }, 1000);
+        layer1.style.opacity = '0';
+        activeLayer = 2;
       } else {
+        // 在 layer1 上设置新图片，然后显示它
         layer1.style.backgroundImage = 'url(' + starImages[currentIndex] + ')';
-        layer2.style.opacity = '0';
         layer1.style.opacity = '1';
-        setTimeout(function() {
-          layer2.style.backgroundImage = 'url(' + starImages[nextIndex] + ')';
-        }, 1000);
+        layer2.style.opacity = '0';
+        activeLayer = 1;
       }
-      showingLayer1 = !showingLayer1;
     }, 5000);
   }
 });

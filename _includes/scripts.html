@@ -51,13 +51,45 @@ $(document).ready(function() {
     '/images/stars-bg/star-19.jpg',
     '/images/stars-bg/star-20.jpg'
   ];
+
+  // Preload all images
+  for (var i = 0; i < starImages.length; i++) {
+    var img = new Image();
+    img.src = starImages[i];
+  }
+
   var currentIndex = 0;
   var cover = $('#profile-cover');
 
   if (cover.length) {
+    // Create two background layers for smooth transition
+    cover.append('<div class="bg-layer bg-layer-1"></div>');
+    cover.append('<div class="bg-layer bg-layer-2"></div>');
+
+    var layer1 = cover.find('.bg-layer-1');
+    var layer2 = cover.find('.bg-layer-2');
+    var activeLayer = layer1;
+    var inactiveLayer = layer2;
+
+    // Set initial background
+    layer1.css('background-image', 'url(' + starImages[0] + ')');
+    layer1.css('opacity', 1);
+    layer2.css('opacity', 0);
+
     setInterval(function() {
       currentIndex = (currentIndex + 1) % starImages.length;
-      cover.css('background-image', 'url(' + starImages[currentIndex] + ')');
+
+      // Set new image on inactive layer
+      inactiveLayer.css('background-image', 'url(' + starImages[currentIndex] + ')');
+
+      // Crossfade
+      activeLayer.animate({opacity: 0}, 1000);
+      inactiveLayer.animate({opacity: 1}, 1000);
+
+      // Swap layers
+      var temp = activeLayer;
+      activeLayer = inactiveLayer;
+      inactiveLayer = temp;
     }, 5000);
   }
 });

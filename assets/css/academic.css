@@ -109,6 +109,11 @@ a:hover {
   display: none !important;
 }
 
+/* Hide the greedy-nav hamburger button on desktop */
+.greedy-nav button {
+  display: none !important;
+}
+
 .site-nav .page-link {
   font-weight: 400;
   color: #002336;

@@ -181,6 +181,15 @@ a:hover {
   z-index: 0;
 }
 
+#bg-layer-1 {
+  background-image: url('/images/stars-bg/star-01.jpg');
+  opacity: 1;
+}
+
+#bg-layer-2 {
+  opacity: 0;
+}
+
 @media screen and (max-width: 600px) {
   .cover {
     height: 580px;

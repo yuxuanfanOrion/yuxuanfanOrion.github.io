@@ -53,14 +53,10 @@ $(document).ready(function() {
   ];
 
   var currentIndex = 0;
-  var cover = $('#profile-cover');
+  var layer1 = $('#bg-layer-1');
+  var layer2 = $('#bg-layer-2');
 
-  if (cover.length) {
-    // 创建两个背景层用于淡入淡出切换
-    var layer1 = $('<div class="bg-layer"></div>');
-    var layer2 = $('<div class="bg-layer"></div>');
-    cover.prepend(layer2).prepend(layer1);
-
+  if (layer1.length && layer2.length) {
     // 初始化：layer1 显示第一张图片
     layer1.css({
       'background-image': 'url(' + starImages[0] + ')',
@@ -78,20 +74,16 @@ $(document).ready(function() {
       var nextIndex = (currentIndex + 1) % starImages.length;
 
       if (showingLayer1) {
-        // 切换到 layer2
         layer2.css('background-image', 'url(' + starImages[currentIndex] + ')');
         layer1.css('opacity', 0);
         layer2.css('opacity', 1);
-        // 预加载下一张到 layer1
         setTimeout(function() {
           layer1.css('background-image', 'url(' + starImages[nextIndex] + ')');
         }, 1000);
       } else {
-        // 切换到 layer1
         layer1.css('background-image', 'url(' + starImages[currentIndex] + ')');
         layer2.css('opacity', 0);
         layer1.css('opacity', 1);
-        // 预加载下一张到 layer2
         setTimeout(function() {
           layer2.css('background-image', 'url(' + starImages[nextIndex] + ')');
         }, 1000);

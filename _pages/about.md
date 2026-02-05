@@ -21,6 +21,8 @@ layout: default
 </header>
 
 <div id="profile-cover" class="cover">
+  <div id="bg-layer-1" class="bg-layer"></div>
+  <div id="bg-layer-2" class="bg-layer"></div>
   <div id="profile-namecard" class="profile-wrapper">
     <div id="my-pic" class="profile-col profile-col-1">
       <img id="profile-avatar" src="/images/yuxuan.png" alt="Yuxuan FAN" class="circle-img"/>

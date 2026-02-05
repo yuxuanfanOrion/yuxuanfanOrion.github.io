@@ -205,13 +205,14 @@ pre>code {
 }
 
 .site-nav {
-    float: right;
+    display: flex;
+    justify-content: center;
     line-height: 56px;
     z-index: 3
 }
 
 .site-nav .menu-icon {
-    display: none
+    display: none !important
 }
 
 .site-nav .page-link {

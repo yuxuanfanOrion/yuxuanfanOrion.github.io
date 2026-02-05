@@ -34,29 +34,8 @@ $(document).ready(function() {
     '/images/stars-bg/star-02.jpg',
     '/images/stars-bg/star-03.jpg',
     '/images/stars-bg/star-04.jpg',
-    '/images/stars-bg/star-05.jpg',
-    '/images/stars-bg/star-06.jpg',
-    '/images/stars-bg/star-07.jpg',
-    '/images/stars-bg/star-08.jpg',
-    '/images/stars-bg/star-09.jpg',
-    '/images/stars-bg/star-10.jpg',
-    '/images/stars-bg/star-11.jpg',
-    '/images/stars-bg/star-12.jpg',
-    '/images/stars-bg/star-13.jpg',
-    '/images/stars-bg/star-14.jpg',
-    '/images/stars-bg/star-15.jpg',
-    '/images/stars-bg/star-16.jpg',
-    '/images/stars-bg/star-17.jpg',
-    '/images/stars-bg/star-18.jpg',
-    '/images/stars-bg/star-19.jpg',
-    '/images/stars-bg/star-20.jpg'
+    '/images/stars-bg/star-05.jpg'
   ];
-
-  // Preload all images
-  for (var i = 0; i < starImages.length; i++) {
-    var img = new Image();
-    img.src = starImages[i];
-  }
 
   var currentIndex = 0;
   var cover = $('#profile-cover');
@@ -83,14 +62,14 @@ $(document).ready(function() {
       inactiveLayer.css('background-image', 'url(' + starImages[currentIndex] + ')');
 
       // Crossfade
-      activeLayer.animate({opacity: 0}, 1000);
-      inactiveLayer.animate({opacity: 1}, 1000);
+      activeLayer.animate({opacity: 0}, 1500);
+      inactiveLayer.animate({opacity: 1}, 1500);
 
       // Swap layers
       var temp = activeLayer;
       activeLayer = inactiveLayer;
       inactiveLayer = temp;
-    }, 5000);
+    }, 6000);
   }
 });
 </script>

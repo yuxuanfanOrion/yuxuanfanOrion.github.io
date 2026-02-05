@@ -1,272 +1,151 @@
 /* ==========================================================================
-   SIDEBAR
+   SIDEBAR - Fixed Top Profile Card for Starry Theme
    ========================================================================== */
 
 /*
-   Default
+   Profile Card (formerly sidebar) - Fixed at top
    ========================================================================== */
 
 .sidebar {
-  -webkit-transform: translate3d(0, 0 , 0);
-          transform: translate3d(0, 0 , 0);
+  position: fixed;
+  top: $masthead-height;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: var(--global-card-bg, #161b22);
+  border-bottom: 1px solid var(--global-border-color, #30363d);
+  backdrop-filter: blur(10px);
 
-  @include clearfix();
-  margin-bottom: 1em;
-
-  @media screen and (min-width: $sidebar-screen-min-width) {
-    height: 100vh;
-    overflow-y: auto;               // Add scrollbar if the sidebar is too long
-    position: fixed;
-    padding-top: $masthead-height;
-  }
-
-  @include breakpoint($large) {
-    @include span(2 of 12);
-    opacity: 1;
-    -webkit-transition: opacity 0.2s ease-in-out;
-            transition: opacity 0.2s ease-in-out;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  @include breakpoint($x-large) {
-    max-width: $sidebar-link-max-width;
-    padding-right: 0;
-  }
-
-  h2, h3, h4, h5, h6 {
-    margin-bottom: 0;
-    font-family: $sans-serif-narrow;
-  }
-
-  h3, h4 {
-    font-size: $type-size-5;
-  }
-
-  p, li {
-    font-family: $sans-serif;
-    font-size: $type-size-6;
-    line-height: 1.5;
-  }
-
-  img {
-    width: 100%;
+  // Inner container for centering
+  > div {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
 }
 
 .sidebar__right {
-  margin-bottom: 1em;
-
-  @include breakpoint($large) {
-    position: relative;
-    float: right;
-    width: $right-sidebar-width-narrow;
-    margin-left: span(0.5 of 12);
-    z-index: 10;
-  }
-
-  @include breakpoint($x-large) {
-    width: $right-sidebar-width;
-  }
+  display: none;
 }
 
 /*
-   Author profile and links
+   Author profile - Horizontal layout with avatar on left
    ========================================================================== */
 
 .author__avatar {
-  display: table-cell;
-  vertical-align: top;
-  width: 36px;
-
-  @include breakpoint($large) {
-    display: block;
-    width: auto;
-    height: auto;
-  }
+  flex-shrink: 0;
 
   img {
-    max-width: 175px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--global-border-color, #30363d);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
 
-    @include breakpoint($large) {
-      padding: 4px;
-      border: 3px solid transparent;
-      background: linear-gradient(white, white) padding-box,
-                  linear-gradient(135deg, #1a365d, #2b6cb0, #38b2ac) border-box;
-      box-shadow: 0 4px 15px rgba(26, 54, 93, 0.15);
-    }
-
-    &:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 20px rgba(26, 54, 93, 0.2);
+  @media screen and (max-width: 600px) {
+    img {
+      width: 60px;
+      height: 60px;
     }
   }
 }
 
 .author__content {
-  display: table-cell;
-  vertical-align: top;
-  padding-left: 15px;
-  padding-right: 25px;
-  line-height: 1;
-
-  @include breakpoint($large) {
-    display: block;
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-  }
+  flex: 1;
+  min-width: 0;
 }
 
 .author__name {
-  margin: 0;
-
-  @include breakpoint($large) {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--global-text-color, #e6edf3);
 }
+
 .sidebar .author__name {
   font-family: $sans-serif;
-  font-size: $type-size-5;
+  font-size: 1.25rem;
   font-weight: 700;
-  color: var(--global-primary-color, #1a365d);
+  color: var(--global-text-color, #e6edf3);
 }
 
 .sidebar .author__desktop {
-  display: none;
-  @media screen and (min-width: 1024px) {
-    display: block;
-  }
+  display: inline;
 }
 
 .author__pronouns {
   margin: 0;
-
-  @include breakpoint($large) {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+  font-size: 0.875rem;
+  color: var(--global-text-color-light, #8b949e);
 }
 
 .author__bio {
   margin: 0;
-
-  @include breakpoint($large) {
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
+  font-size: 0.875rem;
+  color: var(--global-text-color-light, #8b949e);
+  line-height: 1.4;
 }
 
+/*
+   Author URLs - Compact horizontal icons
+   ========================================================================== */
+
 .author__urls-wrapper {
-  position: relative;
-  display: table-cell;
-  vertical-align: middle;
-  font-family: $sans-serif;
-  z-index: 10;
-  position: relative;
-  cursor: pointer;
-
-  li:last-child {
-    a {
-      margin-bottom: 0;
-    }
-  }
-
-  @include breakpoint($large) {
-    display: block;
-  }
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
 
   button {
-    margin-bottom: 0;
-
-    @include breakpoint($large) {
-      display: none;
-    }
+    display: none;
   }
 }
 
 .author__urls {
-  display: none;
-  position: absolute;
-  right: 0;
-  margin-top: 15px;
-  padding: 10px;
-  list-style-type: none;
-  border: 1px solid var(--global-border-color);
-  border-radius: $border-radius;
-  background: var(--global-bg-color);
-  z-index: -1;
-  box-shadow: 0 0 10px rgba(#000, 0.25);
-  cursor: default;
-
-  @include breakpoint($large) {
-    display: block;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  &:before {
-    display: block;
-    content: "";
-    position: absolute;
-    top: -11px;
-    left: calc(50% - 10px);
-    width: 0;
-    border-style: solid;
-    border-width: 0 10px 10px;
-    border-color: var(--global-border-color) transparent;
-    z-index: 0;
-
-    @include breakpoint($large) {
-      display: none;
-    }
-  }
-
-  &:after {
-    display: block;
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: calc(50% - 10px);
-    width: 0;
-    border-style: solid;
-    border-width: 0 10px 10px;
-    border-color: #fff transparent;
-    z-index: 1;
-
-    @include breakpoint($large) {
-      display: none;
-    }
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
   li {
-    white-space: nowrap;
+    display: inline-block;
   }
 
   a {
-    display: block;
-    margin-bottom: 5px;
-    padding-right: 5px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    color: inherit;
-    font-size: $type-size-5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    color: var(--global-text-color-light, #8b949e);
+    font-size: 1rem;
     text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
+    background: var(--global-bg-color, #0d1117);
+    border: 1px solid var(--global-border-color, #30363d);
+    border-radius: 50%;
+    transition: all 0.2s ease;
 
     &:hover {
-      text-decoration: none;
-      color: var(--global-secondary-color, #2b6cb0);
-      transform: translateX(3px);
+      color: var(--global-link-color, #58a6ff);
+      border-color: var(--global-link-color, #58a6ff);
+      background: rgba(88, 166, 255, 0.1);
+    }
+
+    i {
+      margin: 0;
+    }
+
+    // Hide text labels, show only icons
+    span, .label {
+      display: none;
     }
   }
 }

@@ -1,0 +1,187 @@
+.text-hl{
+  color: #0A942F;
+}
+.grey-hl{
+  color: #696969;
+}
+
+.bio-highlight {
+  margin-top: 12px;
+  padding: 16px 20px;
+  border-left: 3px solid #6c86ad;
+  border-radius: 6px;
+  background: #f6f8fc;
+  color: #2f3a47;
+  line-height: 1.6;
+}
+
+.bio-highlight a {
+  color: #305d96;
+  font-weight: 500;
+}
+
+.bio-highlight strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #223041;
+}
+
+.info-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.info-card {
+  padding: 20px;
+  border: 1px solid #e4eaf2;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(28, 46, 69, 0.06);
+}
+
+.info-card__eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6c86ad;
+  font-weight: 600;
+}
+
+.info-card__text,
+.info-card__list {
+  margin: 0;
+  color: #364556;
+  line-height: 1.6;
+}
+
+.info-card__list {
+  padding-left: 18px;
+}
+
+.info-card__list li {
+  margin-bottom: 6px;
+}
+
+/* ===== Site Footer (3-column layout like Espere) ===== */
+.site-footer {
+  border-top: 1px solid #e8e8e8;
+  padding: 30px 0;
+  background: #fdfdfd;
+}
+
+.footer-col-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.footer-col {
+  flex: 1 1 200px;
+}
+
+.footer-col-1 {
+  min-width: 200px;
+}
+
+.footer-col-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.footer-col-3 {
+  text-align: right;
+  min-width: 260px;
+}
+
+.footer-col .contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col .contact-list li {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.footer-col .contact-list li a {
+  color: #2a7ae2;
+}
+
+.footer-col .text {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.footer-col .text a {
+  color: #2a7ae2;
+}
+
+/* Footer social icon buttons */
+.footer-col-2 .icon-button {
+  background-color: #424b5a;
+  border-radius: 3.2rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  height: 2.8rem;
+  width: 2.8rem;
+  position: relative;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.footer-col-2 .icon-button span {
+  border-radius: 0;
+  display: block;
+  height: 0;
+  left: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transition: all 0.3s;
+  width: 0;
+}
+
+.footer-col-2 .icon-button:hover span {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 2.8rem;
+  margin: -1.4rem;
+}
+
+.footer-col-2 .icon-button i {
+  color: #fff;
+  z-index: 10;
+  position: relative;
+}
+
+.footer-col-2 .icon-button.github span { background-color: #000; }
+.footer-col-2 .icon-button.linkedin span { background-color: #0077B5; }
+.footer-col-2 .icon-button.twitter span { background-color: #4099ff; }
+
+@media screen and (max-width: 768px) {
+  .footer-col-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-col-1,
+  .footer-col-2,
+  .footer-col-3 {
+    text-align: center;
+  }
+}

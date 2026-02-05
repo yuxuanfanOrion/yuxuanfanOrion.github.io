@@ -1,30 +1,39 @@
 /* ==========================================================================
-   DEFAULT THEME - Deep Blue Academic
+   DEFAULT THEME - Starry Night Academic
    ========================================================================== */
 
-/* Primary color palette */
-$primary                    : #1a365d;
-$secondary                  : #2b6cb0;
-$accent                     : #38b2ac;
-$highlight                  : #f6e05e;
+/* Starry theme color palette */
+$starry-bg                  : #0d1117;
+$starry-bg-secondary        : #161b22;
+$starry-text                : #e6edf3;
+$starry-text-muted          : #8b949e;
+$starry-link                : #58a6ff;
+$starry-accent              : #7ee787;
+$starry-border              : #30363d;
+
+/* Primary color palette (mapped to starry theme) */
+$primary                    : $starry-link;
+$secondary                  : #79c0ff;
+$accent                     : $starry-accent;
+$highlight                  : #f2cc60;
 
 /* Color codes used for the theme */
-$gray                       : #4a5568;
-$dark-gray                  : #2d3748;
-$darker-gray                : #1a202c;
-$light-gray                 : #a0aec0;
-$lighter-gray               : #edf2f7;
+$gray                       : $starry-text-muted;
+$dark-gray                  : $starry-text;
+$darker-gray                : #c9d1d9;
+$light-gray                 : $starry-text-muted;
+$lighter-gray               : $starry-border;
 
 /* Color codes used for the site */
-$danger-color               : #e53e3e;
-$info-color                 : $secondary;
-$notice-color               : $gray;
-$success-color              : #48bb78;
-$warning-color              : #ed8936;
+$danger-color               : #f85149;
+$info-color                 : $starry-link;
+$notice-color               : $starry-text-muted;
+$success-color              : $starry-accent;
+$warning-color              : #d29922;
 
 /* Other basic settings for the template */
-$border-radius              : 4px;
-$box-shadow                 : 0 1px 1px rgba(0, 0, 0, 0.125);
+$border-radius              : 8px;
+$box-shadow                 : 0 2px 8px rgba(0, 0, 0, 0.3);
 $global-transition          : all 0.2s ease-in-out;
 $masthead-height            : 70px;
 $navicon-width              : 28px;
@@ -32,24 +41,26 @@ $navicon-height             : 4px;
 $sidebar-link-max-width     : 250px;
 $sidebar-screen-min-width   : 1024px;
 
-/* Default light theme for the site */
+/* Starry night theme for the site */
 :root {
-    --global-base-color                 : #{$gray};
-    --global-bg-color                   : #fff;
-    --global-border-color               : #{$lighter-gray};
-    --global-code-background-color      : #f7fafc;
-    --global-code-text-color            : #{$primary};
-    --global-fig-caption-color          : #{$light-gray};
-    --global-link-color                 : #{$secondary};
-    --global-link-color-hover           : #{$primary};
-    --global-link-color-visited         : mix(#fff, #{$secondary}, 15%);
-    --global-masthead-link-color        : #{$dark-gray};
-    --global-masthead-link-color-hover  : #{$primary};
-    --global-text-color                 : #{$dark-gray};
-    --global-text-color-light           : #{$light-gray};
-    --global-thead-color                : #{$lighter-gray};
-    --global-accent-color               : #{$accent};
+    --global-base-color                 : #{$starry-text-muted};
+    --global-bg-color                   : #{$starry-bg};
+    --global-bg-secondary               : #{$starry-bg-secondary};
+    --global-border-color               : #{$starry-border};
+    --global-code-background-color      : #{$starry-bg-secondary};
+    --global-code-text-color            : #{$starry-accent};
+    --global-fig-caption-color          : #{$starry-text-muted};
+    --global-link-color                 : #{$starry-link};
+    --global-link-color-hover           : #{$secondary};
+    --global-link-color-visited         : mix(#{$starry-bg}, #{$starry-link}, 15%);
+    --global-masthead-link-color        : #{$starry-text};
+    --global-masthead-link-color-hover  : #{$starry-link};
+    --global-text-color                 : #{$starry-text};
+    --global-text-color-light           : #{$starry-text-muted};
+    --global-thead-color                : #{$starry-bg-secondary};
+    --global-accent-color               : #{$starry-accent};
     --global-highlight-color            : #{$highlight};
-    --global-primary-color              : #{$primary};
+    --global-primary-color              : #{$starry-link};
     --global-secondary-color            : #{$secondary};
+    --global-card-bg                    : #{$starry-bg-secondary};
 }

@@ -2,34 +2,27 @@
    SINGLE PAGE/POST
    ========================================================================== */
 
+/* Single-column centered layout for starry theme */
 #main {
-  @include container;
-  @include clearfix;
-  margin-top: 2em;
-  padding-left: 1em;
-  padding-right: 1em;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 120px; /* Space for fixed masthead + profile card */
+  padding-left: 1.5em;
+  padding-right: 1.5em;
   animation: intro 0.3s both;
   animation-delay: 0.35s;
-
-  @include breakpoint($x-large) {
-    max-width: $x-large;
-  }
 }
 
 .page {
-  @include breakpoint($large) {
-    @include span(10 of 12 last);
-    @include prefix(0.5 of 12);
-    @include suffix(2 of 12);
-  }
+  width: 100%;
 
   .page__inner-wrap {
-    @include full();
+    width: 100%;
 
     .page__content,
     .page__meta,
     .page__share {
-      @include full();
+      width: 100%;
     }
   }
 }
@@ -51,7 +44,7 @@
 .page__content {
 
   h1 {
-    color: var(--global-primary-color, #1a365d);
+    color: var(--global-text-color, #e6edf3);
     font-weight: 700;
     margin-top: 2em;
     margin-bottom: 0.75em;
@@ -59,8 +52,8 @@
 
   h2 {
     padding-bottom: 0.5em;
-    border-bottom: 2px solid var(--global-secondary-color, #2b6cb0);
-    color: var(--global-primary-color, #1a365d);
+    border-bottom: 1px solid var(--global-border-color, #30363d);
+    color: var(--global-text-color, #e6edf3);
     font-weight: 600;
   }
 
@@ -390,12 +383,7 @@
   margin-top: 2em;
   padding-top: 1em;
   border-top: 1px solid var(--global-border-color);
-  @include clearfix();
-  float: left;
-
-  @include breakpoint($large) {
-    @include pre(2.5 of 12);
-  }
+  width: 100%;
 
   a {
     color: inherit;

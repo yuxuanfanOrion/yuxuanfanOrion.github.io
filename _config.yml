@@ -162,6 +162,8 @@ exclude:
   - "*.sublime-workspace"
   - .asset-cache
   - .bundle
+  - Espere-1119-Song.github.io
+  - dev
   - .github
   - .jekyll-assets-cache
   - .sass-cache

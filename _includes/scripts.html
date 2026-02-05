@@ -56,41 +56,18 @@ $(document).ready(function() {
   var cover = $('#profile-cover');
 
   if (cover.length) {
-    cover.append('<div class="bg-layer bg-layer-1"></div>');
-    cover.append('<div class="bg-layer bg-layer-2"></div>');
-
-    var layer1 = cover.find('.bg-layer-1');
-    var layer2 = cover.find('.bg-layer-2');
-
-    // 初始化：layer1在底层显示，layer2在上层隐藏
-    layer1.css({
+    // 直接在 cover 上切换背景图
+    cover.css({
       'background-image': 'url(' + starImages[0] + ')',
       'background-position': 'center 80%',
-      'opacity': 1,
-      'z-index': 1
-    });
-    layer2.css({
-      'background-position': 'center 80%',
-      'opacity': 0,
-      'z-index': 2
+      'background-size': 'cover',
+      'transition': 'background-image 1s ease-in-out'
     });
 
     setInterval(function() {
       currentIndex = (currentIndex + 1) % starImages.length;
-
-      // 预加载新图片
-      var img = new Image();
-      img.onload = function() {
-        // 设置上层图片并淡入
-        layer2.css('background-image', 'url(' + starImages[currentIndex] + ')');
-        layer2.animate({opacity: 1}, 2000, function() {
-          // 淡入完成后，把新图片设置到底层，重置上层
-          layer1.css('background-image', 'url(' + starImages[currentIndex] + ')');
-          layer2.css('opacity', 0);
-        });
-      };
-      img.src = starImages[currentIndex];
-    }, 10000);
+      cover.css('background-image', 'url(' + starImages[currentIndex] + ')');
+    }, 5000);
   }
 });
 </script>

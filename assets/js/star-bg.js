@@ -8,39 +8,20 @@ $(document).ready(function() {
     var path = '/images/stars-bg/star-' + num + '.jpg';
     starImages.push(path);
 
-    // 预加载图片
     var img = new Image();
     img.src = path;
     preloadedImages.push(img);
   }
 
   var currentIndex = 0;
-  var layer1 = document.getElementById('bg-layer-1');
-  var layer2 = document.getElementById('bg-layer-2');
+  var layer = document.getElementById('bg-layer-1');
 
-  if (layer1 && layer2) {
-    // 初始化：layer1 显示第一张
-    layer1.style.backgroundImage = 'url(' + starImages[0] + ')';
-    layer1.style.opacity = '1';
-    layer2.style.opacity = '0';
-
-    var activeLayer = 1;
+  if (layer) {
+    layer.style.backgroundImage = 'url(' + starImages[0] + ')';
 
     setInterval(function() {
-      // 切换到下一张图片
       currentIndex = (currentIndex + 1) % starImages.length;
-
-      if (activeLayer === 1) {
-        layer2.style.backgroundImage = 'url(' + starImages[currentIndex] + ')';
-        layer2.style.opacity = '1';
-        layer1.style.opacity = '0';
-        activeLayer = 2;
-      } else {
-        layer1.style.backgroundImage = 'url(' + starImages[currentIndex] + ')';
-        layer1.style.opacity = '1';
-        layer2.style.opacity = '0';
-        activeLayer = 1;
-      }
+      layer.style.backgroundImage = 'url(' + starImages[currentIndex] + ')';
     }, 5000);
   }
 });

@@ -34,7 +34,7 @@ layout: default
     </div>
     <div id="my-contact" class="profile-col profile-col-2">
       <div id="my-name">
-        Yuxuan FAN (范宇轩)
+        Yuxuan FAN (樊宇轩)
       </div>
       <div id="my-title">
         M.Phil Student @ HKUST(GZ)

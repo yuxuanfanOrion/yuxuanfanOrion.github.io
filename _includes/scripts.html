@@ -26,98 +26,41 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- Star Background Rotation & Theme Toggle -->
+<!-- Star Background Rotation -->
 <script>
-(function() {
-  // Star background images
-  const starImages = [
-    '{{ base_path }}/images/stars-bg/star-01.jpg',
-    '{{ base_path }}/images/stars-bg/star-02.jpg',
-    '{{ base_path }}/images/stars-bg/star-03.jpg',
-    '{{ base_path }}/images/stars-bg/star-04.jpg',
-    '{{ base_path }}/images/stars-bg/star-05.jpg',
-    '{{ base_path }}/images/stars-bg/star-06.jpg',
-    '{{ base_path }}/images/stars-bg/star-07.jpg',
-    '{{ base_path }}/images/stars-bg/star-08.jpg',
-    '{{ base_path }}/images/stars-bg/star-09.jpg',
-    '{{ base_path }}/images/stars-bg/star-10.jpg',
-    '{{ base_path }}/images/stars-bg/star-11.jpg',
-    '{{ base_path }}/images/stars-bg/star-12.jpg',
-    '{{ base_path }}/images/stars-bg/star-13.jpg',
-    '{{ base_path }}/images/stars-bg/star-14.jpg',
-    '{{ base_path }}/images/stars-bg/star-15.jpg',
-    '{{ base_path }}/images/stars-bg/star-16.jpg',
-    '{{ base_path }}/images/stars-bg/star-17.jpg',
-    '{{ base_path }}/images/stars-bg/star-18.jpg',
-    '{{ base_path }}/images/stars-bg/star-19.jpg',
-    '{{ base_path }}/images/stars-bg/star-20.jpg'
+$(document).ready(function() {
+  var starImages = [
+    '/images/stars-bg/star-01.jpg',
+    '/images/stars-bg/star-02.jpg',
+    '/images/stars-bg/star-03.jpg',
+    '/images/stars-bg/star-04.jpg',
+    '/images/stars-bg/star-05.jpg',
+    '/images/stars-bg/star-06.jpg',
+    '/images/stars-bg/star-07.jpg',
+    '/images/stars-bg/star-08.jpg',
+    '/images/stars-bg/star-09.jpg',
+    '/images/stars-bg/star-10.jpg',
+    '/images/stars-bg/star-11.jpg',
+    '/images/stars-bg/star-12.jpg',
+    '/images/stars-bg/star-13.jpg',
+    '/images/stars-bg/star-14.jpg',
+    '/images/stars-bg/star-15.jpg',
+    '/images/stars-bg/star-16.jpg',
+    '/images/stars-bg/star-17.jpg',
+    '/images/stars-bg/star-18.jpg',
+    '/images/stars-bg/star-19.jpg',
+    '/images/stars-bg/star-20.jpg'
   ];
+  var currentIndex = 0;
+  var cover = $('#profile-cover');
 
-  // Create background containers inside cover
-  function initStarBackground() {
-    const cover = document.getElementById('profile-cover');
-    if (!cover) return;
-
-    const bg1 = document.createElement('div');
-    const bg2 = document.createElement('div');
-    bg1.className = 'stars-bg active';
-    bg2.className = 'stars-bg';
-    bg1.id = 'stars-bg-1';
-    bg2.id = 'stars-bg-2';
-    cover.prepend(bg2);
-    cover.prepend(bg1);
-
-    let currentIndex = 0;
-    let activeBg = bg1;
-    let inactiveBg = bg2;
-
-    // Set initial background
-    bg1.style.backgroundImage = `url(${starImages[0]})`;
-
-    // Rotate backgrounds every 5 seconds
-    setInterval(() => {
+  if (cover.length) {
+    setInterval(function() {
       currentIndex = (currentIndex + 1) % starImages.length;
-      inactiveBg.style.backgroundImage = `url(${starImages[currentIndex]})`;
-
-      activeBg.classList.remove('active');
-      inactiveBg.classList.add('active');
-
-      [activeBg, inactiveBg] = [inactiveBg, activeBg];
+      cover.css('background-image', 'url(' + starImages[currentIndex] + ')');
     }, 5000);
   }
-
-  // Theme toggle
-  function initThemeToggle() {
-    const btn = document.createElement('button');
-    btn.className = 'theme-toggle';
-    btn.setAttribute('aria-label', 'Toggle theme');
-
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    btn.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
-
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      btn.innerHTML = next === 'dark' ? '☀️' : '🌙';
-    });
-
-    document.body.appendChild(btn);
-  }
-
-  // Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initStarBackground();
-      initThemeToggle();
-    });
-  } else {
-    initStarBackground();
-    initThemeToggle();
-  }
-})();
+});
 </script>
 
 {% include analytics.html %}

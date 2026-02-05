@@ -82,7 +82,7 @@ a:hover {
 .site-header {
   border-top: 3px solid #9b3022;
   border-bottom: 1px solid #e4eaf2;
-  min-height: 40px;
+  min-height: 36px;
   position: relative;
   background: #f9f9f9;
 }
@@ -101,7 +101,7 @@ a:hover {
 .site-nav {
   display: flex;
   justify-content: center;
-  line-height: 56px;
+  line-height: 36px;
   z-index: 3;
 }
 

@@ -270,11 +270,11 @@ layout: default
     <div class="info-card-grid">
       <div class="info-card">
         <p class="info-card__eyebrow">Conference Reviewer</p>
-        <p class="info-card__text">CVPR, KDD, IV, ITSC</p>
+        <p class="info-card__text">CVPR, KDD, IV, ITSC, ICIP</p>
       </div>
       <div class="info-card">
         <p class="info-card__eyebrow">Journal Reviewer</p>
-        <p class="info-card__text">TIST (ACM Transactions on Intelligent Systems and Technology)</p>
+        <p class="info-card__text">IJCV, TIST</p>
       </div>
     </div>
   </div>

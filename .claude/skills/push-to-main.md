@@ -23,3 +23,5 @@ Commit all current changes and push to the main (master) branch.
 - Always check for uncommitted changes before committing
 - Use descriptive commit messages
 - Do not commit sensitive files (.env, credentials, etc.)
+- **You MUST always push to origin master at the end** — do not stop after committing, the push step is mandatory
+- If `git push` fails due to network issues (timeout, connection refused, etc.), use `/vpn` to enable proxy first, then retry the push

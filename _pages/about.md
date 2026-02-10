@@ -126,6 +126,18 @@ layout: default
           <p>AI Thrust, Information Hub</p>
         </div>
       </article>
+      <article>
+        <div class="timeline-entry__meta">
+          <span class="timeline-entry__time">Sep. 2022 - Jun. 2023</span>
+          <img src="/images/icon/pku.png" alt="PKU" class="timeline-entry__logo">
+        </div>
+        <div class="timeline-entry__content">
+          <h3>Exchange Student in Economics</h3>
+          <p class="timeline-entry__role">Peking University, Beijing, China</p>
+          <p>National School of Development</p>
+        </div>
+      </article>
+
       <article class="timeline-entry">
         <div class="timeline-entry__meta">
           <span class="timeline-entry__time">Sep. 2020 - Jun. 2024</span>

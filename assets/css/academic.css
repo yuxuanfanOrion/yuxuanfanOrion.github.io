@@ -158,13 +158,18 @@ a:hover {
 }
 
 /* ===== Profile Card ===== */
-.cover {
+.profile-section {
   position: relative;
-  overflow: hidden;
-  max-width: 100%;
   height: 550px;
-  margin-right: auto;
-  margin-left: auto;
+  overflow: hidden;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: #1a1a2e;
 }
 
@@ -193,18 +198,18 @@ a:hover {
 }
 
 @media screen and (max-width: 600px) {
-  .cover {
+  .profile-section {
     height: 580px;
   }
 }
 
 .profile-wrapper {
   border-radius: 25px;
-  position: relative;
+  position: absolute;
   top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
   width: 600px;
-  margin-left: auto;
-  margin-right: auto;
   background-color: #fff;
   z-index: 10;
 }

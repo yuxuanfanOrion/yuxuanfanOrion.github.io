@@ -85,8 +85,10 @@ layout: default
       <article class="timeline-entry">
         <div class="timeline-entry__meta">
           <span class="timeline-entry__time">Oct. 2025 - Present</span>
-          <img src="/images/icon/inclusion_ai.png" alt="Inclusion AI" class="timeline-entry__logo">
-          <img src="/images/icon/ant.png" alt="Ant Group" class="timeline-entry__logo">
+          <div class="timeline-entry__logos">
+            <img src="/images/icon/inclusion_ai.png" alt="Inclusion AI" class="timeline-entry__logo timeline-entry__logo--small">
+            <img src="/images/icon/ant.png" alt="Ant Group" class="timeline-entry__logo">
+          </div>
         </div>
         <div class="timeline-entry__content">
           <h3>Inclusion AI, Ant Group</h3>

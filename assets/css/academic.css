@@ -450,6 +450,18 @@ a:hover {
   max-height: 110px;
 }
 
+.timeline-entry__logos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.timeline-entry__logo--small {
+  width: 90px !important;
+  max-height: 90px !important;
+}
+
 .timeline-entry__content {
   flex: 1 1 320px;
   min-width: 240px;

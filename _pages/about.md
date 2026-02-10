@@ -126,7 +126,7 @@ layout: default
           <p>AI Thrust, Information Hub</p>
         </div>
       </article>
-      <article>
+      <article class="timeline-entry">
         <div class="timeline-entry__meta">
           <span class="timeline-entry__time">Sep. 2021 - Jun. 2024</span>
           <img src="/images/icon/pku.png" alt="PKU" class="timeline-entry__logo">

@@ -446,8 +446,8 @@ a:hover {
 
 #experiences .timeline-entry__logo,
 #education .timeline-entry__logo {
-  width: 140px;
-  max-height: 140px;
+  width: 170px;
+  max-height: 170px;
 }
 
 .timeline-entry__logos {
@@ -505,8 +505,8 @@ a:hover {
 
   #experiences .timeline-entry__logo,
   #education .timeline-entry__logo {
-    width: 100px;
-    max-height: 100px;
+    width: 120px;
+    max-height: 120px;
   }
   .timeline-entry::before {
     left: -30px;

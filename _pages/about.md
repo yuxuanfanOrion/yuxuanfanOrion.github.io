@@ -128,7 +128,7 @@ layout: default
       </article>
       <article>
         <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Sep. 2022 - Jun. 2023</span>
+          <span class="timeline-entry__time">Sep. 2021 - Jun. 2024</span>
           <img src="/images/icon/pku.png" alt="PKU" class="timeline-entry__logo">
         </div>
         <div class="timeline-entry__content">

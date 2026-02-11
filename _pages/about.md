@@ -93,7 +93,7 @@ layout: default
         <div class="timeline-entry__content">
           <h3>Inclusion AI, Ant Group</h3>
           <p class="timeline-entry__role">Research Intern</p>
-          <p>Focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model.</p>
+          <p>Focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model. Participated in the post-training of <a href="https://huggingface.co/inclusionAI/Ming-flash-omni-2.0">Ming-flash-omni-2.0</a>.</p>
         </div>
       </article>
       <article class="timeline-entry">

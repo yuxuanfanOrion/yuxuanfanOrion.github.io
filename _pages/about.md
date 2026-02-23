@@ -99,7 +99,9 @@ layout: default
       <article class="timeline-entry">
         <div class="timeline-entry__meta">
           <span class="timeline-entry__time">Jun. 2025 - Sep. 2025</span>
-          <img src="/images/icon/alibaba.png" alt="Alibaba" class="timeline-entry__logo">
+          <div class="timeline-entry__logos">
+            <img src="/images/icon/alibaba.png" alt="Alibaba" class="timeline-entry__logo">
+          </div>
         </div>
         <div class="timeline-entry__content">
           <h3>CV Lab, Amap, Alibaba</h3>

@@ -1,3 +1,7 @@
+- title: "OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis"
+  authors: '<b>Yuxuan Fan*</b>, Jing Hao*, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang'
+  venue: "CVPR 2026"
+
 - title: "ACE: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall"
   authors: 'Jiayu Yang*, <b>Yuxuan Fan*</b>, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue'
   venue: "ICLR 2026"

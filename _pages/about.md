@@ -181,6 +181,7 @@ layout: default
   <div class="pub-list">
     {% for pub in site.data.publications %}
     <div class="pub">
+      {% if pub.image %}<div class="pub-left"><img class="intro-img" src="{{ pub.image }}" alt="{{ pub.title }}"></div>{% endif %}
       <div class="pub-right">
         <div class="title">{{ pub.title }}</div>
         <div class="authors">{{ pub.authors }}</div>

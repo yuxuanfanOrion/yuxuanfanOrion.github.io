@@ -50,19 +50,30 @@ The homepage (`_pages/about.md`) uses a custom single-page layout with sections:
 - Biography, Experiences, Education (timeline format)
 - News, Publications, Services, Hobbies
 
+## Workflow Rules
+
+- After completing all file changes, always `git add` the changed files, commit with a descriptive message, and let the post-commit hook handle the push automatically.
+- Use VPN proxy for git operations: `export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897`
+
 ## Adding Content
 
-### New Publication
-Create a markdown file in `_publications/` with frontmatter:
+### New News
+Add an entry to `_data/news.yml`:
 ```yaml
----
-title: "Paper Title"
-collection: publications
-category: conferences  # or manuscripts, books
-permalink: /publication/paper-slug
-date: YYYY-MM-DD
-venue: "Conference/Journal Name"
----
+- date: "Mar 2026"
+  text: "One paper accepted by ICML'26!"
+```
+
+### New Publication
+Add an entry to `_data/publications.yml`:
+```yaml
+- title: "Paper Title"
+  authors: '<b>Yuxuan Fan</b>, Co-Author'
+  venue: "CVPR 2026"
+  paper_url: "https://arxiv.org/abs/xxx"
+  image: "/images/pub_xxx.png"      # optional
+  code_url: "https://github.com/xxx" # optional
+  project_url: "https://xxx"         # optional
 ```
 
 ### Enabling Navigation Sections

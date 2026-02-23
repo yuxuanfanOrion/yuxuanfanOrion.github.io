@@ -162,30 +162,12 @@ layout: default
     News
   </h1>
   <ul class="news-list">
+    {% for item in site.data.news %}
     <li class="news-list__item">
-      <span class="news-list__date">Jan 2026</span>
-      <span class="news-list__text">One paper was accepted by ICLR'26!</span>
+      <span class="news-list__date">{{ item.date }}</span>
+      <span class="news-list__text">{{ item.text }}</span>
     </li>
-    <li class="news-list__item">
-      <span class="news-list__date">Nov 2025</span>
-      <span class="news-list__text">Four papers were accepted by AAAI'26!</span>
-    </li>
-    <li class="news-list__item">
-      <span class="news-list__date">Nov 2025</span>
-      <span class="news-list__text">One paper was accepted by Expert Systems with Applications (JCR Q1, IF: 7.5)!</span>
-    </li>
-    <li class="news-list__item">
-      <span class="news-list__date">Sep 2025</span>
-      <span class="news-list__text">Two papers were accepted by NeurIPS'25!</span>
-    </li>
-    <li class="news-list__item">
-      <span class="news-list__date">Jun 2025</span>
-      <span class="news-list__text">One paper was accepted by ACM MM'25!</span>
-    </li>
-    <li class="news-list__item">
-      <span class="news-list__date">May 2025</span>
-      <span class="news-list__text">One paper was accepted by IJCAI'25!</span>
-    </li>
+    {% endfor %}
   </ul>
 </div>
 
@@ -197,84 +179,20 @@ layout: default
   <p>* Equal contribution. Also see <a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a>.</p>
 
   <div class="pub-list">
+    {% for pub in site.data.publications %}
     <div class="pub">
       <div class="pub-right">
-        <div class="title">ACE: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall</div>
-        <div class="authors">
-          <span class="author">Jiayu Yang*</span>, <span class="author"><b>Yuxuan Fan*</b></span>, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue
-        </div>
-        <div class="publish"><span class="publisher">ICLR 2026</span></div>
+        <div class="title">{{ pub.title }}</div>
+        <div class="authors">{{ pub.authors }}</div>
+        <div class="publish"><span class="publisher">{{ pub.venue }}</span></div>
         <div class="tags">
-          <a class="tag" href="https://arxiv.org/abs/2510.07896">Paper</a>
+          {% if pub.paper_url %}<a class="tag" href="{{ pub.paper_url }}">Paper</a>{% endif %}
+          {% if pub.code_url %}<a class="tag" href="{{ pub.code_url }}">Code</a>{% endif %}
+          {% if pub.project_url %}<a class="tag" href="{{ pub.project_url }}">Project</a>{% endif %}
         </div>
       </div>
     </div>
-
-    <div class="pub">
-      <div class="pub-right">
-        <div class="title">HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning</div>
-        <div class="authors">
-          <span class="author">Tianyi Bai*</span>, <span class="author"><b>Yuxuan Fan*</b></span>, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan
-        </div>
-        <div class="publish"><span class="publisher">NeurIPS 2025</span></div>
-        <div class="tags">
-          <a class="tag" href="https://arxiv.org/pdf/2506.07227">Paper</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pub">
-      <div class="pub-right">
-        <div class="title">Towards Better Dental AI: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis</div>
-        <div class="authors">
-          <span class="author">Jing Hao*</span>, <span class="author"><b>Yuxuan Fan*</b></span>, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung
-        </div>
-        <div class="publish"><span class="publisher">NeurIPS 2025</span></div>
-        <div class="tags">
-          <a class="tag" href="https://arxiv.org/pdf/2509.09254">Paper</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pub">
-      <div class="pub-right">
-        <div class="title">How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM</div>
-        <div class="authors">
-          <span class="author">Jirong Zha*</span>, <span class="author"><b>Yuxuan Fan*</b></span>, Xiao Yang, Chen Gao, Xinlei Chen
-        </div>
-        <div class="publish"><span class="publisher">IJCAI 2025</span></div>
-        <div class="tags">
-          <a class="tag" href="https://arxiv.org/pdf/2504.05786">Paper</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pub">
-      <div class="pub-right">
-        <div class="title">AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning</div>
-        <div class="authors">
-          <span class="author">Jirong Zha*</span>, <span class="author"><b>Yuxuan Fan*</b></span>, Tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen
-        </div>
-        <div class="publish"><span class="publisher">AAAI 2026</span></div>
-        <div class="tags">
-          <a class="tag" href="https://arxiv.org/abs/2511.11025">Paper</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="pub">
-      <div class="pub-right">
-        <div class="title">DIMM: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning</div>
-        <div class="authors">
-          <span class="author">Jirong Zha</span>, <span class="author"><b>Yuxuan Fan</b></span>, Kai Li, Han Li, Chen Gao, Xinlei Chen
-        </div>
-        <div class="publish"><span class="publisher">AAAI 2026</span></div>
-        <div class="tags">
-          <a class="tag" href="https://arxiv.org/pdf/2505.12340">Paper</a>
-        </div>
-      </div>
-    </div>
-
+    {% endfor %}
   </div>
 </div>
 

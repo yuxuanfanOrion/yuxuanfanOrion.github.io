@@ -1,0 +1,29 @@
+- title: "ACE: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall"
+  authors: 'Jiayu Yang*, <b>Yuxuan Fan*</b>, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue'
+  venue: "ICLR 2026"
+  paper_url: "https://arxiv.org/abs/2510.07896"
+
+- title: "HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning"
+  authors: 'Tianyi Bai*, <b>Yuxuan Fan*</b>, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan'
+  venue: "NeurIPS 2025"
+  paper_url: "https://arxiv.org/pdf/2506.07227"
+
+- title: "Towards Better Dental AI: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis"
+  authors: 'Jing Hao*, <b>Yuxuan Fan*</b>, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung'
+  venue: "NeurIPS 2025"
+  paper_url: "https://arxiv.org/pdf/2509.09254"
+
+- title: "How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM"
+  authors: 'Jirong Zha*, <b>Yuxuan Fan*</b>, Xiao Yang, Chen Gao, Xinlei Chen'
+  venue: "IJCAI 2025"
+  paper_url: "https://arxiv.org/pdf/2504.05786"
+
+- title: "AirCopBench: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning"
+  authors: 'Jirong Zha*, <b>Yuxuan Fan*</b>, Tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen'
+  venue: "AAAI 2026"
+  paper_url: "https://arxiv.org/abs/2511.11025"
+
+- title: "DIMM: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning"
+  authors: 'Jirong Zha, <b>Yuxuan Fan</b>, Kai Li, Han Li, Chen Gao, Xinlei Chen'
+  venue: "AAAI 2026"
+  paper_url: "https://arxiv.org/pdf/2505.12340"

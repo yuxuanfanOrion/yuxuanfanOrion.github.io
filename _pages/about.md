@@ -69,9 +69,9 @@ layout: default
     <p>
       I am passionate about contributing to large-scale, impactful open-source projects.
     </p>
-    <p class="bio-highlight">
+    <!-- <p class="bio-highlight">
       <strong>Now I am a Research Intern at <a href="https://github.com/inclusionAI">Inclusion AI</a>, Ant Group, focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model.</strong>
-    </p>
+    </p> -->
   </div>
 </div>
 

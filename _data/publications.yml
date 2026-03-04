@@ -18,7 +18,7 @@
   paper_url: "https://arxiv.org/pdf/2509.09254"
 
 - title: "How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM"
-  authors: 'Jirong Zha*, <b>Yuxuan Fan*</b>, Xiao Yang, Chen Gao, Xinlei Chen'
+  authors: '<b>Yuxuan Fan*</b>, Jirong Zha*, Xiao Yang, Chen Gao, Xinlei Chen'
   venue: "IJCAI 2025"
   paper_url: "https://arxiv.org/pdf/2504.05786"
 

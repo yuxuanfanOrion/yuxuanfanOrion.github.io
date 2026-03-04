@@ -10,7 +10,7 @@ layout: default
     <nav class="site-nav">
       <div class="trigger">
         <a class="page-link" href="#bio"><b>Biography</b></a>
-        <a class="page-link" href="#experiences"><b>Experiences</b></a>
+        <!-- <a class="page-link" href="#experiences"><b>Experiences</b></a> -->
         <a class="page-link" href="#education"><b>Education</b></a>
         <a class="page-link" href="#publications"><b>Publications</b></a>
         <a class="page-link" href="#services"><b>Services</b></a>
@@ -75,6 +75,7 @@ layout: default
   </div>
 </div>
 
+<!-- Experiences section (commented out)
 <div id="experiences" class="bio">
   <h1 class="md-heading text-left">
     <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -112,6 +113,7 @@ layout: default
     </div>
   </div>
 </div>
+-->
 
 <div id="education" class="bio">
   <h1 class="md-heading text-left">

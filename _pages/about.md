@@ -36,6 +36,9 @@ layout: default
       <div id="my-title">
         M.Phil Student @ HKUST(GZ)
       </div>
+      <div id="my-tagline">
+        <em>Chasing the starry sky</em>
+      </div>
       <div class="social-media">
         <a href="https://scholar.google.com/citations?user=YOUR_ID" class="icon-button github">
           <i class="ai ai-google-scholar-square icon-github"></i>
@@ -65,6 +68,9 @@ layout: default
   <div class="bio-body">
     <p>
       I'm currently a second year M.Phil student at <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/">AI Thrust, Information Hub</a>, <a href="https://hkust-gz.edu.cn/">The Hong Kong University of Science and Technology (Guangzhou)</a>. I received my bachelor degree from <a href="https://www.ustb.edu.cn/">School of Advanced Engineering, USTB</a> in 2024. I also had a chance to study Economy at <a href="https://nsd.pku.edu.cn/">National School of Development, Peking University</a>.
+    </p>
+    <p>
+      I am also an incoming PhD student at NTU CCDS, where I will be honored to be supervised by <a href="https://jaehong31.github.io/">Prof. JaeHong Yoon</a>.
     </p>
     <p>
       I am passionate about contributing to large-scale, impactful open-source projects.

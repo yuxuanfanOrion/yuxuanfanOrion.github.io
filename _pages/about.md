@@ -186,7 +186,7 @@ layout: default
     <i class="fa fa-file" aria-hidden="true"></i>
     Selected Publications
   </h1>
-  <p>* Equal contribution. Also see <a href="https://scholar.google.com/citations?user=YOUR_ID">Google Scholar</a>.</p>
+  <p>* Equal contribution. Also see <a href="https://scholar.google.com/citations?user=h8x-wqkAAAAJ&hl=zh-CN">Google Scholar</a>.</p>
 
   <div class="pub-list">
     {% for pub in site.data.publications %}

@@ -1,21 +1,26 @@
 - title: "OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis"
   authors: '<b>Yuxuan Fan*</b>, Jing Hao*, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang'
-  venue: "CVPR 2026"
+  venue: "CVPR 2026 (Highlight)"
+  paper_url: "https://arxiv.org/abs/2603.06366"
+  code_url: "https://github.com/isjinghao/OralGPT"
 
 - title: "ACE: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall"
   authors: 'Jiayu Yang*, <b>Yuxuan Fan*</b>, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue'
   venue: "ICLR 2026"
   paper_url: "https://arxiv.org/abs/2510.07896"
+  code_url: "https://github.com/yjywdzh/ACE"
 
 - title: "HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning"
   authors: 'Tianyi Bai*, <b>Yuxuan Fan*</b>, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan'
   venue: "NeurIPS 2025"
   paper_url: "https://arxiv.org/pdf/2506.07227"
+  code_url: "https://github.com/Relaxed-System-Lab/hallu_med"
 
 - title: "Towards Better Dental AI: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis"
   authors: 'Jing Hao*, <b>Yuxuan Fan*</b>, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung'
   venue: "NeurIPS 2025"
   paper_url: "https://arxiv.org/pdf/2509.09254"
+  code_url: "https://github.com/isjinghao/OralGPT"
 
 - title: "How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM"
   authors: '<b>Yuxuan Fan*</b>, Jirong Zha*, Xiao Yang, Chen Gao, Xinlei Chen'
@@ -26,8 +31,11 @@
   authors: 'Jirong Zha*, <b>Yuxuan Fan*</b>, Tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen'
   venue: "AAAI 2026"
   paper_url: "https://arxiv.org/abs/2511.11025"
+  code_url: "https://github.com/EmbodiedCity/AirCopBench.code"
 
 - title: "DIMM: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning"
   authors: 'Jirong Zha, <b>Yuxuan Fan</b>, Kai Li, Han Li, Chen Gao, Xinlei Chen'
   venue: "AAAI 2026"
   paper_url: "https://arxiv.org/pdf/2505.12340"
+  code_url: "https://github.com/zhajirong/DIMM"
+  

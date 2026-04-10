@@ -198,7 +198,8 @@ layout: default
         <div class="publish"><span class="publisher">{{ pub.venue }}</span></div>
         <div class="tags">
           {% if pub.paper_url %}<a class="tag" href="{{ pub.paper_url }}">Paper</a>{% endif %}
-          {% if pub.code_url %}<a class="tag" href="{{ pub.code_url }}">Code</a>{% endif %}
+          {% assign code_link = pub.code_url | default: pub.code %}
+          {% if code_link %}<a class="tag" href="{{ code_link }}">Code</a>{% endif %}
           {% if pub.project_url %}<a class="tag" href="{{ pub.project_url }}">Project</a>{% endif %}
         </div>
       </div>

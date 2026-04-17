@@ -49,7 +49,7 @@ $(document).ready(function(){
   // Magnific-Popup options
   $(".image-popup").magnificPopup({
     type: 'image',
-    tLoading: 'Loading image #%curr%...',
+    tLoading: '',
     gallery: {
       enabled: true,
       navigateByImgClick: true,

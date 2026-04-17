@@ -48,8 +48,12 @@ layout: default
           <i class="fa fa-github icon-github"></i>
           <span></span>
         </a>
-        <a href="mailto:yfan618@connect.hkust-gz.edu.cn" class="icon-button github">
+        <a href="mailto:yfan546@connect.hkust-gz.edu.cn" class="icon-button github" aria-label="Email Yuxuan Fan" title="Email">
           <i class="fa fa-envelope icon-github"></i>
+          <span></span>
+        </a>
+        <a href="/images/wechat-qr.jpg" class="icon-button wechat" aria-label="Open WeChat QR code" title="WeChat QR code">
+          <i class="fa fa-weixin icon-github"></i>
           <span></span>
         </a>
       </div>

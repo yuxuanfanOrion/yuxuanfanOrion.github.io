@@ -26,6 +26,10 @@
   color: #223041;
 }
 
+.icon-button.wechat span {
+  background-color: #07c160;
+}
+
 #my-tagline {
   margin-top: 8px;
   font-size: 1.1rem;

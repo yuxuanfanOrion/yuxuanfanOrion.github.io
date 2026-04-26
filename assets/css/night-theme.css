@@ -444,41 +444,70 @@ html[data-theme="dark"] .starry-sky { opacity: 1; }
   animation: satelliteCross 75s linear infinite;
 }
 
-/* Layer 12 — meteors (4 angles, staggered) */
+/* Layer 12 — meteors (4 angles, staggered).
+   Each meteor's "head" is at the right end (local +x). transform-origin
+   is set to the left end so that translateX in the rotated local frame
+   moves the head in the direction it points — i.e. head always leads. */
 .starry-sky__meteor {
   position: absolute;
-  width: 140px; height: 1.6px;
+  width: 260px;
+  height: 1.4px;
   border-radius: 999px;
-  filter: drop-shadow(0 0 4px rgba(255,255,255,0.7));
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0)    0%,
+    rgba(200,220,255,0.05) 35%,
+    rgba(220,235,255,0.45) 75%,
+    rgba(255,255,255,0.95) 100%
+  );
+  transform-origin: 0 50%;
   opacity: 0;
+  pointer-events: none;
+  animation: meteor-fly var(--starry-shooting-interval) ease-in infinite;
 }
+.starry-sky__meteor::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateY(-50%);
+  box-shadow:
+    0 0 5px  rgba(255,255,255,0.95),
+    0 0 12px rgba(200,225,255,0.7),
+    0 0 24px rgba(160,200,255,0.4);
+}
+
+/* Per-meteor: starting position, motion angle, travel distance, delay */
 .starry-sky__meteor--1 {
-  top: 8%; left: -10%;
-  background: linear-gradient(90deg, transparent, #cfe1ff, #fff);
-  transform: rotate(32deg);
-  animation: meteorRun var(--starry-shooting-interval) ease-in infinite;
+  top: 6%;  left: 12%;
+  --m-angle: 28deg;        /* down-right */
+  --m-dist: 150vmax;
   animation-delay: 0s;
 }
 .starry-sky__meteor--2 {
-  top: 38%; right: -10%; left: auto;
-  background: linear-gradient(90deg, #fff, #ffd9a8, transparent);
-  transform: rotate(155deg);
-  animation: meteorRunReverse calc(var(--starry-shooting-interval) * 1.7) ease-in infinite;
-  animation-delay: 3s;
+  top: 14%; left: 78%;
+  --m-angle: 152deg;       /* down-left */
+  --m-dist: 150vmax;
+  animation-duration: calc(var(--starry-shooting-interval) * 1.7);
+  animation-delay: 3.5s;
 }
 .starry-sky__meteor--3 {
-  bottom: 12%; left: -10%;
-  background: linear-gradient(90deg, transparent, #d6f5ff, #fff);
-  transform: rotate(-22deg);
-  animation: meteorRun calc(var(--starry-shooting-interval) * 2.3) ease-in infinite;
-  animation-delay: 6s;
+  top: 78%; left: 8%;
+  --m-angle: -18deg;       /* up-right (head tilts upward) */
+  --m-dist: 150vmax;
+  animation-duration: calc(var(--starry-shooting-interval) * 2.3);
+  animation-delay: 7s;
 }
 .starry-sky__meteor--4 {
-  top: 55%; left: -10%;
-  background: linear-gradient(90deg, transparent, #e0c8ff, #fff);
-  transform: rotate(8deg);
-  animation: meteorRun calc(var(--starry-shooting-interval) * 2.9) ease-in infinite;
-  animation-delay: 9s;
+  top: 42%; left: -10%;
+  --m-angle: 6deg;         /* nearly horizontal, slight downward */
+  --m-dist: 150vmax;
+  animation-duration: calc(var(--starry-shooting-interval) * 2.9);
+  animation-delay: 11s;
 }
 
 /* =================== Animations =================== */
@@ -533,41 +562,12 @@ html[data-theme="dark"] .starry-sky { opacity: 1; }
   95%  { opacity: 1; }
   100% { transform: translate(110vw, 28vh);      opacity: 0; }
 }
-@keyframes meteorRun {
-  0%        { transform: translate(0, 0) rotate(var(--m-angle, 32deg)); opacity: 0; }
-  3%        { opacity: 1; }
-  18%       { opacity: 1; }
-  22%, 100% { transform: translate(120vw, 60vh) rotate(var(--m-angle, 32deg)); opacity: 0; }
-}
-@keyframes meteorRunReverse {
-  0%        { transform: translate(0, 0) rotate(155deg); opacity: 0; }
-  3%        { opacity: 1; }
-  18%       { opacity: 1; }
-  22%, 100% { transform: translate(-120vw, 60vh) rotate(155deg); opacity: 0; }
-}
-
-/* meteor 1/3/4 share meteorRun but need their own rotation preserved.
-   Apply via per-element keyframe overrides using individual transforms. */
-.starry-sky__meteor--1 { animation-name: meteor1; }
-.starry-sky__meteor--3 { animation-name: meteor3; }
-.starry-sky__meteor--4 { animation-name: meteor4; }
-@keyframes meteor1 {
-  0%        { transform: translate(0, 0) rotate(32deg);             opacity: 0; }
-  3%        { opacity: 1; }
-  18%       { opacity: 1; }
-  22%, 100% { transform: translate(120vw, 70vh) rotate(32deg);      opacity: 0; }
-}
-@keyframes meteor3 {
-  0%        { transform: translate(0, 0) rotate(-22deg);            opacity: 0; }
-  3%        { opacity: 1; }
-  18%       { opacity: 1; }
-  22%, 100% { transform: translate(120vw, -50vh) rotate(-22deg);    opacity: 0; }
-}
-@keyframes meteor4 {
-  0%        { transform: translate(0, 0) rotate(8deg);              opacity: 0; }
-  3%        { opacity: 1; }
-  18%       { opacity: 1; }
-  22%, 100% { transform: translate(120vw, 18vh) rotate(8deg);       opacity: 0; }
+@keyframes meteor-fly {
+  0%   { transform: rotate(var(--m-angle)) translateX(0);             opacity: 0; }
+  2%   { opacity: 0; }
+  4%   { opacity: 1; }
+  8%   { transform: rotate(var(--m-angle)) translateX(var(--m-dist)); opacity: 0; }
+  100% { transform: rotate(var(--m-angle)) translateX(var(--m-dist)); opacity: 0; }
 }
 
 /* =================== Reduced motion =================== */

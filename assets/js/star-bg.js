@@ -41,6 +41,6 @@ $(document).ready(function() {
         layer2.style.opacity = '0';
         activeLayer = 1;
       }
-    }, 5000);
+    }, 2500);
   }
 });

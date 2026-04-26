@@ -9,9 +9,42 @@ layout: compress
   <head>
     {% include head.html %}
     {% include head/custom.html %}
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('site-theme');
+          var theme = stored
+            ? stored
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        } catch (e) {}
+      })();
+    </script>
   </head>
 
   <body>
+
+    <div class="starry-sky" aria-hidden="true">
+      <div class="starry-sky__deepspace"></div>
+      <div class="starry-sky__milkyway"></div>
+      <div class="starry-sky__nebula"></div>
+      <div class="starry-sky__stars-far"></div>
+      <div class="starry-sky__stars-mid"></div>
+      <div class="starry-sky__stars-near"></div>
+      <div class="starry-sky__horizon"></div>
+      <div class="starry-sky__aurora"></div>
+      <div class="starry-sky__moon"></div>
+      <div class="starry-sky__pulsar"></div>
+      <div class="starry-sky__satellite"></div>
+      <div class="starry-sky__meteor starry-sky__meteor--1"></div>
+      <div class="starry-sky__meteor starry-sky__meteor--2"></div>
+      <div class="starry-sky__meteor starry-sky__meteor--3"></div>
+      <div class="starry-sky__meteor starry-sky__meteor--4"></div>
+    </div>
+
+    <button type="button" class="theme-toggle" aria-label="Switch to night mode" aria-pressed="false">
+      <span class="theme-toggle__icon" aria-hidden="true">☀</span>
+    </button>
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}

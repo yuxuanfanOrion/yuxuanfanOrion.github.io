@@ -1,0 +1,590 @@
+/* =====================================================================
+   Night Theme — Immersive Starry Sky
+   Adapted from the Obsidian Starry Sky Theme (Immersive Edition v2)
+   Activated when <html data-theme="dark">.
+   ===================================================================== */
+
+:root[data-theme="dark"] {
+  --starry-panel-opacity: 0.54;
+  --starry-panel-blur: 18px;
+  --starry-nebula-opacity: 0.22;
+  --starry-star-opacity: 0.85;
+  --starry-glow-opacity: 0.14;
+  --starry-twinkle-speed: 4s;
+  --starry-shooting-interval: 11s;
+  --starry-horizon-opacity: 0.22;
+  --starry-milkyway-opacity: 0.14;
+  --starry-moon-opacity: 0.9;
+  --starry-aurora-opacity: 0.16;
+  --starry-parallax-speed: 180s;
+
+  --night-bg: #050814;
+  --night-panel: rgba(15, 21, 38, var(--starry-panel-opacity));
+  --night-panel-border: rgba(120, 150, 210, 0.18);
+  --night-text: #d8e1f5;
+  --night-text-soft: #9aa8c7;
+  --night-link: #8ab4ff;
+  --night-link-hover: #cbd9ff;
+}
+
+/* =================== Base palette overrides =================== */
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background-color: var(--night-bg);
+  color: var(--night-text);
+}
+
+html[data-theme="dark"] .page-content,
+html[data-theme="dark"] .page-content .wrapper {
+  background: transparent;
+  color: var(--night-text);
+}
+
+html[data-theme="dark"] a {
+  color: var(--night-link);
+}
+html[data-theme="dark"] a:hover {
+  color: var(--night-link-hover);
+}
+
+html[data-theme="dark"] .masthead,
+html[data-theme="dark"] .site-header {
+  background: rgba(8, 12, 24, 0.7);
+  backdrop-filter: blur(var(--starry-panel-blur));
+  -webkit-backdrop-filter: blur(var(--starry-panel-blur));
+  border-bottom: 1px solid var(--night-panel-border);
+}
+
+html[data-theme="dark"] .greedy-nav,
+html[data-theme="dark"] .greedy-nav a,
+html[data-theme="dark"] .site-nav .page-link {
+  background: transparent;
+  color: var(--night-text);
+}
+
+html[data-theme="dark"] .md-heading,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4 {
+  color: var(--night-text);
+}
+
+html[data-theme="dark"] .bio,
+html[data-theme="dark"] .publications,
+html[data-theme="dark"] .news-list__item,
+html[data-theme="dark"] .timeline-entry__content,
+html[data-theme="dark"] .timeline-entry__role,
+html[data-theme="dark"] .pub-right .authors,
+html[data-theme="dark"] .pub-right .publish {
+  color: var(--night-text);
+}
+
+html[data-theme="dark"] .timeline {
+  border-left-color: var(--night-panel-border);
+}
+
+html[data-theme="dark"] .timeline-entry__time,
+html[data-theme="dark"] .news-list__date {
+  color: var(--night-text-soft);
+}
+
+html[data-theme="dark"] .info-card,
+html[data-theme="dark"] .awards-list li {
+  background: var(--night-panel);
+  border-color: var(--night-panel-border);
+  backdrop-filter: blur(var(--starry-panel-blur));
+  -webkit-backdrop-filter: blur(var(--starry-panel-blur));
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+html[data-theme="dark"] .info-card__text,
+html[data-theme="dark"] .info-card__list {
+  color: var(--night-text);
+}
+html[data-theme="dark"] .info-card__eyebrow {
+  color: #9bb5e8;
+}
+
+html[data-theme="dark"] .bio-highlight {
+  background: var(--night-panel);
+  border-left-color: #6f8dd6;
+  color: var(--night-text);
+  backdrop-filter: blur(var(--starry-panel-blur));
+  -webkit-backdrop-filter: blur(var(--starry-panel-blur));
+}
+html[data-theme="dark"] .bio-highlight strong { color: #e8edff; }
+html[data-theme="dark"] .bio-highlight a { color: var(--night-link); }
+
+html[data-theme="dark"] .pub {
+  border-bottom-color: var(--night-panel-border);
+}
+html[data-theme="dark"] .pub-right > .title { color: #f0f3ff; }
+html[data-theme="dark"] .tag {
+  background: rgba(138, 180, 255, 0.14);
+  color: var(--night-link);
+  border: 1px solid rgba(138, 180, 255, 0.3);
+}
+html[data-theme="dark"] .tag:hover {
+  background: rgba(138, 180, 255, 0.28);
+  color: #fff;
+}
+
+html[data-theme="dark"] .news-list__item {
+  border-bottom-color: var(--night-panel-border);
+}
+
+html[data-theme="dark"] .profile-wrapper {
+  background-color: rgba(15, 21, 38, 0.72) !important;
+  backdrop-filter: blur(var(--starry-panel-blur));
+  -webkit-backdrop-filter: blur(var(--starry-panel-blur));
+  color: var(--night-text);
+  border: 1px solid var(--night-panel-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+html[data-theme="dark"] #my-name,
+html[data-theme="dark"] #my-title,
+html[data-theme="dark"] #my-tagline {
+  color: var(--night-text);
+}
+html[data-theme="dark"] #my-tagline em { color: #cdd9f7; }
+
+/* Dim the rotating cover photos so the starry sky shows through */
+html[data-theme="dark"] .cover { background-color: transparent; }
+html[data-theme="dark"] .bg-layer {
+  opacity: 0.18 !important;
+  filter: brightness(0.55) saturate(0.7);
+}
+
+html[data-theme="dark"] .site-footer {
+  background: rgba(8, 12, 24, 0.7);
+  border-top-color: var(--night-panel-border);
+  backdrop-filter: blur(var(--starry-panel-blur));
+  -webkit-backdrop-filter: blur(var(--starry-panel-blur));
+  color: var(--night-text-soft);
+}
+html[data-theme="dark"] .footer-col .text,
+html[data-theme="dark"] .footer-col .contact-list li {
+  color: var(--night-text-soft);
+}
+html[data-theme="dark"] .footer-col .text a,
+html[data-theme="dark"] .footer-col .contact-list li a {
+  color: var(--night-link);
+}
+
+html[data-theme="dark"] .back-to-top {
+  background: rgba(15, 21, 38, 0.85);
+  color: var(--night-link);
+  border: 1px solid var(--night-panel-border);
+}
+
+/* =================== Theme toggle button =================== */
+.theme-toggle {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  z-index: 1200;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #e4eaf2;
+  background: rgba(255, 255, 255, 0.92);
+  color: #2f3a47;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.25s ease, background 0.3s ease, color 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 14px rgba(28, 46, 69, 0.12);
+}
+.theme-toggle:hover { transform: scale(1.08); }
+.theme-toggle:focus { outline: none; box-shadow: 0 0 0 3px rgba(108, 134, 173, 0.35); }
+.theme-toggle .theme-toggle__icon { display: block; }
+
+html[data-theme="dark"] .theme-toggle {
+  background: rgba(15, 21, 38, 0.85);
+  border-color: var(--night-panel-border);
+  color: #ffd98a;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5),
+              0 0 16px rgba(255, 217, 138, 0.25);
+}
+
+/* =================== Starry sky container =================== */
+.starry-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+html[data-theme="dark"] .starry-sky { opacity: 1; }
+
+/* Layer 1 — deep-space vertical gradient */
+.starry-sky__deepspace {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    #02030a 0%,
+    #050a1a 35%,
+    #08132c 70%,
+    #0d1a36 100%
+  );
+}
+
+/* Layer 2 — milky way diagonal band */
+.starry-sky__milkyway {
+  position: absolute; inset: 0;
+  opacity: var(--starry-milkyway-opacity);
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(180, 200, 255, 0.32) 46%,
+    rgba(220, 200, 255, 0.45) 50%,
+    rgba(180, 200, 255, 0.32) 54%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+}
+
+/* Layer 3 — nebula color blobs */
+.starry-sky__nebula {
+  position: absolute; inset: 0;
+  opacity: var(--starry-nebula-opacity);
+  background:
+    radial-gradient(ellipse 800px 500px at 18% 28%, rgba(120, 90, 220, 0.55), transparent 70%),
+    radial-gradient(ellipse 700px 420px at 78% 22%, rgba(80, 130, 220, 0.55), transparent 70%),
+    radial-gradient(ellipse 900px 520px at 60% 75%, rgba(160, 90, 200, 0.45), transparent 70%),
+    radial-gradient(ellipse 520px 320px at 12% 82%, rgba(70, 110, 200, 0.45), transparent 70%),
+    radial-gradient(ellipse 620px 380px at 92% 65%, rgba(140, 80, 180, 0.40), transparent 70%);
+  filter: blur(8px);
+  mix-blend-mode: screen;
+}
+
+/* Layer 4 — far stars (small, dim) — 52 dots via radial-gradients */
+.starry-sky__stars-far {
+  position: absolute; inset: 0;
+  opacity: calc(var(--starry-star-opacity) * 0.6);
+  background-image:
+    radial-gradient(0.6px 0.6px at 4% 7%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 11% 18%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 17% 31%, #cfe1ff, transparent),
+    radial-gradient(0.7px 0.7px at 22% 9%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 26% 24%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 31% 41%, #ffe6c7, transparent),
+    radial-gradient(0.5px 0.5px at 35% 14%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 39% 55%, #cfe1ff, transparent),
+    radial-gradient(0.5px 0.5px at 43% 28%, #fff, transparent),
+    radial-gradient(0.7px 0.7px at 47% 6%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 51% 33%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 55% 47%, #cfe1ff, transparent),
+    radial-gradient(0.6px 0.6px at 59% 12%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 63% 25%, #ffe6c7, transparent),
+    radial-gradient(0.7px 0.7px at 67% 40%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 71% 8%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 75% 22%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 79% 36%, #cfe1ff, transparent),
+    radial-gradient(0.6px 0.6px at 83% 51%, #fff, transparent),
+    radial-gradient(0.7px 0.7px at 87% 14%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 91% 27%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 95% 42%, #ffe6c7, transparent),
+    radial-gradient(0.5px 0.5px at 8% 60%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 14% 73%, #cfe1ff, transparent),
+    radial-gradient(0.5px 0.5px at 19% 86%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 24% 67%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 29% 79%, #ffe6c7, transparent),
+    radial-gradient(0.7px 0.7px at 34% 92%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 38% 71%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 42% 83%, #cfe1ff, transparent),
+    radial-gradient(0.5px 0.5px at 46% 96%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 50% 75%, #fff, transparent),
+    radial-gradient(0.7px 0.7px at 54% 88%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 58% 63%, #ffe6c7, transparent),
+    radial-gradient(0.6px 0.6px at 62% 78%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 66% 91%, #cfe1ff, transparent),
+    radial-gradient(0.6px 0.6px at 70% 65%, #fff, transparent),
+    radial-gradient(0.7px 0.7px at 74% 80%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 78% 93%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 82% 69%, #ffe6c7, transparent),
+    radial-gradient(0.5px 0.5px at 86% 82%, #fff, transparent),
+    radial-gradient(0.7px 0.7px at 90% 95%, #cfe1ff, transparent),
+    radial-gradient(0.5px 0.5px at 94% 73%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 6% 49%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 13% 53%, #ffe6c7, transparent),
+    radial-gradient(0.6px 0.6px at 21% 46%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 28% 58%, #cfe1ff, transparent),
+    radial-gradient(0.7px 0.7px at 36% 49%, #fff, transparent),
+    radial-gradient(0.5px 0.5px at 44% 61%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 52% 51%, #ffe6c7, transparent),
+    radial-gradient(0.5px 0.5px at 60% 56%, #fff, transparent),
+    radial-gradient(0.6px 0.6px at 68% 47%, #cfe1ff, transparent);
+  background-size: 120% 120%;
+  background-repeat: no-repeat;
+  animation:
+    twinkleFar var(--starry-twinkle-speed) ease-in-out infinite,
+    parallaxDrift var(--starry-parallax-speed) linear infinite;
+}
+
+/* Layer 5 — mid stars (20) */
+.starry-sky__stars-mid {
+  position: absolute; inset: 0;
+  opacity: var(--starry-star-opacity);
+  background-image:
+    radial-gradient(1.1px 1.1px at 9% 13%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 17% 36%, #cfe1ff, transparent),
+    radial-gradient(1px 1px at 24% 22%, #fff, transparent),
+    radial-gradient(1.3px 1.3px at 31% 49%, #fff, transparent),
+    radial-gradient(1.1px 1.1px at 38% 17%, #ffe6c7, transparent),
+    radial-gradient(1.2px 1.2px at 45% 38%, #fff, transparent),
+    radial-gradient(1px 1px at 52% 24%, #cfe1ff, transparent),
+    radial-gradient(1.3px 1.3px at 59% 51%, #fff, transparent),
+    radial-gradient(1.1px 1.1px at 66% 19%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 73% 41%, #ffe6c7, transparent),
+    radial-gradient(1px 1px at 81% 27%, #fff, transparent),
+    radial-gradient(1.3px 1.3px at 88% 53%, #cfe1ff, transparent),
+    radial-gradient(1.1px 1.1px at 11% 67%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 22% 81%, #fff, transparent),
+    radial-gradient(1px 1px at 33% 73%, #ffe6c7, transparent),
+    radial-gradient(1.3px 1.3px at 44% 87%, #cfe1ff, transparent),
+    radial-gradient(1.1px 1.1px at 55% 75%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 67% 89%, #fff, transparent),
+    radial-gradient(1px 1px at 78% 71%, #ffe6c7, transparent),
+    radial-gradient(1.3px 1.3px at 92% 84%, #fff, transparent);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  animation: twinkleMid calc(var(--starry-twinkle-speed) * 1.3) ease-in-out infinite;
+}
+
+/* Layer 6 — near bright stars (14) */
+.starry-sky__stars-near {
+  position: absolute; inset: 0;
+  opacity: var(--starry-star-opacity);
+  background-image:
+    radial-gradient(2px 2px at 7% 21%, #fff, rgba(255,255,255,0.05) 60%, transparent),
+    radial-gradient(2.2px 2.2px at 19% 44%, #cfe1ff, transparent 70%),
+    radial-gradient(1.8px 1.8px at 28% 11%, #ffe6c7, transparent 70%),
+    radial-gradient(2.4px 2.4px at 37% 33%, #fff, transparent 65%),
+    radial-gradient(2px 2px at 46% 16%, #fff, transparent 70%),
+    radial-gradient(1.8px 1.8px at 55% 41%, #cfe1ff, transparent 70%),
+    radial-gradient(2.2px 2.2px at 64% 24%, #ffe6c7, transparent 70%),
+    radial-gradient(2px 2px at 75% 47%, #fff, transparent 65%),
+    radial-gradient(1.8px 1.8px at 84% 18%, #cfe1ff, transparent 70%),
+    radial-gradient(2.4px 2.4px at 13% 78%, #fff, transparent 65%),
+    radial-gradient(2px 2px at 27% 91%, #ffe6c7, transparent 70%),
+    radial-gradient(2.2px 2.2px at 49% 82%, #fff, transparent 70%),
+    radial-gradient(1.8px 1.8px at 71% 94%, #cfe1ff, transparent 70%),
+    radial-gradient(2px 2px at 89% 79%, #fff, transparent 65%);
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.6));
+}
+
+/* Layer 7 — horizon city glow */
+.starry-sky__horizon {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 38%;
+  opacity: var(--starry-horizon-opacity);
+  background:
+    radial-gradient(ellipse 70% 100% at 30% 110%, rgba(255, 170, 90, 0.55), transparent 70%),
+    radial-gradient(ellipse 60% 90% at 70% 115%, rgba(255, 140, 70, 0.45), transparent 70%),
+    radial-gradient(ellipse 100% 80% at 50% 120%, rgba(255, 110, 60, 0.35), transparent 70%);
+  filter: blur(2px);
+  mix-blend-mode: screen;
+}
+
+/* Layer 8 — moon (top right) */
+.starry-sky__moon {
+  position: absolute;
+  top: 7%; right: 6%;
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, #f7eed8 60%, #d9c79a 100%);
+  opacity: var(--starry-moon-opacity);
+  box-shadow:
+    0 0 25px rgba(255, 240, 200, 0.55),
+    0 0 70px rgba(255, 230, 170, 0.30),
+    0 0 130px rgba(255, 220, 150, 0.18);
+  animation: moonBreathe 9s ease-in-out infinite;
+}
+
+/* Layer 9 — aurora top sheet */
+.starry-sky__aurora {
+  position: absolute; top: 0; left: -10%; right: -10%; height: 55%;
+  opacity: var(--starry-aurora-opacity);
+  background:
+    radial-gradient(ellipse 60% 70% at 25% 25%, rgba(80, 230, 200, 0.55), transparent 70%),
+    radial-gradient(ellipse 70% 60% at 55% 15%, rgba(100, 160, 255, 0.50), transparent 70%),
+    radial-gradient(ellipse 55% 65% at 80% 30%, rgba(180, 110, 230, 0.50), transparent 70%);
+  filter: blur(40px);
+  mix-blend-mode: screen;
+  animation: auroraDrift 28s ease-in-out infinite alternate;
+}
+
+/* Layer 10 — pulsar */
+.starry-sky__pulsar {
+  position: absolute;
+  top: 34%; left: 72%;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 12px rgba(180, 220, 255, 0.6);
+  animation: pulsarBeat calc(var(--starry-shooting-interval) * 1) ease-in-out infinite;
+}
+
+/* Layer 11 — satellite (slow horizontal traverse) */
+.starry-sky__satellite {
+  position: absolute;
+  top: 18%; left: -5%;
+  width: 2.5px; height: 2.5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+  animation: satelliteCross 75s linear infinite;
+}
+
+/* Layer 12 — meteors (4 angles, staggered) */
+.starry-sky__meteor {
+  position: absolute;
+  width: 140px; height: 1.6px;
+  border-radius: 999px;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.7));
+  opacity: 0;
+}
+.starry-sky__meteor--1 {
+  top: 8%; left: -10%;
+  background: linear-gradient(90deg, transparent, #cfe1ff, #fff);
+  transform: rotate(32deg);
+  animation: meteorRun var(--starry-shooting-interval) ease-in infinite;
+  animation-delay: 0s;
+}
+.starry-sky__meteor--2 {
+  top: 38%; right: -10%; left: auto;
+  background: linear-gradient(90deg, #fff, #ffd9a8, transparent);
+  transform: rotate(155deg);
+  animation: meteorRunReverse calc(var(--starry-shooting-interval) * 1.7) ease-in infinite;
+  animation-delay: 3s;
+}
+.starry-sky__meteor--3 {
+  bottom: 12%; left: -10%;
+  background: linear-gradient(90deg, transparent, #d6f5ff, #fff);
+  transform: rotate(-22deg);
+  animation: meteorRun calc(var(--starry-shooting-interval) * 2.3) ease-in infinite;
+  animation-delay: 6s;
+}
+.starry-sky__meteor--4 {
+  top: 55%; left: -10%;
+  background: linear-gradient(90deg, transparent, #e0c8ff, #fff);
+  transform: rotate(8deg);
+  animation: meteorRun calc(var(--starry-shooting-interval) * 2.9) ease-in infinite;
+  animation-delay: 9s;
+}
+
+/* =================== Animations =================== */
+@keyframes twinkleFar {
+  0%, 100% { opacity: calc(var(--starry-star-opacity) * 0.45); }
+  50%      { opacity: calc(var(--starry-star-opacity) * 0.75); }
+}
+@keyframes twinkleMid {
+  0%, 100% { opacity: calc(var(--starry-star-opacity) * 0.7); }
+  50%      { opacity: var(--starry-star-opacity); }
+}
+@keyframes parallaxDrift {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 8% 6%; }
+  100% { background-position: 0% 0%; }
+}
+@keyframes moonBreathe {
+  0%, 100% {
+    box-shadow:
+      0 0 25px rgba(255, 240, 200, 0.55),
+      0 0 70px rgba(255, 230, 170, 0.30),
+      0 0 130px rgba(255, 220, 150, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 32px rgba(255, 240, 200, 0.70),
+      0 0 90px rgba(255, 230, 170, 0.42),
+      0 0 160px rgba(255, 220, 150, 0.26);
+  }
+}
+@keyframes auroraDrift {
+  0%   { transform: translateX(-3%) scaleY(1);    opacity: var(--starry-aurora-opacity); }
+  50%  { transform: translateX(3%)  scaleY(1.08); opacity: calc(var(--starry-aurora-opacity) * 1.3); }
+  100% { transform: translateX(-3%) scaleY(1);    opacity: var(--starry-aurora-opacity); }
+}
+@keyframes pulsarBeat {
+  0%, 70%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 4px rgba(255,255,255,0.9), 0 0 12px rgba(180,220,255,0.6);
+  }
+  80% {
+    transform: scale(1.6);
+    box-shadow:
+      0 0 8px  rgba(255,255,255,1),
+      0 0 24px rgba(200,230,255,0.9),
+      0 0 48px rgba(150,200,255,0.6);
+  }
+}
+@keyframes satelliteCross {
+  0%   { transform: translate(0, 0);             opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translate(110vw, 28vh);      opacity: 0; }
+}
+@keyframes meteorRun {
+  0%        { transform: translate(0, 0) rotate(var(--m-angle, 32deg)); opacity: 0; }
+  3%        { opacity: 1; }
+  18%       { opacity: 1; }
+  22%, 100% { transform: translate(120vw, 60vh) rotate(var(--m-angle, 32deg)); opacity: 0; }
+}
+@keyframes meteorRunReverse {
+  0%        { transform: translate(0, 0) rotate(155deg); opacity: 0; }
+  3%        { opacity: 1; }
+  18%       { opacity: 1; }
+  22%, 100% { transform: translate(-120vw, 60vh) rotate(155deg); opacity: 0; }
+}
+
+/* meteor 1/3/4 share meteorRun but need their own rotation preserved.
+   Apply via per-element keyframe overrides using individual transforms. */
+.starry-sky__meteor--1 { animation-name: meteor1; }
+.starry-sky__meteor--3 { animation-name: meteor3; }
+.starry-sky__meteor--4 { animation-name: meteor4; }
+@keyframes meteor1 {
+  0%        { transform: translate(0, 0) rotate(32deg);             opacity: 0; }
+  3%        { opacity: 1; }
+  18%       { opacity: 1; }
+  22%, 100% { transform: translate(120vw, 70vh) rotate(32deg);      opacity: 0; }
+}
+@keyframes meteor3 {
+  0%        { transform: translate(0, 0) rotate(-22deg);            opacity: 0; }
+  3%        { opacity: 1; }
+  18%       { opacity: 1; }
+  22%, 100% { transform: translate(120vw, -50vh) rotate(-22deg);    opacity: 0; }
+}
+@keyframes meteor4 {
+  0%        { transform: translate(0, 0) rotate(8deg);              opacity: 0; }
+  3%        { opacity: 1; }
+  18%       { opacity: 1; }
+  22%, 100% { transform: translate(120vw, 18vh) rotate(8deg);       opacity: 0; }
+}
+
+/* =================== Reduced motion =================== */
+@media (prefers-reduced-motion: reduce) {
+  .starry-sky__stars-far,
+  .starry-sky__stars-mid,
+  .starry-sky__moon,
+  .starry-sky__aurora,
+  .starry-sky__pulsar,
+  .starry-sky__satellite,
+  .starry-sky__meteor {
+    animation: none !important;
+  }
+}
+
+/* =================== Mobile tuning =================== */
+@media (max-width: 768px) {
+  .starry-sky__moon { width: 52px; height: 52px; top: 5%; right: 7%; }
+  .theme-toggle { top: 12px; right: 14px; width: 38px; height: 38px; font-size: 16px; }
+}

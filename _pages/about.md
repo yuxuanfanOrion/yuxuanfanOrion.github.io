@@ -40,10 +40,12 @@ layout: default
         <em>Chasing the starry sky</em>
       </div>
       <div class="social-media">
+        <!--
         <a href="https://scholar.google.com/citations?user=YOUR_ID" class="icon-button github">
           <i class="ai ai-google-scholar-square icon-github"></i>
           <span></span>
         </a>
+        -->
         <a href="https://github.com/yuxuanfanOrion" class="icon-button github">
           <i class="fa fa-github icon-github"></i>
           <span></span>

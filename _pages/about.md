@@ -12,7 +12,7 @@ layout: default
         <a class="page-link" href="#bio"><b>Biography</b></a>
         <!-- <a class="page-link" href="#experiences"><b>Experiences</b></a> -->
         <a class="page-link" href="#education"><b>Education</b></a>
-        <a class="page-link" href="#publications"><b>Publications</b></a>
+        <!-- <a class="page-link" href="#publications"><b>Publications</b></a> -->
         <a class="page-link" href="#services"><b>Services</b></a>
         <a class="page-link" href="#hobbies"><b>Hobbies</b></a>
       </div>
@@ -71,7 +71,7 @@ layout: default
   </h1>
   <div class="bio-body">
     <p>
-      I'm currently a second year M.Phil student at <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/">AI Thrust, Information Hub</a>, <a href="https://hkust-gz.edu.cn/">The Hong Kong University of Science and Technology (Guangzhou)</a>. I received my bachelor degree from <a href="https://www.ustb.edu.cn/">School of Advanced Engineering, USTB</a> in 2024. I also had a chance to study Economy at <a href="https://nsd.pku.edu.cn/">National School of Development, Peking University</a>.
+      I'm currently a second year M.Phil student at <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/">AI Thrust, Information Hub</a>, <a href="https://hkust-gz.edu.cn/">The Hong Kong University of Science and Technology (Guangzhou)</a>, where I am honored to be supervised by <a href="https://raymondhliu.github.io/">Prof. Hao LIU</a>. I received my bachelor degree from <a href="https://www.ustb.edu.cn/">School of Advanced Engineering, USTB</a> in 2024. I also had a chance to study Economy at <a href="https://nsd.pku.edu.cn/">National School of Development, Peking University</a>.
     </p>
     <p>
       I am also an incoming PhD student at NTU CCDS, where I will be honored to be supervised by <a href="https://jaehong31.github.io/">Prof. JaeHong Yoon</a>.
@@ -185,6 +185,7 @@ layout: default
   </ul>
 </div>
 
+<!--
 <div id="publications" class="publications">
   <h1 class="md-heading text-left">
     <i class="fa fa-file" aria-hidden="true"></i>
@@ -211,6 +212,7 @@ layout: default
     {% endfor %}
   </div>
 </div>
+-->
 
 <div id="services" class="bio">
   <h1 class="md-heading text-left">

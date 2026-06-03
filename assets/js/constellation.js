@@ -56,6 +56,7 @@
     // ---- shared tooltip ----
     var tip = document.createElement('div');
     tip.className = 'constellation__tip';
+    tip.id = 'constellation-tip';
     tip.setAttribute('role', 'tooltip');
     host.appendChild(tip);
 
@@ -90,6 +91,7 @@
       star.style.animationDelay = (0.25 + i * 0.12) + 's';
       var label = paper.title + (paper.venue ? ' — ' + paper.venue : '');
       star.setAttribute('aria-label', label);
+      star.setAttribute('aria-describedby', 'constellation-tip');
       star.setAttribute('title', '');             // suppress native tooltip
       if (paper.url) {
         star.setAttribute('href', paper.url);

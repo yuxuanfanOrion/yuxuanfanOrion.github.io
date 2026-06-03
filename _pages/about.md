@@ -48,16 +48,16 @@ layout: default
           <span></span>
         </a>
         -->
-        <a href="https://github.com/yuxuanfanOrion" class="icon-button github">
-          <i class="fa fa-github icon-github"></i>
+        <a href="https://github.com/yuxuanfanOrion" class="icon-button github" aria-label="GitHub profile" title="GitHub">
+          <i class="fa fa-github icon-github" aria-hidden="true"></i>
           <span></span>
         </a>
         <a href="mailto:yfan546@connect.hkust-gz.edu.cn" class="icon-button github" aria-label="Email Yuxuan Fan" title="Email">
-          <i class="fa fa-envelope icon-github"></i>
+          <i class="fa fa-envelope icon-github" aria-hidden="true"></i>
           <span></span>
         </a>
         <a href="/images/wechat-qr.jpg" class="icon-button wechat" aria-label="Open WeChat QR code" title="WeChat QR code">
-          <i class="fa fa-weixin icon-github"></i>
+          <i class="fa fa-weixin icon-github" aria-hidden="true"></i>
           <span></span>
         </a>
       </div>
@@ -73,14 +73,15 @@ layout: default
 ]
 </script>
 
-<div class="page-content">
+<div class="page-content" id="content" role="main">
 <div class="wrapper">
+<h1 class="sr-only">Yuxuan FAN</h1>
 
 <div id="bio" class="bio">
-  <h1 class="md-heading text-left">
+  <h2 class="md-heading text-left">
     <i class="fa fa-id-card" aria-hidden="true"></i>
     About
-  </h1>
+  </h2>
   <div class="bio-body">
     <p>
       I'm currently a second year M.Phil student at <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/">AI Thrust, Information Hub</a>, <a href="https://hkust-gz.edu.cn/">The Hong Kong University of Science and Technology (Guangzhou)</a>, where I am honored to be supervised by <a href="https://raymondhliu.github.io/">Prof. Hao LIU</a>. I received my bachelor degree from <a href="https://www.ustb.edu.cn/">School of Advanced Engineering, USTB</a> in 2024. I also had a chance to study Economy at <a href="https://nsd.pku.edu.cn/">National School of Development, Peking University</a>.
@@ -99,10 +100,10 @@ layout: default
 
 <!-- Experiences section (commented out)
 <div id="experiences" class="bio">
-  <h1 class="md-heading text-left">
+  <h2 class="md-heading text-left">
     <i class="fa fa-tasks" aria-hidden="true"></i>
     Experiences
-  </h1>
+  </h2>
   <div class="bio-body">
     <div class="timeline">
       <article class="timeline-entry">
@@ -138,10 +139,10 @@ layout: default
 -->
 
 <div id="education" class="bio">
-  <h1 class="md-heading text-left">
+  <h2 class="md-heading text-left">
     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
     Education
-  </h1>
+  </h2>
   <div class="bio-body">
     <div class="timeline">
       <article class="timeline-entry">
@@ -195,10 +196,10 @@ layout: default
 </div>
 
 <div id="news" class="bio">
-  <h1 class="md-heading text-left">
+  <h2 class="md-heading text-left">
     <i class="fa fa-bullhorn" aria-hidden="true"></i>
     News
-  </h1>
+  </h2>
   <ul class="news-list">
     {% for item in site.data.news %}
     <li class="news-list__item">
@@ -211,10 +212,10 @@ layout: default
 
 <!--
 <div id="publications" class="publications">
-  <h1 class="md-heading text-left">
+  <h2 class="md-heading text-left">
     <i class="fa fa-file" aria-hidden="true"></i>
     Selected Publications
-  </h1>
+  </h2>
   <p>* Equal contribution. Also see <a href="https://scholar.google.com/citations?user=h8x-wqkAAAAJ&hl=zh-CN">Google Scholar</a>.</p>
 
   <div class="pub-list">
@@ -239,10 +240,10 @@ layout: default
 -->
 
 <div id="services" class="bio">
-  <h1 class="md-heading text-left">
+  <h2 class="md-heading text-left">
     <i class="fa fa-users" aria-hidden="true"></i>
     Professional Services
-  </h1>
+  </h2>
   <div class="bio-body">
     <div class="info-card-grid">
       <div class="info-card">
@@ -258,10 +259,10 @@ layout: default
 </div>
 
 <div id="hobbies" class="bio">
-  <h1 class="md-heading text-left">
+  <h2 class="md-heading text-left">
     <i class="fa fa-heart" aria-hidden="true"></i>
     Hobbies
-  </h1>
+  </h2>
   <div class="bio-body hobbies-content">
     <p>I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.</p>
     <p>I am a big fan of <strong>Chelsea</strong> and <strong>Oklahoma City Thunder</strong>.</p>

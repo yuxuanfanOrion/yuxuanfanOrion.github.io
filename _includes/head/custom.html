@@ -10,9 +10,8 @@
 <!-- Font Awesome for icons -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Academicons -->
+<!-- Academicons (local; CDN duplicate removed to drop a render-blocking request) -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/academicons.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
 <!-- Custom CSS for additional styling -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/custom.css"/>
@@ -33,7 +32,9 @@
 <link rel="icon" type="image/png" href="{{ base_path }}/images/favicon-192x192.png" sizes="192x192"/>
 <link rel="manifest" href="{{ base_path }}/images/manifest.json"/>
 <link rel="icon" href="/images/favicon.ico"/>
-<meta name="theme-color" content="#f9f9f9"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#f9f9f9" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#050814" media="(prefers-color-scheme: dark)"/>
 
 <!-- Starry Background with Image Rotation -->
 <style>

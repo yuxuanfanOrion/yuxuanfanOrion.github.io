@@ -251,7 +251,7 @@ layout: default
       </div>
       <div class="info-card">
         <p class="info-card__eyebrow">Journal Reviewer</p>
-        <p class="info-card__text">IJCV, TIST</p>
+        <p class="info-card__text">IJCV, TIST, KBS, JBHI</p>
       </div>
     </div>
   </div>

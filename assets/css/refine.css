@@ -1,0 +1,164 @@
+/* =====================================================================
+   Refine — content-area polish that ties the light body to the cosmic
+   hero. Loaded LAST so it layers on top of academic.css / night-theme.css.
+   All motion is gated by prefers-reduced-motion. Dark-mode variants follow
+   each block so the immersive night theme stays intact.
+   ===================================================================== */
+
+:root {
+  --rf-accent: #5a73c8;          /* starlight indigo */
+  --rf-accent-soft: #8aa6e8;
+  --rf-gold: #ffc24d;            /* echoes the Highlight constellation star */
+}
+
+/* ===== Section headings: gradient accent bar + faint icon glow ===== */
+.md-heading {
+  position: relative;
+  padding-bottom: 12px;
+}
+.md-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 54px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--rf-accent), var(--rf-accent-soft) 60%, transparent);
+}
+.md-heading i {
+  color: var(--rf-accent);
+  text-shadow: 0 0 14px rgba(90, 115, 200, 0.30);
+}
+html[data-theme="dark"] .md-heading::after {
+  background: linear-gradient(90deg, #8ab4ff, #6f8dd6 60%, transparent);
+}
+html[data-theme="dark"] .md-heading i {
+  color: #9bb5e8;
+  text-shadow: 0 0 16px rgba(138, 180, 255, 0.35);
+}
+
+/* ===== Body links nudged toward the cosmic indigo (light mode only;
+   night-theme rules win in dark via higher specificity) ===== */
+.page-content a { color: #3a57b0; }
+.page-content a:visited { color: #3a57b0; }
+.page-content a:hover { color: #1f3168; }
+
+/* ===== Scroll reveal (class added by reveal.js → progressive enhancement) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Timeline polish ===== */
+.timeline-entry::before {
+  background: radial-gradient(circle at 35% 35%, #c0cef0, var(--rf-accent));
+  box-shadow: 0 0 0 4px rgba(90, 115, 200, 0.16), 0 0 10px rgba(90, 115, 200, 0.40);
+}
+.timeline-entry__logo {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.timeline-entry:hover .timeline-entry__logo {
+  transform: translateY(-2px) scale(1.03);
+  filter: saturate(1);
+}
+
+/* incoming PhD entry — golden pulsing node, echoing the Highlight star */
+#education .timeline-entry:first-child::before {
+  background: radial-gradient(circle at 35% 35%, #fff2cf, var(--rf-gold));
+  box-shadow: 0 0 0 4px rgba(255, 194, 77, 0.22), 0 0 14px rgba(255, 194, 77, 0.55);
+  animation: tlPulse 2.6s ease-in-out infinite;
+}
+@keyframes tlPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(255, 194, 77, 0.22), 0 0 10px rgba(255, 194, 77, 0.40); }
+  50%      { box-shadow: 0 0 0 5px rgba(255, 194, 77, 0.30), 0 0 22px rgba(255, 194, 77, 0.78); }
+}
+html[data-theme="dark"] .timeline-entry::before {
+  background: radial-gradient(circle at 35% 35%, #cfe1ff, #6f8dd6);
+  box-shadow: 0 0 0 4px rgba(138, 180, 255, 0.16), 0 0 10px rgba(138, 180, 255, 0.40);
+}
+
+/* ===== Info cards: hover lift + reveal-on-hover accent top line ===== */
+.info-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.info-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rf-accent), var(--rf-accent-soft));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(28, 46, 69, 0.12);
+  border-color: #cdd8ec;
+}
+.info-card:hover::before { transform: scaleX(1); }
+html[data-theme="dark"] .info-card:hover {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  border-color: rgba(138, 180, 255, 0.30);
+}
+html[data-theme="dark"] .info-card::before {
+  background: linear-gradient(90deg, #8ab4ff, #6f8dd6);
+}
+
+/* ===== News list: hover tint + softer gradient date pill ===== */
+.news-list__item {
+  border-radius: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  transition: background 0.25s ease;
+}
+.news-list__item:hover { background: rgba(90, 115, 200, 0.05); }
+.news-list__date {
+  background: linear-gradient(135deg, #eef3fb, #e2eaf8);
+}
+html[data-theme="dark"] .news-list__item:hover { background: rgba(138, 180, 255, 0.07); }
+html[data-theme="dark"] .news-list__date {
+  background: linear-gradient(135deg, rgba(138, 180, 255, 0.14), rgba(138, 180, 255, 0.06));
+}
+
+/* ===== Mobile hero fixes =====
+   The hero card was shifting off-screen on phones: the desktop entrance
+   keyframe centers via translateX(-50%), but the mobile keyframe
+   (heroRisePlain) animates translateY only, and its `both` fill clobbers
+   the base translateX(-50%) — so the card lost its horizontal centering.
+   Fix: center the card with symmetric left/right instead of transform, so
+   the translateY-only entrance can't break it. */
+@media screen and (max-width: 600px) {
+  .profile-wrapper {
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+  }
+  #my-name {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+  #education .timeline-entry:first-child::before { animation: none !important; }
+  .timeline-entry__logo,
+  .info-card,
+  .info-card::before { transition: none; }
+}

@@ -25,9 +25,11 @@ layout: default
     <div id="bg-layer-1" class="bg-layer"></div>
     <div id="bg-layer-2" class="bg-layer"></div>
   </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div id="constellation" class="constellation"></div>
   <div id="profile-namecard" class="profile-wrapper">
     <div id="my-pic" class="profile-col profile-col-1">
-      <img id="profile-avatar" src="/images/yuxuan.png" alt="Yuxuan FAN" class="circle-img"/>
+      <img id="profile-avatar" src="/images/yuxuan-chill.png" srcset="/images/yuxuan-chill.png 1x, /images/yuxuan-chill@2x.png 2x" alt="Yuxuan FAN" class="circle-img"/>
     </div>
     <div id="my-contact" class="profile-col profile-col-2">
       <div id="my-name">
@@ -61,7 +63,15 @@ layout: default
       </div>
     </div>
   </div>
+  <div class="hero-fade" aria-hidden="true"></div>
 </div>
+
+<script id="constellation-data" type="application/json">
+[
+{% for pub in site.data.publications %}{"title": {{ pub.title | jsonify }}, "venue": {{ pub.venue | jsonify }}, "url": {{ pub.paper_url | jsonify }}, "highlight": {% if pub.venue contains "Highlight" %}true{% else %}false{% endif %}}{% unless forloop.last %},
+{% endunless %}{% endfor %}
+]
+</script>
 
 <div class="page-content">
 <div class="wrapper">
@@ -134,6 +144,18 @@ layout: default
   </h1>
   <div class="bio-body">
     <div class="timeline">
+      <article class="timeline-entry">
+        <div class="timeline-entry__meta">
+          <span class="timeline-entry__time">Aug. 2026 - 2030 (expected)</span>
+          <img src="/images/icon/ntu.png" alt="NTU" class="timeline-entry__logo">
+        </div>
+        <div class="timeline-entry__content">
+          <h3>Ph.D. in Computer Science</h3>
+          <p class="timeline-entry__role">Nanyang Technological University, Singapore</p>
+          <p>College of Computing and Data Science (CCDS)</p>
+          <p>Advised by <a href="https://jaehong31.github.io/">Prof. JaeHong Yoon</a></p>
+        </div>
+      </article>
       <article class="timeline-entry">
         <div class="timeline-entry__meta">
           <span class="timeline-entry__time">Sep. 2024 - 2026 (expected)</span>

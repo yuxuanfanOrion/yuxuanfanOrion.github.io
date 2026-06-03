@@ -22,3 +22,6 @@ Espere-1119-Song.github.io
 
 .gitignore
 .omx/
+
+# OMC local state and logs
+.omc/

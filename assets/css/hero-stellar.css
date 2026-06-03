@@ -1,0 +1,214 @@
+/* =====================================================================
+   Hero Stellar — dramatic starry hero + constellation conference badges
+   Loaded after the inline cover styles so the frosted-card override wins.
+   Light-mode-only rules are guarded so the immersive dark theme is intact.
+   ===================================================================== */
+
+/* ===== Dramatic depth overlay over the rotating star photos ===== */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(3, 7, 20, 0.78) 0%,
+      rgba(5, 10, 26, 0.45) 30%,
+      rgba(8, 16, 40, 0.18) 55%,
+      rgba(8, 16, 40, 0.05) 100%),
+    radial-gradient(ellipse 120% 80% at 50% -10%,
+      rgba(40, 60, 120, 0.35), transparent 70%);
+}
+
+/* ===== Seamless fade from starry hero into the light content below ===== */
+.hero-fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(249, 249, 249, 0) 0%, rgba(249, 249, 249, 0.85) 78%, #f9f9f9 100%);
+}
+html[data-theme="dark"] .hero-fade {
+  background: linear-gradient(180deg, rgba(5, 8, 20, 0) 0%, rgba(5, 8, 20, 0.85) 78%, var(--night-bg, #050814) 100%);
+}
+
+/* Slightly deepen the rotating photos in light mode so the sky reads as deep space */
+html:not([data-theme="dark"]) .bg-layer {
+  filter: brightness(0.82) saturate(1.05) contrast(1.05);
+}
+
+/* ===== Frosted-glass namecard ===== */
+.profile-wrapper {
+  background-color: rgba(255, 255, 255, 0.66) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  backdrop-filter: blur(16px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 24px 70px -24px rgba(4, 10, 28, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  animation: heroRise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroRise {
+  from { opacity: 0; transform: translateX(-50%) translateY(26px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@media screen and (max-width: 600px) {
+  /* the mobile card is not horizontally centred via transform; animate plainly */
+  .profile-wrapper { animation: heroRisePlain 1s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes heroRisePlain {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* ===== Avatar glow ring ===== */
+.circle-img {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(130, 160, 220, 0.5),
+    0 0 26px rgba(120, 160, 255, 0.35),
+    0 14px 34px rgba(4, 10, 28, 0.5);
+}
+
+/* ===== Constellation layer ===== */
+.constellation {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;            /* container ignores pointer; stars opt back in */
+  overflow: hidden;
+}
+
+.constellation__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.constellation__line {
+  stroke: rgba(170, 200, 255, 0.32);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  fill: none;
+  filter: drop-shadow(0 0 3px rgba(150, 190, 255, 0.35));
+  animation: lineFade 1.4s ease 0.4s both;
+}
+@keyframes lineFade { from { opacity: 0; } to { opacity: 1; } }
+
+.constellation__star {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: transparent;
+  animation: starPop 0.6s ease both;
+}
+.constellation__star::before {           /* the glowing dot */
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #cfe0ff 55%, rgba(160, 195, 255, 0) 100%);
+  box-shadow: 0 0 8px rgba(200, 222, 255, 0.9), 0 0 16px rgba(150, 190, 255, 0.6);
+  animation: starTwinkle 3.2s ease-in-out infinite;
+}
+.constellation__star::after {            /* hit area larger than the dot */
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+.constellation__star:hover { z-index: 3; }
+.constellation__star:hover::before,
+.constellation__star:focus-visible::before {
+  transform: scale(1.5);
+  box-shadow: 0 0 14px #fff, 0 0 28px rgba(170, 205, 255, 0.85);
+}
+.constellation__star:focus-visible { outline: none; }
+
+/* Highlight paper — golden, larger, pulsing */
+.constellation__star--highlight { width: 18px; height: 18px; }
+.constellation__star--highlight::before {
+  background: radial-gradient(circle at 50% 50%, #fff6e0 0%, #ffd479 55%, rgba(255, 196, 90, 0) 100%);
+  box-shadow: 0 0 12px rgba(255, 214, 140, 0.95), 0 0 26px rgba(255, 190, 90, 0.7);
+  animation: starPulse 2.6s ease-in-out infinite;
+}
+
+@keyframes starPop {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.75; }
+  50%      { opacity: 1; }
+}
+@keyframes starPulse {
+  0%, 100% { transform: scale(1);    filter: brightness(1); }
+  50%      { transform: scale(1.18); filter: brightness(1.25); }
+}
+
+/* ===== Tooltip ===== */
+.constellation__tip {
+  position: absolute;
+  z-index: 8;
+  max-width: 260px;
+  transform: translate(-50%, -100%);
+  padding: 9px 13px;
+  border-radius: 12px;
+  background: rgba(10, 16, 34, 0.92);
+  border: 1px solid rgba(140, 175, 245, 0.35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #eaf0ff;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  white-space: normal;
+}
+.constellation__tip.is-visible { opacity: 1; }
+.constellation__tip-title { display: block; font-weight: 600; color: #fff; }
+.constellation__tip-venue {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  color: #a9c2ff;
+}
+.constellation__tip-badge {
+  display: inline-block;
+  margin-top: 4px;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #2a1a00;
+  background: linear-gradient(120deg, #ffe6a8, #ffc24d);
+}
+
+/* ===== Mobile: simpler, less crowded ===== */
+@media screen and (max-width: 600px) {
+  .constellation__svg { display: none; }       /* hide connecting lines */
+  .constellation__star { width: 10px; height: 10px; }
+  .constellation__star--highlight { width: 15px; height: 15px; }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .profile-wrapper,
+  .constellation__star,
+  .constellation__star::before,
+  .constellation__star--highlight::before,
+  .constellation__line { animation: none !important; }
+}

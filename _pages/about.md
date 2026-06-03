@@ -150,7 +150,7 @@ layout: default
           <img src="/images/icon/ntu.png" alt="NTU" class="timeline-entry__logo">
         </div>
         <div class="timeline-entry__content">
-          <h3>Ph.D. in Computer Science</h3>
+          <h3>Ph.D. Student in Computer Science</h3>
           <p class="timeline-entry__role">Nanyang Technological University, Singapore</p>
           <p>College of Computing and Data Science (CCDS)</p>
           <p>Advised by <a href="https://jaehong31.github.io/">Prof. JaeHong Yoon</a></p>
@@ -158,7 +158,7 @@ layout: default
       </article>
       <article class="timeline-entry">
         <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Sep. 2024 - 2026 (expected)</span>
+          <span class="timeline-entry__time">Sep. 2024 - 2026</span>
           <img src="/images/icon/hkust.png" alt="HKUST" class="timeline-entry__logo">
         </div>
         <div class="timeline-entry__content">

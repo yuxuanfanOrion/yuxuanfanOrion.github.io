@@ -162,6 +162,8 @@ exclude:
   - "*.sublime-workspace"
   - .asset-cache
   - .bundle
+  - .omc
+  - docs
   - Espere-1119-Song.github.io
   - dev
   - .github

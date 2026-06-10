@@ -87,7 +87,6 @@ layout: default
       rinovellate di novella fronda,<br>
       puro e disposto a salire <span class="epigraph__stelle">a le stelle</span>.
     </p>
-    <cite class="epigraph__cite">Dante Alighieri, Purgatorio XXXIII</cite>
   </blockquote>
 </div>
 

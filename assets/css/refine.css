@@ -37,15 +37,6 @@
   color: #b8860b;
   text-shadow: 0 0 12px rgba(255, 194, 77, 0.35);
 }
-.epigraph__cite {
-  display: inline-block;
-  font-style: normal;
-  font-size: 0.76rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(61, 74, 102, 0.6);
-}
-.epigraph__cite::before { content: "\2014\00a0"; }
 .epigraph::after {
   content: "\2726";
   display: block;
@@ -59,7 +50,6 @@ html[data-theme="dark"] .epigraph__stelle {
   color: #ffd479;
   text-shadow: 0 0 14px rgba(255, 212, 121, 0.5);
 }
-html[data-theme="dark"] .epigraph__cite { color: rgba(154, 168, 199, 0.85); }
 html[data-theme="dark"] .epigraph::after { color: #8ab4ff; }
 @media screen and (max-width: 600px) {
   .epigraph__verse { font-size: 0.98rem; line-height: 1.8; }

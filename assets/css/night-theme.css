@@ -28,9 +28,16 @@
 }
 
 /* =================== Base palette overrides =================== */
-html[data-theme="dark"],
-html[data-theme="dark"] body {
+/* The body background must stay transparent: an opaque body background
+   paints OVER negative-z-index children (CSS painting order), which would
+   hide the fixed .starry-sky behind a solid block. The html background
+   stays as the fallback color and paints beneath the sky. */
+html[data-theme="dark"] {
   background-color: var(--night-bg);
+  color: var(--night-text);
+}
+html[data-theme="dark"] body {
+  background-color: transparent;
   color: var(--night-text);
 }
 

@@ -20,6 +20,56 @@
       rgba(40, 60, 120, 0.35), transparent 70%);
 }
 
+/* ===== Canvas depth starfield over the photos (under the namecard) ===== */
+.hero-starfield {
+  position: absolute;
+  inset: 0;
+  z-index: 4;               /* after .hero-overlay in DOM, so it paints above it */
+  pointer-events: none;
+}
+
+/* ===== Breathing nebula blobs — GPU-composited transform drift only ===== */
+.hero-nebula {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: screen;
+}
+.hero-nebula::before,
+.hero-nebula::after {
+  content: "";
+  position: absolute;
+  width: 58vw;
+  height: 58vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  filter: blur(90px);       /* set once, never animated */
+  will-change: transform;
+}
+.hero-nebula::before {
+  left: -14%;
+  top: -28%;
+  background: radial-gradient(circle, rgba(98, 52, 200, 0.30), transparent 65%);
+  animation: nebulaDrift1 38s ease-in-out infinite alternate;
+}
+.hero-nebula::after {
+  right: -16%;
+  top: -12%;
+  background: radial-gradient(circle, rgba(32, 92, 205, 0.28), transparent 65%);
+  animation: nebulaDrift2 46s ease-in-out infinite alternate;
+}
+@keyframes nebulaDrift1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(9vw, 6vh) scale(1.15); }
+}
+@keyframes nebulaDrift2 {
+  from { transform: translate(0, 0) scale(1.1); }
+  to   { transform: translate(-8vw, 8vh) scale(0.95); }
+}
+
 /* ===== Seamless fade from starry hero into the light content below ===== */
 .hero-fade {
   position: absolute;
@@ -210,5 +260,7 @@ html:not([data-theme="dark"]) .bg-layer {
   .constellation__star,
   .constellation__star::before,
   .constellation__star--highlight::before,
-  .constellation__line { animation: none !important; }
+  .constellation__line,
+  .hero-nebula::before,
+  .hero-nebula::after { animation: none !important; }
 }

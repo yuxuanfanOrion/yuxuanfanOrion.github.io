@@ -1,0 +1,4 @@
+# Local-dev override: keep base_path-generated asset URLs on localhost so new
+# CSS/JS files resolve instead of 404ing against the production host.
+# Usage: bundle exec jekyll serve --config _config.yml,_config.dev.yml
+url: "http://localhost:4000"

@@ -23,6 +23,8 @@
   ];
 
   var ACCENT = '90,115,200';
+  var GOLD   = '184,134,11';
+  var GEMINI_IDX = 2;
 
   function isDark() {
     return document.documentElement.getAttribute('data-theme') === 'dark';
@@ -51,26 +53,30 @@
     var cols = 4, rows = 3;
     var cellW = w / cols;
     var cellH = Math.max(h / rows, 280);
-    var size = Math.max(55, Math.min(cellW, cellH) * 0.38);
-    size = Math.min(size, 110);
+    var baseSize = Math.max(65, Math.min(cellW, cellH) * 0.42);
+    baseSize = Math.min(baseSize, 130);
 
     _seed = 137;
 
     for (var i = 0; i < Z.length; i++) {
       var z  = Z[i];
+      var isGemini = (i === GEMINI_IDX);
       var col = i % cols, row = Math.floor(i / cols);
       var cx = cellW * (col + 0.5) + (srand() - 0.5) * cellW * 0.32;
       var cy = cellH * (row + 0.5) + (srand() - 0.5) * cellH * 0.22 + 40;
       var rot = (srand() - 0.5) * 0.35;
-      var vFade = Math.max(0.12, 1 - (cy / h) * 0.8);
+      var vFade = Math.max(0.20, 1 - (cy / h) * 0.65);
+      var size = isGemini ? baseSize * 1.35 : baseSize;
+      var rgb = isGemini ? GOLD : ACCENT;
+      var boost = isGemini ? 2.2 : 1;
 
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(rot);
 
       /* lines */
-      ctx.strokeStyle = 'rgba(' + ACCENT + ',' + (0.075 * vFade).toFixed(4) + ')';
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = 'rgba(' + rgb + ',' + (0.16 * boost * vFade).toFixed(4) + ')';
+      ctx.lineWidth = isGemini ? 1.4 : 1.0;
       ctx.lineCap = 'round';
       for (var li = 0; li < z.l.length; li++) {
         var a = z.s[z.l[li][0]], b = z.s[z.l[li][1]];
@@ -85,20 +91,21 @@
         var st = z.s[si];
         var x = (st[0] - 0.5) * size, y = (st[1] - 0.5) * size;
         var bright = z.b && z.b.indexOf(si) !== -1;
-        var r = bright ? 2.2 : 1.3;
-        var al = (bright ? 0.17 : 0.10) * vFade;
+        var r = bright ? (isGemini ? 3.5 : 2.8) : (isGemini ? 2.0 : 1.6);
+        var al = (bright ? 0.32 : 0.20) * boost * vFade;
 
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(' + ACCENT + ',' + al.toFixed(4) + ')';
+        ctx.fillStyle = 'rgba(' + rgb + ',' + al.toFixed(4) + ')';
         ctx.fill();
 
         if (bright) {
-          var g = ctx.createRadialGradient(x, y, 0, x, y, r * 3.5);
-          g.addColorStop(0, 'rgba(' + ACCENT + ',' + (0.055 * vFade).toFixed(4) + ')');
-          g.addColorStop(1, 'rgba(' + ACCENT + ',0)');
+          var glowR = isGemini ? r * 5 : r * 3.5;
+          var g = ctx.createRadialGradient(x, y, 0, x, y, glowR);
+          g.addColorStop(0, 'rgba(' + rgb + ',' + (0.12 * boost * vFade).toFixed(4) + ')');
+          g.addColorStop(1, 'rgba(' + rgb + ',0)');
           ctx.beginPath();
-          ctx.arc(x, y, r * 3.5, 0, Math.PI * 2);
+          ctx.arc(x, y, glowR, 0, Math.PI * 2);
           ctx.fillStyle = g;
           ctx.fill();
         }

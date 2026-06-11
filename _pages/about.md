@@ -283,6 +283,7 @@ layout: default
     <p>I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.</p>
     <p>I am a big fan of <strong>Chelsea</strong> and <strong>Oklahoma City Thunder</strong>.</p>
     <p>I am also a starry sky and astronomy enthusiast, and I love looking up at the stars at night. I'm really into science fiction.</p>
+    <p>My favorite novels are <em>The Three-Body Problem</em> and <em>And Quiet Flows the Don</em>.</p>
   </div>
 </div>
 

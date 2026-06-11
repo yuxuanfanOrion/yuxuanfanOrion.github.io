@@ -1,12 +1,15 @@
-/* Zodiac constellations — twelve subtle star-patterns drawn on a canvas
-   behind the light-mode page content.  Hidden in dark mode.  Static (no
-   animation) to keep CPU cost at zero after the initial paint.  Fades
-   vertically so the top is most visible and the bottom is barely there. */
+/* Zodiac constellations — animated star-patterns on a canvas behind
+   light-mode page content.  Features: gentle twinkling, mouse parallax,
+   occasional shooting stars.  Hidden in dark mode.  Pauses when off-screen
+   or tab hidden.  Respects prefers-reduced-motion (single static frame). */
 (function () {
   'use strict';
 
-  /* -- constellation data: stars [x,y] normalised to [0,1], lines [i,j],
-        bright[] = indices of the brightest star(s) -------------------- */
+  var REDUCE = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TAU = Math.PI * 2;
+  var FRAME_BUDGET = 1000 / 30;
+
   var Z = [
     /* Aries       */ { s:[[.80,.30],[.55,.15],[.30,.22],[.12,.48]], b:[0], l:[[0,1],[1,2],[2,3]] },
     /* Taurus      */ { s:[[.10,.18],[.30,.40],[.50,.55],[.70,.40],[.90,.18]], b:[2], l:[[0,1],[1,2],[2,3],[3,4]] },
@@ -30,25 +33,82 @@
     return document.documentElement.getAttribute('data-theme') === 'dark';
   }
 
-  /* deterministic jitter so the layout is stable across redraws */
   var _seed = 137;
   function srand() { _seed = (_seed * 16807) % 2147483647; return (_seed - 1) / 2147483646; }
 
-  function draw(canvas, ctx, content) {
-    if (isDark()) { canvas.style.display = 'none'; return; }
-    canvas.style.display = '';
+  /* ------------------------------------------------------------------ */
+  function ZodiacField(canvas, content) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.content = content;
+    this.w = 0; this.h = 0;
+    this.visible = true;
+    this.lastFrame = 0;
+    this.mouseX = 0.5; this.mouseY = 0.5;
+    this.curX = 0.5; this.curY = 0.5;
+    this.shooting = null;
+    this.nextShootAt = 0;
+    this.layout = [];
 
-    var w = content.offsetWidth;
-    var h = content.scrollHeight || content.offsetHeight;
+    var self = this;
+    this.computeLayout();
+
+    if (!REDUCE) {
+      window.addEventListener('mousemove', function (e) {
+        self.mouseX = e.clientX / window.innerWidth;
+        self.mouseY = e.clientY / window.innerHeight;
+      }, { passive: true });
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (ents) {
+        self.visible = ents[0].isIntersecting;
+      }).observe(canvas);
+    }
+
+    var rT;
+    window.addEventListener('resize', function () {
+      clearTimeout(rT); rT = setTimeout(function () { self.computeLayout(); }, 200);
+    });
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(function () {
+        clearTimeout(rT); rT = setTimeout(function () { self.computeLayout(); }, 150);
+      }).observe(content);
+    }
+    new MutationObserver(function () {
+      setTimeout(function () { self.computeLayout(); }, 60);
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+    if (REDUCE) {
+      this.drawFrame(0);
+    } else {
+      requestAnimationFrame(function tick(ts) {
+        requestAnimationFrame(tick);
+        if (document.hidden || !self.visible) return;
+        if (isDark()) { canvas.style.display = 'none'; return; }
+        canvas.style.display = '';
+        if (ts - self.lastFrame < FRAME_BUDGET) return;
+        self.lastFrame = ts;
+        self.drawFrame(ts);
+      });
+    }
+  }
+
+  ZodiacField.prototype.computeLayout = function () {
+    if (isDark()) { this.canvas.style.display = 'none'; return; }
+    this.canvas.style.display = '';
+
+    var w = this.content.offsetWidth;
+    var h = this.content.scrollHeight || this.content.offsetHeight;
     if (!w || !h) return;
 
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width  = Math.round(w * dpr);
-    canvas.height = Math.round(h * dpr);
-    canvas.style.width  = w + 'px';
-    canvas.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.clearRect(0, 0, w, h);
+    this.w = w; this.h = h;
+    this.canvas.width = Math.round(w * dpr);
+    this.canvas.height = Math.round(h * dpr);
+    this.canvas.style.width = w + 'px';
+    this.canvas.style.height = h + 'px';
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     var cols = 4, rows = 3;
     var cellW = w / cols;
@@ -57,62 +117,138 @@
     baseSize = Math.min(baseSize, 200);
 
     _seed = 137;
+    this.layout = [];
 
     for (var i = 0; i < Z.length; i++) {
-      var z  = Z[i];
-      var isGemini = (i === GEMINI_IDX);
+      var isG = (i === GEMINI_IDX);
       var col = i % cols, row = Math.floor(i / cols);
       var cx = cellW * (col + 0.5) + (srand() - 0.5) * cellW * 0.32;
       var cy = cellH * (row + 0.5) + (srand() - 0.5) * cellH * 0.22 + 40;
       var rot = (srand() - 0.5) * 0.35;
-      var vFade = Math.max(0.30, 1 - (cy / h) * 0.55);
-      var size = isGemini ? baseSize * 1.45 : baseSize;
-      var rgb = isGemini ? GOLD : ACCENT;
-      var boost = isGemini ? 2.5 : 1;
+
+      var sd = [];
+      for (var si = 0; si < Z[i].s.length; si++) {
+        sd.push({ spd: 0.0006 + srand() * 0.0018, ph: srand() * TAU });
+      }
+
+      this.layout.push({
+        cx: cx, cy: cy, rot: rot,
+        size: isG ? baseSize * 1.45 : baseSize,
+        isG: isG,
+        rgb: isG ? GOLD : ACCENT,
+        boost: isG ? 2.5 : 1,
+        depth: 0.3 + i * 0.06,
+        sd: sd
+      });
+    }
+
+    if (REDUCE) this.drawFrame(0);
+  };
+
+  ZodiacField.prototype.drawFrame = function (ts) {
+    var ctx = this.ctx, w = this.w, h = this.h;
+    ctx.clearRect(0, 0, w, h);
+
+    this.curX += (this.mouseX - this.curX) * 0.03;
+    this.curY += (this.mouseY - this.curY) * 0.03;
+    var px = (this.curX - 0.5) * 18;
+    var py = (this.curY - 0.5) * 12;
+
+    for (var i = 0; i < Z.length; i++) {
+      var z = Z[i], L = this.layout[i];
+      if (!L) continue;
+      var vFade = Math.max(0.30, 1 - (L.cy / h) * 0.55);
 
       ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(rot);
+      ctx.translate(L.cx - px * L.depth, L.cy - py * L.depth);
+      ctx.rotate(L.rot);
 
-      /* lines */
-      ctx.strokeStyle = 'rgba(' + rgb + ',' + (0.25 * boost * vFade).toFixed(4) + ')';
-      ctx.lineWidth = isGemini ? 2.0 : 1.3;
+      /* connecting lines — pulse gently */
+      var linePulse = REDUCE ? 1 : 0.85 + 0.15 * Math.sin(ts * 0.0005 + i);
+      ctx.strokeStyle = 'rgba(' + L.rgb + ',' + (0.25 * L.boost * vFade * linePulse).toFixed(4) + ')';
+      ctx.lineWidth = L.isG ? 2.0 : 1.3;
       ctx.lineCap = 'round';
       for (var li = 0; li < z.l.length; li++) {
         var a = z.s[z.l[li][0]], b = z.s[z.l[li][1]];
         ctx.beginPath();
-        ctx.moveTo((a[0] - 0.5) * size, (a[1] - 0.5) * size);
-        ctx.lineTo((b[0] - 0.5) * size, (b[1] - 0.5) * size);
+        ctx.moveTo((a[0] - 0.5) * L.size, (a[1] - 0.5) * L.size);
+        ctx.lineTo((b[0] - 0.5) * L.size, (b[1] - 0.5) * L.size);
         ctx.stroke();
       }
 
       /* stars */
       for (var si = 0; si < z.s.length; si++) {
-        var st = z.s[si];
-        var x = (st[0] - 0.5) * size, y = (st[1] - 0.5) * size;
+        var st = z.s[si], sd = L.sd[si];
+        var x = (st[0] - 0.5) * L.size, y = (st[1] - 0.5) * L.size;
         var bright = z.b && z.b.indexOf(si) !== -1;
-        var r = bright ? (isGemini ? 5.0 : 3.5) : (isGemini ? 2.8 : 2.0);
-        var al = (bright ? 0.45 : 0.30) * boost * vFade;
+        var r = bright ? (L.isG ? 5.0 : 3.5) : (L.isG ? 2.8 : 2.0);
+        var tw = REDUCE ? 1 : 0.65 + 0.35 * Math.sin(ts * sd.spd + sd.ph);
+        var al = (bright ? 0.45 : 0.30) * L.boost * vFade * tw;
 
         ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(' + rgb + ',' + al.toFixed(4) + ')';
+        ctx.arc(x, y, r, 0, TAU);
+        ctx.fillStyle = 'rgba(' + L.rgb + ',' + al.toFixed(4) + ')';
         ctx.fill();
 
         if (bright) {
-          var glowR = isGemini ? r * 6 : r * 4;
+          var glowR = L.isG ? r * 6 : r * 4;
+          var twGlow = 0.20 * L.boost * vFade * tw;
           var g = ctx.createRadialGradient(x, y, 0, x, y, glowR);
-          g.addColorStop(0, 'rgba(' + rgb + ',' + (0.20 * boost * vFade).toFixed(4) + ')');
-          g.addColorStop(1, 'rgba(' + rgb + ',0)');
+          g.addColorStop(0, 'rgba(' + L.rgb + ',' + twGlow.toFixed(4) + ')');
+          g.addColorStop(1, 'rgba(' + L.rgb + ',0)');
           ctx.beginPath();
-          ctx.arc(x, y, glowR, 0, Math.PI * 2);
+          ctx.arc(x, y, glowR, 0, TAU);
           ctx.fillStyle = g;
           ctx.fill();
         }
       }
       ctx.restore();
     }
-  }
+
+    if (!REDUCE) this.drawShooting(ts);
+  };
+
+  ZodiacField.prototype.drawShooting = function (ts) {
+    var ctx = this.ctx, w = this.w, h = this.h;
+    if (!this.shooting) {
+      if (!this.nextShootAt) this.nextShootAt = ts + 3000 + Math.random() * 6000;
+      if (ts < this.nextShootAt) return;
+      var ang = (12 + Math.random() * 35) * Math.PI / 180;
+      this.shooting = {
+        x: w * (0.05 + Math.random() * 0.85),
+        y: h * (0.02 + Math.random() * 0.55),
+        vx: Math.cos(ang) * 0.42,
+        vy: Math.sin(ang) * 0.42,
+        born: ts, life: 1100
+      };
+    }
+    var m = this.shooting, age = ts - m.born;
+    if (age > m.life) {
+      this.shooting = null;
+      this.nextShootAt = ts + 6000 + Math.random() * 12000;
+      return;
+    }
+    var t = age / m.life;
+    var fade = t < 0.12 ? t / 0.12 : 1 - (t - 0.12) / 0.88;
+    var hx = m.x + m.vx * age, hy = m.y + m.vy * age;
+    var TRAIL = 100;
+    var tx = hx - m.vx / 0.42 * TRAIL, ty = hy - m.vy / 0.42 * TRAIL;
+    var grad = ctx.createLinearGradient(tx, ty, hx, hy);
+    grad.addColorStop(0, 'rgba(' + ACCENT + ',0)');
+    grad.addColorStop(1, 'rgba(' + ACCENT + ',' + (0.22 * fade).toFixed(4) + ')');
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 1.3;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(tx, ty);
+    ctx.lineTo(hx, hy);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(hx, hy, 1.5, 0, TAU);
+    ctx.fillStyle = 'rgba(' + ACCENT + ',' + (0.30 * fade).toFixed(4) + ')';
+    ctx.fill();
+  };
 
   function init() {
     var content = document.querySelector('.page-content');
@@ -124,19 +260,7 @@
     canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;';
     content.appendChild(canvas);
 
-    var ctx = canvas.getContext('2d');
-    var paint = function () { draw(canvas, ctx, content); };
-
-    paint();
-
-    var rT;
-    window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(paint, 200); });
-    new MutationObserver(function () { setTimeout(paint, 60); })
-      .observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-    if (typeof ResizeObserver !== 'undefined') {
-      new ResizeObserver(function () { clearTimeout(rT); rT = setTimeout(paint, 150); }).observe(content);
-    }
+    new ZodiacField(canvas, content);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

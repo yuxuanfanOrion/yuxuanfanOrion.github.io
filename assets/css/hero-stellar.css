@@ -52,13 +52,13 @@
 .hero-nebula::before {
   left: -14%;
   top: -28%;
-  background: radial-gradient(circle, rgba(98, 52, 200, 0.30), transparent 65%);
+  background: radial-gradient(circle, rgba(98, 52, 200, 0.38), transparent 65%);
   animation: nebulaDrift1 38s ease-in-out infinite alternate;
 }
 .hero-nebula::after {
   right: -16%;
   top: -12%;
-  background: radial-gradient(circle, rgba(32, 92, 205, 0.28), transparent 65%);
+  background: radial-gradient(circle, rgba(32, 92, 205, 0.35), transparent 65%);
   animation: nebulaDrift2 46s ease-in-out infinite alternate;
 }
 @keyframes nebulaDrift1 {
@@ -76,13 +76,24 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 42%;
+  height: 52%;
   z-index: 5;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(249, 249, 249, 0) 0%, rgba(249, 249, 249, 0.85) 78%, #f9f9f9 100%);
+  background: linear-gradient(180deg,
+    rgba(249, 249, 249, 0) 0%,
+    rgba(245, 246, 252, 0.25) 30%,
+    rgba(245, 246, 252, 0.65) 58%,
+    rgba(249, 249, 249, 0.92) 82%,
+    #f9f9f9 100%);
 }
 html[data-theme="dark"] .hero-fade {
-  background: linear-gradient(180deg, rgba(5, 8, 20, 0) 0%, rgba(5, 8, 20, 0.85) 78%, var(--night-bg, #050814) 100%);
+  height: 52%;
+  background: linear-gradient(180deg,
+    rgba(5, 8, 20, 0) 0%,
+    rgba(5, 8, 20, 0.25) 30%,
+    rgba(5, 8, 20, 0.65) 58%,
+    rgba(5, 8, 20, 0.92) 82%,
+    var(--night-bg, #050814) 100%);
 }
 
 /* Slightly deepen the rotating photos in light mode so the sky reads as deep space */

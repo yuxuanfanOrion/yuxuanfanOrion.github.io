@@ -353,16 +353,37 @@
 
   /* ===== DATA: deep-sky objects ======================================== */
   var DSO = [
-    { name:'Pleiades',     x:0.22, y:0.15, type:'cluster', count:9,  rx:22,       color:'140,175,230' },
-    { name:'Orion Nebula', x:0.15, y:0.34, type:'nebula',  rx:28, ry:22, color:'200,140,180' },
-    { name:'Andromeda',    x:0.78, y:0.12, type:'galaxy',  rx:40, ry:12, color:'170,165,210', angle:-0.5 },
-    { name:'Lagoon Neb.',  x:0.72, y:0.55, type:'nebula',  rx:20, ry:16, color:'200,150,170' },
-    { name:'Omega Cen.',   x:0.40, y:0.78, type:'cluster', count:15, rx:18, color:'255,235,190' },
-    { name:'M13 Hercules', x:0.52, y:0.18, type:'cluster', count:11, rx:16, color:'220,215,240' },
-    { name:'Crab Nebula',  x:0.18, y:0.20, type:'nebula',  rx:14, ry:12, color:'180,200,230' },
-    { name:'Eagle Neb.',   x:0.65, y:0.48, type:'nebula',  rx:18, ry:15, color:'190,145,175' },
-    { name:'Ring Nebula',  x:0.61, y:0.09, type:'nebula',  rx:10, ry:10, color:'140,200,190' },
-    { name:'Carina Neb.',  x:0.35, y:0.72, type:'nebula',  rx:30, ry:20, color:'210,140,160' }
+    /* --- star clusters --- */
+    { name:'Pleiades',       x:0.22, y:0.15, type:'cluster', count:12, rx:28,       color:'130,170,235' },
+    { name:'Omega Cen.',     x:0.40, y:0.78, type:'cluster', count:18, rx:22,       color:'255,235,190' },
+    { name:'M13 Hercules',   x:0.52, y:0.18, type:'cluster', count:14, rx:20,       color:'215,210,240' },
+    { name:'Hyades',         x:0.19, y:0.17, type:'cluster', count:10, rx:30,       color:'255,230,190' },
+    { name:'Praesepe M44',   x:0.38, y:0.28, type:'cluster', count:10, rx:18,       color:'230,225,210' },
+    { name:'Double Cluster',x:0.27, y:0.10, type:'cluster', count:16, rx:24,       color:'170,190,240' },
+    { name:'47 Tucanae',     x:0.70, y:0.82, type:'cluster', count:14, rx:16,       color:'255,230,200' },
+    { name:'Wild Duck M11',  x:0.74, y:0.40, type:'cluster', count:11, rx:14,       color:'230,220,200' },
+    /* --- emission / planetary nebulae --- */
+    { name:'Orion Nebula',   x:0.15, y:0.34, type:'nebula',  rx:35, ry:28, color:'210,130,175' },
+    { name:'Lagoon Neb.',    x:0.72, y:0.55, type:'nebula',  rx:28, ry:22, color:'200,145,170' },
+    { name:'Crab Nebula',    x:0.18, y:0.20, type:'nebula',  rx:18, ry:16, color:'160,190,230' },
+    { name:'Eagle Neb.',     x:0.65, y:0.48, type:'nebula',  rx:25, ry:20, color:'195,140,175' },
+    { name:'Ring Nebula',    x:0.61, y:0.09, type:'nebula',  rx:14, ry:14, color:'120,200,185' },
+    { name:'Carina Neb.',    x:0.35, y:0.72, type:'nebula',  rx:40, ry:28, color:'215,130,155' },
+    { name:'Trifid Neb.',    x:0.70, y:0.52, type:'nebula',  rx:22, ry:18, color:'180,130,190' },
+    { name:'Rosette Neb.',   x:0.10, y:0.40, type:'nebula',  rx:30, ry:28, color:'210,140,150' },
+    { name:'North America',  x:0.73, y:0.12, type:'nebula',  rx:28, ry:22, color:'200,145,140' },
+    { name:'Helix Neb.',     x:0.88, y:0.50, type:'nebula',  rx:20, ry:18, color:'100,195,185' },
+    { name:'Dumbbell Neb.',  x:0.80, y:0.28, type:'nebula',  rx:16, ry:14, color:'140,190,170' },
+    { name:'Veil Neb.',      x:0.72, y:0.14, type:'nebula',  rx:32, ry:12, color:'150,170,210' },
+    { name:'Tarantula Neb.', x:0.48, y:0.85, type:'nebula',  rx:35, ry:30, color:'220,140,160' },
+    /* --- galaxies --- */
+    { name:'Andromeda',      x:0.78, y:0.12, type:'galaxy',  rx:50, ry:15, color:'165,160,210', angle:-0.5 },
+    { name:'Triangulum',     x:0.82, y:0.18, type:'galaxy',  rx:25, ry:12, color:'170,175,215', angle:0.3 },
+    { name:'Whirlpool M51',  x:0.40, y:0.08, type:'galaxy',  rx:18, ry:16, color:'180,170,210', angle:0.7 },
+    { name:'Sombrero M104',  x:0.52, y:0.45, type:'galaxy',  rx:22, ry:7,  color:'220,200,180', angle:-0.2 },
+    { name:'Centaurus A',    x:0.45, y:0.80, type:'galaxy',  rx:28, ry:20, color:'190,175,200', angle:0.4 },
+    { name:'LMC',            x:0.30, y:0.88, type:'galaxy',  rx:35, ry:25, color:'170,180,220', angle:-0.3 },
+    { name:'SMC',            x:0.25, y:0.90, type:'galaxy',  rx:18, ry:14, color:'165,175,215', angle:0.1 }
   ];
 
   /* ===== DATA: planets ================================================= */
@@ -718,19 +739,20 @@
       var vFade = Math.max(0.25, 1 - d.y * 0.55);
 
       if (d.type === 'cluster') {
-        /* faint haze behind */
-        var hGrad = ctx.createRadialGradient(dx, dy, 0, dx, dy, d.rx * 1.5);
-        hGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.14 * vFade).toFixed(4) + ')');
+        /* haze glow behind cluster */
+        var hGrad = ctx.createRadialGradient(dx, dy, 0, dx, dy, d.rx * 2);
+        hGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.22 * vFade).toFixed(4) + ')');
+        hGrad.addColorStop(0.6, 'rgba(' + d.color + ',' + (0.08 * vFade).toFixed(4) + ')');
         hGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
-        ctx.beginPath(); ctx.arc(dx, dy, d.rx * 2.5, 0, TAU);
+        ctx.beginPath(); ctx.arc(dx, dy, d.rx * 3, 0, TAU);
         ctx.fillStyle = hGrad; ctx.fill();
-        /* tiny dots */
+        /* cluster stars */
         _seed = 5000 + i * 100;
         for (var ci = 0; ci < (d.count || 7); ci++) {
           var cx = dx + (srand() - 0.5) * d.rx * 2;
           var cy = dy + (srand() - 0.5) * d.rx * 2;
-          var cr = 0.8 + srand() * 1.0;
-          var ca = (0.25 + srand() * 0.22) * vFade;
+          var cr = 0.9 + srand() * 1.2;
+          var ca = (0.35 + srand() * 0.25) * vFade;
           var ctw = REDUCE ? 1 : 0.6 + 0.4 * Math.sin(ts * (0.001 + srand() * 0.002) + srand() * TAU);
           ctx.globalAlpha = ca * ctw;
           ctx.beginPath(); ctx.arc(cx, cy, cr, 0, TAU);
@@ -742,8 +764,8 @@
         var nRx = d.rx || 15;
         var nRy = d.ry || nRx;
         var nGrad = ctx.createRadialGradient(dx, dy, 0, dx, dy, Math.max(nRx, nRy));
-        nGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.20 * vFade).toFixed(4) + ')');
-        nGrad.addColorStop(0.5, 'rgba(' + d.color + ',' + (0.08 * vFade).toFixed(4) + ')');
+        nGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.30 * vFade).toFixed(4) + ')');
+        nGrad.addColorStop(0.4, 'rgba(' + d.color + ',' + (0.14 * vFade).toFixed(4) + ')');
         nGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
         ctx.save();
         ctx.translate(dx, dy);
@@ -756,8 +778,8 @@
         var gRy = d.ry || 8;
         var gAngle = d.angle || 0;
         var gGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, gRx);
-        gGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.18 * vFade).toFixed(4) + ')');
-        gGrad.addColorStop(0.4, 'rgba(' + d.color + ',' + (0.08 * vFade).toFixed(4) + ')');
+        gGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.25 * vFade).toFixed(4) + ')');
+        gGrad.addColorStop(0.35, 'rgba(' + d.color + ',' + (0.12 * vFade).toFixed(4) + ')');
         gGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
         ctx.save();
         ctx.translate(dx, dy);
@@ -766,6 +788,16 @@
         ctx.beginPath(); ctx.arc(0, 0, gRx, 0, TAU);
         ctx.fillStyle = gGrad; ctx.fill();
         ctx.restore();
+      }
+
+      /* DSO name label */
+      var labelAlpha = (0.22 * vFade);
+      if (labelAlpha > 0.05) {
+        ctx.font = '8px Georgia, serif';
+        ctx.fillStyle = 'rgba(' + d.color + ',' + labelAlpha.toFixed(4) + ')';
+        ctx.textAlign = 'center';
+        var labelY = dy + (d.ry || d.rx || 15) + 12;
+        ctx.fillText(d.name, dx, labelY);
       }
     }
   };

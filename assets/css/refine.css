@@ -17,6 +17,17 @@
 .epigraph {
   margin: 6px auto 52px;
   text-align: center;
+  position: relative;
+}
+html:not([data-theme="dark"]) .epigraph::before {
+  content: "";
+  position: absolute;
+  top: -30px; left: 50%; width: 320px; height: 160px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center,
+    rgba(130, 160, 220, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 .epigraph__quote {
   margin: 0;
@@ -35,15 +46,20 @@
 }
 .epigraph__stelle {
   color: #b8860b;
-  text-shadow: 0 0 12px rgba(255, 194, 77, 0.35);
+  text-shadow: 0 0 14px rgba(255, 194, 77, 0.45), 0 0 30px rgba(255, 194, 77, 0.15);
 }
 .epigraph::after {
   content: "\2726";
   display: block;
   margin-top: 20px;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: var(--rf-accent-soft);
-  text-shadow: 0 0 10px rgba(138, 166, 232, 0.8);
+  text-shadow: 0 0 12px rgba(138, 166, 232, 0.9), 0 0 24px rgba(90, 115, 200, 0.4);
+  animation: epigraphStarPulse 4s ease-in-out infinite;
+}
+@keyframes epigraphStarPulse {
+  0%, 100% { opacity: 0.7; text-shadow: 0 0 12px rgba(138,166,232,0.9), 0 0 24px rgba(90,115,200,0.4); }
+  50%      { opacity: 1;   text-shadow: 0 0 16px rgba(138,166,232,1),   0 0 32px rgba(90,115,200,0.6); }
 }
 html[data-theme="dark"] .epigraph__verse { color: #cdd9f7; }
 html[data-theme="dark"] .epigraph__stelle {
@@ -330,26 +346,35 @@ html:not([data-theme="dark"]) .page-content::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgba(90, 115, 200, 0.13) 0.6px, transparent 0.7px);
-  background-size: 38px 38px;
-  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4) 38%, transparent 78%);
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4) 38%, transparent 78%);
+  background-image:
+    radial-gradient(circle, rgba(90, 115, 200, 0.16) 0.7px, transparent 0.8px),
+    radial-gradient(circle, rgba(130, 160, 220, 0.09) 0.4px, transparent 0.5px);
+  background-size: 36px 36px, 22px 22px;
+  background-position: 0 0, 11px 11px;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.15) 65%, transparent 90%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.15) 65%, transparent 90%);
 }
 
-/* ===== Nebula wash: faint color blobs behind light-mode content
-   to give the white background a cosmic atmosphere ===== */
+/* ===== Nebula wash: drifting color blobs behind light-mode content ===== */
 html:not([data-theme="dark"]) .page-content::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -10% -10%;
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 55% 35% at 12% 15%, rgba(98, 52, 200, 0.035), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 85% 25%, rgba(32, 92, 205, 0.035), transparent 70%),
-    radial-gradient(ellipse 60% 30% at 50% 50%, rgba(90, 115, 200, 0.025), transparent 70%),
-    radial-gradient(ellipse 45% 35% at 20% 75%, rgba(160, 90, 200, 0.025), transparent 70%),
-    radial-gradient(ellipse 50% 30% at 75% 80%, rgba(70, 110, 200, 0.025), transparent 70%);
+    radial-gradient(ellipse 50% 35% at 15% 18%, rgba(98, 52, 200, 0.04), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 82% 22%, rgba(32, 92, 205, 0.045), transparent 70%),
+    radial-gradient(ellipse 55% 30% at 45% 48%, rgba(90, 115, 200, 0.03), transparent 70%),
+    radial-gradient(ellipse 40% 35% at 18% 72%, rgba(160, 90, 200, 0.03), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 78% 78%, rgba(70, 110, 200, 0.035), transparent 70%),
+    radial-gradient(ellipse 60% 25% at 55% 12%, rgba(80, 130, 220, 0.03), transparent 70%);
+  animation: nebulaWashDrift 55s ease-in-out infinite alternate;
+}
+@keyframes nebulaWashDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(3%, 2%) scale(1.04); }
+  100% { transform: translate(-2%, -1%) scale(0.97); }
 }
 
 /* ===== Reduced motion ===== */
@@ -359,4 +384,6 @@ html:not([data-theme="dark"]) .page-content::after {
   .info-card,
   .info-card::before,
   .site-nav .page-link::after { transition: none; }
+  .page-content::after,
+  .epigraph::after { animation: none !important; }
 }

@@ -104,6 +104,27 @@ html[data-theme="dark"] .md-heading i {
 .page-content a:visited { color: #3a57b0; }
 .page-content a:hover { color: #1f3168; }
 
+/* ===== Text contrast boost: subtle frosted backdrop behind content blocks
+   so text remains crisp against the busy starfield background ===== */
+html:not([data-theme="dark"]) .bio-body,
+html:not([data-theme="dark"]) .hobbies-content,
+html:not([data-theme="dark"]) .timeline,
+html:not([data-theme="dark"]) .info-card-grid {
+  position: relative;
+  z-index: 1;
+}
+html:not([data-theme="dark"]) .bio-body p,
+html:not([data-theme="dark"]) .hobbies-content p,
+html:not([data-theme="dark"]) .timeline-entry__content {
+  text-shadow: 0 0 8px rgba(255,255,255,0.9), 0 0 16px rgba(255,255,255,0.6);
+}
+
+/* ===== Section headings: cosmic gold/indigo gradient text ===== */
+html:not([data-theme="dark"]) .md-heading {
+  color: #2a3660;
+  text-shadow: 0 0 12px rgba(90,115,200,0.15);
+}
+
 /* ===== Scroll reveal (class added by reveal.js → progressive enhancement) ===== */
 .reveal {
   opacity: 0;

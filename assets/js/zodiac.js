@@ -277,113 +277,113 @@
   /* ===== DATA: named bright stars ====================================== */
   var STARS = [
     { name:'Polaris',    x:0.50, y:0.02, color:'255,245,220', r:3.0, noTwinkle:true },
-    { name:'Vega',       x:0.62, y:0.06, color:'180,210,255', r:3.5 },
-    { name:'Deneb',      x:0.72, y:0.08, color:'220,230,255', r:3.0 },
-    { name:'Capella',    x:0.25, y:0.08, color:'255,235,180', r:3.2 },
-    { name:'Arcturus',   x:0.45, y:0.15, color:'255,200,130', r:3.5 },
+    { name:'Vega',       x:0.92, y:0.30, color:'180,210,255', r:3.5 },
+    { name:'Deneb',      x:0.10, y:0.58, color:'220,230,255', r:3.0 },
+    { name:'Capella',    x:0.25, y:0.10, color:'255,235,180', r:3.2 },
+    { name:'Arcturus',   x:0.08, y:0.68, color:'255,200,130', r:3.5 },
     { name:'Castor',     x:0.55, y:0.12, color:'220,230,255', r:2.5 },
     { name:'Pollux',     x:0.58, y:0.14, color:'255,200,130', r:2.8 },
-    { name:'Betelgeuse', x:0.12, y:0.28, color:'255,150,80',  r:4.0, variable:true },
-    { name:'Rigel',      x:0.18, y:0.35, color:'180,210,255', r:3.8 },
-    { name:'Sirius',     x:0.22, y:0.42, color:'200,220,255', r:5.0 },
-    { name:'Procyon',    x:0.35, y:0.30, color:'255,245,220', r:3.0 },
-    { name:'Aldebaran',  x:0.20, y:0.18, color:'255,180,110', r:3.2 },
-    { name:'Regulus',    x:0.38, y:0.22, color:'180,210,255', r:2.8 },
-    { name:'Spica',      x:0.52, y:0.38, color:'180,210,255', r:3.0 },
-    { name:'Antares',    x:0.68, y:0.50, color:'255,150,80',  r:3.5 },
-    { name:'Altair',     x:0.78, y:0.25, color:'220,230,255', r:3.2 },
-    { name:'Fomalhaut',  x:0.85, y:0.55, color:'220,230,255', r:2.5 },
-    { name:'Achernar',   x:0.90, y:0.70, color:'180,210,255', r:2.8 },
-    { name:'Canopus',    x:0.30, y:0.65, color:'255,245,220', r:3.5 },
-    { name:'Acrux',      x:0.60, y:0.85, color:'180,210,255', r:3.0 },
-    { name:'Dubhe',      x:0.32, y:0.04, color:'255,200,130', r:3.0 },
-    { name:'Merak',      x:0.34, y:0.06, color:'220,230,255', r:2.6 },
-    { name:'Algol',      x:0.30, y:0.12, color:'180,210,255', r:3.0, variable:true },
-    { name:'Mirfak',     x:0.28, y:0.10, color:'255,245,220', r:2.8 },
-    { name:'Eltanin',    x:0.56, y:0.05, color:'255,200,130', r:2.6 },
-    { name:'Alphecca',   x:0.48, y:0.10, color:'220,230,255', r:2.5 },
-    { name:'Markab',     x:0.82, y:0.15, color:'220,230,255', r:2.6 },
-    { name:'Mira',       x:0.05, y:0.55, color:'255,150,80',  r:3.5, variable:true },
-    { name:'Hadar',      x:0.55, y:0.80, color:'180,210,255', r:3.2 },
-    { name:'Bellatrix',  x:0.10, y:0.26, color:'180,210,255', r:2.8 }
+    { name:'Betelgeuse', x:0.10, y:0.28, color:'255,150,80',  r:4.0, variable:true },
+    { name:'Rigel',      x:0.16, y:0.35, color:'180,210,255', r:3.8 },
+    { name:'Sirius',     x:0.22, y:0.48, color:'200,220,255', r:5.0 },
+    { name:'Procyon',    x:0.35, y:0.38, color:'255,245,220', r:3.0 },
+    { name:'Aldebaran',  x:0.20, y:0.20, color:'255,180,110', r:3.2 },
+    { name:'Regulus',    x:0.38, y:0.30, color:'180,210,255', r:2.8 },
+    { name:'Spica',      x:0.52, y:0.45, color:'180,210,255', r:3.0 },
+    { name:'Antares',    x:0.68, y:0.55, color:'255,150,80',  r:3.5 },
+    { name:'Altair',     x:0.88, y:0.52, color:'220,230,255', r:3.2 },
+    { name:'Fomalhaut',  x:0.85, y:0.65, color:'220,230,255', r:2.5 },
+    { name:'Achernar',   x:0.90, y:0.78, color:'180,210,255', r:2.8 },
+    { name:'Canopus',    x:0.30, y:0.72, color:'255,245,220', r:3.5 },
+    { name:'Acrux',      x:0.55, y:0.85, color:'180,210,255', r:3.0 },
+    { name:'Dubhe',      x:0.32, y:0.05, color:'255,200,130', r:3.0 },
+    { name:'Merak',      x:0.34, y:0.07, color:'220,230,255', r:2.6 },
+    { name:'Algol',      x:0.18, y:0.16, color:'180,210,255', r:3.0, variable:true },
+    { name:'Mirfak',     x:0.16, y:0.14, color:'255,245,220', r:2.8 },
+    { name:'Eltanin',    x:0.56, y:0.06, color:'255,200,130', r:2.6 },
+    { name:'Alphecca',   x:0.45, y:0.40, color:'220,230,255', r:2.5 },
+    { name:'Markab',     x:0.92, y:0.65, color:'220,230,255', r:2.6 },
+    { name:'Mira',       x:0.05, y:0.60, color:'255,150,80',  r:3.5, variable:true },
+    { name:'Hadar',      x:0.48, y:0.82, color:'180,210,255', r:3.2 },
+    { name:'Bellatrix',  x:0.08, y:0.25, color:'180,210,255', r:2.8 }
   ];
 
   /* ===== DATA: non-zodiac constellations =============================== */
   var EXTRA = [
-    { name:'Orion',        cx:0.15, cy:0.32, scale:0.7,
+    { name:'Orion',        cx:0.12, cy:0.30, scale:0.7,
       s:[[.35,.15],[.65,.15],[.5,.38],[.5,.48],[.5,.58],[.25,.85],[.75,.85],[.5,.68]],
       b:[0,1,5,6], l:[[0,2],[1,2],[2,3],[3,4],[4,5],[4,6],[0,7],[1,7]] },
-    { name:'Big Dipper',   cx:0.35, cy:0.05, scale:0.6,
+    { name:'Big Dipper',   cx:0.30, cy:0.06, scale:0.6,
       s:[[.0,.5],[.2,.3],[.45,.25],[.6,.35],[.75,.3],[.85,.15],[.95,.2]],
       b:[0,6], l:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6]] },
-    { name:'Cassiopeia',   cx:0.65, cy:0.04, scale:0.5,
+    { name:'Cassiopeia',   cx:0.88, cy:0.18, scale:0.5,
       s:[[.0,.6],[.25,.2],[.5,.5],[.75,.15],[1,.55]],
       b:[2], l:[[0,1],[1,2],[2,3],[3,4]] },
-    { name:'Cygnus',       cx:0.70, cy:0.10, scale:0.55,
+    { name:'Cygnus',       cx:0.08, cy:0.55, scale:0.55,
       s:[[.5,.0],[.5,.35],[.5,.7],[.2,.35],[.8,.35],[.5,1]],
       b:[0,5], l:[[0,1],[1,2],[2,5],[1,3],[1,4]] },
-    { name:'Canis Major',  cx:0.20, cy:0.45, scale:0.5,
+    { name:'Canis Major',  cx:0.25, cy:0.50, scale:0.5,
       s:[[.4,.1],[.5,.35],[.6,.55],[.3,.7],[.7,.65],[.5,.85]],
       b:[0], l:[[0,1],[1,2],[2,3],[2,4],[3,5],[4,5]] },
-    { name:'Lyra',         cx:0.60, cy:0.08, scale:0.35,
+    { name:'Lyra',         cx:0.92, cy:0.35, scale:0.35,
       s:[[.5,.0],[.3,.5],[.7,.5],[.25,.8],[.75,.8]],
       b:[0], l:[[0,1],[0,2],[1,3],[2,4],[3,4],[1,2]] },
-    { name:'Crux',         cx:0.55, cy:0.88, scale:0.35,
+    { name:'Crux',         cx:0.50, cy:0.88, scale:0.4,
       s:[[.5,.0],[.5,1],[.0,.45],[1,.45],[.65,.55]],
       b:[0,1], l:[[0,1],[2,3]] },
-    { name:'Aquila',       cx:0.80, cy:0.22, scale:0.45,
+    { name:'Aquila',       cx:0.85, cy:0.55, scale:0.45,
       s:[[.5,.15],[.3,.45],[.7,.45],[.5,.75],[.2,.7],[.8,.7]],
       b:[0], l:[[0,1],[0,2],[1,3],[2,3],[3,4],[3,5]] },
-    { name:'Perseus',     cx:0.28, cy:0.12, scale:0.5,
+    { name:'Perseus',     cx:0.15, cy:0.15, scale:0.5,
       s:[[.5,.0],[.4,.25],[.3,.5],[.2,.75],[.6,.35],[.75,.5],[.85,.65]],
       b:[0,3], l:[[0,1],[1,2],[2,3],[1,4],[4,5],[5,6]] },
-    { name:'Draco',       cx:0.48, cy:0.04, scale:0.7,
+    { name:'Draco',       cx:0.50, cy:0.05, scale:0.65,
       s:[[.15,.3],[.25,.1],[.45,.05],[.65,.1],[.75,.3],[.65,.5],[.45,.45],[.35,.55],[.5,.7]],
       b:[4], l:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]] },
-    { name:'Boötes',      cx:0.42, cy:0.14, scale:0.45,
+    { name:'Boötes',      cx:0.08, cy:0.70, scale:0.45,
       s:[[.5,.0],[.2,.35],[.8,.35],[.3,.7],[.7,.7],[.5,1]],
       b:[0], l:[[0,1],[0,2],[1,3],[2,4],[3,5],[4,5]] },
-    { name:'Pegasus',     cx:0.84, cy:0.14, scale:0.5,
+    { name:'Pegasus',     cx:0.90, cy:0.68, scale:0.5,
       s:[[.15,.15],[.85,.15],[.85,.85],[.15,.85],[.0,.5],[.5,.0]],
       b:[0,2], l:[[0,1],[1,2],[2,3],[3,0],[0,4],[1,5]] },
-    { name:'Corona Bor.', cx:0.50, cy:0.11, scale:0.3,
+    { name:'Corona Bor.', cx:0.45, cy:0.42, scale:0.3,
       s:[[.0,.5],[.15,.2],[.4,.05],[.6,.05],[.85,.2],[1,.5]],
       b:[2], l:[[0,1],[1,2],[2,3],[3,4],[4,5]] }
   ];
 
   /* ===== DATA: deep-sky objects ======================================== */
   var DSO = [
-    /* --- star clusters --- */
-    { name:'Pleiades',       x:0.22, y:0.15, type:'cluster', count:12, rx:28,       color:'130,170,235' },
-    { name:'Omega Cen.',     x:0.40, y:0.78, type:'cluster', count:18, rx:22,       color:'255,235,190' },
-    { name:'M13 Hercules',   x:0.52, y:0.18, type:'cluster', count:14, rx:20,       color:'215,210,240' },
-    { name:'Hyades',         x:0.19, y:0.17, type:'cluster', count:10, rx:30,       color:'255,230,190' },
-    { name:'Praesepe M44',   x:0.38, y:0.28, type:'cluster', count:10, rx:18,       color:'230,225,210' },
-    { name:'Double Cluster',x:0.27, y:0.10, type:'cluster', count:16, rx:24,       color:'170,190,240' },
-    { name:'47 Tucanae',     x:0.70, y:0.82, type:'cluster', count:14, rx:16,       color:'255,230,200' },
-    { name:'Wild Duck M11',  x:0.74, y:0.40, type:'cluster', count:11, rx:14,       color:'230,220,200' },
-    /* --- emission / planetary nebulae --- */
-    { name:'Orion Nebula',   x:0.15, y:0.34, type:'nebula',  rx:35, ry:28, color:'210,130,175' },
-    { name:'Lagoon Neb.',    x:0.72, y:0.55, type:'nebula',  rx:28, ry:22, color:'200,145,170' },
-    { name:'Crab Nebula',    x:0.18, y:0.20, type:'nebula',  rx:18, ry:16, color:'160,190,230' },
-    { name:'Eagle Neb.',     x:0.65, y:0.48, type:'nebula',  rx:25, ry:20, color:'195,140,175' },
-    { name:'Ring Nebula',    x:0.61, y:0.09, type:'nebula',  rx:14, ry:14, color:'120,200,185' },
-    { name:'Carina Neb.',    x:0.35, y:0.72, type:'nebula',  rx:40, ry:28, color:'215,130,155' },
-    { name:'Trifid Neb.',    x:0.70, y:0.52, type:'nebula',  rx:22, ry:18, color:'180,130,190' },
-    { name:'Rosette Neb.',   x:0.10, y:0.40, type:'nebula',  rx:30, ry:28, color:'210,140,150' },
-    { name:'North America',  x:0.73, y:0.12, type:'nebula',  rx:28, ry:22, color:'200,145,140' },
-    { name:'Helix Neb.',     x:0.88, y:0.50, type:'nebula',  rx:20, ry:18, color:'100,195,185' },
-    { name:'Dumbbell Neb.',  x:0.80, y:0.28, type:'nebula',  rx:16, ry:14, color:'140,190,170' },
-    { name:'Veil Neb.',      x:0.72, y:0.14, type:'nebula',  rx:32, ry:12, color:'150,170,210' },
-    { name:'Tarantula Neb.', x:0.48, y:0.85, type:'nebula',  rx:35, ry:30, color:'220,140,160' },
-    /* --- galaxies --- */
-    { name:'Andromeda',      x:0.78, y:0.12, type:'galaxy',  rx:50, ry:15, color:'165,160,210', angle:-0.5 },
-    { name:'Triangulum',     x:0.82, y:0.18, type:'galaxy',  rx:25, ry:12, color:'170,175,215', angle:0.3 },
-    { name:'Whirlpool M51',  x:0.40, y:0.08, type:'galaxy',  rx:18, ry:16, color:'180,170,210', angle:0.7 },
-    { name:'Sombrero M104',  x:0.52, y:0.45, type:'galaxy',  rx:22, ry:7,  color:'220,200,180', angle:-0.2 },
-    { name:'Centaurus A',    x:0.45, y:0.80, type:'galaxy',  rx:28, ry:20, color:'190,175,200', angle:0.4 },
-    { name:'LMC',            x:0.30, y:0.88, type:'galaxy',  rx:35, ry:25, color:'170,180,220', angle:-0.3 },
-    { name:'SMC',            x:0.25, y:0.90, type:'galaxy',  rx:18, ry:14, color:'165,175,215', angle:0.1 }
+    /* --- star clusters (deep gold/blue tones) --- */
+    { name:'Pleiades',       x:0.22, y:0.15, type:'cluster', count:14, rx:35,       color:'60,110,200' },
+    { name:'Omega Cen.',     x:0.40, y:0.78, type:'cluster', count:20, rx:28,       color:'200,170,80' },
+    { name:'M13 Hercules',   x:0.52, y:0.18, type:'cluster', count:16, rx:24,       color:'120,100,180' },
+    { name:'Hyades',         x:0.19, y:0.17, type:'cluster', count:12, rx:35,       color:'200,160,60' },
+    { name:'Praesepe M44',   x:0.38, y:0.28, type:'cluster', count:12, rx:22,       color:'180,160,100' },
+    { name:'Double Cluster', x:0.27, y:0.10, type:'cluster', count:18, rx:30,       color:'70,120,200' },
+    { name:'47 Tucanae',     x:0.70, y:0.82, type:'cluster', count:16, rx:20,       color:'200,170,90' },
+    { name:'Wild Duck M11',  x:0.74, y:0.40, type:'cluster', count:13, rx:18,       color:'160,140,80' },
+    /* --- emission / planetary nebulae (vivid saturated colors) --- */
+    { name:'Orion Nebula',   x:0.15, y:0.34, type:'nebula',  rx:45, ry:35, color:'180,50,120' },
+    { name:'Lagoon Neb.',    x:0.72, y:0.55, type:'nebula',  rx:35, ry:28, color:'170,60,110' },
+    { name:'Crab Nebula',    x:0.18, y:0.20, type:'nebula',  rx:22, ry:20, color:'60,120,200' },
+    { name:'Eagle Neb.',     x:0.65, y:0.48, type:'nebula',  rx:32, ry:25, color:'160,55,120' },
+    { name:'Ring Nebula',    x:0.61, y:0.09, type:'nebula',  rx:18, ry:18, color:'40,160,150' },
+    { name:'Carina Neb.',    x:0.35, y:0.72, type:'nebula',  rx:55, ry:38, color:'190,50,90' },
+    { name:'Trifid Neb.',    x:0.70, y:0.52, type:'nebula',  rx:28, ry:22, color:'130,50,160' },
+    { name:'Rosette Neb.',   x:0.10, y:0.40, type:'nebula',  rx:40, ry:35, color:'190,55,75' },
+    { name:'North America',  x:0.73, y:0.12, type:'nebula',  rx:35, ry:28, color:'185,65,60' },
+    { name:'Helix Neb.',     x:0.88, y:0.50, type:'nebula',  rx:25, ry:22, color:'30,160,145' },
+    { name:'Dumbbell Neb.',  x:0.80, y:0.28, type:'nebula',  rx:20, ry:18, color:'50,150,120' },
+    { name:'Veil Neb.',      x:0.72, y:0.14, type:'nebula',  rx:40, ry:15, color:'70,100,190' },
+    { name:'Tarantula Neb.', x:0.48, y:0.85, type:'nebula',  rx:45, ry:38, color:'200,55,100' },
+    /* --- galaxies (violet / indigo tones) --- */
+    { name:'Andromeda',      x:0.78, y:0.12, type:'galaxy',  rx:60, ry:18, color:'100,80,180', angle:-0.5 },
+    { name:'Triangulum',     x:0.82, y:0.18, type:'galaxy',  rx:30, ry:15, color:'90,90,180', angle:0.3 },
+    { name:'Whirlpool M51',  x:0.40, y:0.08, type:'galaxy',  rx:22, ry:20, color:'110,85,175', angle:0.7 },
+    { name:'Sombrero M104',  x:0.52, y:0.45, type:'galaxy',  rx:28, ry:8,  color:'160,130,90', angle:-0.2 },
+    { name:'Centaurus A',    x:0.45, y:0.80, type:'galaxy',  rx:35, ry:25, color:'120,90,160', angle:0.4 },
+    { name:'LMC',            x:0.30, y:0.88, type:'galaxy',  rx:45, ry:32, color:'80,100,180', angle:-0.3 },
+    { name:'SMC',            x:0.25, y:0.90, type:'galaxy',  rx:22, ry:18, color:'75,95,175', angle:0.1 }
   ];
 
   /* ===== DATA: planets ================================================= */
@@ -661,7 +661,7 @@
     for (var i = 0; i < Z.length; i++) {
       var z = Z[i], L = this.layout[i];
       if (!L) continue;
-      var vFade = Math.max(0.30, 1 - (L.cy / h) * 0.55);
+      var vFade = Math.max(0.45, 1 - (L.cy / h) * 0.35);
       var ox = L.cx - px * L.depth, oy = L.cy - py * L.depth;
 
       /* figure illustration (behind stars) */
@@ -736,7 +736,7 @@
       var d = DSO[i];
       var dx = d.x * w - px * 0.12;
       var dy = d.y * h - py * 0.12;
-      var vFade = Math.max(0.25, 1 - d.y * 0.55);
+      var vFade = Math.max(0.45, 1 - d.y * 0.35);
 
       if (d.type === 'cluster') {
         /* haze glow behind cluster */
@@ -807,7 +807,7 @@
     for (var i = 0; i < EXTRA.length; i++) {
       var ex = EXTRA[i], eL = this.extraLayout[i];
       if (!eL) continue;
-      var vFade = Math.max(0.25, 1 - (eL.cy / h) * 0.55);
+      var vFade = Math.max(0.45, 1 - (eL.cy / h) * 0.35);
       var ox = eL.cx - px * eL.depth;
       var oy = eL.cy - py * eL.depth;
       var baseOpacity = 1.0;
@@ -868,7 +868,7 @@
       if (!td) continue;
       var sx = star.x * w - px * td.depth;
       var sy = star.y * h - py * td.depth;
-      var vFade = Math.max(0.25, 1 - star.y * 0.55);
+      var vFade = Math.max(0.45, 1 - star.y * 0.35);
       var r = star.r;
 
       /* variable star pulsation (Betelgeuse) */
@@ -910,7 +910,7 @@
       var pl = PLANETS[i];
       var plx = pl.x * w - px * 0.2;
       var ply = pl.y * h - py * 0.2;
-      var vFade = Math.max(0.25, 1 - pl.y * 0.55);
+      var vFade = Math.max(0.45, 1 - pl.y * 0.35);
       var alpha = 0.70 * vFade; /* steady — no twinkle */
 
       /* glow halo */

@@ -295,7 +295,17 @@
     { name:'Fomalhaut',  x:0.85, y:0.55, color:'220,230,255', r:2.5 },
     { name:'Achernar',   x:0.90, y:0.70, color:'180,210,255', r:2.8 },
     { name:'Canopus',    x:0.30, y:0.65, color:'255,245,220', r:3.5 },
-    { name:'Acrux',      x:0.60, y:0.85, color:'180,210,255', r:2.5 }
+    { name:'Acrux',      x:0.60, y:0.85, color:'180,210,255', r:3.0 },
+    { name:'Dubhe',      x:0.32, y:0.04, color:'255,200,130', r:3.0 },
+    { name:'Merak',      x:0.34, y:0.06, color:'220,230,255', r:2.6 },
+    { name:'Algol',      x:0.30, y:0.12, color:'180,210,255', r:3.0, variable:true },
+    { name:'Mirfak',     x:0.28, y:0.10, color:'255,245,220', r:2.8 },
+    { name:'Eltanin',    x:0.56, y:0.05, color:'255,200,130', r:2.6 },
+    { name:'Alphecca',   x:0.48, y:0.10, color:'220,230,255', r:2.5 },
+    { name:'Markab',     x:0.82, y:0.15, color:'220,230,255', r:2.6 },
+    { name:'Mira',       x:0.05, y:0.55, color:'255,150,80',  r:3.5, variable:true },
+    { name:'Hadar',      x:0.55, y:0.80, color:'180,210,255', r:3.2 },
+    { name:'Bellatrix',  x:0.10, y:0.26, color:'180,210,255', r:2.8 }
   ];
 
   /* ===== DATA: non-zodiac constellations =============================== */
@@ -323,7 +333,22 @@
       b:[0,1], l:[[0,1],[2,3]] },
     { name:'Aquila',       cx:0.80, cy:0.22, scale:0.45,
       s:[[.5,.15],[.3,.45],[.7,.45],[.5,.75],[.2,.7],[.8,.7]],
-      b:[0], l:[[0,1],[0,2],[1,3],[2,3],[3,4],[3,5]] }
+      b:[0], l:[[0,1],[0,2],[1,3],[2,3],[3,4],[3,5]] },
+    { name:'Perseus',     cx:0.28, cy:0.12, scale:0.5,
+      s:[[.5,.0],[.4,.25],[.3,.5],[.2,.75],[.6,.35],[.75,.5],[.85,.65]],
+      b:[0,3], l:[[0,1],[1,2],[2,3],[1,4],[4,5],[5,6]] },
+    { name:'Draco',       cx:0.48, cy:0.04, scale:0.7,
+      s:[[.15,.3],[.25,.1],[.45,.05],[.65,.1],[.75,.3],[.65,.5],[.45,.45],[.35,.55],[.5,.7]],
+      b:[4], l:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8]] },
+    { name:'Boötes',      cx:0.42, cy:0.14, scale:0.45,
+      s:[[.5,.0],[.2,.35],[.8,.35],[.3,.7],[.7,.7],[.5,1]],
+      b:[0], l:[[0,1],[0,2],[1,3],[2,4],[3,5],[4,5]] },
+    { name:'Pegasus',     cx:0.84, cy:0.14, scale:0.5,
+      s:[[.15,.15],[.85,.15],[.85,.85],[.15,.85],[.0,.5],[.5,.0]],
+      b:[0,2], l:[[0,1],[1,2],[2,3],[3,0],[0,4],[1,5]] },
+    { name:'Corona Bor.', cx:0.50, cy:0.11, scale:0.3,
+      s:[[.0,.5],[.15,.2],[.4,.05],[.6,.05],[.85,.2],[1,.5]],
+      b:[2], l:[[0,1],[1,2],[2,3],[3,4],[4,5]] }
   ];
 
   /* ===== DATA: deep-sky objects ======================================== */
@@ -332,7 +357,12 @@
     { name:'Orion Nebula', x:0.15, y:0.34, type:'nebula',  rx:28, ry:22, color:'200,140,180' },
     { name:'Andromeda',    x:0.78, y:0.12, type:'galaxy',  rx:40, ry:12, color:'170,165,210', angle:-0.5 },
     { name:'Lagoon Neb.',  x:0.72, y:0.55, type:'nebula',  rx:20, ry:16, color:'200,150,170' },
-    { name:'Omega Cen.',   x:0.40, y:0.78, type:'cluster', count:15, rx:18, color:'255,235,190' }
+    { name:'Omega Cen.',   x:0.40, y:0.78, type:'cluster', count:15, rx:18, color:'255,235,190' },
+    { name:'M13 Hercules', x:0.52, y:0.18, type:'cluster', count:11, rx:16, color:'220,215,240' },
+    { name:'Crab Nebula',  x:0.18, y:0.20, type:'nebula',  rx:14, ry:12, color:'180,200,230' },
+    { name:'Eagle Neb.',   x:0.65, y:0.48, type:'nebula',  rx:18, ry:15, color:'190,145,175' },
+    { name:'Ring Nebula',  x:0.61, y:0.09, type:'nebula',  rx:10, ry:10, color:'140,200,190' },
+    { name:'Carina Neb.',  x:0.35, y:0.72, type:'nebula',  rx:30, ry:20, color:'210,140,160' }
   ];
 
   /* ===== DATA: planets ================================================= */
@@ -443,8 +473,8 @@
       var dy = srand();
       this.dust.push({
         x: srand() * w, y: dy * h,
-        r: 0.6 + srand() * 1.5,
-        baseAlpha: (0.10 + srand() * 0.20) * Math.max(0.2, 1 - dy * 0.6),
+        r: 0.8 + srand() * 1.8,
+        baseAlpha: (0.15 + srand() * 0.25) * Math.max(0.25, 1 - dy * 0.55),
         spd: 0.0005 + srand() * 0.002, ph: srand() * TAU,
         color: DUST_COLORS[Math.floor(srand() * DUST_COLORS.length)],
         depth: 0.1 + srand() * 0.5
@@ -617,10 +647,10 @@
       ctx.save();
       ctx.translate(ox, oy);
       ctx.rotate(L.rot);
-      var figAlpha = (L.isG ? 0.18 : 0.10) * vFade;
+      var figAlpha = (L.isG ? 0.25 : 0.14) * vFade;
       var figPulse = REDUCE ? 1 : 0.8 + 0.2 * Math.sin(ts * 0.0003 + i * 2);
       ctx.strokeStyle = 'rgba(' + L.rgb + ',' + (figAlpha * figPulse).toFixed(4) + ')';
-      ctx.lineWidth = L.isG ? 1.5 : 1.0;
+      ctx.lineWidth = L.isG ? 1.8 : 1.2;
       ctx.lineCap = 'round'; ctx.lineJoin = 'round';
       if (FIGS[i]) FIGS[i](ctx, L.figSize);
       ctx.restore();
@@ -630,8 +660,8 @@
       ctx.translate(ox, oy);
       ctx.rotate(L.rot);
       var lp = REDUCE ? 1 : 0.85 + 0.15 * Math.sin(ts * 0.0005 + i);
-      ctx.strokeStyle = 'rgba(' + L.rgb + ',' + (0.25 * L.boost * vFade * lp).toFixed(4) + ')';
-      ctx.lineWidth = L.isG ? 2.0 : 1.3;
+      ctx.strokeStyle = 'rgba(' + L.rgb + ',' + (0.35 * L.boost * vFade * lp).toFixed(4) + ')';
+      ctx.lineWidth = L.isG ? 2.4 : 1.6;
       ctx.lineCap = 'round';
       for (var li = 0; li < z.l.length; li++) {
         var a = z.s[z.l[li][0]], b = z.s[z.l[li][1]];
@@ -646,21 +676,29 @@
         var st = z.s[si], sd = L.sd[si];
         var x = (st[0] - 0.5) * L.size, y = (st[1] - 0.5) * L.size;
         var bright = z.b && z.b.indexOf(si) !== -1;
-        var r = bright ? (L.isG ? 5.0 : 3.5) : (L.isG ? 2.8 : 2.0);
+        var r = bright ? (L.isG ? 6.0 : 4.2) : (L.isG ? 3.2 : 2.4);
         var stw = REDUCE ? 1 : 0.65 + 0.35 * Math.sin(ts * sd.spd + sd.ph);
-        var sal = (bright ? 0.45 : 0.30) * L.boost * vFade * stw;
+        var sal = (bright ? 0.55 : 0.38) * L.boost * vFade * stw;
         ctx.beginPath(); ctx.arc(x, y, r, 0, TAU);
         ctx.fillStyle = 'rgba(' + L.rgb + ',' + sal.toFixed(4) + ')';
         ctx.fill();
         if (bright) {
           var glowR = L.isG ? r * 6 : r * 4;
           var g = ctx.createRadialGradient(x, y, 0, x, y, glowR);
-          g.addColorStop(0, 'rgba(' + L.rgb + ',' + (0.20 * L.boost * vFade * stw).toFixed(4) + ')');
+          g.addColorStop(0, 'rgba(' + L.rgb + ',' + (0.30 * L.boost * vFade * stw).toFixed(4) + ')');
           g.addColorStop(1, 'rgba(' + L.rgb + ',0)');
           ctx.beginPath(); ctx.arc(x, y, glowR, 0, TAU);
           ctx.fillStyle = g; ctx.fill();
         }
       }
+
+      /* zodiac name + symbol label */
+      var ZNAMES = ['Aries ♈','Taurus ♉','Gemini ♊','Cancer ♋','Leo ♌','Virgo ♍','Libra ♎','Scorpius ♏','Sagittarius ♐','Capricornus ♑','Aquarius ♒','Pisces ♓'];
+      ctx.font = (L.isG ? '11px' : '9px') + ' Georgia, serif';
+      ctx.fillStyle = 'rgba(' + L.rgb + ',' + (0.28 * L.boost * vFade).toFixed(4) + ')';
+      ctx.textAlign = 'center';
+      ctx.fillText(ZNAMES[i], 0, L.size * 0.55 + 16);
+
       ctx.restore();
     }
 
@@ -682,7 +720,7 @@
       if (d.type === 'cluster') {
         /* faint haze behind */
         var hGrad = ctx.createRadialGradient(dx, dy, 0, dx, dy, d.rx * 1.5);
-        hGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.08 * vFade).toFixed(4) + ')');
+        hGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.14 * vFade).toFixed(4) + ')');
         hGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
         ctx.beginPath(); ctx.arc(dx, dy, d.rx * 2.5, 0, TAU);
         ctx.fillStyle = hGrad; ctx.fill();
@@ -691,8 +729,8 @@
         for (var ci = 0; ci < (d.count || 7); ci++) {
           var cx = dx + (srand() - 0.5) * d.rx * 2;
           var cy = dy + (srand() - 0.5) * d.rx * 2;
-          var cr = 0.6 + srand() * 0.8;
-          var ca = (0.18 + srand() * 0.18) * vFade;
+          var cr = 0.8 + srand() * 1.0;
+          var ca = (0.25 + srand() * 0.22) * vFade;
           var ctw = REDUCE ? 1 : 0.6 + 0.4 * Math.sin(ts * (0.001 + srand() * 0.002) + srand() * TAU);
           ctx.globalAlpha = ca * ctw;
           ctx.beginPath(); ctx.arc(cx, cy, cr, 0, TAU);
@@ -704,8 +742,8 @@
         var nRx = d.rx || 15;
         var nRy = d.ry || nRx;
         var nGrad = ctx.createRadialGradient(dx, dy, 0, dx, dy, Math.max(nRx, nRy));
-        nGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.12 * vFade).toFixed(4) + ')');
-        nGrad.addColorStop(0.5, 'rgba(' + d.color + ',' + (0.05 * vFade).toFixed(4) + ')');
+        nGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.20 * vFade).toFixed(4) + ')');
+        nGrad.addColorStop(0.5, 'rgba(' + d.color + ',' + (0.08 * vFade).toFixed(4) + ')');
         nGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
         ctx.save();
         ctx.translate(dx, dy);
@@ -718,8 +756,8 @@
         var gRy = d.ry || 8;
         var gAngle = d.angle || 0;
         var gGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, gRx);
-        gGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.10 * vFade).toFixed(4) + ')');
-        gGrad.addColorStop(0.4, 'rgba(' + d.color + ',' + (0.05 * vFade).toFixed(4) + ')');
+        gGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.18 * vFade).toFixed(4) + ')');
+        gGrad.addColorStop(0.4, 'rgba(' + d.color + ',' + (0.08 * vFade).toFixed(4) + ')');
         gGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
         ctx.save();
         ctx.translate(dx, dy);
@@ -748,8 +786,8 @@
 
       /* lines */
       var lp = REDUCE ? 1 : 0.85 + 0.15 * Math.sin(ts * 0.0005 + i + 20);
-      ctx.strokeStyle = 'rgba(' + ACCENT + ',' + (0.30 * vFade * lp * baseOpacity).toFixed(4) + ')';
-      ctx.lineWidth = 1.2;
+      ctx.strokeStyle = 'rgba(' + ACCENT + ',' + (0.40 * vFade * lp * baseOpacity).toFixed(4) + ')';
+      ctx.lineWidth = 1.4;
       ctx.lineCap = 'round';
       for (var li = 0; li < ex.l.length; li++) {
         var a = ex.s[ex.l[li][0]], b = ex.s[ex.l[li][1]];
@@ -764,9 +802,9 @@
         var st = ex.s[si], sd = eL.sd[si];
         var sx = (st[0] - 0.5) * eL.size, sy = (st[1] - 0.5) * eL.size;
         var bright = ex.b && ex.b.indexOf(si) !== -1;
-        var r = bright ? 3.2 : 1.8;
+        var r = bright ? 3.8 : 2.2;
         var stw = REDUCE ? 1 : 0.6 + 0.4 * Math.sin(ts * sd.spd + sd.ph);
-        var sal = (bright ? 0.45 : 0.28) * vFade * stw * baseOpacity;
+        var sal = (bright ? 0.55 : 0.35) * vFade * stw * baseOpacity;
         ctx.beginPath(); ctx.arc(sx, sy, r, 0, TAU);
         ctx.fillStyle = 'rgba(' + ACCENT + ',' + sal.toFixed(4) + ')';
         ctx.fill();
@@ -779,6 +817,13 @@
           ctx.fillStyle = grd; ctx.fill();
         }
       }
+
+      /* constellation name label */
+      ctx.font = '9px Georgia, serif';
+      ctx.fillStyle = 'rgba(' + ACCENT + ',' + (0.22 * vFade).toFixed(4) + ')';
+      ctx.textAlign = 'center';
+      ctx.fillText(ex.name, 0, eL.size * 0.55 + 14);
+
       ctx.restore();
     }
   };
@@ -809,13 +854,13 @@
         tw = REDUCE ? 1 : 0.55 + 0.45 * Math.sin(ts * td.spd + td.ph);
       }
 
-      var alpha = 0.55 * vFade * tw;
+      var alpha = 0.72 * vFade * tw;
 
       /* glow halo */
-      var glowR = r * 5;
+      var glowR = r * 6;
       var grd = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
-      grd.addColorStop(0, 'rgba(' + star.color + ',' + (0.30 * vFade * tw).toFixed(4) + ')');
-      grd.addColorStop(0.4, 'rgba(' + star.color + ',' + (0.10 * vFade * tw).toFixed(4) + ')');
+      grd.addColorStop(0, 'rgba(' + star.color + ',' + (0.45 * vFade * tw).toFixed(4) + ')');
+      grd.addColorStop(0.4, 'rgba(' + star.color + ',' + (0.15 * vFade * tw).toFixed(4) + ')');
       grd.addColorStop(1, 'rgba(' + star.color + ',0)');
       ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, TAU);
       ctx.fillStyle = grd; ctx.fill();
@@ -834,13 +879,13 @@
       var plx = pl.x * w - px * 0.2;
       var ply = pl.y * h - py * 0.2;
       var vFade = Math.max(0.25, 1 - pl.y * 0.55);
-      var alpha = 0.55 * vFade; /* steady — no twinkle */
+      var alpha = 0.70 * vFade; /* steady — no twinkle */
 
       /* glow halo */
-      var glowR = pl.r * 5;
+      var glowR = pl.r * 6;
       var grd = ctx.createRadialGradient(plx, ply, 0, plx, ply, glowR);
-      grd.addColorStop(0, 'rgba(' + pl.color + ',' + (0.25 * vFade).toFixed(4) + ')');
-      grd.addColorStop(0.4, 'rgba(' + pl.color + ',' + (0.08 * vFade).toFixed(4) + ')');
+      grd.addColorStop(0, 'rgba(' + pl.color + ',' + (0.38 * vFade).toFixed(4) + ')');
+      grd.addColorStop(0.4, 'rgba(' + pl.color + ',' + (0.12 * vFade).toFixed(4) + ')');
       grd.addColorStop(1, 'rgba(' + pl.color + ',0)');
       ctx.beginPath(); ctx.arc(plx, ply, glowR, 0, TAU);
       ctx.fillStyle = grd; ctx.fill();

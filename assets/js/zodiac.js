@@ -328,19 +328,19 @@
 
   /* ===== DATA: deep-sky objects ======================================== */
   var DSO = [
-    { name:'Pleiades',     x:0.22, y:0.15, type:'cluster', count:7,  rx:15,       color:'160,190,240' },
-    { name:'Orion Nebula', x:0.15, y:0.34, type:'nebula',  rx:18, ry:14, color:'200,140,180' },
-    { name:'Andromeda',    x:0.78, y:0.12, type:'galaxy',  rx:25, ry:8,  color:'180,175,210', angle:-0.5 },
-    { name:'Lagoon Neb.',  x:0.72, y:0.55, type:'nebula',  rx:12, ry:10, color:'200,150,170' },
-    { name:'Omega Cen.',   x:0.40, y:0.78, type:'cluster', count:12, rx:12, color:'255,240,200' }
+    { name:'Pleiades',     x:0.22, y:0.15, type:'cluster', count:9,  rx:22,       color:'140,175,230' },
+    { name:'Orion Nebula', x:0.15, y:0.34, type:'nebula',  rx:28, ry:22, color:'200,140,180' },
+    { name:'Andromeda',    x:0.78, y:0.12, type:'galaxy',  rx:40, ry:12, color:'170,165,210', angle:-0.5 },
+    { name:'Lagoon Neb.',  x:0.72, y:0.55, type:'nebula',  rx:20, ry:16, color:'200,150,170' },
+    { name:'Omega Cen.',   x:0.40, y:0.78, type:'cluster', count:15, rx:18, color:'255,235,190' }
   ];
 
   /* ===== DATA: planets ================================================= */
   var PLANETS = [
-    { name:'Venus',   x:0.08, y:0.20, r:3.5, color:'255,250,220' },
-    { name:'Mars',    x:0.42, y:0.45, r:2.5, color:'255,160,120' },
-    { name:'Jupiter', x:0.75, y:0.35, r:3.8, color:'255,240,200' },
-    { name:'Saturn',  x:0.88, y:0.42, r:2.8, color:'255,225,160' }
+    { name:'Venus',   x:0.08, y:0.20, r:4.5, color:'255,250,220' },
+    { name:'Mars',    x:0.42, y:0.45, r:3.2, color:'255,160,120' },
+    { name:'Jupiter', x:0.75, y:0.35, r:4.8, color:'255,240,200' },
+    { name:'Saturn',  x:0.88, y:0.42, r:3.5, color:'255,225,160' }
   ];
 
   /* ===== HELPERS ======================================================= */
@@ -617,10 +617,10 @@
       ctx.save();
       ctx.translate(ox, oy);
       ctx.rotate(L.rot);
-      var figAlpha = (L.isG ? 0.12 : 0.06) * vFade;
+      var figAlpha = (L.isG ? 0.18 : 0.10) * vFade;
       var figPulse = REDUCE ? 1 : 0.8 + 0.2 * Math.sin(ts * 0.0003 + i * 2);
       ctx.strokeStyle = 'rgba(' + L.rgb + ',' + (figAlpha * figPulse).toFixed(4) + ')';
-      ctx.lineWidth = L.isG ? 1.2 : 0.8;
+      ctx.lineWidth = L.isG ? 1.5 : 1.0;
       ctx.lineCap = 'round'; ctx.lineJoin = 'round';
       if (FIGS[i]) FIGS[i](ctx, L.figSize);
       ctx.restore();
@@ -682,17 +682,17 @@
       if (d.type === 'cluster') {
         /* faint haze behind */
         var hGrad = ctx.createRadialGradient(dx, dy, 0, dx, dy, d.rx * 1.5);
-        hGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.03 * vFade).toFixed(4) + ')');
+        hGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.08 * vFade).toFixed(4) + ')');
         hGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
-        ctx.beginPath(); ctx.arc(dx, dy, d.rx * 1.5, 0, TAU);
+        ctx.beginPath(); ctx.arc(dx, dy, d.rx * 2.5, 0, TAU);
         ctx.fillStyle = hGrad; ctx.fill();
         /* tiny dots */
         _seed = 5000 + i * 100;
         for (var ci = 0; ci < (d.count || 7); ci++) {
           var cx = dx + (srand() - 0.5) * d.rx * 2;
           var cy = dy + (srand() - 0.5) * d.rx * 2;
-          var cr = 0.5 + srand() * 0.5;
-          var ca = (0.10 + srand() * 0.12) * vFade;
+          var cr = 0.6 + srand() * 0.8;
+          var ca = (0.18 + srand() * 0.18) * vFade;
           var ctw = REDUCE ? 1 : 0.6 + 0.4 * Math.sin(ts * (0.001 + srand() * 0.002) + srand() * TAU);
           ctx.globalAlpha = ca * ctw;
           ctx.beginPath(); ctx.arc(cx, cy, cr, 0, TAU);
@@ -704,8 +704,8 @@
         var nRx = d.rx || 15;
         var nRy = d.ry || nRx;
         var nGrad = ctx.createRadialGradient(dx, dy, 0, dx, dy, Math.max(nRx, nRy));
-        nGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.06 * vFade).toFixed(4) + ')');
-        nGrad.addColorStop(0.5, 'rgba(' + d.color + ',' + (0.03 * vFade).toFixed(4) + ')');
+        nGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.12 * vFade).toFixed(4) + ')');
+        nGrad.addColorStop(0.5, 'rgba(' + d.color + ',' + (0.05 * vFade).toFixed(4) + ')');
         nGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
         ctx.save();
         ctx.translate(dx, dy);
@@ -718,8 +718,8 @@
         var gRy = d.ry || 8;
         var gAngle = d.angle || 0;
         var gGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, gRx);
-        gGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.05 * vFade).toFixed(4) + ')');
-        gGrad.addColorStop(0.4, 'rgba(' + d.color + ',' + (0.03 * vFade).toFixed(4) + ')');
+        gGrad.addColorStop(0, 'rgba(' + d.color + ',' + (0.10 * vFade).toFixed(4) + ')');
+        gGrad.addColorStop(0.4, 'rgba(' + d.color + ',' + (0.05 * vFade).toFixed(4) + ')');
         gGrad.addColorStop(1, 'rgba(' + d.color + ',0)');
         ctx.save();
         ctx.translate(dx, dy);
@@ -740,7 +740,7 @@
       var vFade = Math.max(0.25, 1 - (eL.cy / h) * 0.55);
       var ox = eL.cx - px * eL.depth;
       var oy = eL.cy - py * eL.depth;
-      var baseOpacity = 0.60; /* 60% opacity for non-zodiac */
+      var baseOpacity = 1.0;
 
       ctx.save();
       ctx.translate(ox, oy);
@@ -748,8 +748,8 @@
 
       /* lines */
       var lp = REDUCE ? 1 : 0.85 + 0.15 * Math.sin(ts * 0.0005 + i + 20);
-      ctx.strokeStyle = 'rgba(' + ACCENT + ',' + (0.18 * vFade * lp * baseOpacity).toFixed(4) + ')';
-      ctx.lineWidth = 1.0;
+      ctx.strokeStyle = 'rgba(' + ACCENT + ',' + (0.30 * vFade * lp * baseOpacity).toFixed(4) + ')';
+      ctx.lineWidth = 1.2;
       ctx.lineCap = 'round';
       for (var li = 0; li < ex.l.length; li++) {
         var a = ex.s[ex.l[li][0]], b = ex.s[ex.l[li][1]];
@@ -764,9 +764,9 @@
         var st = ex.s[si], sd = eL.sd[si];
         var sx = (st[0] - 0.5) * eL.size, sy = (st[1] - 0.5) * eL.size;
         var bright = ex.b && ex.b.indexOf(si) !== -1;
-        var r = bright ? 2.8 : 1.6;
+        var r = bright ? 3.2 : 1.8;
         var stw = REDUCE ? 1 : 0.6 + 0.4 * Math.sin(ts * sd.spd + sd.ph);
-        var sal = (bright ? 0.35 : 0.22) * vFade * stw * baseOpacity;
+        var sal = (bright ? 0.45 : 0.28) * vFade * stw * baseOpacity;
         ctx.beginPath(); ctx.arc(sx, sy, r, 0, TAU);
         ctx.fillStyle = 'rgba(' + ACCENT + ',' + sal.toFixed(4) + ')';
         ctx.fill();
@@ -809,12 +809,13 @@
         tw = REDUCE ? 1 : 0.55 + 0.45 * Math.sin(ts * td.spd + td.ph);
       }
 
-      var alpha = 0.35 * vFade * tw;
+      var alpha = 0.55 * vFade * tw;
 
       /* glow halo */
-      var glowR = r * 4;
+      var glowR = r * 5;
       var grd = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
-      grd.addColorStop(0, 'rgba(' + star.color + ',' + (0.15 * vFade * tw).toFixed(4) + ')');
+      grd.addColorStop(0, 'rgba(' + star.color + ',' + (0.30 * vFade * tw).toFixed(4) + ')');
+      grd.addColorStop(0.4, 'rgba(' + star.color + ',' + (0.10 * vFade * tw).toFixed(4) + ')');
       grd.addColorStop(1, 'rgba(' + star.color + ',0)');
       ctx.beginPath(); ctx.arc(sx, sy, glowR, 0, TAU);
       ctx.fillStyle = grd; ctx.fill();
@@ -833,12 +834,13 @@
       var plx = pl.x * w - px * 0.2;
       var ply = pl.y * h - py * 0.2;
       var vFade = Math.max(0.25, 1 - pl.y * 0.55);
-      var alpha = 0.35 * vFade; /* steady — no twinkle */
+      var alpha = 0.55 * vFade; /* steady — no twinkle */
 
       /* glow halo */
-      var glowR = pl.r * 3.5;
+      var glowR = pl.r * 5;
       var grd = ctx.createRadialGradient(plx, ply, 0, plx, ply, glowR);
-      grd.addColorStop(0, 'rgba(' + pl.color + ',' + (0.12 * vFade).toFixed(4) + ')');
+      grd.addColorStop(0, 'rgba(' + pl.color + ',' + (0.25 * vFade).toFixed(4) + ')');
+      grd.addColorStop(0.4, 'rgba(' + pl.color + ',' + (0.08 * vFade).toFixed(4) + ')');
       grd.addColorStop(1, 'rgba(' + pl.color + ',0)');
       ctx.beginPath(); ctx.arc(plx, ply, glowR, 0, TAU);
       ctx.fillStyle = grd; ctx.fill();
@@ -850,8 +852,8 @@
 
       /* Saturn's ring */
       if (pl.name === 'Saturn') {
-        ctx.strokeStyle = 'rgba(' + pl.color + ',' + (0.20 * vFade).toFixed(4) + ')';
-        ctx.lineWidth = 0.6;
+        ctx.strokeStyle = 'rgba(' + pl.color + ',' + (0.35 * vFade).toFixed(4) + ')';
+        ctx.lineWidth = 0.8;
         ctx.beginPath();
         ctx.ellipse(plx, ply, pl.r * 2.2, pl.r * 0.7, -0.3, 0.1, Math.PI - 0.1);
         ctx.stroke();

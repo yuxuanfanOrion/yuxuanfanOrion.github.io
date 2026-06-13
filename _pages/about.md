@@ -10,7 +10,7 @@ layout: default
     <nav class="site-nav">
       <div class="trigger">
         <a class="page-link" href="#bio"><b>Biography</b></a>
-        <!-- <a class="page-link" href="#experiences"><b>Experiences</b></a> -->
+        <a class="page-link" href="#experiences"><b>Experiences</b></a>
         <a class="page-link" href="#education"><b>Education</b></a>
         <!-- <a class="page-link" href="#publications"><b>Publications</b></a> -->
         <a class="page-link" href="#services"><b>Services</b></a>
@@ -111,7 +111,6 @@ layout: default
   </div>
 </div>
 
-<!-- Experiences section (commented out)
 <div id="experiences" class="bio">
   <h2 class="md-heading text-left">
     <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -121,7 +120,20 @@ layout: default
     <div class="timeline">
       <article class="timeline-entry">
         <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Oct. 2025 - Present</span>
+          <span class="timeline-entry__time">Apr. 2026 - Jun. 2026</span>
+          <div class="timeline-entry__logos">
+            <img src="/images/icon/alibaba.png" alt="Alibaba" class="timeline-entry__logo">
+          </div>
+        </div>
+        <div class="timeline-entry__content">
+          <h3>Tongyi Wanxiang, Alibaba Group</h3>
+          <p class="timeline-entry__role">Research Intern</p>
+          <p>Participated in the pre-training of image generation models.</p>
+        </div>
+      </article>
+      <article class="timeline-entry">
+        <div class="timeline-entry__meta">
+          <span class="timeline-entry__time">Oct. 2025 - Mar. 2026</span>
           <div class="timeline-entry__logos">
             <img src="/images/icon/inclusion_ai.png" alt="Inclusion AI" class="timeline-entry__logo timeline-entry__logo--small">
             <img src="/images/icon/ant.png" alt="Ant Group" class="timeline-entry__logo">
@@ -149,7 +161,6 @@ layout: default
     </div>
   </div>
 </div>
--->
 
 <div id="education" class="bio">
   <h2 class="md-heading text-left">

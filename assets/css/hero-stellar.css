@@ -28,48 +28,6 @@
   pointer-events: none;
 }
 
-/* ===== Breathing nebula blobs — GPU-composited transform drift only ===== */
-.hero-nebula {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  overflow: hidden;
-  mix-blend-mode: screen;
-}
-.hero-nebula::before,
-.hero-nebula::after {
-  content: "";
-  position: absolute;
-  width: 58vw;
-  height: 58vw;
-  max-width: 900px;
-  max-height: 900px;
-  border-radius: 50%;
-  filter: blur(90px);       /* set once, never animated */
-  will-change: transform;
-}
-.hero-nebula::before {
-  left: -14%;
-  top: -28%;
-  background: radial-gradient(circle, rgba(98, 52, 200, 0.38), transparent 65%);
-  animation: nebulaDrift1 38s ease-in-out infinite alternate;
-}
-.hero-nebula::after {
-  right: -16%;
-  top: -12%;
-  background: radial-gradient(circle, rgba(32, 92, 205, 0.35), transparent 65%);
-  animation: nebulaDrift2 46s ease-in-out infinite alternate;
-}
-@keyframes nebulaDrift1 {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(9vw, 6vh) scale(1.15); }
-}
-@keyframes nebulaDrift2 {
-  from { transform: translate(0, 0) scale(1.1); }
-  to   { transform: translate(-8vw, 8vh) scale(0.95); }
-}
-
 /* ===== Seamless fade from starry hero into the light content below ===== */
 .hero-fade {
   position: absolute;
@@ -126,11 +84,11 @@ html:not([data-theme="dark"]) .bg-layer {
 
 /* ===== Avatar glow ring ===== */
 .circle-img {
-  border-color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.85);
   box-shadow:
-    0 0 0 1px rgba(130, 160, 220, 0.5),
-    0 0 26px rgba(120, 160, 255, 0.35),
-    0 14px 34px rgba(4, 10, 28, 0.5);
+    0 0 0 1px rgba(130, 160, 220, 0.35),
+    0 0 16px rgba(120, 160, 255, 0.2),
+    0 10px 24px rgba(4, 10, 28, 0.4);
 }
 
 /* ===== Constellation layer ===== */
@@ -271,7 +229,5 @@ html:not([data-theme="dark"]) .bg-layer {
   .constellation__star,
   .constellation__star::before,
   .constellation__star--highlight::before,
-  .constellation__line,
-  .hero-nebula::before,
-  .hero-nebula::after { animation: none !important; }
+  .constellation__line { animation: none !important; }
 }

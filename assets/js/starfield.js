@@ -262,12 +262,12 @@
     if (hero) {
       new Starfield(hero, {
         pole: [0.74, 0.12],
-        densityArea: 7800,
-        maxStars: 340,
-        rotSpeed: 0.0000026,
-        parallax: 22,
-        milkyWay: true,
-        shootingStars: true
+        densityArea: 14000,
+        maxStars: 160,
+        rotSpeed: 0.0000018,
+        parallax: 14,
+        milkyWay: false,
+        shootingStars: false
       });
     }
 
@@ -278,12 +278,12 @@
       };
       new Starfield(page, {
         pole: [0.78, 0.16],
-        densityArea: 6500,
-        maxStars: 420,
-        rotSpeed: 0.0000016,
-        parallax: 12,
-        milkyWay: false,                 /* CSS band already paints one */
-        shootingStars: false,            /* CSS meteors already fly */
+        densityArea: 12000,
+        maxStars: 200,
+        rotSpeed: 0.0000012,
+        parallax: 8,
+        milkyWay: false,
+        shootingStars: false,
         isActive: isDark
       });
     }

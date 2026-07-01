@@ -26,7 +26,6 @@ layout: default
     <div id="bg-layer-2" class="bg-layer"></div>
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-nebula" aria-hidden="true"></div>
   <canvas id="hero-starfield" class="hero-starfield" aria-hidden="true"></canvas>
   <div id="constellation" class="constellation"></div>
   <div id="profile-namecard" class="profile-wrapper">

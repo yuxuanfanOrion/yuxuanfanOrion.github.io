@@ -19,16 +19,6 @@
   text-align: center;
   position: relative;
 }
-html:not([data-theme="dark"]) .epigraph::before {
-  content: "";
-  position: absolute;
-  top: -30px; left: 50%; width: 320px; height: 160px;
-  transform: translateX(-50%);
-  background: radial-gradient(ellipse at center,
-    rgba(130, 160, 220, 0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: -1;
-}
 .epigraph__quote {
   margin: 0;
   padding: 0;
@@ -46,7 +36,6 @@ html:not([data-theme="dark"]) .epigraph::before {
 }
 .epigraph__stelle {
   color: #b8860b;
-  text-shadow: 0 0 14px rgba(255, 194, 77, 0.45), 0 0 30px rgba(255, 194, 77, 0.15);
 }
 .epigraph::after {
   content: "\2726";
@@ -54,17 +43,11 @@ html:not([data-theme="dark"]) .epigraph::before {
   margin-top: 20px;
   font-size: 0.78rem;
   color: var(--rf-accent-soft);
-  text-shadow: 0 0 12px rgba(138, 166, 232, 0.9), 0 0 24px rgba(90, 115, 200, 0.4);
-  animation: epigraphStarPulse 4s ease-in-out infinite;
-}
-@keyframes epigraphStarPulse {
-  0%, 100% { opacity: 0.7; text-shadow: 0 0 12px rgba(138,166,232,0.9), 0 0 24px rgba(90,115,200,0.4); }
-  50%      { opacity: 1;   text-shadow: 0 0 16px rgba(138,166,232,1),   0 0 32px rgba(90,115,200,0.6); }
+  opacity: 0.7;
 }
 html[data-theme="dark"] .epigraph__verse { color: #cdd9f7; }
 html[data-theme="dark"] .epigraph__stelle {
   color: #ffd479;
-  text-shadow: 0 0 14px rgba(255, 212, 121, 0.5);
 }
 html[data-theme="dark"] .epigraph::after { color: #8ab4ff; }
 @media screen and (max-width: 600px) {
@@ -88,14 +71,12 @@ html[data-theme="dark"] .epigraph::after { color: #8ab4ff; }
 }
 .md-heading i {
   color: var(--rf-accent);
-  text-shadow: 0 0 14px rgba(90, 115, 200, 0.30);
 }
 html[data-theme="dark"] .md-heading::after {
   background: linear-gradient(90deg, #8ab4ff, #6f8dd6 60%, transparent);
 }
 html[data-theme="dark"] .md-heading i {
   color: #9bb5e8;
-  text-shadow: 0 0 16px rgba(138, 180, 255, 0.35);
 }
 
 /* ===== Body links nudged toward the cosmic indigo (light mode only;
@@ -104,25 +85,9 @@ html[data-theme="dark"] .md-heading i {
 .page-content a:visited { color: #3a57b0; }
 .page-content a:hover { color: #1f3168; }
 
-/* ===== Text contrast boost: subtle frosted backdrop behind content blocks
-   so text remains crisp against the busy starfield background ===== */
-html:not([data-theme="dark"]) .bio-body,
-html:not([data-theme="dark"]) .hobbies-content,
-html:not([data-theme="dark"]) .timeline,
-html:not([data-theme="dark"]) .info-card-grid {
-  position: relative;
-  z-index: 1;
-}
-html:not([data-theme="dark"]) .bio-body p,
-html:not([data-theme="dark"]) .hobbies-content p,
-html:not([data-theme="dark"]) .timeline-entry__content {
-  text-shadow: 0 0 8px rgba(255,255,255,0.9), 0 0 16px rgba(255,255,255,0.6);
-}
 
-/* ===== Section headings: cosmic gold/indigo gradient text ===== */
 html:not([data-theme="dark"]) .md-heading {
   color: #2a3660;
-  text-shadow: 0 0 12px rgba(90,115,200,0.15);
 }
 
 /* ===== Scroll reveal (class added by reveal.js → progressive enhancement) ===== */
@@ -139,8 +104,8 @@ html:not([data-theme="dark"]) .md-heading {
 
 /* ===== Timeline polish ===== */
 .timeline-entry::before {
-  background: radial-gradient(circle at 35% 35%, #c0cef0, var(--rf-accent));
-  box-shadow: 0 0 0 4px rgba(90, 115, 200, 0.16), 0 0 10px rgba(90, 115, 200, 0.40);
+  background: var(--rf-accent);
+  box-shadow: 0 0 0 3px rgba(90, 115, 200, 0.12);
 }
 .timeline-entry__logo {
   transition: transform 0.3s ease, filter 0.3s ease;
@@ -150,15 +115,13 @@ html:not([data-theme="dark"]) .md-heading {
   filter: saturate(1);
 }
 
-/* incoming PhD entry — calm static golden node, echoing the Highlight star
-   (a steady glow reads as "destination", a perpetual pulse read as a nervous tic) */
 #education .timeline-entry:first-child::before {
-  background: radial-gradient(circle at 35% 35%, #fff2cf, var(--rf-gold));
-  box-shadow: 0 0 0 4px rgba(255, 194, 77, 0.20), 0 0 16px rgba(255, 194, 77, 0.55);
+  background: var(--rf-gold);
+  box-shadow: 0 0 0 3px rgba(255, 194, 77, 0.15);
 }
 html[data-theme="dark"] .timeline-entry::before {
-  background: radial-gradient(circle at 35% 35%, #cfe1ff, #6f8dd6);
-  box-shadow: 0 0 0 4px rgba(138, 180, 255, 0.16), 0 0 10px rgba(138, 180, 255, 0.40);
+  background: #6f8dd6;
+  box-shadow: 0 0 0 3px rgba(138, 180, 255, 0.12);
 }
 
 /* ===== Info cards: hover lift + reveal-on-hover accent top line ===== */
@@ -357,46 +320,7 @@ html[data-theme="dark"] .site-nav .page-link::after { background: #8ab4ff; }
   .site-nav .page-link { display: inline-block; padding: 5px 8px; }
 }
 
-/* ===== Cosmic touch: a whisper-faint star substrate behind light-mode content,
-   so the deep-space hero doesn't end at a hard seam. Static, ~paper texture,
-   strongest near the top and thinning downward. Never in dark mode. ===== */
 .page-content { position: relative; }
-html:not([data-theme="dark"]) .page-content::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    radial-gradient(circle, rgba(90, 115, 200, 0.16) 0.7px, transparent 0.8px),
-    radial-gradient(circle, rgba(130, 160, 220, 0.09) 0.4px, transparent 0.5px);
-  background-size: 36px 36px, 22px 22px;
-  background-position: 0 0, 11px 11px;
-  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.15) 65%, transparent 90%);
-  mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.15) 65%, transparent 90%);
-}
-
-/* ===== Nebula wash: drifting color blobs behind light-mode content ===== */
-html:not([data-theme="dark"]) .page-content::after {
-  content: "";
-  position: absolute;
-  inset: -10% -10%;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 50% 35% at 15% 18%, rgba(98, 52, 200, 0.04), transparent 70%),
-    radial-gradient(ellipse 45% 40% at 82% 22%, rgba(32, 92, 205, 0.045), transparent 70%),
-    radial-gradient(ellipse 55% 30% at 45% 48%, rgba(90, 115, 200, 0.03), transparent 70%),
-    radial-gradient(ellipse 40% 35% at 18% 72%, rgba(160, 90, 200, 0.03), transparent 70%),
-    radial-gradient(ellipse 50% 30% at 78% 78%, rgba(70, 110, 200, 0.035), transparent 70%),
-    radial-gradient(ellipse 60% 25% at 55% 12%, rgba(80, 130, 220, 0.03), transparent 70%);
-  animation: nebulaWashDrift 55s ease-in-out infinite alternate;
-}
-@keyframes nebulaWashDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(3%, 2%) scale(1.04); }
-  100% { transform: translate(-2%, -1%) scale(0.97); }
-}
 
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
@@ -405,6 +329,4 @@ html:not([data-theme="dark"]) .page-content::after {
   .info-card,
   .info-card::before,
   .site-nav .page-link::after { transition: none; }
-  .page-content::after,
-  .epigraph::after { animation: none !important; }
 }

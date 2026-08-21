@@ -3,7 +3,7 @@ permalink: /
 title: "Home"
 layout: home
 author_profile: false
-description: "Yuxuan FAN (樊宇轩), M.Phil. student at HKUST(GZ), incoming Ph.D. student at NTU CCDS."
+description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
 ---
 
 <h1 class="sr-only">Yuxuan FAN</h1>
@@ -12,15 +12,15 @@ description: "Yuxuan FAN (樊宇轩), M.Phil. student at HKUST(GZ), incoming Ph.
   <h2 class="section-title">About</h2>
   <div class="about-text">
     <p>
-      I am a second-year M.Phil. student at the <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/" target="_blank" rel="noopener">AI Thrust, Information Hub</a>,
-      <a href="https://hkust-gz.edu.cn/" target="_blank" rel="noopener">The Hong Kong University of Science and Technology (Guangzhou)</a>,
-      where I am honored to be supervised by <a href="https://raymondhliu.github.io/" target="_blank" rel="noopener">Prof. Hao LIU</a>.
-      I received my bachelor's degree from the <a href="https://www.ustb.edu.cn/" target="_blank" rel="noopener">School of Advanced Engineering, USTB</a> in 2024,
-      and also studied Economics at the <a href="https://nsd.pku.edu.cn/" target="_blank" rel="noopener">National School of Development, Peking University</a>.
+      I am a Ph.D. student at the <a href="https://www.ntu.edu.sg/computing" target="_blank" rel="noopener">College of Computing and Data Science</a>,
+      <a href="https://www.ntu.edu.sg/" target="_blank" rel="noopener">Nanyang Technological University</a>, Singapore,
+      where I am honored to be supervised by <a href="https://jaehong31.github.io/" target="_blank" rel="noopener">Prof. JaeHong Yoon</a>.
     </p>
     <p>
-      I am an incoming Ph.D. student at NTU CCDS, where I will be supervised by
-      <a href="https://jaehong31.github.io/" target="_blank" rel="noopener">Prof. JaeHong Yoon</a>.
+      I received my M.Phil. in Artificial Intelligence from the <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/" target="_blank" rel="noopener">AI Thrust, Information Hub</a>,
+      <a href="https://hkust-gz.edu.cn/" target="_blank" rel="noopener">HKUST (Guangzhou)</a> in 2026, supervised by <a href="https://raymondhliu.github.io/" target="_blank" rel="noopener">Prof. Hao LIU</a>,
+      and my bachelor's degree from the <a href="https://www.ustb.edu.cn/" target="_blank" rel="noopener">School of Advanced Engineering, USTB</a> in 2024.
+      I also studied Economics at the <a href="https://nsd.pku.edu.cn/" target="_blank" rel="noopener">National School of Development, Peking University</a>.
     </p>
     <p>
       I am passionate about contributing to large-scale, impactful open-source projects.
@@ -107,7 +107,7 @@ description: "Yuxuan FAN (樊宇轩), M.Phil. student at HKUST(GZ), incoming Ph.
 
   <div class="timeline-item">
     <div class="timeline-when">
-      Aug. 2026 – 2030 (exp.)
+      Aug. 2026 – 2030 (expected)
       <img class="timeline-logo" src="/images/icon/ntu.png" alt="NTU">
     </div>
     <div class="timeline-body">
@@ -119,7 +119,7 @@ description: "Yuxuan FAN (樊宇轩), M.Phil. student at HKUST(GZ), incoming Ph.
 
   <div class="timeline-item">
     <div class="timeline-when">
-      Sep. 2024 – 2026
+      Sep. 2024 – Jun. 2026
       <img class="timeline-logo" src="/images/icon/hkust.png" alt="HKUST(GZ)">
     </div>
     <div class="timeline-body">

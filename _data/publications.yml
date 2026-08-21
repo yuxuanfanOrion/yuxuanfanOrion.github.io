@@ -10,6 +10,22 @@
   paper_url: "https://arxiv.org/abs/2510.07896"
   code_url: "https://github.com/yjywdzh/ACE"
 
+- title: "NestedKV: Nested Memory Routing for Long-Context KV Cache Compression"
+  authors: 'Hong Chen, Xiang Liu, Yubo Gao, <b>Yuxuan Fan</b>, Bo Wang, Yuanlin Chu, Yuanguo Lin, Xuming Hu'
+  venue: "EMNLP 2026"
+
+- title: "Decomposing Visual Histories with Vision-Language Agents: Hierarchical Temporal Guidance for Compositional Image Generation"
+  authors: 'Lujundong Li, Mingxu Zhang, Songning Lai, Jiayu Yang, <b>Yuxuan Fan</b>, Ziwei Xie, Feng Liu, Changwang Zhang, Jun Wang, Dazhong Shen, Ying Sun'
+  venue: "EMNLP 2026"
+
+- title: "PhoenixNest-Video: Evidence-Grounded Multimodal Agent Framework for Automated Video Interview Assessment"
+  authors: '<b>Yuxuan Fan</b>, Miaojun Huang, Haimei Zhang, Jingshen Wu, Hao Liu'
+  venue: "EMNLP 2026"
+
+- title: "Demystifying Hidden-State Recurrence: Switchable Latent Reasoning with On-Policy Reinforcement Learning"
+  authors: 'Jiayu Yang, Chao Chen, Shengen Wu, Yinhong Liu, <b>Yuxuan Fan</b>, Lujundong Li, Songning Lai, Chengwei Qin, Zhijiang Guo'
+  venue: "EMNLP 2026 Findings"
+
 - title: "HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning"
   authors: 'Tianyi Bai*, <b>Yuxuan Fan*</b>, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan'
   venue: "NeurIPS 2025"

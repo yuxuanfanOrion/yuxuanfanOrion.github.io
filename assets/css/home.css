@@ -391,8 +391,10 @@ section:first-of-type {
 }
 
 .timeline-logo {
-  height: 22px;
-  width: auto;
+  height: 26px;
+  max-width: 96px;
+  object-fit: contain;
+  object-position: left center;
   margin-top: 10px;
   display: block;
   opacity: 0.85;

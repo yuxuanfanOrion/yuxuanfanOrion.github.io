@@ -68,12 +68,12 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
   <div class="timeline-item">
     <div class="timeline-when">
       Apr. 2026 – Jun. 2026
-      <img class="timeline-logo" src="/images/icon/alibaba.png" alt="Alibaba">
+      <img class="timeline-logo" src="/images/icon/wan.png" alt="Tongyi Wanxiang">
     </div>
     <div class="timeline-body">
       <h3>Tongyi Wanxiang, Alibaba Group</h3>
       <div class="timeline-where">Research Intern</div>
-      <p>Participated in the pre-training of image generation models.</p>
+      <p>Participated in the pre-training of image generation models for <a href="https://cn.aliyun.com/benefit/scene/wan?from_alibabacloud=" target="_blank" rel="noopener">Wan 3.0</a>.</p>
     </div>
   </div>
 

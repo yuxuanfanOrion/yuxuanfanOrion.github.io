@@ -161,6 +161,7 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
       <h3>Conference Reviewer</h3>
       <ul class="services-list">
         <li>CVPR</li>
+        <li>AAAI</li>
         <li>KDD</li>
         <li>IV</li>
         <li>ITSC</li>

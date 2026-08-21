@@ -53,7 +53,7 @@ The homepage (`_pages/about.md`) uses a custom single-page layout with sections:
 ## Workflow Rules
 
 - After completing all file changes, always `git add` the changed files, commit with a descriptive message, and let the post-commit hook handle the push automatically.
-- Use VPN proxy for git operations: `export https_proxy=http://127.0.0.1:7897 http_proxy=http://127.0.0.1:7897 all_proxy=socks5://127.0.0.1:7897`
+- Git operations connect directly (currently in Singapore). Do not set an http/https proxy.
 
 ## Adding Content
 

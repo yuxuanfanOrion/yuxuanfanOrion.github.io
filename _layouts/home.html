@@ -1,0 +1,112 @@
+---
+layout: compress
+---
+<!doctype html>
+<html lang="{{ site.locale | slice: 0,2 }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.name }} — {{ site.description }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="icon" href="/images/favicon-192x192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-180x180.png">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/home.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <img class="avatar" src="/images/yuxuan-chill.png" srcset="/images/yuxuan-chill.png 1x, /images/yuxuan-chill@2x.png 2x" alt="Yuxuan FAN">
+      <h1>Yuxuan FAN<span class="name-cn">樊宇轩</span></h1>
+      <div class="sidebar-meta">
+        M.Phil. Student in AI<br>
+        <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/" target="_blank" rel="noopener">HKUST (Guangzhou)</a><br>
+        <span class="sidebar-email">yfan546@connect.hkust-gz.edu.cn</span>
+      </div>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>Incoming Ph.D. student at NTU CCDS</span>
+      </div>
+    </div>
+
+    <nav class="vertical-nav">
+      <a href="#about">About</a>
+      <a href="#publications">Publications</a>
+      <a href="#news">News</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#education">Education</a>
+      <a href="#services">Services</a>
+      <a href="#hobbies">Hobbies</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="https://scholar.google.com/citations?user=h8x-wqkAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Scholar</a>
+      <a href="https://github.com/yuxuanfanOrion" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:yfan546@connect.hkust-gz.edu.cn">Email</a>
+      <a href="/images/wechat-qr.jpg" target="_blank" rel="noopener">WeChat</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    {{ content }}
+  </main>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <blockquote class="epigraph" lang="it">
+      <p>
+        Io ritornai da la santissima onda<br>
+        rifatto sì come piante novelle<br>
+        rinovellate di novella fronda,<br>
+        puro e disposto a salire <span class="stelle">a le stelle</span>.
+      </p>
+      <cite>Dante, Purgatorio XXXIII</cite>
+    </blockquote>
+    <div class="footer-text">
+      &copy; {{ site.time | date: "%Y" }} Yuxuan FAN
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.vertical-nav a');
+    if (!sections.length) return;
+
+    function updateActiveNav() {
+      var scrollPosition = window.scrollY + 150;
+      var activeId = '';
+
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+        activeId = sections[sections.length - 1].id;
+      } else {
+        sections.forEach(function (section) {
+          if (scrollPosition >= section.offsetTop) activeId = section.id;
+        });
+      }
+
+      if (!activeId) return;
+      navLinks.forEach(function (link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    window.addEventListener('resize', updateActiveNav);
+    updateActiveNav();
+  })();
+</script>
+
+</body>
+</html>

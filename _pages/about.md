@@ -1,301 +1,190 @@
 ---
 permalink: /
 title: "Home"
+layout: home
 author_profile: false
-layout: default
+description: "Yuxuan FAN (樊宇轩), M.Phil. student at HKUST(GZ), incoming Ph.D. student at NTU CCDS."
 ---
 
-<header class="site-header">
-  <div class="wrapper">
-    <nav class="site-nav">
-      <div class="trigger">
-        <a class="page-link" href="#bio"><b>Biography</b></a>
-        <a class="page-link" href="#experiences"><b>Experiences</b></a>
-        <a class="page-link" href="#education"><b>Education</b></a>
-        <!-- <a class="page-link" href="#publications"><b>Publications</b></a> -->
-        <a class="page-link" href="#services"><b>Services</b></a>
-        <a class="page-link" href="#hobbies"><b>Hobbies</b></a>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<div class="profile-section">
-  <div id="profile-cover" class="cover">
-    <div id="bg-layer-1" class="bg-layer"></div>
-    <div id="bg-layer-2" class="bg-layer"></div>
-  </div>
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <canvas id="hero-starfield" class="hero-starfield" aria-hidden="true"></canvas>
-  <div id="constellation" class="constellation"></div>
-  <div id="profile-namecard" class="profile-wrapper">
-    <div id="my-pic" class="profile-col profile-col-1">
-      <img id="profile-avatar" src="/images/yuxuan-chill.png" srcset="/images/yuxuan-chill.png 1x, /images/yuxuan-chill@2x.png 2x" alt="Yuxuan FAN" class="circle-img"/>
-    </div>
-    <div id="my-contact" class="profile-col profile-col-2">
-      <div id="my-name">
-        Yuxuan FAN (樊宇轩)
-      </div>
-      <div id="my-title">
-        M.Phil Student @ HKUST(GZ)
-      </div>
-      <div id="my-tagline">
-        <em>Chasing the starry sky</em>
-      </div>
-      <div class="social-media">
-        <!--
-        <a href="https://scholar.google.com/citations?user=YOUR_ID" class="icon-button github">
-          <i class="ai ai-google-scholar-square icon-github"></i>
-          <span></span>
-        </a>
-        -->
-        <a href="https://github.com/yuxuanfanOrion" class="icon-button github" aria-label="GitHub profile" title="GitHub">
-          <i class="fa fa-github icon-github" aria-hidden="true"></i>
-          <span></span>
-        </a>
-        <a href="mailto:yfan546@connect.hkust-gz.edu.cn" class="icon-button github" aria-label="Email Yuxuan Fan" title="Email">
-          <i class="fa fa-envelope icon-github" aria-hidden="true"></i>
-          <span></span>
-        </a>
-        <a href="/images/wechat-qr.jpg" class="icon-button wechat" aria-label="Open WeChat QR code" title="WeChat QR code">
-          <i class="fa fa-weixin icon-github" aria-hidden="true"></i>
-          <span></span>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="hero-fade" aria-hidden="true"></div>
-</div>
-
-<script id="constellation-data" type="application/json">
-[
-{% for pub in site.data.publications %}{"title": {{ pub.title | jsonify }}, "venue": {{ pub.venue | jsonify }}, "url": {{ pub.paper_url | jsonify }}, "highlight": {% if pub.venue contains "Highlight" %}true{% else %}false{% endif %}}{% unless forloop.last %},
-{% endunless %}{% endfor %}
-]
-</script>
-
-<div class="page-content" id="content" role="main">
-<div class="wrapper">
 <h1 class="sr-only">Yuxuan FAN</h1>
 
-<div id="epigraph" class="epigraph">
-  <blockquote class="epigraph__quote">
-    <p class="epigraph__verse" lang="it">
-      Io ritornai da la santissima onda<br>
-      rifatto sì come piante novelle<br>
-      rinovellate di novella fronda,<br>
-      puro e disposto a salire <span class="epigraph__stelle">a le stelle</span>.
-    </p>
-  </blockquote>
-</div>
-
-<div id="bio" class="bio">
-  <h2 class="md-heading text-left">
-    <i class="fa fa-id-card" aria-hidden="true"></i>
-    About
-  </h2>
-  <div class="bio-body">
+<section id="about">
+  <h2 class="section-title">About</h2>
+  <div class="about-text">
     <p>
-      I'm currently a second year M.Phil student at <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/">AI Thrust, Information Hub</a>, <a href="https://hkust-gz.edu.cn/">The Hong Kong University of Science and Technology (Guangzhou)</a>, where I am honored to be supervised by <a href="https://raymondhliu.github.io/">Prof. Hao LIU</a>. I received my bachelor degree from <a href="https://www.ustb.edu.cn/">School of Advanced Engineering, USTB</a> in 2024. I also had a chance to study Economy at <a href="https://nsd.pku.edu.cn/">National School of Development, Peking University</a>.
+      I am a second-year M.Phil. student at the <a href="https://www.hkust-gz.edu.cn/academics/hubs-and-thrust-areas/information-hub/" target="_blank" rel="noopener">AI Thrust, Information Hub</a>,
+      <a href="https://hkust-gz.edu.cn/" target="_blank" rel="noopener">The Hong Kong University of Science and Technology (Guangzhou)</a>,
+      where I am honored to be supervised by <a href="https://raymondhliu.github.io/" target="_blank" rel="noopener">Prof. Hao LIU</a>.
+      I received my bachelor's degree from the <a href="https://www.ustb.edu.cn/" target="_blank" rel="noopener">School of Advanced Engineering, USTB</a> in 2024,
+      and also studied Economics at the <a href="https://nsd.pku.edu.cn/" target="_blank" rel="noopener">National School of Development, Peking University</a>.
     </p>
     <p>
-      I am also an incoming PhD student at NTU CCDS, where I will be honored to be supervised by <a href="https://jaehong31.github.io/">Prof. JaeHong Yoon</a>.
+      I am an incoming Ph.D. student at NTU CCDS, where I will be supervised by
+      <a href="https://jaehong31.github.io/" target="_blank" rel="noopener">Prof. JaeHong Yoon</a>.
     </p>
     <p>
       I am passionate about contributing to large-scale, impactful open-source projects.
     </p>
-    <!-- <p class="bio-highlight">
-      <strong>Now I am a Research Intern at <a href="https://github.com/inclusionAI">Inclusion AI</a>, Ant Group, focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model.</strong>
-    </p> -->
   </div>
-</div>
+</section>
 
-<div id="experiences" class="bio">
-  <h2 class="md-heading text-left">
-    <i class="fa fa-tasks" aria-hidden="true"></i>
-    Experiences
-  </h2>
-  <div class="bio-body">
-    <div class="timeline">
-      <article class="timeline-entry">
-        <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Apr. 2026 - Jun. 2026</span>
-          <div class="timeline-entry__logos">
-            <img src="/images/icon/alibaba.png" alt="Alibaba" class="timeline-entry__logo">
-          </div>
-        </div>
-        <div class="timeline-entry__content">
-          <h3>Tongyi Wanxiang, Alibaba Group</h3>
-          <p class="timeline-entry__role">Research Intern</p>
-          <p>Participated in the pre-training of image generation models.</p>
-        </div>
-      </article>
-      <article class="timeline-entry">
-        <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Oct. 2025 - Mar. 2026</span>
-          <div class="timeline-entry__logos">
-            <img src="/images/icon/inclusion_ai.png" alt="Inclusion AI" class="timeline-entry__logo timeline-entry__logo--small">
-            <img src="/images/icon/ant.png" alt="Ant Group" class="timeline-entry__logo">
-          </div>
-        </div>
-        <div class="timeline-entry__content">
-          <h3>Inclusion AI, Ant Group</h3>
-          <p class="timeline-entry__role">Research Intern</p>
-          <p>Focusing on enhancing the visual reasoning ability of Ming-Flash-Omni model. Participated in the post-training of <a href="https://huggingface.co/inclusionAI/Ming-flash-omni-2.0">Ming-flash-omni-2.0</a>.</p>
-        </div>
-      </article>
-      <article class="timeline-entry">
-        <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Jun. 2025 - Sep. 2025</span>
-          <div class="timeline-entry__logos">
-            <img src="/images/icon/alibaba.png" alt="Alibaba" class="timeline-entry__logo">
-          </div>
-        </div>
-        <div class="timeline-entry__content">
-          <h3>CV Lab, Amap, Alibaba</h3>
-          <p class="timeline-entry__role">Research Intern</p>
-          <p>Computer Vision research.</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-
-<div id="education" class="bio">
-  <h2 class="md-heading text-left">
-    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-    Education
-  </h2>
-  <div class="bio-body">
-    <div class="timeline">
-      <article class="timeline-entry">
-        <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Aug. 2026 - 2030 (expected)</span>
-          <img src="/images/icon/ntu.png" alt="NTU" class="timeline-entry__logo">
-        </div>
-        <div class="timeline-entry__content">
-          <h3>Ph.D. Student in Computer Science</h3>
-          <p class="timeline-entry__role">Nanyang Technological University, Singapore</p>
-          <p>College of Computing and Data Science (CCDS)</p>
-          <p>Advised by <a href="https://jaehong31.github.io/">Prof. JaeHong Yoon</a></p>
-        </div>
-      </article>
-      <article class="timeline-entry">
-        <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Sep. 2024 - 2026</span>
-          <img src="/images/icon/hkust.png" alt="HKUST" class="timeline-entry__logo">
-        </div>
-        <div class="timeline-entry__content">
-          <h3>M.Phil in Artificial Intelligence</h3>
-          <p class="timeline-entry__role">HKUST(GZ), Hong Kong/Guangzhou</p>
-          <p>AI Thrust, Information Hub</p>
-        </div>
-      </article>
-      <article class="timeline-entry">
-        <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Sep. 2021 - Jun. 2024</span>
-          <img src="/images/icon/pku.png" alt="PKU" class="timeline-entry__logo">
-        </div>
-        <div class="timeline-entry__content">
-          <h3>Exchange Student in Economics</h3>
-          <p class="timeline-entry__role">Peking University, Beijing, China</p>
-          <p>National School of Development</p>
-        </div>
-      </article>
-
-      <article class="timeline-entry">
-        <div class="timeline-entry__meta">
-          <span class="timeline-entry__time">Sep. 2020 - Jun. 2024</span>
-          <img src="/images/icon/ustb.png" alt="USTB" class="timeline-entry__logo">
-        </div>
-        <div class="timeline-entry__content">
-          <h3>B.S. in Robotics and Mechanical Engineering</h3>
-          <p class="timeline-entry__role">USTB, Beijing, China</p>
-          <p>School of Advanced Engineering</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</div>
-
-<!-- News section (commented out)
-<div id="news" class="bio">
-  <h2 class="md-heading text-left">
-    <i class="fa fa-bullhorn" aria-hidden="true"></i>
-    News
-  </h2>
-  <ul class="news-list">
-    {% for item in site.data.news %}
-    <li class="news-list__item">
-      <span class="news-list__date">{{ item.date }}</span>
-      <span class="news-list__text">{{ item.text }}</span>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
--->
-{% comment %}News hidden per request{% endcomment %}
-
-<!--
-<div id="publications" class="publications">
-  <h2 class="md-heading text-left">
-    <i class="fa fa-file" aria-hidden="true"></i>
-    Selected Publications
-  </h2>
-  <p>* Equal contribution. Also see <a href="https://scholar.google.com/citations?user=h8x-wqkAAAAJ&hl=zh-CN">Google Scholar</a>.</p>
-
-  <div class="pub-list">
+<section id="publications">
+  <h2 class="section-title">Selected Publications</h2>
+  <p class="section-note">* Equal contribution. See also <a href="https://scholar.google.com/citations?user=h8x-wqkAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Google Scholar</a>.</p>
+  <div class="pub-scroll-container scroll-container">
     {% for pub in site.data.publications %}
-    <div class="pub">
-      {% if pub.image %}<div class="pub-left"><img class="intro-img" src="{{ pub.image }}" alt="{{ pub.title }}"></div>{% endif %}
-      <div class="pub-right">
-        <div class="title">{{ pub.title }}</div>
-        <div class="authors">{{ pub.authors }}</div>
-        <div class="publish"><span class="publisher">{{ pub.venue }}</span></div>
-        <div class="tags">
-          {% if pub.paper_url %}<a class="tag" href="{{ pub.paper_url }}">Paper</a>{% endif %}
-          {% assign code_link = pub.code_url | default: pub.code %}
-          {% if code_link %}<a class="tag" href="{{ code_link }}">Code</a>{% endif %}
-          {% if pub.project_url %}<a class="tag" href="{{ pub.project_url }}">Project</a>{% endif %}
-        </div>
+    <div class="pub-item">
+      <div class="pub-title">
+        {% if pub.paper_url %}<a href="{{ pub.paper_url }}" target="_blank" rel="noopener">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}
+      </div>
+      <div class="pub-authors">{{ pub.authors }}</div>
+      <div class="pub-meta">
+        <span class="pub-venue">{{ pub.venue | remove: " (Highlight)" }}</span>
+        {% if pub.venue contains "Highlight" %}<span class="badge badge-highlight">Highlight</span>{% endif %}
+        {% assign code_link = pub.code_url | default: pub.code %}
+        {% if code_link %}<a class="badge badge-link" href="{{ code_link }}" target="_blank" rel="noopener">Code</a>{% endif %}
+        {% if pub.project_url %}<a class="badge badge-link" href="{{ pub.project_url }}" target="_blank" rel="noopener">Project</a>{% endif %}
       </div>
     </div>
     {% endfor %}
   </div>
-</div>
--->
+</section>
 
-<div id="services" class="bio">
-  <h2 class="md-heading text-left">
-    <i class="fa fa-users" aria-hidden="true"></i>
-    Professional Services
-  </h2>
-  <div class="bio-body">
-    <div class="info-card-grid">
-      <div class="info-card">
-        <p class="info-card__eyebrow">Conference Reviewer</p>
-        <p class="info-card__text">CVPR, KDD, IV, ITSC, ICIP</p>
-      </div>
-      <div class="info-card">
-        <p class="info-card__eyebrow">Journal Reviewer</p>
-        <p class="info-card__text">IJCV, TIST, KBS, JBHI</p>
-      </div>
+<section id="news">
+  <h2 class="section-title">News</h2>
+  <div class="news-scroll-container scroll-container">
+    {% for item in site.data.news %}
+    <div class="news-item">
+      <span class="news-date">{{ item.date }}</span>
+      <span class="news-text">{{ item.text }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="experiences">
+  <h2 class="section-title">Experiences</h2>
+
+  <div class="timeline-item">
+    <div class="timeline-when">
+      Apr. 2026 – Jun. 2026
+      <img class="timeline-logo" src="/images/icon/alibaba.png" alt="Alibaba">
+    </div>
+    <div class="timeline-body">
+      <h3>Tongyi Wanxiang, Alibaba Group</h3>
+      <div class="timeline-where">Research Intern</div>
+      <p>Participated in the pre-training of image generation models.</p>
     </div>
   </div>
-</div>
 
-<div id="hobbies" class="bio">
-  <h2 class="md-heading text-left">
-    <i class="fa fa-heart" aria-hidden="true"></i>
-    Hobbies
-  </h2>
-  <div class="bio-body hobbies-content">
+  <div class="timeline-item">
+    <div class="timeline-when">
+      Oct. 2025 – Mar. 2026
+      <img class="timeline-logo" src="/images/icon/ant.png" alt="Ant Group">
+    </div>
+    <div class="timeline-body">
+      <h3>Inclusion AI, Ant Group</h3>
+      <div class="timeline-where">Research Intern</div>
+      <p>Enhancing the visual reasoning ability of the Ming-Flash-Omni model. Participated in the post-training of <a href="https://huggingface.co/inclusionAI/Ming-flash-omni-2.0" target="_blank" rel="noopener">Ming-flash-omni-2.0</a>.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-when">
+      Jun. 2025 – Sep. 2025
+      <img class="timeline-logo" src="/images/icon/alibaba.png" alt="Alibaba">
+    </div>
+    <div class="timeline-body">
+      <h3>CV Lab, Amap, Alibaba</h3>
+      <div class="timeline-where">Research Intern</div>
+      <p>Computer vision research.</p>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <h2 class="section-title">Education</h2>
+
+  <div class="timeline-item">
+    <div class="timeline-when">
+      Aug. 2026 – 2030 (exp.)
+      <img class="timeline-logo" src="/images/icon/ntu.png" alt="NTU">
+    </div>
+    <div class="timeline-body">
+      <h3>Ph.D. in Computer Science</h3>
+      <div class="timeline-where">Nanyang Technological University, Singapore</div>
+      <p>College of Computing and Data Science (CCDS). Advised by <a href="https://jaehong31.github.io/" target="_blank" rel="noopener">Prof. JaeHong Yoon</a>.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-when">
+      Sep. 2024 – 2026
+      <img class="timeline-logo" src="/images/icon/hkust.png" alt="HKUST(GZ)">
+    </div>
+    <div class="timeline-body">
+      <h3>M.Phil. in Artificial Intelligence</h3>
+      <div class="timeline-where">HKUST(GZ), Guangzhou, China</div>
+      <p>AI Thrust, Information Hub.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-when">
+      Sep. 2021 – Jun. 2024
+      <img class="timeline-logo" src="/images/icon/pku.png" alt="PKU">
+    </div>
+    <div class="timeline-body">
+      <h3>Exchange Student in Economics</h3>
+      <div class="timeline-where">Peking University, Beijing, China</div>
+      <p>National School of Development.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-when">
+      Sep. 2020 – Jun. 2024
+      <img class="timeline-logo" src="/images/icon/ustb.png" alt="USTB">
+    </div>
+    <div class="timeline-body">
+      <h3>B.S. in Robotics and Mechanical Engineering</h3>
+      <div class="timeline-where">USTB, Beijing, China</div>
+      <p>School of Advanced Engineering.</p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <h2 class="section-title">Professional Services</h2>
+  <div class="services-grid">
+    <div class="services-card">
+      <h3>Conference Reviewer</h3>
+      <ul class="services-list">
+        <li>CVPR</li>
+        <li>KDD</li>
+        <li>IV</li>
+        <li>ITSC</li>
+        <li>ICIP</li>
+      </ul>
+    </div>
+    <div class="services-card">
+      <h3>Journal Reviewer</h3>
+      <ul class="services-list">
+        <li>International Journal of Computer Vision (IJCV)</li>
+        <li>ACM Transactions on Intelligent Systems and Technology (TIST)</li>
+        <li>Knowledge-Based Systems (KBS)</li>
+        <li>IEEE Journal of Biomedical and Health Informatics (JBHI)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="hobbies">
+  <h2 class="section-title">Hobbies</h2>
+  <div class="hobbies-text">
     <p>I believe the meaning of life lies in experiencing a wealth of things, and in always being on the journey.</p>
-    <p>I am a big fan of <strong>Chelsea</strong> and <strong>Oklahoma City Thunder</strong>.</p>
-    <p>I am also a starry sky and astronomy enthusiast, and I love looking up at the stars at night. I'm really into science fiction.</p>
+    <p>I am a big fan of <strong>Chelsea</strong> and the <strong>Oklahoma City Thunder</strong>.</p>
+    <p>I am a starry sky and astronomy enthusiast, and I love looking up at the stars at night. I am also really into science fiction.</p>
     <p>My favorite novels are <em>The Three-Body Problem</em> and <em>And Quiet Flows the Don</em>.</p>
   </div>
-</div>
-
-</div>
-</div>
+</section>

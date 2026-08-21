@@ -400,6 +400,18 @@ section:first-of-type {
   opacity: 0.85;
 }
 
+/* Square marks carry far less visual mass than a wordmark of the same height,
+   so they get a taller box; wide wordmarks get a shorter, narrower one. */
+.timeline-logo--mark {
+  height: 32px;
+  max-width: 32px;
+}
+
+.timeline-logo--wide {
+  height: 18px;
+  max-width: 78px;
+}
+
 .timeline-body h3 {
   font-size: 0.95rem;
   font-weight: 700;

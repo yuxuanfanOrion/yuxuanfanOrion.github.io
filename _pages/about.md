@@ -68,7 +68,7 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
   <div class="timeline-item">
     <div class="timeline-when">
       Apr. 2026 – Jun. 2026
-      <img class="timeline-logo" src="/images/icon/wan.png" alt="Tongyi Wanxiang">
+      <img class="timeline-logo timeline-logo--mark" src="/images/icon/wan.png" alt="Tongyi Wanxiang">
     </div>
     <div class="timeline-body">
       <h3>Tongyi Wanxiang, Alibaba Group</h3>
@@ -80,7 +80,7 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
   <div class="timeline-item">
     <div class="timeline-when">
       Oct. 2025 – Mar. 2026
-      <img class="timeline-logo" src="/images/icon/ant.png" alt="Ant Group">
+      <img class="timeline-logo timeline-logo--mark" src="/images/icon/ant.png" alt="Ant Group">
     </div>
     <div class="timeline-body">
       <h3>Inclusion AI, Ant Group</h3>
@@ -92,7 +92,7 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
   <div class="timeline-item">
     <div class="timeline-when">
       Jun. 2025 – Sep. 2025
-      <img class="timeline-logo" src="/images/icon/alibaba.png" alt="Alibaba">
+      <img class="timeline-logo timeline-logo--wide" src="/images/icon/alibaba.png" alt="Alibaba">
     </div>
     <div class="timeline-body">
       <h3>CV Lab, Amap, Alibaba</h3>

@@ -28,6 +28,18 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
   </div>
 </section>
 
+<section id="news">
+  <h2 class="section-title">News</h2>
+  <div class="news-scroll-container scroll-container">
+    {% for item in site.data.news %}
+    <div class="news-item">
+      <span class="news-date">{{ item.date }}</span>
+      <span class="news-text">{{ item.text }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
 <section id="publications">
   <h2 class="section-title">Selected Publications</h2>
   <p class="section-note">* Equal contribution. See also <a href="https://scholar.google.com/citations?user=h8x-wqkAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Google Scholar</a>.</p>
@@ -45,18 +57,6 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
         {% if code_link %}<a class="badge badge-link" href="{{ code_link }}" target="_blank" rel="noopener">Code</a>{% endif %}
         {% if pub.project_url %}<a class="badge badge-link" href="{{ pub.project_url }}" target="_blank" rel="noopener">Project</a>{% endif %}
       </div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-
-<section id="news">
-  <h2 class="section-title">News</h2>
-  <div class="news-scroll-container scroll-container">
-    {% for item in site.data.news %}
-    <div class="news-item">
-      <span class="news-date">{{ item.date }}</span>
-      <span class="news-text">{{ item.text }}</span>
     </div>
     {% endfor %}
   </div>

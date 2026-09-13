@@ -2,7 +2,7 @@
 
 ## Personal portrait artwork
 
-The homepage composition, *Where Light Pauses*, uses the original `images/yuxuan-chill.png` photograph above an AI-generated abstract panel made with [Photo Abstract Editorial](https://github.com/ZzzLc0405/photo-abstract-editorial) by [@AM. / ZzzLc0405](https://github.com/ZzzLc0405), for this personal, non-commercial site. CSS displays only the lower panel of `images/yuxuan-editorial.webp`, preserving the original portrait without generative changes.
+The homepage artwork, *Where Light Pauses* (`images/yuxuan-abstract-portrait.webp`), is a generated abstract portrait inspired by the original forest photograph. At the owner's request, it shows a recognizable human subject and displays only the generated artwork. Its visual direction adapts [Photo Abstract Editorial](https://github.com/ZzzLc0405/photo-abstract-editorial) by [@AM. / ZzzLc0405](https://github.com/ZzzLc0405), for this personal, non-commercial site.
 
 **Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 

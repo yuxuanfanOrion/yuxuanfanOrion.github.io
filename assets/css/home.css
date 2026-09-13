@@ -118,21 +118,6 @@ a:hover {
   height: auto;
 }
 
-/* Show only the generated lower panel; the photograph above stays original.
-   The panel begins at y=1002 in the 1010 × 1558 generated asset. */
-.portrait-memory {
-  position: relative;
-  aspect-ratio: 1010 / 556;
-  overflow: hidden;
-  background: #f3f0e8;
-}
-
-.portrait-memory img {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
 .sidebar-identity {
   min-width: 0;
 }

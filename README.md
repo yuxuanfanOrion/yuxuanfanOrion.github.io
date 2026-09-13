@@ -2,7 +2,7 @@
 
 ## Personal portrait artwork
 
-The homepage artwork, *Starcos 反余弦* (`images/starcos-abstract.webp`), is a generated abstract composition inspired by the original forest photograph. At the owner's request, the human figure is reduced to simple shapes and a directional silhouette, with no realistic facial detail; only the generated artwork is displayed. Its visual direction adapts [Photo Abstract Editorial](https://github.com/ZzzLc0405/photo-abstract-editorial) by [@AM. / ZzzLc0405](https://github.com/ZzzLc0405), for this personal, non-commercial site.
+The homepage artwork, *Starcos 反余弦* (`images/starcos-baobab-nebula.webp`), combines the owner's abstract portrait with supplied baobab and starry-sky references. The selected composition keeps the figure small beside a monumental baobab, with added meteors and subtle nebulae. Only generated artwork is displayed, with no realistic facial detail. Its visual direction adapts [Photo Abstract Editorial](https://github.com/ZzzLc0405/photo-abstract-editorial) by [@AM. / ZzzLc0405](https://github.com/ZzzLc0405), for this personal, non-commercial site.
 
 **Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 

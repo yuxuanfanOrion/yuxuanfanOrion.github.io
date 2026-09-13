@@ -93,9 +93,7 @@ a:hover {
 
 /* ── Sidebar ── */
 .sidebar {
-  position: sticky;
-  top: 100px;
-  height: calc(100vh - 200px);
+  align-self: start;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -107,18 +105,43 @@ a:hover {
   align-items: flex-start;
 }
 
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 12px;
-  object-fit: cover;
+.portrait-editorial {
+  display: block;
+  width: 220px;
+  max-width: 100%;
   margin-bottom: 24px;
-  border: 1px solid var(--border);
-  transition: var(--transition);
 }
 
-.avatar:hover {
-  transform: scale(1.03);
+.portrait-editorial img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Show only the generated lower panel; the photograph above stays original.
+   The panel begins at y=1002 in the 1010 × 1558 generated asset. */
+.portrait-memory {
+  position: relative;
+  aspect-ratio: 1010 / 556;
+  overflow: hidden;
+  background: #f3f0e8;
+}
+
+.portrait-memory img {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.sidebar-identity {
+  min-width: 0;
+}
+
+@media (min-width: 901px) and (min-height: 1100px) {
+  .sidebar {
+    position: sticky;
+    top: 60px;
+  }
 }
 
 .sidebar h1 {
@@ -587,6 +610,17 @@ footer {
     height: auto;
   }
 
+  .sidebar-top {
+    display: grid;
+    grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+    align-items: center;
+    gap: 32px;
+  }
+
+  .portrait-editorial {
+    margin-bottom: 0;
+  }
+
   .vertical-nav {
     flex-direction: row;
     flex-wrap: wrap;
@@ -612,6 +646,19 @@ footer {
 }
 
 @media (max-width: 560px) {
+  .sidebar-top {
+    grid-template-columns: 128px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .sidebar h1 {
+    font-size: 1.6rem;
+  }
+
+  .sidebar-email {
+    overflow-wrap: anywhere;
+  }
+
   .timeline-item,
   .news-item {
     grid-template-columns: 1fr;

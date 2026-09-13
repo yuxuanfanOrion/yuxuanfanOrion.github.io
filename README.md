@@ -1,4 +1,9 @@
 # Academic Pages
+
+## Personal portrait artwork
+
+The homepage composition, *Where Light Pauses*, uses the original `images/yuxuan-chill.png` photograph above an AI-generated abstract panel made with [Photo Abstract Editorial](https://github.com/ZzzLc0405/photo-abstract-editorial) by [@AM. / ZzzLc0405](https://github.com/ZzzLc0405), for this personal, non-commercial site. CSS displays only the lower panel of `images/yuxuan-editorial.webp`, preserving the original portrait without generative changes.
+
 **Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 
 ![Academic Pages template example](images/homepage.png "Academic Pages template example")

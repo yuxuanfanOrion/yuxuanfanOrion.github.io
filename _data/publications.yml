@@ -5,10 +5,12 @@
 - title: "PhoenixNest-Video: Evidence-Grounded Multimodal Agent Framework for Automated Video Interview Assessment"
   authors: '<b>Yuxuan Fan</b>, Miaojun Huang, Haimei Zhang, Jingshen Wu, Hao Liu'
   venue: "EMNLP 2026"
+  paper_url: "https://arxiv.org/abs/2609.02231"
 
 - title: "MuseBench: Benchmarking Intent-Level Audiovisual Arts Understanding in MLLMs"
   authors: '<b>Yuxuan Fan</b>, Gyusik Seo, Jing Hao, Jaemin Cho, Mohit Bansal, Jaehong Yoon'
   venue: "Preprint"
+  paper_url: "https://arxiv.org/abs/2606.30026"
 
 # ── Co-first author ──
 - title: "OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis"
@@ -32,24 +34,25 @@
 - title: "HALLUCINATION AT A GLANCE: Controlled Visual Editing and Fine-Grained Multimodal Learning"
   authors: 'Tianyi Bai*, <b>Yuxuan Fan*</b>, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan'
   venue: "NeurIPS 2025"
-  paper_url: "https://arxiv.org/pdf/2506.07227"
+  paper_url: "https://arxiv.org/abs/2506.07227"
   code_url: "https://github.com/Relaxed-System-Lab/hallu_med"
 
 - title: "Towards Better Dental AI: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis"
   authors: 'Jing Hao*, <b>Yuxuan Fan*</b>, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung'
   venue: "NeurIPS 2025"
-  paper_url: "https://arxiv.org/pdf/2509.09254"
+  paper_url: "https://arxiv.org/abs/2509.09254"
   code_url: "https://github.com/isjinghao/OralGPT"
 
 - title: "How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM"
   authors: '<b>Yuxuan Fan*</b>, Jirong Zha*, Xiao Yang, Chen Gao, Xinlei Chen'
   venue: "IJCAI 2025"
-  paper_url: "https://arxiv.org/pdf/2504.05786"
+  paper_url: "https://arxiv.org/abs/2504.05786"
 
 # ── Other ──
 - title: "NestedKV: Nested Memory Routing for Long-Context KV Cache Compression"
   authors: 'Hong Chen, Xiang Liu, Yubo Gao, <b>Yuxuan Fan</b>, Bo Wang, Yuanlin Chu, Yuanguo Lin, Xuming Hu'
   venue: "EMNLP 2026"
+  paper_url: "https://arxiv.org/abs/2605.26678"
 
 - title: "Decomposing Visual Histories with Vision-Language Agents: Hierarchical Temporal Guidance for Compositional Image Generation"
   authors: 'Lujundong Li, Mingxu Zhang, Songning Lai, Jiayu Yang, <b>Yuxuan Fan</b>, Ziwei Xie, Feng Liu, Changwang Zhang, Jun Wang, Dazhong Shen, Ying Sun'
@@ -58,9 +61,10 @@
 - title: "Demystifying Hidden-State Recurrence: Switchable Latent Reasoning with On-Policy Reinforcement Learning"
   authors: 'Jiayu Yang, Chao Chen, Shengen Wu, Yinhong Liu, <b>Yuxuan Fan</b>, Lujundong Li, Songning Lai, Chengwei Qin, Zhijiang Guo'
   venue: "EMNLP 2026 Findings"
+  paper_url: "https://arxiv.org/abs/2606.13106"
 
 - title: "DIMM: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning"
   authors: 'Jirong Zha, <b>Yuxuan Fan</b>, Kai Li, Han Li, Chen Gao, Xinlei Chen'
   venue: "AAAI 2026"
-  paper_url: "https://arxiv.org/pdf/2505.12340"
+  paper_url: "https://arxiv.org/abs/2505.12340"
   code_url: "https://github.com/zhajirong/DIMM"

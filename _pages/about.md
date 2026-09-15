@@ -47,12 +47,13 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
     {% for pub in site.data.publications %}
     <div class="pub-item">
       <div class="pub-title">
-        {% if pub.paper_url %}<a href="{{ pub.paper_url }}" target="_blank" rel="noopener">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}
+        {{ pub.title }}
       </div>
       <div class="pub-authors">{{ pub.authors }}</div>
       <div class="pub-meta">
         <span class="pub-venue">{{ pub.venue | remove: " (Highlight)" }}</span>
         {% if pub.venue contains "Highlight" %}<span class="badge badge-highlight">Highlight</span>{% endif %}
+        {% if pub.paper_url %}<a class="badge badge-link" href="{{ pub.paper_url }}" target="_blank" rel="noopener">arXiv</a>{% endif %}
         {% assign code_link = pub.code_url | default: pub.code %}
         {% if code_link %}<a class="badge badge-link" href="{{ code_link }}" target="_blank" rel="noopener">Code</a>{% endif %}
         {% if pub.project_url %}<a class="badge badge-link" href="{{ pub.project_url }}" target="_blank" rel="noopener">Project</a>{% endif %}

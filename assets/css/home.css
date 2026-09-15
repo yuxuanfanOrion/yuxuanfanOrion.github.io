@@ -317,9 +317,6 @@ section:first-of-type {
   color: var(--text-primary);
 }
 
-.pub-title a { color: var(--text-primary); }
-.pub-title a:hover { color: var(--accent); }
-
 .pub-authors {
   font-size: 0.82rem;
   color: var(--text-secondary);

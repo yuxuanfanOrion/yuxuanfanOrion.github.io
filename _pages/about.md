@@ -57,6 +57,7 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
         {% assign code_link = pub.code_url | default: pub.code %}
         {% if code_link %}<a class="badge badge-link" href="{{ code_link }}" target="_blank" rel="noopener">Code</a>{% endif %}
         {% if pub.project_url %}<a class="badge badge-link" href="{{ pub.project_url }}" target="_blank" rel="noopener">Project</a>{% endif %}
+        {% if pub.dataset_url %}<a class="badge badge-link" href="{{ pub.dataset_url }}" target="_blank" rel="noopener">Dataset</a>{% endif %}
       </div>
     </div>
     {% endfor %}

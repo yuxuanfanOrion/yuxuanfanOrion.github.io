@@ -11,6 +11,9 @@
   authors: '<b>Yuxuan Fan</b>, Gyusik Seo, Jing Hao, Jaemin Cho, Mohit Bansal, Jaehong Yoon'
   venue: "Preprint"
   paper_url: "https://arxiv.org/abs/2606.30026"
+  code_url: "https://github.com/musebench/musebench-code"
+  dataset_url: "https://huggingface.co/datasets/EasonFan/MuseBench"
+  project_url: "https://musebench.github.io"
 
 # ── Co-first author ──
 - title: "OralGPT-Plus: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis"

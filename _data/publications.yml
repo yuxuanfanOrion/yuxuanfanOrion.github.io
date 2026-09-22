@@ -6,6 +6,7 @@
   authors: '<b>Yuxuan Fan</b>, Miaojun Huang, Haimei Zhang, Jingshen Wu, Hao Liu'
   venue: "EMNLP 2026"
   paper_url: "https://arxiv.org/abs/2609.02231"
+  paper_note: "因为专利和隐私原因，代码暂无法公开"
 
 - title: "MuseBench: Benchmarking Intent-Level Audiovisual Arts Understanding in MLLMs"
   authors: '<b>Yuxuan Fan</b>, Gyusik Seo, Jing Hao, Jaemin Cho, Mohit Bansal, Jaehong Yoon'

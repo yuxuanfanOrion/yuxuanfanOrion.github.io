@@ -373,6 +373,12 @@ section:first-of-type {
   color: var(--accent);
 }
 
+.pub-note {
+  margin-left: 2px;
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+}
+
 /* ── Timeline (experiences & education) ── */
 .timeline-item {
   display: grid;

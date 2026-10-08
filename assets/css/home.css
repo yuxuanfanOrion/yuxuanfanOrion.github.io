@@ -286,6 +286,72 @@ a:hover {
   background: linear-gradient(to bottom, transparent, rgba(225, 236, 255, 0.7) 50%, transparent);
 }
 
+/* The central star flares on a beat: quiet most of the cycle, then the
+   spikes stretch with a double flicker, light runs out along each spike,
+   a halo ring expands and a faint ray wheel brightens behind the core. */
+.twinkle--hero::before {
+  animation: nebula-hero-core 6.5s ease-in-out var(--t) infinite;
+}
+
+.twinkle--hero::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--g) * 2.2);
+  height: calc(var(--g) * 2.2);
+  left: calc(var(--g) * -1.1);
+  top: calc(var(--g) * -1.1);
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 50%, rgba(200, 222, 255, 0.32) 62%, rgba(170, 200, 255, 0.12) 70%, transparent 76%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: nebula-hero-halo 6.5s ease-out var(--t) infinite;
+}
+
+.twinkle--hero i {
+  width: 1.5px;
+  left: -0.75px;
+  background: linear-gradient(to bottom, transparent, rgba(175, 205, 255, 0.5) 28%, #fff 50%, rgba(255, 228, 195, 0.5) 72%, transparent);
+  animation: nebula-hero-spike 6.5s cubic-bezier(0.4, 0, 0.2, 1) var(--t) infinite;
+}
+
+.twinkle--hero i::before,
+.twinkle--hero i::after {
+  content: "";
+  position: absolute;
+  left: -0.75px;
+  width: 3px;
+  height: 18px;
+  top: calc(50% - 9px);
+  border-radius: 2px;
+  background: linear-gradient(to bottom, transparent, #fff, transparent);
+  opacity: 0;
+  animation: nebula-hero-bead-up 6.5s ease-out var(--t) infinite;
+}
+
+.twinkle--hero i::after {
+  animation-name: nebula-hero-bead-down;
+}
+
+.twinkle--hero i.short::before,
+.twinkle--hero i.short::after {
+  display: none;
+}
+
+.twinkle--hero .rays {
+  position: absolute;
+  width: calc(var(--g) * 3.4);
+  height: calc(var(--g) * 3.4);
+  left: calc(var(--g) * -1.7);
+  top: calc(var(--g) * -1.7);
+  border-radius: 50%;
+  background: repeating-conic-gradient(rgba(255, 255, 255, 0.6) 0deg 1deg, transparent 1deg 11deg);
+  -webkit-mask: radial-gradient(circle, #000 0, #000 12%, transparent 66%);
+  mask: radial-gradient(circle, #000 0, #000 12%, transparent 66%);
+  mix-blend-mode: screen;
+  opacity: 0.15;
+  animation: nebula-hero-spin 36s linear infinite, nebula-hero-rays 6.5s ease-in-out var(--t) infinite;
+}
+
 .glint {
   width: 2px;
   height: 2px;
@@ -406,6 +472,50 @@ a:hover {
   50%      { opacity: 0.9;  scale: 1 1; }
 }
 
+@keyframes nebula-hero-core {
+  0%, 58%, 100% { opacity: 0.6; transform: scale(0.8); }
+  68%           { opacity: 1;   transform: scale(1.9); }
+  72%           { opacity: 0.8; transform: scale(1.35); }
+  76%           { opacity: 1;   transform: scale(1.75); }
+  88%           { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes nebula-hero-spike {
+  0%, 58%, 100% { opacity: 0.35; scale: 1 0.6; }
+  68%           { opacity: 1;    scale: 1 1.3; }
+  72%           { opacity: 0.7;  scale: 1 1.02; }
+  76%           { opacity: 1;    scale: 1 1.2; }
+  90%           { opacity: 0.45; scale: 1 0.72; }
+}
+
+@keyframes nebula-hero-bead-up {
+  0%, 64%  { opacity: 0; translate: 0 0; }
+  70%      { opacity: 1; }
+  88%, 100% { opacity: 0; translate: 0 calc(var(--len) * -0.48); }
+}
+
+@keyframes nebula-hero-bead-down {
+  0%, 64%  { opacity: 0; translate: 0 0; }
+  70%      { opacity: 1; }
+  88%, 100% { opacity: 0; translate: 0 calc(var(--len) * 0.48); }
+}
+
+@keyframes nebula-hero-halo {
+  0%, 64%   { opacity: 0;   transform: scale(0.4); }
+  70%       { opacity: 1;   transform: scale(1); }
+  92%, 100% { opacity: 0;   transform: scale(2.4); }
+}
+
+@keyframes nebula-hero-rays {
+  0%, 58%, 100% { opacity: 0.15; scale: 0.85; }
+  70%           { opacity: 0.75; scale: 1.15; }
+  90%           { opacity: 0.25; scale: 0.95; }
+}
+
+@keyframes nebula-hero-spin {
+  to { rotate: 360deg; }
+}
+
 @keyframes nebula-blink {
   0%, 100% { opacity: 0.1; }
   50%      { opacity: 0.95; }
@@ -416,6 +526,10 @@ a:hover {
   .nebula-sky::after,
   .twinkle::before,
   .twinkle i,
+  .twinkle--hero::after,
+  .twinkle--hero i::before,
+  .twinkle--hero i::after,
+  .twinkle--hero .rays,
   .glint {
     animation: none;
   }

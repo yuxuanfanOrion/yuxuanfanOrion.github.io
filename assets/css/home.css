@@ -203,21 +203,6 @@ a:hover {
   transform: rotate(calc(var(--r) * -1));
 }
 
-/* Slow exposure sweep, drawn in strip coordinates so it runs across seams. */
-.nebula-sky::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 22cqh;
-  background: linear-gradient(to bottom, transparent, rgba(170, 205, 255, 0.16) 55%, rgba(255, 255, 255, 0.22) 60%, transparent);
-  mix-blend-mode: screen;
-  transform: translateY(-22cqh);
-  animation: nebula-scan 16s linear 4s infinite;
-  pointer-events: none;
-}
-
 /* object-fit: cover by hand, so the twinkle layer can share the geometry. */
 .nebula-stage {
   position: absolute;
@@ -420,12 +405,6 @@ a:hover {
   to   { transform: scale(1.1) translate3d(-1%, -1.4%, 0); }
 }
 
-@keyframes nebula-scan {
-  0%   { transform: translateY(-22cqh); }
-  25%  { transform: translateY(100cqh); }
-  100% { transform: translateY(100cqh); }
-}
-
 @keyframes nebula-glow {
   0%, 100% { opacity: 0.35; transform: scale(0.75); }
   50%      { opacity: 1;    transform: scale(1.15); }
@@ -469,16 +448,11 @@ a:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .nebula-stage,
-  .nebula-sky::after,
   .twinkle::before,
   .twinkle i,
   .twinkle--hero::after,
   .glint {
     animation: none;
-  }
-
-  .nebula-sky::after {
-    display: none;
   }
 }
 

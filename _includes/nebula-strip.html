@@ -36,6 +36,7 @@
           <span class="glint" style="--x:24%;--y:84%;--t:-0.2s"></span>
           <span class="glint" style="--x:79%;--y:88%;--t:-2.5s"></span>
         </div>
+        <span class="meteor"></span>
       </div>
     </div>
     <figcaption class="nebula-caption">
@@ -50,33 +51,85 @@
     if (!nebula || !('IntersectionObserver' in window)) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    var rail = nebula.parentElement;
     var tiles = nebula.querySelectorAll('.nebula-tile');
-    var timer = null;
+    var meteor = nebula.querySelector('.meteor');
+    var reexposeTimer = null;
+    var meteorTimer = null;
+    var descent = 0;
+    var target = 0;
+    var frame = null;
     nebula.classList.add('is-armed');
+
+    function clamp01(v) { return Math.min(1, Math.max(0, v)); }
+
+    function scrollProgress() {
+      var travel = rail.offsetHeight - nebula.offsetHeight;
+      if (travel > 1) {
+        return clamp01((nebula.getBoundingClientRect().top - rail.getBoundingClientRect().top) / travel);
+      }
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      return max > 0 ? clamp01(window.scrollY / max) : 0;
+    }
+
+    function step() {
+      descent += (target - descent) * 0.08;
+      if (Math.abs(target - descent) < 0.0005) descent = target;
+      nebula.style.setProperty('--descent', descent.toFixed(4));
+      frame = descent === target ? null : requestAnimationFrame(step);
+    }
+
+    function onScroll() {
+      target = scrollProgress();
+      if (!frame) frame = requestAnimationFrame(step);
+    }
 
     function reexpose() {
       var tile = tiles[Math.floor(Math.random() * tiles.length)];
       tile.classList.add('is-reexposing');
       setTimeout(function () { tile.classList.remove('is-reexposing'); }, 1900);
-      schedule();
+      scheduleReexpose();
     }
 
-    function schedule() {
-      clearTimeout(timer);
-      timer = setTimeout(reexpose, 6000 + Math.random() * 6000);
+    function scheduleReexpose() {
+      clearTimeout(reexposeTimer);
+      reexposeTimer = setTimeout(reexpose, 6000 + Math.random() * 6000);
+    }
+
+    function shootMeteor() {
+      meteor.style.setProperty('--mx', (55 + Math.random() * 40).toFixed(1) + '%');
+      meteor.style.setProperty('--my', (3 + Math.random() * 32).toFixed(1) + '%');
+      meteor.style.setProperty('--ma', (132 + Math.random() * 26).toFixed(1) + 'deg');
+      meteor.classList.remove('is-falling');
+      void meteor.offsetWidth;
+      meteor.classList.add('is-falling');
+      scheduleMeteor(30000 + Math.random() * 30000);
+    }
+
+    function scheduleMeteor(delay) {
+      clearTimeout(meteorTimer);
+      meteorTimer = setTimeout(shootMeteor, delay);
     }
 
     new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
+          var first = !nebula.classList.contains('is-exposed');
           nebula.classList.add('is-exposed');
           nebula.classList.remove('is-paused');
-          schedule();
+          scheduleReexpose();
+          scheduleMeteor(first ? 8000 + Math.random() * 7000 : 15000 + Math.random() * 30000);
         } else {
           nebula.classList.add('is-paused');
-          clearTimeout(timer);
+          clearTimeout(reexposeTimer);
+          clearTimeout(meteorTimer);
         }
       });
     }, { threshold: 0.1 }).observe(nebula);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    descent = target = scrollProgress();
+    nebula.style.setProperty('--descent', descent.toFixed(4));
   })();
 </script>

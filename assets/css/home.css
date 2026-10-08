@@ -203,14 +203,18 @@ a:hover {
   transform: rotate(calc(var(--r) * -1));
 }
 
-/* object-fit: cover by hand, so the twinkle layer can share the geometry. */
+/* object-fit: cover by hand, so the twinkle layer can share the geometry.
+   The picture is kept at least 1.35x the strip height so there is room to
+   pan: --descent (0 to 1, set from page scroll) slides it from the stars
+   at the top of the page down to the cliffs at the bottom. */
 .nebula-stage {
   position: absolute;
-  --sw: max(100cqw, 100cqh * 600 / 1801);
+  --sw: max(100cqw, 100cqh * 1.35 * 600 / 1801);
   width: var(--sw);
   height: calc(var(--sw) * 1801 / 600);
   left: calc((100cqw - var(--sw)) / 2);
-  top: calc((100cqh - var(--sw) * 1801 / 600) * 0.42);
+  top: 0;
+  translate: 0 calc((100cqh - var(--sw) * 1801 / 600) * var(--descent, 0.42));
   transform-origin: 50% 42%;
   animation: nebula-drift 48s ease-in-out infinite alternate;
   will-change: transform;
@@ -310,6 +314,39 @@ a:hover {
   box-shadow: 0 0 4px 1px rgba(180, 210, 255, 0.8);
   opacity: 0.15;
   animation: nebula-blink 3.8s ease-in-out var(--t) infinite;
+}
+
+/* A rare meteor, echoing the ones in the portrait. The script places it
+   (--mx, --my), aims it down-left (--ma) and replays the animation. */
+.meteor {
+  position: absolute;
+  left: var(--mx, 80%);
+  top: var(--my, 10%);
+  rotate: var(--ma, 145deg);
+  pointer-events: none;
+}
+
+.meteor::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -0.5px;
+  width: 64px;
+  height: 1px;
+  border-radius: 1px;
+  background: linear-gradient(to right, transparent, rgba(200, 220, 255, 0.45) 70%, rgba(255, 255, 255, 0.95));
+  transform-origin: 100% 50%;
+  opacity: 0;
+}
+
+.meteor.is-falling::before {
+  animation: nebula-meteor 0.85s cubic-bezier(0.3, 0, 0.8, 0.6) forwards;
+}
+
+@keyframes nebula-meteor {
+  0%   { opacity: 0; translate: 0 0;     scale: 0.3 1; }
+  15%  { opacity: 1; }
+  100% { opacity: 0; translate: 150px 0; scale: 1 1; }
 }
 
 .nebula-caption {

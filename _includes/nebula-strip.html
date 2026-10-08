@@ -1,0 +1,82 @@
+{% comment %}
+  Vertical strip of the JWST "Cosmic Cliffs" (NGC 3324), shown as a mosaic of
+  slightly misaligned tiles. --x/--y/--w/--h are percentages of the strip,
+  --r is the tile's tilt, --d its delay in the exposure sequence.
+{% endcomment %}
+{% assign nebula_src = "/images/nebula-cosmic-cliffs.webp" %}
+{% capture nebula_sky %}<div class="nebula-sky"><div class="nebula-stage"><img src="{{ nebula_src }}" alt="" width="600" height="1801" loading="lazy" decoding="async"></div></div>{% endcapture %}
+<div class="nebula-rail">
+  <figure class="nebula">
+    <div class="nebula-frame" role="img" aria-label="The Cosmic Cliffs in the Carina Nebula (NGC 3324), imaged by the James Webb Space Telescope">
+      <div class="nebula-tile" style="--x:0;--y:1.5;--w:62;--h:17;--r:-0.6deg;--d:0.3s;--tone:1.02"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+      <div class="nebula-tile" style="--x:46;--y:0;--w:54;--h:21;--r:0.5deg;--d:0.6s;--tone:0.97"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+      <div class="nebula-tile" style="--x:3;--y:15;--w:95;--h:20;--r:0.3deg;--d:0s;--tone:1"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+      <div class="nebula-tile" style="--x:0;--y:33;--w:92;--h:19;--r:-0.4deg;--d:0.9s;--tone:1.03"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+      <div class="nebula-tile" style="--x:7;--y:49;--w:93;--h:18;--r:0.6deg;--d:0.45s;--tone:0.98"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+      <div class="nebula-tile" style="--x:1;--y:64;--w:58;--h:21;--r:-0.5deg;--d:1.05s;--tone:1.02"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+      <div class="nebula-tile" style="--x:42;--y:66;--w:56;--h:20;--r:0.4deg;--d:0.75s;--tone:0.97"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+      <div class="nebula-tile" style="--x:4;--y:83;--w:93;--h:16.5;--r:-0.3deg;--d:0.15s;--tone:1.01"><div class="nebula-fill">{{ nebula_sky }}</div></div>
+
+      <div class="nebula-glow" aria-hidden="true">
+        <div class="nebula-stage">
+          <span class="twinkle" style="--x:29.7%;--y:10.83%;--len:120px;--g:22px;--t:0s"><i style="--a:0deg"></i><i style="--a:60deg"></i><i style="--a:-60deg"></i><i class="short" style="--a:90deg"></i></span>
+          <span class="twinkle" style="--x:51.3%;--y:19.43%;--len:150px;--g:26px;--t:-1.7s"><i style="--a:0deg"></i><i style="--a:60deg"></i><i style="--a:-60deg"></i><i class="short" style="--a:90deg"></i></span>
+          <span class="twinkle" style="--x:72.8%;--y:37.76%;--len:110px;--g:20px;--t:-3.1s"><i style="--a:0deg"></i><i style="--a:60deg"></i><i style="--a:-60deg"></i><i class="short" style="--a:90deg"></i></span>
+          <span class="twinkle twinkle--small" style="--x:9.2%;--y:5.94%;--len:44px;--g:10px;--t:-0.8s"><i style="--a:0deg"></i><i style="--a:60deg"></i><i style="--a:-60deg"></i></span>
+          <span class="twinkle twinkle--small" style="--x:70.3%;--y:21.38%;--len:40px;--g:10px;--t:-2.4s"><i style="--a:0deg"></i><i style="--a:60deg"></i><i style="--a:-60deg"></i></span>
+          <span class="twinkle twinkle--small" style="--x:21.7%;--y:35.81%;--len:38px;--g:9px;--t:-4s"><i style="--a:0deg"></i><i style="--a:60deg"></i><i style="--a:-60deg"></i></span>
+          <span class="glint" style="--x:18.3%;--y:30.54%;--t:-0.4s"></span>
+          <span class="glint" style="--x:94.7%;--y:28.04%;--t:-2.2s"></span>
+          <span class="glint" style="--x:35.5%;--y:15.82%;--t:-1.3s"></span>
+          <span class="glint" style="--x:84%;--y:9%;--t:-3.3s"></span>
+          <span class="glint" style="--x:42%;--y:29%;--t:-0.9s"></span>
+          <span class="glint" style="--x:62%;--y:7%;--t:-2.8s"></span>
+          <span class="glint" style="--x:38%;--y:53%;--t:-1.9s"></span>
+          <span class="glint" style="--x:66%;--y:64%;--t:-3.6s"></span>
+          <span class="glint" style="--x:24%;--y:84%;--t:-0.2s"></span>
+          <span class="glint" style="--x:79%;--y:88%;--t:-2.5s"></span>
+        </div>
+      </div>
+    </div>
+    <figcaption class="nebula-caption">
+      <span>Cosmic Cliffs &middot; NGC 3324</span>
+      <a href="https://esawebb.org/images/weic2205a/" target="_blank" rel="noopener">JWST / NASA, ESA, CSA, STScI</a>
+    </figcaption>
+  </figure>
+</div>
+<script>
+  (function () {
+    var nebula = document.querySelector('.nebula');
+    if (!nebula || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var tiles = nebula.querySelectorAll('.nebula-tile');
+    var timer = null;
+    nebula.classList.add('is-armed');
+
+    function reexpose() {
+      var tile = tiles[Math.floor(Math.random() * tiles.length)];
+      tile.classList.add('is-reexposing');
+      setTimeout(function () { tile.classList.remove('is-reexposing'); }, 1900);
+      schedule();
+    }
+
+    function schedule() {
+      clearTimeout(timer);
+      timer = setTimeout(reexpose, 6000 + Math.random() * 6000);
+    }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          nebula.classList.add('is-exposed');
+          nebula.classList.remove('is-paused');
+          schedule();
+        } else {
+          nebula.classList.add('is-paused');
+          clearTimeout(timer);
+        }
+      });
+    }, { threshold: 0.1 }).observe(nebula);
+  })();
+</script>

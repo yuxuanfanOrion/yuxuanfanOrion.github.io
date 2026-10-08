@@ -92,11 +92,12 @@ a:hover {
 }
 
 /* ── Sidebar ── */
+/* Stretches to the full height of the page so the nebula strip at its
+   bottom can stay pinned while the main column scrolls. */
 .sidebar {
-  align-self: start;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .sidebar-top {
@@ -122,10 +123,325 @@ a:hover {
   min-width: 0;
 }
 
+/* ── Nebula strip ──
+   A JWST mosaic: eight tiles, each slightly offset and tilted, all showing
+   the same sky. Every tile holds a full-size copy of the strip
+   (.nebula-sky), counter-rotated so the picture lines up across seams and
+   only the tile edges look stitched. Sizes use container units of
+   .nebula-frame. */
+.nebula-rail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 48px;
+}
+
+.nebula {
+  position: sticky;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  max-width: 100%;
+  height: min(calc(100vh - 80px), 860px);
+  min-height: 200px;
+}
+
+.nebula-frame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  container-type: size;
+}
+
+.nebula-tile {
+  position: absolute;
+  left: calc(var(--x) * 1cqw);
+  top: calc(var(--y) * 1cqh);
+  width: calc(var(--w) * 1cqw);
+  height: calc(var(--h) * 1cqh);
+  transform: rotate(var(--r));
+  filter: brightness(var(--tone, 1));
+  background: #0b1226;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+/* Render-bucket corner marks, shown while a tile is still exposing. */
+.nebula-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  --c: rgba(255, 255, 255, 0.75);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 8px 1px,
+    linear-gradient(var(--c), var(--c)) top left / 1px 8px,
+    linear-gradient(var(--c), var(--c)) top right / 8px 1px,
+    linear-gradient(var(--c), var(--c)) top right / 1px 8px,
+    linear-gradient(var(--c), var(--c)) bottom left / 8px 1px,
+    linear-gradient(var(--c), var(--c)) bottom left / 1px 8px,
+    linear-gradient(var(--c), var(--c)) bottom right / 8px 1px,
+    linear-gradient(var(--c), var(--c)) bottom right / 1px 8px;
+  background-repeat: no-repeat;
+}
+
+.nebula-fill {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.nebula-sky {
+  position: absolute;
+  left: calc(var(--x) * -1cqw);
+  top: calc(var(--y) * -1cqh);
+  width: 100cqw;
+  height: 100cqh;
+  overflow: hidden;
+  transform-origin: calc((var(--x) + var(--w) / 2) * 1cqw) calc((var(--y) + var(--h) / 2) * 1cqh);
+  transform: rotate(calc(var(--r) * -1));
+}
+
+/* Slow exposure sweep, drawn in strip coordinates so it runs across seams. */
+.nebula-sky::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 22cqh;
+  background: linear-gradient(to bottom, transparent, rgba(170, 205, 255, 0.16) 55%, rgba(255, 255, 255, 0.22) 60%, transparent);
+  mix-blend-mode: screen;
+  transform: translateY(-22cqh);
+  animation: nebula-scan 16s linear 4s infinite;
+  pointer-events: none;
+}
+
+/* object-fit: cover by hand, so the twinkle layer can share the geometry. */
+.nebula-stage {
+  position: absolute;
+  --sw: max(100cqw, 100cqh * 600 / 1801);
+  width: var(--sw);
+  height: calc(var(--sw) * 1801 / 600);
+  left: calc((100cqw - var(--sw)) / 2);
+  top: calc((100cqh - var(--sw) * 1801 / 600) * 0.42);
+  transform-origin: 50% 42%;
+  animation: nebula-drift 48s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.nebula-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.nebula-glow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.twinkle,
+.glint {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+}
+
+.twinkle::before {
+  content: "";
+  position: absolute;
+  width: var(--g);
+  height: var(--g);
+  left: calc(var(--g) / -2);
+  top: calc(var(--g) / -2);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0, rgba(200, 222, 255, 0.5) 28%, transparent 70%);
+  mix-blend-mode: screen;
+  animation: nebula-glow 5.2s ease-in-out var(--t) infinite;
+}
+
+.twinkle i {
+  position: absolute;
+  left: -0.5px;
+  top: calc(var(--len) / -2);
+  width: 1px;
+  height: var(--len);
+  background: linear-gradient(to bottom, transparent, rgba(225, 236, 255, 0.85) 50%, transparent);
+  mix-blend-mode: screen;
+  transform: rotate(var(--a));
+  animation: nebula-spike 5.2s ease-in-out var(--t) infinite;
+}
+
+.twinkle i.short {
+  height: calc(var(--len) * 0.35);
+  top: calc(var(--len) * -0.175);
+  opacity: 0.6;
+}
+
+.twinkle--small i {
+  background: linear-gradient(to bottom, transparent, rgba(225, 236, 255, 0.7) 50%, transparent);
+}
+
+.glint {
+  width: 2px;
+  height: 2px;
+  margin: -1px 0 0 -1px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 4px 1px rgba(180, 210, 255, 0.8);
+  opacity: 0.15;
+  animation: nebula-blink 3.8s ease-in-out var(--t) infinite;
+}
+
+.nebula-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 14px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  color: var(--text-tertiary);
+}
+
+.nebula-caption a {
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.nebula-caption a:hover {
+  color: var(--accent);
+}
+
+/* Exposure sequence: set up by the inline script, so without JS the tiles
+   are simply shown. Each tile fills top to bottom, overexposed and soft,
+   then settles. */
+.nebula.is-armed .nebula-fill {
+  clip-path: inset(0 0 100% 0);
+}
+
+.nebula.is-armed .nebula-tile::after {
+  opacity: 0.85;
+}
+
+.nebula.is-armed .nebula-glow {
+  opacity: 0;
+}
+
+.nebula.is-armed.is-exposed .nebula-glow {
+  opacity: 1;
+  transition: opacity 1.2s ease 1.6s;
+}
+
+.nebula.is-armed.is-exposed .nebula-fill {
+  animation: nebula-expose 1.6s cubic-bezier(0.3, 0.7, 0.2, 1) var(--d) both;
+}
+
+.nebula.is-armed.is-exposed .nebula-tile::after {
+  animation: nebula-corners-out 0.8s ease calc(var(--d) + 1.2s) both;
+}
+
+/* A random tile now and then takes a fresh exposure. The corner animation
+   keeps nebula-corners-out first in the list so it is not restarted. */
+.nebula-tile.is-reexposing .nebula-sky {
+  animation: nebula-reexpose 1.8s ease-out;
+}
+
+.nebula.is-armed.is-exposed .nebula-tile.is-reexposing::after {
+  animation: nebula-corners-out 0.8s ease calc(var(--d) + 1.2s) both, nebula-corners-flash 1.8s ease-out;
+}
+
+.nebula.is-paused *,
+.nebula.is-paused *::before,
+.nebula.is-paused *::after {
+  animation-play-state: paused !important;
+}
+
+@keyframes nebula-expose {
+  0%   { clip-path: inset(0 0 100% 0); filter: brightness(2.6) saturate(0.3) blur(4px); }
+  45%  { clip-path: inset(0 0 0 0);    filter: brightness(1.7) saturate(0.6) blur(1.5px); }
+  100% { clip-path: inset(0 0 0 0);    filter: brightness(1) saturate(1) blur(0); }
+}
+
+@keyframes nebula-corners-out {
+  to { opacity: 0; }
+}
+
+@keyframes nebula-corners-flash {
+  0%, 100% { opacity: 0; }
+  15%, 55% { opacity: 0.8; }
+}
+
+@keyframes nebula-reexpose {
+  0%   { filter: brightness(1) saturate(1) blur(0); }
+  18%  { filter: brightness(1.9) saturate(0.55) blur(1.5px); }
+  100% { filter: brightness(1) saturate(1) blur(0); }
+}
+
+@keyframes nebula-drift {
+  from { transform: scale(1.05) translate3d(0.8%, 0.6%, 0); }
+  to   { transform: scale(1.1) translate3d(-1%, -1.4%, 0); }
+}
+
+@keyframes nebula-scan {
+  0%   { transform: translateY(-22cqh); }
+  25%  { transform: translateY(100cqh); }
+  100% { transform: translateY(100cqh); }
+}
+
+@keyframes nebula-glow {
+  0%, 100% { opacity: 0.35; transform: scale(0.75); }
+  50%      { opacity: 1;    transform: scale(1.15); }
+}
+
+@keyframes nebula-spike {
+  0%, 100% { opacity: 0.15; scale: 1 0.55; }
+  50%      { opacity: 0.9;  scale: 1 1; }
+}
+
+@keyframes nebula-blink {
+  0%, 100% { opacity: 0.1; }
+  50%      { opacity: 0.95; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nebula-stage,
+  .nebula-sky::after,
+  .twinkle::before,
+  .twinkle i,
+  .glint {
+    animation: none;
+  }
+
+  .nebula-sky::after {
+    display: none;
+  }
+}
+
+/* On tall screens the whole sidebar is pinned and the strip takes
+   whatever height is left under the links. */
 @media (min-width: 901px) and (min-height: 1100px) {
   .sidebar {
+    align-self: start;
     position: sticky;
     top: 60px;
+    height: calc(100vh - 120px);
+  }
+
+  .nebula-rail {
+    min-height: 0;
+  }
+
+  .nebula {
+    position: static;
+    height: 100%;
   }
 }
 
@@ -596,6 +912,10 @@ footer {
   .sidebar {
     position: static;
     height: auto;
+  }
+
+  .nebula-rail {
+    display: none;
   }
 
   .sidebar-top {

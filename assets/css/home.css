@@ -125,7 +125,8 @@ a:hover {
 
 /* ── Nebula strip ──
    A JWST mosaic: eight tiles, each slightly offset and tilted, all showing
-   the same sky. Every tile holds a full-size copy of the strip
+   the same sky. This is the CSS fallback; with WebGL2 a canvas draws it.
+   Every tile holds a full-size copy of the strip
    (.nebula-sky), counter-rotated so the picture lines up across seams and
    only the tile edges look stitched. Sizes use container units of
    .nebula-frame. */
@@ -152,6 +153,34 @@ a:hover {
   flex: 1;
   min-height: 0;
   container-type: size;
+}
+
+/* WebGL path: the canvas draws the whole mosaic (see /assets/js/nebula.js);
+   the tile elements stay on top only for their corner marks. */
+.nebula-gl {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nebula.has-gl .nebula-gl {
+  display: block;
+}
+
+.nebula.has-gl .nebula-tile {
+  background: transparent;
+  box-shadow: none;
+  filter: none;
+}
+
+.nebula.has-gl .nebula-fill {
+  display: none;
+}
+
+.nebula.has-gl .nebula-glow .nebula-stage {
+  animation: none;
 }
 
 .nebula-tile {
@@ -205,16 +234,17 @@ a:hover {
 
 /* object-fit: cover by hand, so the twinkle layer can share the geometry.
    The picture is kept at least 1.35x the strip height so there is room to
-   pan: --descent (0 to 1, set from page scroll) slides it from the stars
-   at the top of the page down to the cliffs at the bottom. */
+   pan: --descent (0 to 1, set from page scroll) slides it from the top of
+   the image to the bottom as the reader moves down the page. --ar is the
+   image's height / width, set per nebula. */
 .nebula-stage {
   position: absolute;
-  --sw: max(100cqw, 100cqh * 1.35 * 600 / 1801);
+  --sw: max(100cqw, 100cqh * 1.35 / var(--ar, 3));
   width: var(--sw);
-  height: calc(var(--sw) * 1801 / 600);
+  height: calc(var(--sw) * var(--ar, 3));
   left: calc((100cqw - var(--sw)) / 2);
   top: 0;
-  translate: 0 calc((100cqh - var(--sw) * 1801 / 600) * var(--descent, 0.42));
+  translate: 0 calc((100cqh - var(--sw) * var(--ar, 3)) * var(--descent, 0.42));
   transform-origin: 50% 42%;
   animation: nebula-drift 48s ease-in-out infinite alternate;
   will-change: transform;

@@ -1,0 +1,276 @@
+% Compile with XeLaTeX. Content retained from the existing English CV.
+\RequirePackage{fix-cm}
+\documentclass{academic-cv}
+\usepackage{fontawesome5}
+\usepackage{needspace}
+\input{publication-layout.tex}
+\begin{document}
+\raggedright
+\cvname{Yuxuan Fan}
+\cvcontact{\faPhone\, +86 180 9096 8590\enspace|\enspace
+\href{mailto:orionisfan@outlook.com}{\faEnvelope\, orionisfan@outlook.com}\enspace|\enspace
+\href{https://yuxuanfanorion.github.io/}{\faHome\, yuxuanfanorion.github.io}\enspace|\enspace
+\href{https://scholar.google.com/citations?user=h8x-wqkAAAAJ}{\faGraduationCap\, Google Scholar}}
+
+\cvsection{Education}
+\cveducationentry{Nanyang Technological University}{Aug. 2026 -- Jun. 2030 (expected)}
+\cveducationdetail{Ph.D. student in Computer Science, College of Computing and Data Science. Advised by Prof. Jaehong Yoon.}
+\cveducationdetail{\cveducationlabel{Research Areas}\quad Recursive self-improvement, multimodal large language models, data flywheels, and model evaluation.}
+\cveducationdetail{\cveducationlabel{Scholarship}\quad Research Scholarship (approx. US\$127,000). \href{https://www.ntu.edu.sg/about-us/facts-figures/university-rankings}{QS World University Rankings 2027: \#12}.}
+
+\cveducationentry{The Hong Kong University of Science and Technology (Guangzhou)}{Aug. 2024 -- Jun. 2026}
+\cveducationdetail{M.Phil. in Artificial Intelligence, AI Thrust, Information Hub. Full University Scholarship (approx. US\$33,000).}
+
+\cveducationentry{University of Science and Technology Beijing}{Sep. 2020 -- Jun. 2024}
+\cveducationdetail{Bachelor's degree in Robotics \& Mechanical Engineering, School of Advanced Engineering.}
+\cveducationdetail{\cveducationlabel{GPA}\quad 3.61/4.0 (top 10\%). \cveducationlabel{Awards}\quad First-Class Scholarship; Outstanding Student.}
+
+\cveducationentry{Peking University}{Sep. 2021 -- Jun. 2024}
+\cveducationdetail{Minor in Economics, National School of Development.}
+
+\cvsection{Experience}
+\cventry{Research Intern @ \textcolor{cvaccent}{Wan Team, Tongyi Lab}}{Apr. 2026 -- Jun. 2026}
+\cvdetail{Participated in the pre-training of image generation models for Wan 3.0.}
+
+\cventry{Research Intern @ \textcolor{cvaccent}{Inclusion AI, Ant Group}}{Oct. 2025 -- Mar. 2026}
+\cvdetail{Participated in post-training \href{https://huggingface.co/inclusionAI/Ming-flash-omni-2.0}{Ming-Flash-Omni-2.0} to improve reasoning ability; improved reasoning benchmark performance through dataset curation and training strategy refinement.}
+
+\cventry{Multimodal Algorithm Research Intern @ \textcolor{cvaccent}{CV Lab, Alibaba AMAP}}{Jun. 2025 -- Sep. 2025}
+\cvdetail{Researched video understanding with large multimodal models for temporal and semantic comprehension. Designed generalization strategies for vision-language-action reasoning and social navigation. Improved action recognition and intent prediction through data augmentation, fine-tuning, and cross-modal alignment.}
+
+\cvsection{Publications \& Technical Reports}
+{\fontsize{8.8}{10.5}\selectfont\color{cvmuted}Asterisks (*) denote equal contribution.\par}
+\begin{pubitem}
+  \pubtag{[CVPR'26, Highlight]}
+  \pubtitle{\pubaccent{OralGPT-Plus}: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis}
+  \pubauthors{\pubme, Jing Hao, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2603.06366}\enspace\pubcode{https://github.com/isjinghao/OralGPT}}
+  \pubvenue{\pubaccepted{\cvpr}{2026}\,\textbf{(Highlight)}}
+  \pubsummary{Uses reinforcement learning and visual inspection tools to improve dental diagnosis from panoramic X-rays.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Main]}
+  \pubtitle{\pubaccent{PhoenixNest-Video}: Evidence-Grounded Multimodal Agent Framework for Automated Video Interview Assessment}
+  \pubauthors{\pubme, Miaojun Huang, Haimei Zhang, Jingshen Wu, Hao Liu}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2609.02231}}
+  \pubvenue{\pubaccepted{\emnlp}{2026}}
+  \pubsummary{Combines video graphs, cross-modal verification, and rubric-based scoring for evidence-grounded interview assessment.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[IJCAI'25]}
+  \pubtitle{How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM}
+  \pubauthors{\pubme\textsuperscript{*}, Jirong Zha\textsuperscript{*}, Xiao Yang, Chen Gao, Xinlei Chen}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2504.05786}}
+  \pubvenue{\pubaccepted{\ijcai}{2025}}
+  \pubsummary{Surveys image-, point-cloud-, and hybrid-modality approaches to 3D understanding and spatial reasoning with LLMs.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Under Review]}
+  \pubtitle{\pubaccent{MetaRubric}: Learning to Reward for Rubric-Based Reinforcement Learning}
+  \pubauthors{\pubme, Jaehong Yoon}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2610.02824}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{Couples evidence-aware policy optimization with adaptive rubrics to reduce unsupported rewards in medical reasoning.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Under Review]}
+  \pubtitle{\pubaccent{MuseBench}: Benchmarking Intent-Level Audiovisual Arts Understanding in MLLMs}
+  \pubauthors{\pubme, Gyusik Seo, Jing Hao, Jaemin Cho, Mohit Bansal, Jaehong Yoon}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2606.30026}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{Benchmarks creative-intent understanding with 4,016 audiovisual arts questions, exposing a gap between MLLMs and experts.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Under Review]}
+  \pubtitle{\pubaccent{RCI}: Robust, Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits}
+  \pubauthors{\pubme, Hao Zhao, Hao Tang}
+  \publinks{}
+  \pubvenue{\pubunderreview}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Toolkit]}
+  \pubtitle{\pubaccent{VLMEvalKit}: An Open-Source Toolkit for Evaluating Large Multi-Modality Models}
+  \pubauthors{VLMEvalKit Team}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2407.11691}\enspace\pubcode{https://github.com/open-compass/VLMEvalKit}}
+  \pubvenue{Toolkit}
+  \pubnote{Tech report / open-source toolkit. (GitHub: 4k stars)}
+  \pubsummary{Unifies data preparation, inference, answer extraction, and scoring for reproducible multimodal model evaluation.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Technical Report]}
+  \pubtitle{\pubaccent{Ming-flash-omni-2.0}: A Unified Multimodal Model for Perception and Generation}
+  \pubauthors{Inclusion AI, Ming Team}
+  \publinks{\pubmodel{https://huggingface.co/inclusionAI/Ming-flash-omni-2.0}\enspace\pubpage{https://mp.weixin.qq.com/s/hz2fsH1DGpp2zpY-Yngsog}}
+  \pubvenue{Tech report.}
+  \pubsummary{Unifies video understanding, controllable audio, and image generation in a 100B-parameter MoE with 6B active parameters.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[ICLR'26]}
+  \pubtitle{\pubaccent{ACE}: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall}
+  \pubauthors{Jiayu Yang\textsuperscript{*}, \pubme\textsuperscript{*}, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2510.07896}\enspace\pubcode{https://github.com/yjywdzh/ACE}}
+  \pubvenue{\pubaccepted{\iclr}{2026}}
+  \pubsummary{Edits neuron-level query-value pathways to propagate updated facts through multi-hop reasoning.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{AirCopBench}: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning}
+  \pubauthors{Jirong Zha\textsuperscript{*}, \pubme\textsuperscript{*}, Tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2511.11025}\enspace\pubcode{https://github.com/EmbodiedCity/AirCopBench.code}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{Tests multi-drone perception and reasoning with over 14,600 questions, including degraded visual conditions.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[NeurIPS'25]}
+  \pubtitle{\pubaccent{HALLUCINATION AT A GLANCE}: Controlled Visual Editing and Fine-Grained Multimodal Learning}
+  \pubauthors{Tianyi Bai\textsuperscript{*}, \pubme\textsuperscript{*}, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2506.07227}\enspace\pubcode{https://github.com/Relaxed-System-Lab/hallu_med}}
+  \pubvenue{\pubaccepted{\neurips}{2025}}
+  \pubsummary{Uses minimal image edits and feature consistency to improve fine-grained visual sensitivity and reduce hallucinations.}
+\end{pubitem}
+
+
+\begin{pubitem}
+  \pubtag{[NeurIPS'25]}
+  \pubtitle{\pubaccent{Towards Better Dental AI}: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis}
+  \pubauthors{Jing Hao\textsuperscript{*}, \pubme\textsuperscript{*}, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2509.09254}\enspace\pubcode{https://github.com/isjinghao/OralGPT}}
+  \pubvenue{\pubaccepted{\neurips}{2025}}
+  \pubsummary{Introduces 1.3 million dental instruction instances and a benchmark, and trains OralGPT for panoramic X-ray analysis.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{DIMM}: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning}
+  \pubauthors{Jirong Zha, \pubme, Kai Li, Han Li, Chen Gao, Xinlei Chen}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2505.12340}\enspace\pubcode{https://github.com/zhajirong/DIMM}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{Decouples 3D motion-model fusion and learns adaptive filter weights with RL to track highly maneuverable objects.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Preprint]}
+  \pubtitle{\pubaccent{FootQuery}: Future-Touchdown-Guided Retrieval from Depth History for Perceptive Humanoid Locomotion}
+  \pubauthors{Tao Dong\textsuperscript{*}, Jia Yu\textsuperscript{*}, \pubme, Linna Zhao, Jiaqi Gong, Andong Yang, Chao Gao, Guyue Zhou}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2609.21447}\enspace\pubpage{https://beiketaoerge.github.io/footquery/}}
+  \pubvenue{\textit{arXiv preprint, 2026}}
+  \pubsummary{Queries depth history with predicted foot touchdowns to guide humanoid locomotion across stairs, platforms, and gaps.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Under Review]}
+  \pubtitle{\pubaccent{GelFusion}: Enhancing Robotic Manipulation under Visual Constraints via Visuotactile Fusion}
+  \pubauthors{Shulong Jiang, Shiqi Zhao, \pubme, Peng Yin}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2505.07455}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{Fuses vision with geometric and dynamic tactile features for contact-rich manipulation under limited visibility.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Under Review]}
+  \pubtitle{\pubaccent{Not Only Consistency}: Enhance Test-Time Adaptation with Spatio-temporal Inconsistency for Remote Physiological Measurement}
+  \pubauthors{Xiao Yang, Jiyao Wang, \pubme, Can Liu, Houcheng Su, Weichen Guo, Zitong Yu, Dengbo He, Kaishun Wu}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2507.07908}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{Uses spatiotemporal consistency and variability for source-free test-time adaptation of physiological measurement.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[CVPR'26]}
+  \pubtitle{\pubaccent{OralGPT-Omni}: A Versatile Dental Multimodal Large Language Model}
+  \pubauthors{Jing Hao, Yuci Liang, Lizhuo Lin, \pubme, Wenkai Zhou, Kaixin Guo, Zanting Ye, Yanpeng Sun, Xinyu Zhang, Yanqi Yang, Qiankun Li, Hao Tang, James Kit-Hon Tsoi, Linlin Shen, Kuo Feng Hung}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2511.22055}}
+  \pubvenue{\pubaccepted{\cvpr}{2026}}
+  \pubsummary{Uses clinically grounded reasoning supervision and four-stage training for dental understanding across five modalities.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Main]}
+  \pubtitle{\pubaccent{NestedKV}: Nested Memory Routing for Long-Context KV Cache Compression}
+  \pubauthors{Hong Chen, Xiang Liu, Yubo Gao, \pubme, Bo Wang, Yuanlin Chu, Yuanguo Lin, Xuming Hu}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2605.26678}}
+  \pubvenue{\pubaccepted{\emnlp}{2026}}
+  \pubsummary{Combines nested memory anchors and head-adaptive budgets for training-free, long-context KV cache compression.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Journal]}
+  \pubtitle{V\textsuperscript{2}-Fusion: Virtual Voxel Enhanced 4D Radar-image Feature Fusion for 3D Object Detection}
+  \pubauthors{Li Wang, Haoming Zhang, Xinyu Zhang, \pubme, Long Shi, Tao Xie, Lei Yang, Bin Xu}
+  \publinks{\pubarxiv{https://www.sciencedirect.com/science/article/pii/S0957417425037455}}
+  \pubvenue{\textit{Expert Systems with Applications 2025}}
+  \pubsummary{Densifies radar voxels with image semantics and aggregates local textures to improve 3D object detection.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{Deconstructing Pre-training}: Knowledge Attribution Analysis in MoE and Dense Models}
+  \pubauthors{Bo Wang, Junzhuo Li, Hong Chen, Yuanlin Chu, \pubme, Xuming Hu}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2601.08383}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{Tracks neuron-level knowledge acquisition with Gated-LPI, comparing consolidation and robustness in MoE and dense models.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Main]}
+  \pubtitle{\pubaccent{Decomposing Visual Histories with Vision-Language Agents}: Hierarchical Temporal Guidance for Compositional Image Generation}
+  \pubauthors{Lujundong Li, Mingxu Zhang, Songning Lai, Jiayu Yang, \pubme, Ziwei Xie, Feng Liu, Changwang Zhang, Jun Wang, Dazhong Shen, Ying Sun}
+  \publinks{\pubarxiv{https://openreview.net/pdf/7f17f807dd64208e44c6df6a415d4406e19c0a51.pdf}}
+  \pubvenue{\pubaccepted{\emnlp}{2026}}
+  \pubsummary{Routes subject, structure, and detail from visual references to different denoising stages for compositional generation.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Findings]}
+  \pubtitle{\pubaccent{Demystifying Hidden-State Recurrence}: Switchable Latent Reasoning with On-Policy Reinforcement Learning}
+  \pubauthors{Jiayu Yang, Chao Chen, Shengen Wu, Yinhong Liu, \pubme, Lujundong Li, Songning Lai, Chengwei Qin, Zhijiang Guo}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2606.13106}}
+  \pubvenue{\pubaccepted{\emnlpfindings}{2026}}
+  \pubsummary{Uses discrete boundary tokens for on-policy RL of continuous latent reasoning and causal analysis of latent computation.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[ACM MM'25]}
+  \pubtitle{\pubaccent{EventVAD}: Training-free Event-aware Video Anomaly Detection}
+  \pubauthors{Yihua Shao, Haojin He, Sijie Li, Siyu Chen, Xinwei Long, Fanhu Zeng, \pubme, Muyang Zhang, Ziyang Yan, Ao Ma, Xiaochen Wang, Hao Tang, Yan Wang, Shuyan Li}
+  \publinks{\pubpdf{https://dl.acm.org/doi/pdf/10.1145/3746027.3754500}}
+  \pubvenue{\textit{ACM MM 2025}}
+  \pubsummary{Segments videos into events with dynamic graphs and applies hierarchical multimodal prompting for training-free anomaly detection.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[Under Review]}
+  \pubtitle{\pubaccent{Moss-chatv}: Reinforcement Learning with Process Reasoning Reward for Video Temporal Reasoning}
+  \pubauthors{Sicheng Tao, Jungang Li, Yibo Yan, Junyan Zhang, Yubo Gao, Hanqian Li, ShuHang Xun, \pubme, Hong Chen, Jianxiang He, Xuming Hu}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2509.21113}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{Uses a dynamic-time-warping process reward to align video reasoning with temporal evidence and improve question answering.}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{RoadSceneVQA}: Benchmarking Visual Question Answering in Roadside Perception Systems for Intelligent Transportation System}
+  \pubauthors{Runwei Guan, Rongsheng Hu, Shangshu Chen, Ningyuan Xiao, Xue Xia, Jiayang Liu, Beibei Chen, Ziren Tang, Ningwei Ouyang, Shaofeng Liang, \pubme, Wanjie Sun, Yutao Yue}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2511.18286}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{Introduces 34,736 roadside questions and a reasoning baseline for understanding traffic intent, legality, and interactions.}
+\end{pubitem}
+
+\cvsection{Awards \& Languages}
+\cvdetail{\textbf{RoboMaster National Finals}\quad Second Prize, 2023.}
+\cvdetail{\textbf{Mathematical Modeling}\quad Honorable Mention, MCM/ICM, 2022; Second Prize, APMCM, 2023.}
+\cvdetail{\textbf{English}\quad IELTS 7.0.}
+\cvsection{Professional Services}
+\cvdetail{\textbf{Conference Reviewer}\quad CVPR, AAAI, KDD, IEEE IV, IEEE ITSC, IEEE ICIP.}
+\cvdetail{\textbf{Journal Reviewer}\quad International Journal of Computer Vision (IJCV); ACM Transactions on Intelligent Systems and Technology (TIST); Knowledge-Based Systems (KBS); IEEE Journal of Biomedical and Health Informatics (JBHI).}
+\end{document}

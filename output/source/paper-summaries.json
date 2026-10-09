@@ -1,0 +1,177 @@
+[
+  {
+    "id": 1,
+    "paper": "OralGPT-Plus",
+    "source": "https://arxiv.org/abs/2603.06366",
+    "read": "Abstract",
+    "summary": "Uses reinforcement learning and visual inspection tools to improve dental diagnosis from panoramic X-rays."
+  },
+  {
+    "id": 2,
+    "paper": "PhoenixNest-Video",
+    "source": "https://arxiv.org/abs/2609.02231",
+    "read": "Abstract",
+    "summary": "Combines video graphs, cross-modal verification, and rubric-based scoring for evidence-grounded interview assessment."
+  },
+  {
+    "id": 3,
+    "paper": "How to Enable LLM with 3D Capacity?",
+    "source": "https://arxiv.org/abs/2504.05786",
+    "read": "Abstract",
+    "summary": "Surveys image-, point-cloud-, and hybrid-modality approaches to 3D understanding and spatial reasoning with LLMs."
+  },
+  {
+    "id": 4,
+    "paper": "MetaRubric",
+    "source": "https://arxiv.org/html/2610.02824v1",
+    "read": "Abstract and Introduction",
+    "summary": "Couples evidence-aware policy optimization with adaptive rubrics to reduce unsupported rewards in medical reasoning."
+  },
+  {
+    "id": 5,
+    "paper": "MuseBench",
+    "source": "https://arxiv.org/abs/2606.30026",
+    "read": "Abstract",
+    "summary": "Benchmarks creative-intent understanding with 4,016 audiovisual arts questions, exposing a gap between MLLMs and experts."
+  },
+  {
+    "id": 6,
+    "paper": "RCI",
+    "source": null,
+    "read": "No public manuscript located; requested a link or local manuscript from the user.",
+    "summary": null
+  },
+  {
+    "id": 7,
+    "paper": "VLMEvalKit",
+    "source": "https://arxiv.org/abs/2407.11691",
+    "read": "Abstract and official repository README",
+    "summary": "Unifies data preparation, inference, answer extraction, and scoring for reproducible multimodal model evaluation."
+  },
+  {
+    "id": 8,
+    "paper": "Ming-flash-omni-2.0",
+    "source": "https://huggingface.co/inclusionAI/Ming-flash-omni-2.0",
+    "read": "Official model card: Introduction and Key Features",
+    "summary": "Unifies video understanding, controllable audio, and image generation in a 100B-parameter MoE with 6B active parameters."
+  },
+  {
+    "id": 9,
+    "paper": "ACE",
+    "source": "https://arxiv.org/abs/2510.07896",
+    "read": "Abstract",
+    "summary": "Edits neuron-level query-value pathways to propagate updated facts through multi-hop reasoning."
+  },
+  {
+    "id": 10,
+    "paper": "AirCopBench",
+    "source": "https://arxiv.org/abs/2511.11025",
+    "read": "Abstract",
+    "summary": "Tests multi-drone perception and reasoning with over 14,600 questions, including degraded visual conditions."
+  },
+  {
+    "id": 11,
+    "paper": "Hallucination at a Glance",
+    "source": "https://arxiv.org/abs/2506.07227",
+    "read": "Abstract",
+    "summary": "Uses minimal image edits and feature consistency to improve fine-grained visual sensitivity and reduce hallucinations."
+  },
+  {
+    "id": 12,
+    "paper": "Towards Better Dental AI",
+    "source": "https://arxiv.org/abs/2509.09254",
+    "read": "Abstract",
+    "summary": "Introduces 1.3 million dental instruction instances and a benchmark, and trains OralGPT for panoramic X-ray analysis."
+  },
+  {
+    "id": 13,
+    "paper": "DIMM",
+    "source": "https://arxiv.org/abs/2505.12340",
+    "read": "Abstract",
+    "summary": "Decouples 3D motion-model fusion and learns adaptive filter weights with RL to track highly maneuverable objects."
+  },
+  {
+    "id": 14,
+    "paper": "FootQuery",
+    "source": "https://arxiv.org/abs/2609.21447",
+    "read": "Abstract and PDF first page (author order and equal contribution)",
+    "summary": "Queries depth history with predicted foot touchdowns to guide humanoid locomotion across stairs, platforms, and gaps."
+  },
+  {
+    "id": 15,
+    "paper": "GelFusion",
+    "source": "https://arxiv.org/abs/2505.07455",
+    "read": "Abstract",
+    "summary": "Fuses vision with geometric and dynamic tactile features for contact-rich manipulation under limited visibility."
+  },
+  {
+    "id": 16,
+    "paper": "Not Only Consistency",
+    "source": "https://arxiv.org/abs/2507.07908",
+    "read": "Abstract",
+    "summary": "Uses spatiotemporal consistency and variability for source-free test-time adaptation of physiological measurement."
+  },
+  {
+    "id": 17,
+    "paper": "OralGPT-Omni",
+    "source": "https://arxiv.org/abs/2511.22055",
+    "read": "Abstract",
+    "summary": "Uses clinically grounded reasoning supervision and four-stage training for dental understanding across five modalities."
+  },
+  {
+    "id": 18,
+    "paper": "NestedKV",
+    "source": "https://arxiv.org/abs/2605.26678",
+    "read": "Abstract",
+    "summary": "Combines nested memory anchors and head-adaptive budgets for training-free, long-context KV cache compression."
+  },
+  {
+    "id": 19,
+    "paper": "V2-Fusion",
+    "source": "https://www.sciencedirect.com/science/article/pii/S0957417425037455",
+    "read": "Publisher-indexed Method and Conclusion snippets; publisher page returned 403 on direct open.",
+    "summary": "Densifies radar voxels with image semantics and aggregates local textures to improve 3D object detection."
+  },
+  {
+    "id": 20,
+    "paper": "Deconstructing Pre-training",
+    "source": "https://ojs.aaai.org/index.php/AAAI/article/view/40622",
+    "read": "Publisher abstract",
+    "summary": "Tracks neuron-level knowledge acquisition with Gated-LPI, comparing consolidation and robustness in MoE and dense models."
+  },
+  {
+    "id": 21,
+    "paper": "Decomposing Visual Histories",
+    "source": "https://openreview.net/pdf/7f17f807dd64208e44c6df6a415d4406e19c0a51.pdf",
+    "read": "Manuscript abstract and introduction",
+    "summary": "Routes subject, structure, and detail from visual references to different denoising stages for compositional generation."
+  },
+  {
+    "id": 22,
+    "paper": "Demystifying Hidden-State Recurrence",
+    "source": "https://arxiv.org/abs/2606.13106",
+    "read": "Abstract",
+    "summary": "Uses discrete boundary tokens for on-policy RL of continuous latent reasoning and causal analysis of latent computation."
+  },
+  {
+    "id": 23,
+    "paper": "EventVAD",
+    "source": "https://arxiv.org/abs/2504.13092",
+    "read": "Abstract and official repository README",
+    "summary": "Segments videos into events with dynamic graphs and applies hierarchical multimodal prompting for training-free anomaly detection."
+  },
+  {
+    "id": 24,
+    "paper": "MOSS-ChatV",
+    "source": "https://arxiv.org/abs/2509.21113",
+    "read": "Abstract",
+    "summary": "Uses a dynamic-time-warping process reward to align video reasoning with temporal evidence and improve question answering."
+  },
+  {
+    "id": 25,
+    "paper": "RoadSceneVQA",
+    "source": "https://arxiv.org/abs/2511.18286",
+    "read": "Abstract",
+    "summary": "Introduces 34,736 roadside questions and a reasoning baseline for understanding traffic intent, legality, and interactions."
+  }
+]

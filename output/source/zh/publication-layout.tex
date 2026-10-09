@@ -1,0 +1,65 @@
+% Compact publication entries for academic-cv (Simplified Chinese build). Requires fontawesome5 in the main file.
+\newcommand{\pubme}{{\color{cvink}Yuxuan Fan}}
+\newcommand{\pubarxiv}[1]{\href{#1}{\faFilePdf}}
+\newcommand{\pubpdf}[1]{\pubarxiv{#1}}
+\newcommand{\pubcode}[1]{\href{#1}{\faGithub}}
+\newcommand{\pubmodel}[1]{\href{#1}{\faCube}}
+\newcommand{\pubpage}[1]{\href{#1}{\faGlobe}}
+\newcommand{\cvpr}{CVPR}
+\newcommand{\neurips}{NeurIPS}
+\newcommand{\ijcai}{IJCAI}
+\newcommand{\aaai}{AAAI}
+\newcommand{\acmmm}{ACM MM}
+\newcommand{\iclr}{ICLR}
+\newcommand{\emnlp}{EMNLP (Main)}
+\newcommand{\emnlpfindings}{EMNLP (Findings)}
+\newcommand{\pubaccepted}[2]{\textit{#1 #2}}
+\newcommand{\pubunderreview}{\textit{审稿中}}
+\newcommand{\pubaccent}[1]{{\color{cvaccent}#1}}
+\newcounter{publication}
+\newlength{\pubindent}
+\setlength{\pubindent}{17.5pt}
+\newcommand{\pubtag}[1]{\def\pubtagvalue{#1}}
+\newcommand{\pubtitle}[1]{\def\pubtitlevalue{#1}}
+\newcommand{\pubauthors}[1]{\def\pubauthorsvalue{#1}}
+\newcommand{\publinks}[1]{\def\publinksvalue{#1}}
+\newcommand{\pubvenue}[1]{\def\pubvenuevalue{#1}}
+\newcommand{\pubnote}[1]{\def\pubnotevalue{#1}}
+\newcommand{\pubsummary}[1]{\def\pubsummaryvalue{#1}}
+\newcommand{\pubrightcluster}{%
+  {\fontsize{8.8pt}{10.5pt}\selectfont\color{cvmuted}%
+    \ifx\publinksvalue\empty\else\publinksvalue\enspace\fi
+    \pubvenuevalue}}
+\newenvironment{pubitem}{%
+  \def\pubtagvalue{}\def\pubtitlevalue{}\def\pubauthorsvalue{}%
+  \def\publinksvalue{}\def\pubvenuevalue{}\def\pubnotevalue{}\def\pubsummaryvalue{}%
+}{%
+  \par\addvspace{2.4pt}\noindent
+  \begin{minipage}{\linewidth}
+    \refstepcounter{publication}%
+    \begingroup
+      \fontsize{10pt}{11.5pt}\selectfont\raggedright
+      \hyphenpenalty=5000\exhyphenpenalty=5000
+      \hangindent=\pubindent\hangafter=1
+      \makebox[\pubindent][l]{{\fontsize{8.7pt}{10pt}\selectfont\color{cvaccent}\thepublication.}}%
+      {\bfseries\spaceskip=.65\fontdimen2\font\relax\xspaceskip=0pt\relax\pubtitlevalue}%
+      \ifx\publinksvalue\empty
+        \ifx\pubvenuevalue\empty\else\nobreak\hspace{.6em plus 1fill}\mbox{\pubrightcluster}\fi
+      \else\nobreak\hspace{.6em plus 1fill}\mbox{\pubrightcluster}\fi
+      \par
+    \endgroup
+    \begingroup
+      \fontsize{9pt}{10.6pt}\selectfont\color{cvmuted}%
+      \leftskip=\pubindent\rightskip=0pt plus 1fil\noindent\pubauthorsvalue\par
+      \ifx\pubnotevalue\empty\else
+        {\itshape\pubnotevalue}\par
+      \fi
+    \endgroup
+    \ifx\pubsummaryvalue\empty\else
+      \begingroup
+        \fontsize{9.2pt}{10.8pt}\selectfont\color{cvsummaryblue}%
+        \leftskip=\pubindent\rightskip=0pt plus 1fil\noindent\pubsummaryvalue\par
+      \endgroup
+    \fi
+  \end{minipage}\par
+}

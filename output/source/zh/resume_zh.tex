@@ -1,0 +1,276 @@
+% Compile with XeLaTeX. Simplified Chinese version of the English CV.
+\RequirePackage{fix-cm}
+\documentclass{academic-cv}
+\usepackage{fontawesome5}
+\usepackage{needspace}
+\input{publication-layout.tex}
+\begin{document}
+\raggedright
+\cvname{樊宇轩 Yuxuan Fan}
+\cvcontact{\faPhone\, +86 180 9096 8590\enspace|\enspace
+\href{mailto:orionisfan@outlook.com}{\faEnvelope\, orionisfan@outlook.com}\enspace|\enspace
+\href{https://yuxuanfanorion.github.io/}{\faHome\, yuxuanfanorion.github.io}\enspace|\enspace
+\href{https://scholar.google.com/citations?user=h8x-wqkAAAAJ}{\faGraduationCap\, Google Scholar}}
+
+\cvsection{教育背景}
+\cveducationentry{南洋理工大学}{2026 年 8 月 -- 2030 年 6 月（预计）}
+\cveducationdetail{计算机科学博士研究生，计算与数据科学学院。导师：Jaehong Yoon 教授。}
+\cveducationdetail{\cveducationlabel{研究方向}\quad 递归自我改进、多模态大语言模型、数据飞轮与模型评测。}
+\cveducationdetail{\cveducationlabel{奖学金}\quad 研究奖学金（约 127,000 美元）。\href{https://www.ntu.edu.sg/about-us/facts-figures/university-rankings}{QS 世界大学排名 2027：第 12 名}。}
+
+\cveducationentry{香港科技大学（广州）}{2024 年 8 月 -- 2026 年 6 月}
+\cveducationdetail{人工智能哲学硕士（M.Phil.），信息枢纽人工智能学域。学校全额奖学金（约 33,000 美元）。}
+
+\cveducationentry{北京科技大学}{2020 年 9 月 -- 2024 年 6 月}
+\cveducationdetail{机器人与机械工程学士，高等工程师学院。}
+\cveducationdetail{\cveducationlabel{GPA}\quad 3.61/4.0（前 10\%）。\cveducationlabel{奖项}\quad 一等奖学金；优秀学生。}
+
+\cveducationentry{北京大学}{2021 年 9 月 -- 2024 年 6 月}
+\cveducationdetail{经济学辅修，国家发展研究院。}
+
+\cvsection{实习经历}
+\cventry{研究实习生 @ \textcolor{cvaccent}{通义实验室 Wan 团队}}{2026 年 4 月 -- 2026 年 6 月}
+\cvdetail{参与 Wan 3.0 图像生成模型的预训练。}
+
+\cventry{研究实习生 @ \textcolor{cvaccent}{蚂蚁集团 Inclusion AI}}{2025 年 10 月 -- 2026 年 3 月}
+\cvdetail{参与 \href{https://huggingface.co/inclusionAI/Ming-flash-omni-2.0}{Ming-Flash-Omni-2.0} 的后训练以提升推理能力；通过数据集整理与筛选以及训练策略优化，提升了推理基准上的表现。}
+
+\cventry{多模态算法研究实习生 @ \textcolor{cvaccent}{阿里巴巴高德 CV Lab}}{2025 年 6 月 -- 2025 年 9 月}
+\cvdetail{研究基于大型多模态模型的视频理解，涵盖时序与语义理解。设计了面向视觉-语言-动作推理与社交导航的泛化策略。通过数据增强、微调与跨模态对齐，提升了动作识别与意图预测的效果。}
+
+\cvsection{论文与技术报告}
+{\fontsize{8.8}{10.5}\selectfont\color{cvmuted}星号（*）表示同等贡献。\par}
+\begin{pubitem}
+  \pubtag{[CVPR'26, Highlight]}
+  \pubtitle{\pubaccent{OralGPT-Plus}: Learning to Use Visual Tools via Reinforcement Learning for Panoramic X-ray Analysis}
+  \pubauthors{\pubme, Jing Hao, Hong Chen, Jiahao Bao, Yihua Shao, Yuci Liang, Kuo Feng Hung, Hao Tang}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2603.06366}\enspace\pubcode{https://github.com/isjinghao/OralGPT}}
+  \pubvenue{\pubaccepted{\cvpr}{2026}\,\textbf{（Highlight）}}
+  \pubsummary{结合强化学习与视觉检查工具，提升基于全景 X 光片的牙科诊断。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Main]}
+  \pubtitle{\pubaccent{PhoenixNest-Video}: Evidence-Grounded Multimodal Agent Framework for Automated Video Interview Assessment}
+  \pubauthors{\pubme, Miaojun Huang, Haimei Zhang, Jingshen Wu, Hao Liu}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2609.02231}}
+  \pubvenue{\pubaccepted{\emnlp}{2026}}
+  \pubsummary{结合视频图结构、跨模态验证与基于评分细则的打分，实现有证据支撑的面试评估。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[IJCAI'25]}
+  \pubtitle{How to Enable LLM with 3D Capacity? A Survey of Spatial Reasoning in LLM}
+  \pubauthors{\pubme\textsuperscript{*}, Jirong Zha\textsuperscript{*}, Xiao Yang, Chen Gao, Xinlei Chen}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2504.05786}}
+  \pubvenue{\pubaccepted{\ijcai}{2025}}
+  \pubsummary{综述基于图像、点云及混合模态的方法，探讨 LLM 的三维理解与空间推理。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[审稿中]}
+  \pubtitle{\pubaccent{MetaRubric}: Learning to Reward for Rubric-Based Reinforcement Learning}
+  \pubauthors{\pubme, Jaehong Yoon}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2610.02824}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{将证据感知的策略优化与自适应评分细则结合，减少医学推理中缺乏依据的奖励。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[审稿中]}
+  \pubtitle{\pubaccent{MuseBench}: Benchmarking Intent-Level Audiovisual Arts Understanding in MLLMs}
+  \pubauthors{\pubme, Gyusik Seo, Jing Hao, Jaemin Cho, Mohit Bansal, Jaehong Yoon}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2606.30026}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{以 4,016 道视听艺术问题评测对创作意图的理解，揭示 MLLM 与专家之间的差距。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[审稿中]}
+  \pubtitle{\pubaccent{RCI}: Robust, Controllable and Interpretable Robotic Manipulation Integrating Knowledge Editing and Bandits}
+  \pubauthors{\pubme, Hao Zhao, Hao Tang}
+  \publinks{}
+  \pubvenue{\pubunderreview}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[工具包]}
+  \pubtitle{\pubaccent{VLMEvalKit}: An Open-Source Toolkit for Evaluating Large Multi-Modality Models}
+  \pubauthors{VLMEvalKit Team}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2407.11691}\enspace\pubcode{https://github.com/open-compass/VLMEvalKit}}
+  \pubvenue{工具包}
+  \pubnote{技术报告 / 开源工具包。（GitHub：4k stars）}
+  \pubsummary{统一数据准备、推理、答案提取与评分流程，实现可复现的多模态模型评测。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[技术报告]}
+  \pubtitle{\pubaccent{Ming-flash-omni-2.0}: A Unified Multimodal Model for Perception and Generation}
+  \pubauthors{Inclusion AI, Ming Team}
+  \publinks{\pubmodel{https://huggingface.co/inclusionAI/Ming-flash-omni-2.0}\enspace\pubpage{https://mp.weixin.qq.com/s/hz2fsH1DGpp2zpY-Yngsog}}
+  \pubvenue{技术报告}
+  \pubsummary{在总参数量 1,000 亿、激活参数量 60 亿的 MoE 模型中统一视频理解、可控音频与图像生成。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[ICLR'26]}
+  \pubtitle{\pubaccent{ACE}: Attribution-Controlled Knowledge Editing for Multi-hop Factual Recall}
+  \pubauthors{Jiayu Yang\textsuperscript{*}, \pubme\textsuperscript{*}, Songning Lai, Shengen Wu, Jiaqi Tang, Chun Kang, Zhijiang Guo, Yutao Yue}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2510.07896}\enspace\pubcode{https://github.com/yjywdzh/ACE}}
+  \pubvenue{\pubaccepted{\iclr}{2026}}
+  \pubsummary{编辑神经元层面的 query-value 通路，使更新后的事实在多跳推理中得以传播。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{AirCopBench}: A Benchmark for Multi-drone Collaborative Embodied Perception and Reasoning}
+  \pubauthors{Jirong Zha\textsuperscript{*}, \pubme\textsuperscript{*}, Tianyu Zhang, Geng Chen, Yingfeng Chen, Chen Gao, Xinlei Chen}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2511.11025}\enspace\pubcode{https://github.com/EmbodiedCity/AirCopBench.code}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{以超过 14,600 道问题测试多无人机感知与推理，涵盖视觉退化的场景。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[NeurIPS'25]}
+  \pubtitle{\pubaccent{HALLUCINATION AT A GLANCE}: Controlled Visual Editing and Fine-Grained Multimodal Learning}
+  \pubauthors{Tianyi Bai\textsuperscript{*}, \pubme\textsuperscript{*}, Jiantao Qiu, Fupeng Sun, Jiayi Song, Junlin Han, Zichen Liu, Conghui He, Wentao Zhang, Binhang Yuan}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2506.07227}\enspace\pubcode{https://github.com/Relaxed-System-Lab/hallu_med}}
+  \pubvenue{\pubaccepted{\neurips}{2025}}
+  \pubsummary{利用微小的图像编辑与特征一致性，提升细粒度视觉敏感度并减少幻觉。}
+\end{pubitem}
+
+
+\begin{pubitem}
+  \pubtag{[NeurIPS'25]}
+  \pubtitle{\pubaccent{Towards Better Dental AI}: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis}
+  \pubauthors{Jing Hao\textsuperscript{*}, \pubme\textsuperscript{*}, Yanpeng Sun, Kaixin Guo, Lizhuo Lin, Jinrong Yang, Qi Yong H. Ai, Lun M. Wong, Hao Tang, Kuo Feng Hung}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2509.09254}\enspace\pubcode{https://github.com/isjinghao/OralGPT}}
+  \pubvenue{\pubaccepted{\neurips}{2025}}
+  \pubsummary{提出 130 万条牙科指令样本与一个基准，并训练用于全景 X 光片分析的 OralGPT。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{DIMM}: Decoupled Multi-hierarchy Kalman Filter via Reinforcement Learning}
+  \pubauthors{Jirong Zha, \pubme, Kai Li, Han Li, Chen Gao, Xinlei Chen}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2505.12340}\enspace\pubcode{https://github.com/zhajirong/DIMM}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{解耦三维运动模型融合，并通过强化学习获得自适应滤波权重，以跟踪高机动目标。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[预印本]}
+  \pubtitle{\pubaccent{FootQuery}: Future-Touchdown-Guided Retrieval from Depth History for Perceptive Humanoid Locomotion}
+  \pubauthors{Tao Dong\textsuperscript{*}, Jia Yu\textsuperscript{*}, \pubme, Linna Zhao, Jiaqi Gong, Andong Yang, Chao Gao, Guyue Zhou}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2609.21447}\enspace\pubpage{https://beiketaoerge.github.io/footquery/}}
+  \pubvenue{\textit{arXiv 预印本，2026}}
+  \pubsummary{利用预测的落脚点检索历史深度图像，引导人形机器人通过楼梯、平台与间隙。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[审稿中]}
+  \pubtitle{\pubaccent{GelFusion}: Enhancing Robotic Manipulation under Visual Constraints via Visuotactile Fusion}
+  \pubauthors{Shulong Jiang, Shiqi Zhao, \pubme, Peng Yin}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2505.07455}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{将视觉信息与触觉的几何及动态特征融合，用于视觉受限下的接触密集型操作。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[审稿中]}
+  \pubtitle{\pubaccent{Not Only Consistency}: Enhance Test-Time Adaptation with Spatio-temporal Inconsistency for Remote Physiological Measurement}
+  \pubauthors{Xiao Yang, Jiyao Wang, \pubme, Can Liu, Houcheng Su, Weichen Guo, Zitong Yu, Dengbo He, Kaishun Wu}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2507.07908}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{利用时空一致性与变化特征，实现无需源域数据的生理测量测试时自适应。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[CVPR'26]}
+  \pubtitle{\pubaccent{OralGPT-Omni}: A Versatile Dental Multimodal Large Language Model}
+  \pubauthors{Jing Hao, Yuci Liang, Lizhuo Lin, \pubme, Wenkai Zhou, Kaixin Guo, Zanting Ye, Yanpeng Sun, Xinyu Zhang, Yanqi Yang, Qiankun Li, Hao Tang, James Kit-Hon Tsoi, Linlin Shen, Kuo Feng Hung}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2511.22055}}
+  \pubvenue{\pubaccepted{\cvpr}{2026}}
+  \pubsummary{采用基于临床依据的推理监督与四阶段训练，实现跨五种模态的牙科理解。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Main]}
+  \pubtitle{\pubaccent{NestedKV}: Nested Memory Routing for Long-Context KV Cache Compression}
+  \pubauthors{Hong Chen, Xiang Liu, Yubo Gao, \pubme, Bo Wang, Yuanlin Chu, Yuanguo Lin, Xuming Hu}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2605.26678}}
+  \pubvenue{\pubaccepted{\emnlp}{2026}}
+  \pubsummary{结合嵌套记忆锚点与注意力头自适应预算，实现免训练的长上下文 KV 缓存压缩。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[期刊]}
+  \pubtitle{V\textsuperscript{2}-Fusion: Virtual Voxel Enhanced 4D Radar-image Feature Fusion for 3D Object Detection}
+  \pubauthors{Li Wang, Haoming Zhang, Xinyu Zhang, \pubme, Long Shi, Tao Xie, Lei Yang, Bin Xu}
+  \publinks{\pubarxiv{https://www.sciencedirect.com/science/article/pii/S0957417425037455}}
+  \pubvenue{\textit{Expert Systems with Applications 2025}}
+  \pubsummary{利用图像语义稠密化雷达体素并聚合局部纹理，以提升三维目标检测。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{Deconstructing Pre-training}: Knowledge Attribution Analysis in MoE and Dense Models}
+  \pubauthors{Bo Wang, Junzhuo Li, Hong Chen, Yuanlin Chu, \pubme, Xuming Hu}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2601.08383}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{通过 Gated-LPI 追踪神经元层面的知识获取，比较 MoE 与稠密模型的知识巩固与鲁棒性。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Main]}
+  \pubtitle{\pubaccent{Decomposing Visual Histories with Vision-Language Agents}: Hierarchical Temporal Guidance for Compositional Image Generation}
+  \pubauthors{Lujundong Li, Mingxu Zhang, Songning Lai, Jiayu Yang, \pubme, Ziwei Xie, Feng Liu, Changwang Zhang, Jun Wang, Dazhong Shen, Ying Sun}
+  \publinks{\pubarxiv{https://openreview.net/pdf/7f17f807dd64208e44c6df6a415d4406e19c0a51.pdf}}
+  \pubvenue{\pubaccepted{\emnlp}{2026}}
+  \pubsummary{将视觉参考中的主体、结构与细节分别路由到不同的去噪阶段，用于组合式生成。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[EMNLP'26 Findings]}
+  \pubtitle{\pubaccent{Demystifying Hidden-State Recurrence}: Switchable Latent Reasoning with On-Policy Reinforcement Learning}
+  \pubauthors{Jiayu Yang, Chao Chen, Shengen Wu, Yinhong Liu, \pubme, Lujundong Li, Songning Lai, Chengwei Qin, Zhijiang Guo}
+  \publinks{\pubarxiv{https://arxiv.org/abs/2606.13106}}
+  \pubvenue{\pubaccepted{\emnlpfindings}{2026}}
+  \pubsummary{使用离散边界 token，通过同策略强化学习训练连续潜在空间推理，并对潜在空间计算进行因果分析。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[ACM MM'25]}
+  \pubtitle{\pubaccent{EventVAD}: Training-free Event-aware Video Anomaly Detection}
+  \pubauthors{Yihua Shao, Haojin He, Sijie Li, Siyu Chen, Xinwei Long, Fanhu Zeng, \pubme, Muyang Zhang, Ziyang Yan, Ao Ma, Xiaochen Wang, Hao Tang, Yan Wang, Shuyan Li}
+  \publinks{\pubpdf{https://dl.acm.org/doi/pdf/10.1145/3746027.3754500}}
+  \pubvenue{\textit{ACM MM 2025}}
+  \pubsummary{利用动态图将视频切分为事件，并通过分层多模态提示实现免训练异常检测。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[审稿中]}
+  \pubtitle{\pubaccent{Moss-chatv}: Reinforcement Learning with Process Reasoning Reward for Video Temporal Reasoning}
+  \pubauthors{Sicheng Tao, Jungang Li, Yibo Yan, Junyan Zhang, Yubo Gao, Hanqian Li, ShuHang Xun, \pubme, Hong Chen, Jianxiang He, Xuming Hu}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2509.21113}}
+  \pubvenue{\pubunderreview}
+  \pubsummary{使用基于动态时间规整的过程奖励，使视频推理与时序证据对齐，从而改进问答。}
+\end{pubitem}
+
+\begin{pubitem}
+  \pubtag{[AAAI'26]}
+  \pubtitle{\pubaccent{RoadSceneVQA}: Benchmarking Visual Question Answering in Roadside Perception Systems for Intelligent Transportation System}
+  \pubauthors{Runwei Guan, Rongsheng Hu, Shangshu Chen, Ningyuan Xiao, Xue Xia, Jiayang Liu, Beibei Chen, Ziren Tang, Ningwei Ouyang, Shaofeng Liang, \pubme, Wanjie Sun, Yutao Yue}
+  \publinks{\pubarxiv{https://arxiv.org/pdf/2511.18286}}
+  \pubvenue{\pubaccepted{\aaai}{2026}}
+  \pubsummary{提出 34,736 个路侧问题及一个推理基线，用于理解交通意图、合法性与交互。}
+\end{pubitem}
+
+\cvsection{奖项与语言}
+\cvdetail{\textbf{RoboMaster 全国总决赛}\quad 二等奖，2023。}
+\cvdetail{\textbf{数学建模}\quad MCM/ICM 荣誉奖（Honorable Mention），2022；APMCM 二等奖，2023。}
+\cvdetail{\textbf{英语}\quad 雅思 7.0。}
+\cvsection{学术服务}
+\cvdetail{\textbf{会议审稿人}\quad CVPR, AAAI, KDD, IEEE IV, IEEE ITSC, IEEE ICIP。}
+\cvdetail{\textbf{期刊审稿人}\quad International Journal of Computer Vision (IJCV); ACM Transactions on Intelligent Systems and Technology (TIST); Knowledge-Based Systems (KBS); IEEE Journal of Biomedical and Health Informatics (JBHI)。}
+\end{document}

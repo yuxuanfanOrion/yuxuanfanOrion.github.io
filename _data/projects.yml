@@ -1,0 +1,24 @@
+# Projects shown in the Projects section of the homepage, in this order.
+# kind:   what it is, shown before the organisation ("Foundation model", "Open source", ...)
+# logo:   optional image under /images/icon/
+# links:  shown as badges, in this order
+
+- name: "Wan 3.0"
+  kind: "Foundation model"
+  org: "Tongyi Wanxiang, Alibaba Group"
+  logo: "/images/icon/wan.png"
+  text: "Participated in the pre-training of the image generation models."
+  links:
+    - label: "Project"
+      url: "https://cn.aliyun.com/benefit/scene/wan?from_alibabacloud="
+
+- name: "Ming-flash-omni 2.0"
+  kind: "Foundation model"
+  org: "Inclusion AI, Ant Group"
+  logo: "/images/icon/inclusion_ai.png"
+  text: "Enhanced the model's visual reasoning ability and participated in its post-training."
+  links:
+    - label: "GitHub"
+      url: "https://github.com/inclusionAI/Ming"
+    - label: "HuggingFace"
+      url: "https://huggingface.co/inclusionAI/Ming-flash-omni-2.0"

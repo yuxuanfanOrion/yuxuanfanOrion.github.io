@@ -48,7 +48,7 @@ The site will be available at `localhost:4000`.
 The homepage (`_pages/about.md`) uses a custom single-page layout with sections:
 - Profile cover with rotating background images
 - Biography, Experiences, Education (timeline format)
-- News, Publications, Services, Hobbies
+- News, Publications, Projects, Services, Blog (placeholder until posts exist), Hobbies
 
 ## Workflow Rules
 
@@ -74,6 +74,19 @@ Add an entry to `_data/publications.yml`:
   image: "/images/pub_xxx.png"      # optional
   code_url: "https://github.com/xxx" # optional
   project_url: "https://xxx"         # optional
+```
+
+### New Project
+Add an entry to `_data/projects.yml` (shown in the Projects section, in file order):
+```yaml
+- name: "Project Name"
+  kind: "Foundation model"            # or "Open source", ...
+  org: "Team, Company"                # optional
+  logo: "/images/icon/xxx.png"        # optional
+  text: "One line on the part played."
+  links:
+    - label: "GitHub"
+      url: "https://github.com/xxx"
 ```
 
 ### Enabling Navigation Sections

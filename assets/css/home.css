@@ -1270,6 +1270,58 @@ section:first-of-type {
   color: var(--text-secondary);
 }
 
+/* ── Projects ──
+   Two columns of entries read from _data/projects.yml: logo and name, what
+   it is and where, one line on the part played, then links. */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0 32px;
+}
+
+.project-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.project-item h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.project-meta {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.project-item p {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
 /* ── Services ── */
 .services-grid {
   display: grid;
@@ -1406,7 +1458,8 @@ footer {
 .section-title,
 .pub-item,
 .news-item,
-.timeline-item {
+.timeline-item,
+.project-item {
   position: relative;
 }
 
@@ -1414,7 +1467,8 @@ footer {
   .section-title::after,
   .pub-item::after,
   .news-item::after,
-  .timeline-item::after {
+  .timeline-item::after,
+  .project-item::after {
     content: "";
     position: absolute;
     left: 0;
@@ -1437,7 +1491,8 @@ footer {
   @media (hover: hover) {
     .pub-item:hover::after,
     .news-item:hover::after,
-    .timeline-item:hover::after {
+    .timeline-item:hover::after,
+    .project-item:hover::after {
       animation: meteor-track 0.8s cubic-bezier(0.3, 0, 0.2, 1) both;
     }
   }

@@ -48,7 +48,11 @@ The site will be available at `localhost:4000`.
 The homepage (`_pages/about.md`) uses a custom single-page layout with sections:
 - Profile cover with rotating background images
 - Biography, Experiences, Education (timeline format)
-- News, Publications, Projects, Services, Blog (placeholder until posts exist), Hobbies
+- News, Publications, Services, Hobbies
+
+Sub-pages share the homepage's theme through `_layouts/subpage.html`:
+- `/projects/` (`_pages/projects.md`, data in `_data/projects.yml`)
+- `/blog/` (`_pages/blog.md`, a placeholder until posts exist)
 
 ## Workflow Rules
 
@@ -77,13 +81,16 @@ Add an entry to `_data/publications.yml`:
 ```
 
 ### New Project
-Add an entry to `_data/projects.yml` (shown in the Projects section, in file order):
+Add an entry to `_data/projects.yml` (shown on the Projects page `/projects/`, in file order):
 ```yaml
 - name: "Project Name"
   kind: "Foundation model"            # or "Open source", ...
-  org: "Team, Company"                # optional
-  logo: "/images/icon/xxx.png"        # optional
-  text: "One line on the part played."
+  org: "Team, Company"
+  period: "Jan. 2026 – Mar. 2026"     # optional
+  logo: "/images/icon/xxx.png"        # optional, shown on the nebula
+  sky: cosmic-cliffs                  # a nebula id from _data/nebulae.yml
+  image: "/images/project_xxx.png"    # optional, replaces the nebula and logo
+  text: "One or two sentences on the part played."
   links:
     - label: "GitHub"
       url: "https://github.com/xxx"

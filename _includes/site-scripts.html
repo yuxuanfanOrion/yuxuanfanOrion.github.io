@@ -1,0 +1,53 @@
+{% comment %}
+  Scripts every page shares: the theme switch, the sky and the pointer.
+{% endcomment %}
+<script>
+  /* Theme switch. A click flips the theme, saves the choice and tells the
+     canvases; where the browser can, the new theme opens as a circle from
+     the button. Without a saved choice the page follows the system. */
+  (function () {
+    var root = document.documentElement;
+    var button = document.querySelector('.theme-toggle');
+    var system = window.matchMedia('(prefers-color-scheme: dark)');
+    if (!button) return;
+
+    function label() {
+      button.setAttribute('aria-label', root.getAttribute('data-theme') === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      label();
+      window.dispatchEvent(new Event('themechange'));
+    }
+
+    button.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('site-theme', next); } catch (e) {}
+      if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        apply(next);
+        return;
+      }
+      var box = button.getBoundingClientRect();
+      var x = box.left + box.width / 2;
+      var y = box.top + box.height / 2;
+      var reach = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+      document.startViewTransition(function () { apply(next); }).ready.then(function () {
+        root.animate(
+          { clipPath: ['circle(0px at ' + x + 'px ' + y + 'px)', 'circle(' + reach + 'px at ' + x + 'px ' + y + 'px)'] },
+          { duration: 700, easing: 'cubic-bezier(0.3, 0, 0.2, 1)', pseudoElement: '::view-transition-new(root)' }
+        );
+      });
+    });
+
+    system.addEventListener('change', function (e) {
+      var saved = null;
+      try { saved = localStorage.getItem('site-theme'); } catch (err) {}
+      if (saved !== 'light' && saved !== 'dark') apply(e.matches ? 'dark' : 'light');
+    });
+
+    label();
+  })();
+</script>
+<script src="/assets/js/sky.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+<script src="/assets/js/stardust.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>

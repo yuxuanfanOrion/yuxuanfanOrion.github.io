@@ -65,27 +65,6 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
   </div>
 </section>
 
-<section id="projects">
-  <h2 class="section-title">Projects</h2>
-  <div class="project-grid">
-    {% for project in site.data.projects %}
-    <article class="project-item">
-      <div class="project-head">
-        {% if project.logo %}<img class="project-logo" src="{{ project.logo }}" alt="" loading="lazy" decoding="async">{% endif %}
-        <h3>{{ project.name }}</h3>
-      </div>
-      <div class="project-meta">{{ project.kind }}{% if project.org %}, {{ project.org }}{% endif %}</div>
-      <p>{{ project.text }}</p>
-      {% if project.links %}
-      <div class="project-links">
-        {% for link in project.links %}<a class="badge badge-link" href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a>{% endfor %}
-      </div>
-      {% endif %}
-    </article>
-    {% endfor %}
-  </div>
-</section>
-
 <section id="experiences">
   <h2 class="section-title">Experiences</h2>
 
@@ -202,11 +181,6 @@ description: "Yuxuan FAN (樊宇轩), Ph.D. student at NTU CCDS, Singapore."
       </ul>
     </div>
   </div>
-</section>
-
-<section id="blog">
-  <h2 class="section-title">Blog</h2>
-  <p class="section-note">Coming soon.</p>
 </section>
 
 <section id="hobbies">

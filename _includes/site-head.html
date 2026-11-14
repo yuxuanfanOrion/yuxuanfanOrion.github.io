@@ -1,0 +1,25 @@
+{% comment %}
+  Shared <head> content for the homepage and its sub-pages (Projects,
+  Blog): icons, fonts, the theme set before first paint, and the stylesheet.
+  The layout writes <title> and the description itself.
+{% endcomment %}
+  <link rel="icon" href="/images/favicon-192x192.png" type="image/png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon-180x180.png">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    /* Theme, before first paint: the saved choice, else the system's. */
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem('site-theme'); } catch (e) {}
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/home.css?v={{ site.time | date: '%Y%m%d%H%M%S' }}">

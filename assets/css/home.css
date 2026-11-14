@@ -72,14 +72,37 @@ html[data-theme="dark"] .page-sky {
   display: block;
 }
 
-/* ── Theme switch ──
-   Top right corner of the page. It shows where a click leads: the moon by
-   day, the sun at night. */
-.theme-toggle {
+/* ── Page links and theme switch ──
+   Top right corner of every page: links between the pages, then the
+   switch. It shows where a click leads: the moon by day, the sun at night. */
+.site-nav {
   position: absolute;
   top: 20px;
   right: 24px;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.site-nav a {
+  color: var(--text-tertiary);
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--text-primary);
+}
+
+.theme-toggle {
   display: grid;
   place-items: center;
   width: 36px;
@@ -1270,58 +1293,6 @@ section:first-of-type {
   color: var(--text-secondary);
 }
 
-/* ── Projects ──
-   Two columns of entries read from _data/projects.yml: logo and name, what
-   it is and where, one line on the part played, then links. */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 0 32px;
-}
-
-.project-item {
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.project-head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.project-logo {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-.project-item h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.project-meta {
-  margin-top: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.project-item p {
-  margin-top: 6px;
-  font-size: 0.85rem;
-  line-height: 1.55;
-}
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
 /* ── Services ── */
 .services-grid {
   display: grid;
@@ -1370,6 +1341,216 @@ section:first-of-type {
 .hobbies-text strong {
   color: var(--text-primary);
   font-weight: 700;
+}
+
+/* ── Sub-pages (Projects, Blog) ──
+   One column the width of the homepage, the name top left as the way back,
+   then a large title. Laid out by _layouts/subpage.html. */
+.page-container {
+  max-width: 1100px;
+  min-height: 76vh;
+  margin: 0 auto;
+  padding: 26px 24px 100px;
+}
+
+.page-home {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 24px;
+}
+
+.page-title {
+  margin-top: 72px;
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--text-primary);
+}
+
+.page-lede {
+  margin-top: 16px;
+  max-width: 60ch;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.page-content {
+  margin-top: 64px;
+}
+
+/* ── Projects page ──
+   One large row per project from _data/projects.yml: a picture on one side
+   (a nebula with the project's logo, or the project's own image) and the
+   text on the other, sides alternating. */
+.project-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 64px;
+  align-items: center;
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+
+.project-feature:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Even rows mirror: text first, picture second, each keeping its width. */
+.project-feature:nth-child(even) {
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+}
+
+.project-feature:nth-child(even) .project-visual {
+  order: 2;
+}
+
+.project-sky {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #0b1226;
+}
+
+.project-sky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--sky) center var(--sky-y, 50%) / cover no-repeat;
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(closest-side, rgba(5, 8, 20, 0.1), rgba(5, 8, 20, 0.5));
+}
+
+.project-chip {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 20px 44px rgba(5, 8, 22, 0.5);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-chip img {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+}
+
+.project-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project-feature:hover .project-sky::before {
+    transform: scale(1.06);
+  }
+
+  .project-feature:hover .project-chip {
+    transform: translateY(-4px);
+  }
+}
+
+.project-kind {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.project-body h2 {
+  margin-top: 10px;
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.project-org {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.project-period {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+}
+
+.project-body p {
+  margin-top: 18px;
+  max-width: 48ch;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.project-links .badge {
+  padding: 8px 16px;
+  font-size: 0.72rem;
+}
+
+@media (max-width: 800px) {
+  .page-title {
+    margin-top: 48px;
+  }
+
+  .page-content {
+    margin-top: 40px;
+  }
+
+  .project-feature,
+  .project-feature:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 40px 0;
+  }
+
+  .project-feature:nth-child(even) .project-visual {
+    order: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .site-nav {
+    right: 16px;
+    gap: 14px;
+    font-size: 0.68rem;
+  }
+
+  .page-home {
+    display: none;
+  }
 }
 
 /* ── Footer with epigraph ── */
@@ -1458,8 +1639,7 @@ footer {
 .section-title,
 .pub-item,
 .news-item,
-.timeline-item,
-.project-item {
+.timeline-item {
   position: relative;
 }
 
@@ -1467,8 +1647,7 @@ footer {
   .section-title::after,
   .pub-item::after,
   .news-item::after,
-  .timeline-item::after,
-  .project-item::after {
+  .timeline-item::after {
     content: "";
     position: absolute;
     left: 0;
@@ -1491,8 +1670,7 @@ footer {
   @media (hover: hover) {
     .pub-item:hover::after,
     .news-item:hover::after,
-    .timeline-item:hover::after,
-    .project-item:hover::after {
+    .timeline-item:hover::after {
       animation: meteor-track 0.8s cubic-bezier(0.3, 0, 0.2, 1) both;
     }
   }

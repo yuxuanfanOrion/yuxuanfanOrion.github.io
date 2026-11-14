@@ -1,12 +1,17 @@
-# Projects shown in the Projects section of the homepage, in this order.
-# kind:   what it is, shown before the organisation ("Foundation model", "Open source", ...)
-# logo:   optional image under /images/icon/
-# links:  shown as badges, in this order
+# Projects shown on the Projects page (/projects/), in this order.
+# kind:    what it is ("Foundation model", "Open source", ...)
+# period:  optional, when the work was done
+# logo:    optional image under /images/icon/, shown on the visual
+# sky:     id of a nebula in _data/nebulae.yml, used as the visual's backdrop
+# image:   optional picture of the project itself; replaces the nebula and logo
+# links:   shown as buttons, in this order
 
 - name: "Wan 3.0"
   kind: "Foundation model"
   org: "Tongyi Wanxiang, Alibaba Group"
+  period: "Apr. 2026 – Jun. 2026"
   logo: "/images/icon/wan.png"
+  sky: pillars-of-creation
   text: "Participated in the pre-training of the image generation models."
   links:
     - label: "Project"
@@ -15,7 +20,9 @@
 - name: "Ming-flash-omni 2.0"
   kind: "Foundation model"
   org: "Inclusion AI, Ant Group"
+  period: "Oct. 2025 – Mar. 2026"
   logo: "/images/icon/inclusion_ai.png"
+  sky: cosmic-cliffs
   text: "Enhanced the model's visual reasoning ability and participated in its post-training."
   links:
     - label: "GitHub"

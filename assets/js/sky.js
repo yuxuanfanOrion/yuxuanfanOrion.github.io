@@ -222,7 +222,7 @@
     lastDraw: 0
   };
   /* Blocks of text the sky is cleared behind. */
-  var blocks = Array.prototype.slice.call(document.querySelectorAll('.content, .sidebar-identity, .nav-row, .sidebar-footer'));
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.content, .sidebar-identity, .nav-row, .sidebar-footer, .page-header, .project-body'));
   var masks = [];
   var maskKey = '';
   var ORION_STARS = [[88.793, 7.407], [81.283, 6.350], [85.190, -1.943], [84.053, -1.202], [83.002, -0.299], [86.939, -9.670], [78.634, -8.202]]

@@ -1,0 +1,41 @@
+---
+layout: compress
+---
+{% comment %}
+  Sub-pages of the homepage (Projects, Blog): the same theme, sky and
+  pointer, without the sidebar. The page supplies a title, an optional
+  lede, and its content.
+{% endcomment %}
+<!doctype html>
+<html lang="{{ site.locale | slice: 0,2 }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.name }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  {% include site-head.html %}
+</head>
+<body>
+
+{% include site-nav.html %}
+
+<canvas class="page-sky" aria-hidden="true" data-stars="/assets/js/sky-stars.json"></canvas>
+
+<div class="page-container">
+  <header class="page-header">
+    <a class="page-home" href="/">Yuxuan FAN</a>
+    <h1 class="page-title">{{ page.title }}</h1>
+    {% if page.lede %}<p class="page-lede">{{ page.lede }}</p>{% endif %}
+  </header>
+
+  <main class="page-content">
+    {{ content }}
+  </main>
+</div>
+
+{% include site-footer.html %}
+
+{% include site-scripts.html %}
+
+</body>
+</html>

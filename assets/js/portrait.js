@@ -1,13 +1,19 @@
 /*
- * Sidebar portrait: the Starcos painting drawn from five layers that
- * recompose to the original (gas, stars, meteors, trees and ground,
- * figure). Only the gas is warped, so it drifts while every star keeps its
- * painted shape; stars twinkle by brightness on their own phase; now and
- * then one of the three meteors fades and flies back in along its path;
- * and the layers shift slightly against each other with the pointer.
+ * Sidebar portrait: a night-sky picture (Milky Way, baobab, a figure
+ * looking up) that moves a little. The picture is drawn as it is, and three
+ * helper textures let the shader take it apart:
+ *
+ *   smooth   the picture without stars, meteors or the figure
+ *   meteors  the light the two meteors add
+ *   mask     r: open sky, g: the figure, b: the figure, widened
+ *
+ * Star light is the picture minus the smooth copy, so stars can twinkle in
+ * place without being bent. The glow of the Milky Way drifts by warping
+ * only the smooth copy. Now and then a meteor fades and flies back in along
+ * its path, and the figure shifts against the sky with the pointer.
  *
  * The static <img> stays underneath: it is what shows without WebGL2, with
- * reduced motion, and until the layers have loaded. Clicking the portrait
+ * reduced motion, and until the textures have loaded. Clicking the portrait
  * (or hovering, on devices that hover) shows the photograph.
  */
 (function () {
@@ -36,16 +42,15 @@
 
   var FRAG = '#version 300 es\n' +
     'precision highp float;\n' +
-    'uniform sampler2D uSky;\n' +      /* gas only: no stars, no meteors */
-    'uniform sampler2D uStars;\n' +    /* r: coverage, g: phase of the nearest star */
-    'uniform sampler2D uMeteors;\n' +  /* light the meteors add to the gas */
-    'uniform sampler2D uGround;\n' +
-    'uniform sampler2D uFigure;\n' +
+    'uniform sampler2D uNight;\n' +
+    'uniform sampler2D uSmooth;\n' +
+    'uniform sampler2D uMeteors;\n' +
+    'uniform sampler2D uMask;\n' +
     'uniform vec2 uRes;\n' +           /* canvas size, device px */
     'uniform float uTime;\n' +
     'uniform vec2 uPar;\n' +           /* parallax, -1..1 */
-    'uniform vec4 uMeteorSeg[3];\n' +  /* tail xy, head xy, in picture uv */
-    'uniform vec3 uMeteorState[3];\n' +/* distance back along the path (in lengths), opacity, extra glow */
+    'uniform vec4 uMeteorSeg[2];\n' +  /* tail xy, head xy, in picture uv */
+    'uniform vec3 uMeteorState[2];\n' +/* distance back along the path (in lengths), opacity, extra glow */
     'out vec4 outColor;\n' +
     'float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }\n' +
     'float noise(vec2 p) {\n' +
@@ -64,16 +69,32 @@
     '  vec2 asp = vec2(1.0, ar);\n' +
     '  float t = uTime;\n' +
     '  vec2 suv = uv + uPar * vec2(0.004, 0.002);\n' +
-    /* Gas: a slow warp, and the clouds (not the flat blue) breathe a little. */
+    '  vec3 night = texture(uNight, suv, -0.5).rgb;\n' +
+    '  vec3 smoothed = texture(uSmooth, suv).rgb;\n' +
+    '  vec3 painted = texture(uMeteors, suv, -0.5).rgb;\n' +
+    '  vec3 mask = texture(uMask, suv).rgb;\n' +
+    '  float open = mask.r;\n' +
+    /* The picture without its meteors; they are added back below. */
+    '  vec3 col = night - painted;\n' +
+    /* Glow: warp the smooth copy and add the difference, so stars and
+       silhouettes stay exactly where they are. The bright band also
+       breathes a little. */
     '  vec2 np = suv * vec2(3.0, 3.0 * ar);\n' +
     '  vec2 flow = vec2(fbm(np + vec2(t * 0.045, -t * 0.025)), fbm(np + vec2(13.1, 7.7) + vec2(-t * 0.03, t * 0.04))) - 0.5;\n' +
-    '  vec2 fuv = suv + flow * vec2(0.018, 0.018 / ar);\n' +
-    '  vec3 col = texture(uSky, fuv, -0.6).rgb;\n' +
-    '  float cloud = smoothstep(0.02, 0.10, lum(textureLod(uSky, fuv, 2.0).rgb) - 0.125);\n' +
-    '  col *= 1.0 + 0.14 * (fbm(np * 0.8 + vec2(t * 0.03, t * 0.022)) - 0.5) * cloud;\n' +
-    /* Meteors, read from the painting. One that is flying in is read from
-       further along its own path, so it slides into its painted place. */
-    '  for (int i = 0; i < 3; i++) {\n' +
+    '  vec3 drifted = texture(uSmooth, suv + flow * vec2(0.03, 0.03 / ar) * open).rgb;\n' +
+    '  col += (drifted - smoothed) * open;\n' +
+    '  col += smoothed * 0.16 * (fbm(np * 0.8 + vec2(t * 0.03, t * 0.022)) - 0.5) * smoothstep(0.12, 0.4, lum(smoothed)) * open;\n' +
+    /* Twinkle: star light is what the picture has over its smooth copy.
+       Each neighbourhood of a few pixels runs on its own phase; only stars
+       that stand out are affected, so the fine grain stays calm. */
+    '  vec3 light = max(night - smoothed - painted, 0.0) * open;\n' +
+    '  float seed = noise(suv * vec2(150.0, 150.0 * ar));\n' +
+    '  float tw = sin(t * (1.1 + 1.7 * noise(suv * vec2(41.0, 41.0 * ar))) + seed * 40.0);\n' +
+    '  tw *= 0.6 + 0.4 * sin(t * 0.43 + seed * 17.0);\n' +
+    '  col += light * tw * 0.55 * smoothstep(0.05, 0.22, lum(light));\n' +
+    /* Meteors, read from the picture. One that is flying in is read from
+       further along its own path, so it slides into its place. */
+    '  for (int i = 0; i < 2; i++) {\n' +
     '    vec3 state = uMeteorState[i];\n' +
     '    if (state.y <= 0.0) continue;\n' +
     '    vec2 tail = uMeteorSeg[i].xy * asp;\n' +
@@ -82,38 +103,30 @@
     '    vec2 dir = (head - tail) / len;\n' +
     '    vec2 q = suv * asp + dir * state.x * len;\n' +
     '    vec2 rel = q - tail;\n' +
-    '    float along = clamp(dot(rel, dir), -0.15 * len, 1.1 * len);\n' +
-    '    float near = 1.0 - smoothstep(0.014, 0.020, length(rel - dir * along));\n' +
-    '    if (near > 0.0) col += texture(uMeteors, q / asp, -0.6).rgb * near * state.y * (1.0 + state.z);\n' +
+    '    float along = clamp(dot(rel, dir), -0.2 * len, 1.15 * len);\n' +
+    '    float near = 1.0 - smoothstep(0.010, 0.016, length(rel - dir * along));\n' +
+    '    if (near > 0.0) col += texture(uMeteors, q / asp, -0.5).rgb * near * state.y * (1.0 + state.z);\n' +
     '  }\n' +
-    /* Stars keep their painted discs; only their brightness moves, with a
-       faint halo at the bright end. The phase is the same over each star. */
-    '  vec4 star = texture(uStars, suv, -0.6);\n' +
-    '  float seed = star.g;\n' +
-    '  float tw = 0.5 + 0.5 * sin(t * (0.9 + seed * 1.8) + seed * 50.0);\n' +
-    '  tw *= 0.65 + 0.35 * sin(t * 0.41 + seed * 91.0);\n' +
-    '  col = mix(col, vec3(1.0), star.r * mix(0.80, 1.0, tw));\n' +
-    '  col += vec3(0.72, 0.84, 1.0) * textureLod(uStars, suv, 3.5).r * 0.5 * tw;\n' +
-    '  vec4 ground = texture(uGround, uv + uPar * vec2(0.010, 0.004), -0.6);\n' +
-    '  col = ground.rgb + col * (1.0 - ground.a);\n' +
-    '  vec4 figure = texture(uFigure, uv + uPar * vec2(0.019, 0.007), -0.6);\n' +
-    '  col = figure.rgb + col * (1.0 - figure.a);\n' +
+    /* The figure stands in front: where it was photographed the smooth copy
+       shows through, and it is drawn again slightly shifted. */
+    '  col = mix(col, smoothed, mask.b);\n' +
+    '  vec2 fuv = uv + uPar * vec2(0.008, 0.003);\n' +
+    '  col = mix(col, texture(uNight, fuv, -0.5).rgb, texture(uMask, fuv).g);\n' +
     '  outColor = vec4(clamp(col, 0.0, 1.0), 1.0);\n' +
     '}\n';
 
-  /* Painted meteors, tail then head, in pixels of the 1122 x 1402 painting. */
+  /* Meteors, tail then head, in pixels of the 1122 x 1402 original. */
   var METEORS = [
-    [544, 94, 222, 228],
-    [1066, 284, 898, 357],
-    [1028, 533, 925, 579]
+    [243, 123, 351, 232],
+    [1042, 371, 980, 439]
   ];
-  var meteorSeg = new Float32Array(12);
+  var meteorSeg = new Float32Array(METEORS.length * 4);
   METEORS.forEach(function (m, i) {
     meteorSeg.set([m[0] / 1122, m[1] / 1402, m[2] / 1122, m[3] / 1402], i * 4);
   });
   /* Per meteor: distance back along its path, opacity, extra glow. At rest
-     all three sit where they were painted. */
-  var meteorState = new Float32Array([0, 1, 0, 0, 1, 0, 0, 1, 0]);
+     both sit where they are in the picture. */
+  var meteorState = new Float32Array([0, 1, 0, 0, 1, 0]);
 
   function compile(type, src) {
     var sh = gl.createShader(type);
@@ -143,17 +156,16 @@
   gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
   var u = {};
-  ['uSky', 'uStars', 'uMeteors', 'uGround', 'uFigure', 'uRes', 'uTime', 'uPar', 'uMeteorSeg', 'uMeteorState'].forEach(function (name) {
+  ['uNight', 'uSmooth', 'uMeteors', 'uMask', 'uRes', 'uTime', 'uPar', 'uMeteorSeg', 'uMeteorState'].forEach(function (name) {
     u[name] = gl.getUniformLocation(prog, name);
   });
 
   /* ── Layers ── */
   var layers = [
-    { src: canvas.dataset.sky, alpha: false },
-    { src: canvas.dataset.stars, alpha: false },
-    { src: canvas.dataset.meteors, alpha: false },
-    { src: canvas.dataset.ground, alpha: true },
-    { src: canvas.dataset.figure, alpha: true }
+    { src: canvas.dataset.night },
+    { src: canvas.dataset.smooth },
+    { src: canvas.dataset.meteors },
+    { src: canvas.dataset.mask }
   ];
   var pending = layers.length;
   var ready = false;
@@ -167,7 +179,7 @@
       gl.activeTexture(gl.TEXTURE0 + unit);
       gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
       gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
-      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, layer.alpha);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
       gl.generateMipmap(gl.TEXTURE_2D);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
@@ -211,9 +223,9 @@
   }, { passive: true });
 
   /* ── Meteor replay ──
-     One meteor at a time fades out where it was painted, the sky stays
-     empty for a moment, then it flies back in along its path and stops in
-     its painted place. */
+     One meteor at a time fades out where it is in the picture, the sky
+     stays empty for a moment, then it flies back in along its path and
+     stops in its place. */
   var replay = -1;
   var replayStart = 0;
   var nextReplayAt = Infinity;
@@ -275,11 +287,10 @@
 
     stepReplay(t);
 
-    gl.uniform1i(u.uSky, 0);
-    gl.uniform1i(u.uStars, 1);
+    gl.uniform1i(u.uNight, 0);
+    gl.uniform1i(u.uSmooth, 1);
     gl.uniform1i(u.uMeteors, 2);
-    gl.uniform1i(u.uGround, 3);
-    gl.uniform1i(u.uFigure, 4);
+    gl.uniform1i(u.uMask, 3);
     gl.uniform2f(u.uRes, canvas.width, canvas.height);
     gl.uniform1f(u.uTime, t);
     gl.uniform2f(u.uPar, par[0], par[1]);

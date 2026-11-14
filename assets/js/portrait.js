@@ -1,8 +1,10 @@
 /*
- * Sidebar portrait: the Starcos painting drawn from three layers (sky,
- * trees and ground, figure) so that the Milky Way gas drifts, the painted
- * stars twinkle, the three meteors streak along their painted paths and
- * the layers shift slightly against each other with the pointer.
+ * Sidebar portrait: the Starcos painting drawn from five layers that
+ * recompose to the original (gas, stars, meteors, trees and ground,
+ * figure). Only the gas is warped, so it drifts while every star keeps its
+ * painted shape; stars twinkle by brightness on their own phase; now and
+ * then one of the three meteors fades and flies back in along its path;
+ * and the layers shift slightly against each other with the pointer.
  *
  * The static <img> stays underneath: it is what shows without WebGL2, with
  * reduced motion, and until the layers have loaded. Clicking the portrait
@@ -34,14 +36,16 @@
 
   var FRAG = '#version 300 es\n' +
     'precision highp float;\n' +
-    'uniform sampler2D uSky;\n' +
+    'uniform sampler2D uSky;\n' +      /* gas only: no stars, no meteors */
+    'uniform sampler2D uStars;\n' +    /* r: coverage, g: phase of the nearest star */
+    'uniform sampler2D uMeteors;\n' +  /* light the meteors add to the gas */
     'uniform sampler2D uGround;\n' +
     'uniform sampler2D uFigure;\n' +
-    'uniform vec2 uRes;\n' +          /* canvas size, device px */
+    'uniform vec2 uRes;\n' +           /* canvas size, device px */
     'uniform float uTime;\n' +
-    'uniform vec2 uPar;\n' +          /* parallax, -1..1 */
-    'uniform vec4 uMeteor;\n' +       /* tail xy, head xy, in picture uv */
-    'uniform float uMeteorT;\n' +     /* 0..1 along the pass, negative when idle */
+    'uniform vec2 uPar;\n' +           /* parallax, -1..1 */
+    'uniform vec4 uMeteorSeg[3];\n' +  /* tail xy, head xy, in picture uv */
+    'uniform vec3 uMeteorState[3];\n' +/* distance back along the path (in lengths), opacity, extra glow */
     'out vec4 outColor;\n' +
     'float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }\n' +
     'float noise(vec2 p) {\n' +
@@ -57,51 +61,42 @@
     'void main() {\n' +
     '  vec2 uv = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y) / uRes;\n' +
     '  float ar = uRes.y / uRes.x;\n' +
+    '  vec2 asp = vec2(1.0, ar);\n' +
     '  float t = uTime;\n' +
     '  vec2 suv = uv + uPar * vec2(0.004, 0.002);\n' +
-    /* Painted stars are held still while the gas around them drifts. The
-       mask comes from coarse mip levels so it fades out wider than twice
-       the displacement and never folds the warp. */
-    '  float held = smoothstep(0.05, 0.14, lum(textureLod(uSky, suv, 3.0).rgb) - lum(textureLod(uSky, suv, 6.0).rgb));\n' +
-    '  float gas = 1.0 - held;\n' +
+    /* Gas: a slow warp, and the clouds (not the flat blue) breathe a little. */
     '  vec2 np = suv * vec2(3.0, 3.0 * ar);\n' +
     '  vec2 flow = vec2(fbm(np + vec2(t * 0.045, -t * 0.025)), fbm(np + vec2(13.1, 7.7) + vec2(-t * 0.03, t * 0.04))) - 0.5;\n' +
-    '  vec2 fuv = suv + flow * vec2(0.024, 0.024 / ar) * gas;\n' +
-    '  vec3 col = texture(uSky, fuv).rgb;\n' +
-    /* Only the nebula breathes; the flat night blue stays flat. */
+    '  vec2 fuv = suv + flow * vec2(0.018, 0.018 / ar);\n' +
+    '  vec3 col = texture(uSky, fuv, -0.6).rgb;\n' +
     '  float cloud = smoothstep(0.02, 0.10, lum(textureLod(uSky, fuv, 2.0).rgb) - 0.125);\n' +
-    '  col *= 1.0 + 0.22 * (fbm(np * 0.8 + vec2(t * 0.03, t * 0.022)) - 0.5) * cloud * gas;\n' +
-    /* Twinkle: white pixels fade towards the sky behind them, each star on
-       its own phase. */
-    '  float white = smoothstep(0.30, 0.55, min(col.r, min(col.g, col.b)));\n' +
-    '  float ph = 16.0 * noise(suv * vec2(6.0, 6.0 * ar));\n' +
-    '  float tw = 0.70 + 0.30 * sin(t * 2.1 + ph) * (0.55 + 0.45 * sin(t * 0.67 + ph * 1.7));\n' +
-    '  vec3 behind = textureLod(uSky, fuv, 5.0).rgb;\n' +
-    '  col = mix(col, mix(behind, col, tw), white);\n' +
-    /* Meteor: a tapering streak that runs from beyond the painted tail to
-       beyond the painted head. Distances are in units of picture width. */
-    '  if (uMeteorT >= 0.0) {\n' +
-    '    vec2 tail = uMeteor.xy * vec2(1.0, ar);\n' +
-    '    vec2 head = uMeteor.zw * vec2(1.0, ar);\n' +
-    '    vec2 dir = normalize(head - tail);\n' +
+    '  col *= 1.0 + 0.14 * (fbm(np * 0.8 + vec2(t * 0.03, t * 0.022)) - 0.5) * cloud;\n' +
+    /* Meteors, read from the painting. One that is flying in is read from
+       further along its own path, so it slides into its painted place. */
+    '  for (int i = 0; i < 3; i++) {\n' +
+    '    vec3 state = uMeteorState[i];\n' +
+    '    if (state.y <= 0.0) continue;\n' +
+    '    vec2 tail = uMeteorSeg[i].xy * asp;\n' +
+    '    vec2 head = uMeteorSeg[i].zw * asp;\n' +
     '    float len = length(head - tail);\n' +
-    '    vec2 from = tail - dir * len * 0.2;\n' +
-    '    vec2 to = head + dir * len * 0.9;\n' +
-    '    vec2 at = mix(from, to, uMeteorT);\n' +
-    '    vec2 d = suv * vec2(1.0, ar) - at;\n' +
-    '    float along = dot(d, -dir);\n' +
-    '    float side = abs(d.x * dir.y - d.y * dir.x);\n' +
-    '    float k = clamp(along / len, 0.0, 1.0);\n' +
-    '    float width = mix(0.0042, 0.0010, k);\n' +
-    '    float streak = step(0.0, along) * step(along, len) * (1.0 - smoothstep(width * 0.35, width, side)) * pow(1.0 - k, 1.5);\n' +
-    '    float glow = exp(-dot(d, d) / (2.0 * 0.0055 * 0.0055));\n' +
-    '    float fade = smoothstep(0.0, 0.12, uMeteorT) * (1.0 - smoothstep(0.62, 1.0, uMeteorT));\n' +
-    '    vec3 tint = mix(vec3(1.0, 0.70, 0.36), vec3(1.0, 0.97, 0.90), pow(1.0 - k, 2.0));\n' +
-    '    col += (streak * tint + glow * vec3(1.0, 0.95, 0.85) * 0.9) * fade;\n' +
+    '    vec2 dir = (head - tail) / len;\n' +
+    '    vec2 q = suv * asp + dir * state.x * len;\n' +
+    '    vec2 rel = q - tail;\n' +
+    '    float along = clamp(dot(rel, dir), -0.15 * len, 1.1 * len);\n' +
+    '    float near = 1.0 - smoothstep(0.014, 0.020, length(rel - dir * along));\n' +
+    '    if (near > 0.0) col += texture(uMeteors, q / asp, -0.6).rgb * near * state.y * (1.0 + state.z);\n' +
     '  }\n' +
-    '  vec4 ground = texture(uGround, uv + uPar * vec2(0.010, 0.004));\n' +
+    /* Stars keep their painted discs; only their brightness moves, with a
+       faint halo at the bright end. The phase is the same over each star. */
+    '  vec4 star = texture(uStars, suv, -0.6);\n' +
+    '  float seed = star.g;\n' +
+    '  float tw = 0.5 + 0.5 * sin(t * (0.9 + seed * 1.8) + seed * 50.0);\n' +
+    '  tw *= 0.65 + 0.35 * sin(t * 0.41 + seed * 91.0);\n' +
+    '  col = mix(col, vec3(1.0), star.r * mix(0.80, 1.0, tw));\n' +
+    '  col += vec3(0.72, 0.84, 1.0) * textureLod(uStars, suv, 3.5).r * 0.5 * tw;\n' +
+    '  vec4 ground = texture(uGround, uv + uPar * vec2(0.010, 0.004), -0.6);\n' +
     '  col = ground.rgb + col * (1.0 - ground.a);\n' +
-    '  vec4 figure = texture(uFigure, uv + uPar * vec2(0.019, 0.007));\n' +
+    '  vec4 figure = texture(uFigure, uv + uPar * vec2(0.019, 0.007), -0.6);\n' +
     '  col = figure.rgb + col * (1.0 - figure.a);\n' +
     '  outColor = vec4(clamp(col, 0.0, 1.0), 1.0);\n' +
     '}\n';
@@ -111,7 +106,14 @@
     [544, 94, 222, 228],
     [1066, 284, 898, 357],
     [1028, 533, 925, 579]
-  ].map(function (m) { return [m[0] / 1122, m[1] / 1402, m[2] / 1122, m[3] / 1402]; });
+  ];
+  var meteorSeg = new Float32Array(12);
+  METEORS.forEach(function (m, i) {
+    meteorSeg.set([m[0] / 1122, m[1] / 1402, m[2] / 1122, m[3] / 1402], i * 4);
+  });
+  /* Per meteor: distance back along its path, opacity, extra glow. At rest
+     all three sit where they were painted. */
+  var meteorState = new Float32Array([0, 1, 0, 0, 1, 0, 0, 1, 0]);
 
   function compile(type, src) {
     var sh = gl.createShader(type);
@@ -141,13 +143,15 @@
   gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
   var u = {};
-  ['uSky', 'uGround', 'uFigure', 'uRes', 'uTime', 'uPar', 'uMeteor', 'uMeteorT'].forEach(function (name) {
+  ['uSky', 'uStars', 'uMeteors', 'uGround', 'uFigure', 'uRes', 'uTime', 'uPar', 'uMeteorSeg', 'uMeteorState'].forEach(function (name) {
     u[name] = gl.getUniformLocation(prog, name);
   });
 
   /* ── Layers ── */
   var layers = [
     { src: canvas.dataset.sky, alpha: false },
+    { src: canvas.dataset.stars, alpha: false },
+    { src: canvas.dataset.meteors, alpha: false },
     { src: canvas.dataset.ground, alpha: true },
     { src: canvas.dataset.figure, alpha: true }
   ];
@@ -172,7 +176,7 @@
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       if (--pending === 0) {
         ready = true;
-        nextMeteorAt = now() + 1.4;
+        nextReplayAt = now() + 2.5;
         start();
       }
     };
@@ -206,11 +210,44 @@
     pointerAt = now();
   }, { passive: true });
 
-  /* ── Meteors ── */
-  var meteor = -1;
-  var meteorStart = 0;
-  var nextMeteorAt = Infinity;
-  var METEOR_SECONDS = 1.15;
+  /* ── Meteor replay ──
+     One meteor at a time fades out where it was painted, the sky stays
+     empty for a moment, then it flies back in along its path and stops in
+     its painted place. */
+  var replay = -1;
+  var replayStart = 0;
+  var nextReplayAt = Infinity;
+  var FADE = 0.6;
+  var GAP = 0.7;
+  var FLY = 0.9;
+
+  function stepReplay(t) {
+    if (replay < 0) {
+      if (t < nextReplayAt) return;
+      replay = Math.floor(Math.random() * METEORS.length);
+      replayStart = t;
+    }
+    var e = t - replayStart;
+    var back = 0;
+    var opacity = 1;
+    var glow = 0;
+    if (e < FADE) {
+      opacity = 1 - e / FADE;
+    } else if (e < FADE + GAP) {
+      opacity = 0;
+    } else if (e < FADE + GAP + FLY) {
+      var p = (e - FADE - GAP) / FLY;
+      back = 1.9 * Math.pow(1 - p, 3);
+      opacity = Math.min(1, p / 0.3);
+      glow = 0.7 * (1 - p);
+    } else {
+      meteorState.set([0, 1, 0], replay * 3);
+      replay = -1;
+      nextReplayAt = t + 4 + Math.random() * 5;
+      return;
+    }
+    meteorState.set([back, opacity, glow], replay * 3);
+  }
 
   /* ── Draw loop ── */
   var visible = false;
@@ -236,29 +273,18 @@
     par[0] += (tx - par[0]) * 0.06;
     par[1] += (ty - par[1]) * 0.06;
 
-    if (meteor < 0 && t >= nextMeteorAt) {
-      meteor = Math.floor(Math.random() * METEORS.length);
-      meteorStart = t;
-    }
-    var mt = -1;
-    if (meteor >= 0) {
-      mt = (t - meteorStart) / (METEOR_SECONDS * (0.8 + 0.5 * (METEORS[meteor][0] - METEORS[meteor][2]) / 0.29));
-      if (mt >= 1) {
-        mt = -1;
-        meteor = -1;
-        nextMeteorAt = t + 3.5 + Math.random() * 5.5;
-      }
-    }
+    stepReplay(t);
 
     gl.uniform1i(u.uSky, 0);
-    gl.uniform1i(u.uGround, 1);
-    gl.uniform1i(u.uFigure, 2);
+    gl.uniform1i(u.uStars, 1);
+    gl.uniform1i(u.uMeteors, 2);
+    gl.uniform1i(u.uGround, 3);
+    gl.uniform1i(u.uFigure, 4);
     gl.uniform2f(u.uRes, canvas.width, canvas.height);
     gl.uniform1f(u.uTime, t);
     gl.uniform2f(u.uPar, par[0], par[1]);
-    var m = METEORS[meteor >= 0 ? meteor : 0];
-    gl.uniform4f(u.uMeteor, m[0], m[1], m[2], m[3]);
-    gl.uniform1f(u.uMeteorT, mt);
+    gl.uniform4fv(u.uMeteorSeg, meteorSeg);
+    gl.uniform3fv(u.uMeteorState, meteorState);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 
     root.classList.add('has-gl');

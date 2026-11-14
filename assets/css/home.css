@@ -1383,15 +1383,12 @@ section:first-of-type {
 }
 
 /* ── Projects page ──
-   One large row per project from _data/projects.yml: a picture on one side
-   (a nebula with the project's logo, or the project's own image) and the
-   text on the other, sides alternating. */
+   Each project from _data/projects.yml is laid out the way a product page
+   would present it: picture and name with a tagline, a row of key numbers,
+   three highlights, then the part played. The picture is a nebula with the
+   project's logo, or the project's own image. */
 .project-feature {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: 64px;
-  align-items: center;
-  padding: 64px 0;
+  padding: 72px 0;
   border-top: 1px solid var(--border);
 }
 
@@ -1400,8 +1397,15 @@ section:first-of-type {
   border-top: 0;
 }
 
-/* Even rows mirror: text first, picture second, each keeping its width. */
-.project-feature:nth-child(even) {
+.project-top {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 64px;
+  align-items: center;
+}
+
+/* Even projects mirror: text first, picture second, each keeping its width. */
+.project-feature:nth-child(even) .project-top {
   grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
 }
 
@@ -1479,16 +1483,34 @@ section:first-of-type {
 
 .project-body h2 {
   margin-top: 10px;
-  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-size: clamp(2.1rem, 4vw, 3rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
   color: var(--text-primary);
 }
 
+.project-tagline {
+  margin-top: 14px;
+  max-width: 24ch;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+.project-summary {
+  margin-top: 16px;
+  max-width: 50ch;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
 .project-org {
-  margin-top: 12px;
-  font-size: 0.95rem;
+  margin-top: 20px;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
 }
@@ -1496,28 +1518,100 @@ section:first-of-type {
 .project-period {
   display: block;
   margin-top: 2px;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-tertiary);
-}
-
-.project-body p {
-  margin-top: 18px;
-  max-width: 48ch;
-  font-size: 1.02rem;
-  line-height: 1.7;
 }
 
 .project-links {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 24px;
+  margin-top: 22px;
 }
 
 .project-links .badge {
   padding: 8px 16px;
   font-size: 0.72rem;
+}
+
+/* Key numbers: the value large, its label small above it. */
+.project-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 64px;
+}
+
+.project-stat {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16px;
+  border-top: 1px solid var(--text-primary);
+}
+
+.project-stat dd {
+  order: -1;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.project-stat dt {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.project-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 56px;
+}
+
+.project-highlight h3,
+.project-role h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.project-highlight p {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+/* The part played, set apart from what the project's makers say about it. */
+.project-role {
+  margin-top: 56px;
+  padding: 22px 26px;
+  border-left: 2px solid var(--accent);
+  background: var(--muted-bg);
+}
+
+.project-role p {
+  margin-top: 6px;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.project-source {
+  margin-top: 18px;
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+}
+
+.project-source a {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 @media (max-width: 800px) {
@@ -1529,15 +1623,34 @@ section:first-of-type {
     margin-top: 40px;
   }
 
-  .project-feature,
-  .project-feature:nth-child(even) {
+  .project-feature {
+    padding: 48px 0;
+  }
+
+  .project-top,
+  .project-feature:nth-child(even) .project-top {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding: 40px 0;
   }
 
   .project-feature:nth-child(even) .project-visual {
     order: 0;
+  }
+
+  .project-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
+    margin-top: 40px;
+  }
+
+  .project-highlights {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-top: 40px;
+  }
+
+  .project-role {
+    margin-top: 40px;
   }
 }
 

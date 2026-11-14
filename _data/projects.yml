@@ -1,10 +1,21 @@
 # Projects shown on the Projects page (/projects/), in this order.
-# kind:    what it is ("Foundation model", "Open source", ...)
-# period:  optional, when the work was done
-# logo:    optional image under /images/icon/, shown on the visual
-# sky:     id of a nebula in _data/nebulae.yml, used as the visual's backdrop
-# image:   optional picture of the project itself; replaces the nebula and logo
-# links:   shown as buttons, in this order
+# The page presents each one the way a product page would: a tagline, a
+# summary, a few key numbers, three highlights, then the part played.
+#
+# kind:        what it is ("Foundation model", "Open source", ...)
+# period:      optional, when the work was done
+# logo:        optional image under /images/icon/, shown on the visual
+# sky:         id of a nebula in _data/nebulae.yml, used as the visual's backdrop
+# image:       optional picture of the project itself; replaces the nebula and logo
+# tagline:     one line, shown large under the name
+# summary:     what the project is
+# stats:       key numbers (value, label)
+# highlights:  capabilities (title, text)
+# role:        the part played
+# source:      where the facts above come from (label, url)
+# links:       shown as buttons, in this order
+#
+# Facts and figures below are taken from each project's official page.
 
 - name: "Wan 3.0"
   kind: "Foundation model"
@@ -12,9 +23,30 @@
   period: "Apr. 2026 – Jun. 2026"
   logo: "/images/icon/wan.png"
   sky: pillars-of-creation
-  text: "Participated in the pre-training of the image generation models."
+  tagline: "Anything can become a video."
+  summary: "Alibaba's video generation model. One model handles reference, editing, replication and driving, takes four kinds of input, and generates videos up to 30 seconds long."
+  stats:
+    - value: "30 s"
+      label: "of video in a single take"
+    - value: "4"
+      label: "input modalities: text, image, audio, video"
+    - value: "20"
+      label: "reference assets per generation, at most"
+    - value: "1080P"
+      label: "top output resolution"
+  highlights:
+    - title: "Native 30 seconds, one take"
+      text: "Characters, dialogue, action and camera move forward naturally within one continuous shot."
+    - title: "Four-modality reference"
+      text: "Text, image, audio and video as input. Character appearance, prop details and voice stay consistent across the result."
+    - title: "One model, many tasks"
+      text: "Text-to-video, image-to-video and reference-to-video, with editing, replication and driving supported in the same model."
+  role: "Participated in the pre-training of the image generation models."
+  source:
+    label: "Alibaba Cloud product page"
+    url: "https://cn.aliyun.com/benefit/scene/wan?from_alibabacloud="
   links:
-    - label: "Project"
+    - label: "Product page"
       url: "https://cn.aliyun.com/benefit/scene/wan?from_alibabacloud="
 
 - name: "Ming-flash-omni 2.0"
@@ -23,9 +55,34 @@
   period: "Oct. 2025 – Mar. 2026"
   logo: "/images/icon/inclusion_ai.png"
   sky: cosmic-cliffs
-  text: "Enhanced the model's visual reasoning ability and participated in its post-training."
+  tagline: "One open-source model that sees, listens, speaks and draws."
+  summary: "An omni-modal model built on the Ling-2.0 Mixture-of-Experts architecture. It takes image, text, video and audio as input and produces image, text and audio."
+  stats:
+    - value: "100B"
+      label: "total parameters"
+    - value: "6B"
+      label: "active parameters"
+    - value: "4 in, 3 out"
+      label: "modalities"
+    - value: "MIT"
+      label: "open-source licence"
+  highlights:
+    - title: "Expert-level multimodal cognition"
+      text: "Identifies plants and animals, recognises cultural references from regional cuisines to landmarks, and analyses artifacts by era, form and craftsmanship."
+    - title: "Unified speech, audio and music"
+      text: "One end-to-end pipeline for speech, audio and music, with zero-shot voice cloning and control over emotion, timbre and ambience."
+    - title: "Controllable image generation and editing"
+      text: "A native multi-task architecture that unifies segmentation, generation and editing, including scene composition and context-aware object removal."
+  role: "Enhanced the model's visual reasoning ability and participated in its post-training."
+  source:
+    label: "official model card"
+    url: "https://huggingface.co/inclusionAI/Ming-flash-omni-2.0"
   links:
     - label: "GitHub"
       url: "https://github.com/inclusionAI/Ming"
     - label: "HuggingFace"
       url: "https://huggingface.co/inclusionAI/Ming-flash-omni-2.0"
+    - label: "ModelScope"
+      url: "https://www.modelscope.cn/models/inclusionAI/Ming-flash-omni-2.0"
+    - label: "Technical report"
+      url: "https://arxiv.org/abs/2506.09344"

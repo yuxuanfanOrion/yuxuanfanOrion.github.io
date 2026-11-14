@@ -11,6 +11,8 @@
 # summary:     what the project is
 # stats:       key numbers (value, label)
 # highlights:  capabilities (title, text)
+# figure:      optional large figure shown under the highlights (src, alt,
+#              caption, credit, url of the page it comes from)
 # role:        the part played
 # source:      where the facts above come from (label, url)
 # links:       shown as buttons, in this order
@@ -73,6 +75,12 @@
       text: "One end-to-end pipeline for speech, audio and music, with zero-shot voice cloning and control over emotion, timbre and ambience."
     - title: "Controllable image generation and editing"
       text: "A native multi-task architecture that unifies segmentation, generation and editing, including scene composition and context-aware object removal."
+  figure:
+    src: "/images/project-ming-architecture.webp"
+    alt: "Architecture of Ming-flash-omni: vision and audio encoders feed the Ling-flash Mixture-of-Experts language model, whose outputs drive an audio head and a vision head for speech and image generation"
+    caption: "Model architecture: vision and audio encoders feed the Ling-flash Mixture-of-Experts model, with audio and vision heads for generation."
+    credit: "Figure from the Ming repository, Inclusion AI"
+    url: "https://github.com/inclusionAI/Ming"
   role: "Enhanced the model's visual reasoning ability and participated in its post-training."
   source:
     label: "official model card"

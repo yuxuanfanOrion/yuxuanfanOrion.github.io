@@ -81,20 +81,39 @@ Add an entry to `_data/publications.yml`:
 ```
 
 ### New Project
-Add an entry to `_data/projects.yml` (shown on the Projects page `/projects/`, in file order):
+Add an entry to `_data/projects.yml` (shown on the Projects page `/projects/`, in file order).
+Each project is laid out like a product page; every field except `name`, `kind` and `org` is optional:
 ```yaml
 - name: "Project Name"
   kind: "Foundation model"            # or "Open source", ...
   org: "Team, Company"
-  period: "Jan. 2026 – Mar. 2026"     # optional
-  logo: "/images/icon/xxx.png"        # optional, shown on the nebula
+  period: "Jan. 2026 – Mar. 2026"
+  logo: "/images/icon/xxx.png"        # shown on the nebula
   sky: cosmic-cliffs                  # a nebula id from _data/nebulae.yml
-  image: "/images/project_xxx.png"    # optional, replaces the nebula and logo
-  text: "One or two sentences on the part played."
+  image: "/images/project_xxx.png"    # replaces the nebula and logo
+  tagline: "One line, shown large."
+  summary: "What the project is."
+  stats:                              # key numbers
+    - value: "100B"
+      label: "total parameters"
+  highlights:                         # capabilities
+    - title: "Short title"
+      text: "One or two sentences."
+  figure:                             # a large figure under the highlights
+    src: "/images/project-xxx.webp"
+    alt: "What the figure shows"
+    caption: "Caption."
+    credit: "Figure from ..."
+    url: "https://..."
+  role: "The part played."
+  source:                             # where the facts come from
+    label: "official page"
+    url: "https://..."
   links:
     - label: "GitHub"
       url: "https://github.com/xxx"
 ```
+Take facts and figures from the project's official page and link it in `source`.
 
 ### Enabling Navigation Sections
 Uncomment entries in `_data/navigation.yml` and ensure corresponding collections are enabled in `_config.yml`.

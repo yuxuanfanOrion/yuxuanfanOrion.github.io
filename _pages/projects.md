@@ -63,6 +63,16 @@ lede: "Foundation models and projects I have worked on."
     </div>
     {% endif %}
 
+    {% if project.figure %}
+    <figure class="project-figure">
+      <img src="{{ project.figure.src }}" alt="{{ project.figure.alt }}" loading="lazy" decoding="async">
+      <figcaption>
+        {{ project.figure.caption }}
+        {% if project.figure.credit %}<a href="{{ project.figure.url }}" target="_blank" rel="noopener">{{ project.figure.credit }}</a>.{% endif %}
+      </figcaption>
+    </figure>
+    {% endif %}
+
     {% if project.role %}
     <div class="project-role">
       <h3>My part</h3>

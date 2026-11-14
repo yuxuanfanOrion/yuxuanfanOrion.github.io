@@ -32,6 +32,20 @@
     </figcaption>
   </figure>
 </div>
+{% comment %}
+  Narrow screens have no room for the strip, so the same nebula is shown as
+  a short band across the page instead, centred on its brightest star and
+  drifting slowly up and down. Styled in home.css under .nebula-band.
+{% endcomment %}
+<figure class="nebula-band">
+  <div class="nebula-band-sky" role="img" aria-label="{{ nebula.title }}, imaged by the James Webb Space Telescope">
+    <img src="{{ nebula.src }}" alt="" width="600" height="1800" loading="lazy" decoding="async" style="--y:{{ nebula.hero[1] }}">
+  </div>
+  <figcaption class="nebula-caption">
+    <span class="nebula-title">{{ nebula.title }}</span>
+    <a class="nebula-credit" href="{{ nebula.url }}" title="{{ nebula.credit }}" target="_blank" rel="noopener">JWST / NASA, ESA, CSA, STScI</a>
+  </figcaption>
+</figure>
 <script type="application/json" id="nebula-data">{{ site.data.nebulae | jsonify }}</script>
 <script>
   (function () {
@@ -56,11 +70,21 @@
     nebula.nebula = v;
     nebula.dataset.nebula = v.id;
     nebula.style.setProperty('--ar', v.ar);
-    nebula.querySelector('.nebula-frame').setAttribute('aria-label', v.title + ', imaged by the James Webb Space Telescope');
-    nebula.querySelector('.nebula-title').textContent = v.title;
-    var credit = nebula.querySelector('.nebula-credit');
-    credit.href = v.url;
-    credit.title = v.credit;
+    var label = v.title + ', imaged by the James Webb Space Telescope';
+    nebula.querySelector('.nebula-frame').setAttribute('aria-label', label);
+    Array.prototype.forEach.call(document.querySelectorAll('.nebula-title'), function (el) { el.textContent = v.title; });
+    Array.prototype.forEach.call(document.querySelectorAll('.nebula-credit'), function (el) {
+      el.href = v.url;
+      el.title = v.credit;
+    });
+    var band = document.querySelector('.nebula-band-sky');
+    if (band) {
+      band.setAttribute('aria-label', label);
+      var bandImg = band.querySelector('img');
+      bandImg.src = v.src;
+      bandImg.height = Math.round(600 * v.ar);
+      bandImg.style.setProperty('--y', v.hero[1]);
+    }
     Array.prototype.forEach.call(nebula.querySelectorAll('.nebula-sky img'), function (img) {
       img.src = v.src;
       img.height = Math.round(600 * v.ar);

@@ -20,12 +20,18 @@ layout: compress
 </head>
 <body>
 
+<canvas class="page-sky" aria-hidden="true" data-stars="/assets/js/sky-stars.json"></canvas>
+
 <div class="app-container">
 
   <aside class="sidebar">
     <div class="sidebar-top">
-      <figure class="portrait-editorial">
-        <img src="/images/starcos-baobab-nebula.webp" alt="Starcos 反余弦: an abstract figure gazing up beside a baobab tree beneath stars, meteors and nebulae" width="1122" height="1402" fetchpriority="high">
+      <figure class="portrait" data-portrait>
+        <button class="portrait-frame" type="button" aria-pressed="false" aria-label="Switch between the Starcos illustration and a photo of Yuxuan">
+          <img class="portrait-art" src="/images/starcos-baobab-nebula.webp" alt="Starcos 反余弦: an abstract figure gazing up beside a baobab tree beneath stars, meteors and nebulae" width="1122" height="1402" fetchpriority="high">
+          <canvas class="portrait-gl" aria-hidden="true" data-sky="/images/starcos-sky.webp" data-ground="/images/starcos-ground.webp" data-figure="/images/starcos-figure.webp"></canvas>
+          <img class="portrait-photo" src="/images/yuxuan-forest.webp" alt="Yuxuan FAN in a forest, looking to the side" width="800" height="1000" decoding="async">
+        </button>
       </figure>
       <div class="sidebar-identity">
         <h1>Yuxuan FAN<span class="name-cn">樊宇轩</span></h1>
@@ -41,15 +47,33 @@ layout: compress
       </div>
     </div>
 
-    <nav class="vertical-nav">
-      <a href="#about">About</a>
-      <a href="#news">News</a>
-      <a href="#publications">Publications</a>
-      <a href="#experiences">Experiences</a>
-      <a href="#education">Education</a>
-      <a href="#services">Services</a>
-      <a href="#hobbies">Hobbies</a>
-    </nav>
+    <div class="nav-row">
+      <nav class="vertical-nav">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#education">Education</a>
+        <a href="#services">Services</a>
+        <a href="#hobbies">Hobbies</a>
+      </nav>
+      {% comment %}
+        Orion as a map of the page: its seven main stars at their real
+        relative positions (north up, east left), one per section. Stars and
+        lines light up as the reader moves down the page.
+      {% endcomment %}
+      <svg class="orion" viewBox="0 0 100 160" aria-hidden="true">
+        <g class="orion-base"><path d="M9.6 11.9L69.2 20.4"/><path d="M9.6 11.9L38.1 86.7"/><path d="M38.1 86.7L47.2 80.8"/><path d="M47.2 80.8L55.6 73.6"/><path d="M69.2 20.4L55.6 73.6"/><path d="M38.1 86.7L24.5 148.6"/><path d="M55.6 73.6L90.1 136.8"/><path d="M24.5 148.6L90.1 136.8"/></g>
+        <g class="orion-lines"><path d="M9.6 11.9L69.2 20.4" pathLength="1" data-at="1"/><path d="M9.6 11.9L38.1 86.7" pathLength="1" data-at="2"/><path d="M38.1 86.7L47.2 80.8" pathLength="1" data-at="3"/><path d="M47.2 80.8L55.6 73.6" pathLength="1" data-at="4"/><path d="M69.2 20.4L55.6 73.6" pathLength="1" data-at="4"/><path d="M38.1 86.7L24.5 148.6" pathLength="1" data-at="5"/><path d="M55.6 73.6L90.1 136.8" pathLength="1" data-at="6"/><path d="M24.5 148.6L90.1 136.8" pathLength="1" data-at="6"/></g>
+        <a class="orion-star" href="#about" tabindex="-1"><title>About</title><circle class="orion-hit" cx="9.6" cy="11.9" r="7"/><circle class="orion-ring" cx="9.6" cy="11.9" r="6.7"/><circle class="orion-dot" cx="9.6" cy="11.9" r="3.1"/></a>
+        <a class="orion-star" href="#news" tabindex="-1"><title>News</title><circle class="orion-hit" cx="69.2" cy="20.4" r="7"/><circle class="orion-ring" cx="69.2" cy="20.4" r="6.1"/><circle class="orion-dot" cx="69.2" cy="20.4" r="2.5"/></a>
+        <a class="orion-star" href="#publications" tabindex="-1"><title>Publications</title><circle class="orion-hit" cx="38.1" cy="86.7" r="7"/><circle class="orion-ring" cx="38.1" cy="86.7" r="6.0"/><circle class="orion-dot" cx="38.1" cy="86.7" r="2.4"/></a>
+        <a class="orion-star" href="#experiences" tabindex="-1"><title>Experiences</title><circle class="orion-hit" cx="47.2" cy="80.8" r="7"/><circle class="orion-ring" cx="47.2" cy="80.8" r="6.1"/><circle class="orion-dot" cx="47.2" cy="80.8" r="2.5"/></a>
+        <a class="orion-star" href="#education" tabindex="-1"><title>Education</title><circle class="orion-hit" cx="55.6" cy="73.6" r="7"/><circle class="orion-ring" cx="55.6" cy="73.6" r="5.7"/><circle class="orion-dot" cx="55.6" cy="73.6" r="2.1"/></a>
+        <a class="orion-star" href="#services" tabindex="-1"><title>Services</title><circle class="orion-hit" cx="24.5" cy="148.6" r="7"/><circle class="orion-ring" cx="24.5" cy="148.6" r="5.8"/><circle class="orion-dot" cx="24.5" cy="148.6" r="2.2"/></a>
+        <a class="orion-star" href="#hobbies" tabindex="-1"><title>Hobbies</title><circle class="orion-hit" cx="90.1" cy="136.8" r="7"/><circle class="orion-ring" cx="90.1" cy="136.8" r="7.0"/><circle class="orion-dot" cx="90.1" cy="136.8" r="3.4"/></a>
+      </svg>
+    </div>
 
     <div class="sidebar-footer">
       <a href="https://scholar.google.com/citations?user=h8x-wqkAAAAJ&hl=zh-CN" target="_blank" rel="noopener">Scholar</a>
@@ -90,6 +114,23 @@ layout: compress
     var navLinks = document.querySelectorAll('.vertical-nav a');
     if (!sections.length) return;
 
+    /* Once the section list has scrolled away, a small copy of the Orion
+       map stays beside the pinned nebula strip. */
+    var orion = document.querySelector('.orion');
+    var strip = document.querySelector('.nebula');
+    if (orion && strip && 'IntersectionObserver' in window) {
+      var mini = orion.cloneNode(true);
+      mini.classList.add('orion--mini');
+      strip.appendChild(mini);
+      new IntersectionObserver(function (entries) {
+        mini.classList.toggle('is-shown', !entries[entries.length - 1].isIntersecting);
+      }).observe(document.querySelector('.nav-row'));
+    }
+    var maps = Array.prototype.map.call(document.querySelectorAll('.orion'), function (map) {
+      return { stars: map.querySelectorAll('.orion-star'), lines: map.querySelectorAll('.orion-lines path') };
+    });
+    var orionStars = maps.length ? maps[0].stars : [];
+
     function updateActiveNav() {
       var scrollPosition = window.scrollY + 150;
       var activeId = '';
@@ -103,16 +144,40 @@ layout: compress
       }
 
       if (!activeId) return;
-      navLinks.forEach(function (link) {
-        link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+      var activeIndex = -1;
+      navLinks.forEach(function (link, i) {
+        var on = link.getAttribute('href') === '#' + activeId;
+        link.classList.toggle('active', on);
+        if (on) activeIndex = i;
+      });
+      maps.forEach(function (map) {
+        map.stars.forEach(function (star, i) {
+          star.classList.toggle('is-lit', i <= activeIndex);
+          star.classList.toggle('is-current', i === activeIndex);
+        });
+        map.lines.forEach(function (line) {
+          line.classList.toggle('is-lit', Number(line.dataset.at) <= activeIndex);
+        });
       });
     }
+
+    /* Pointing at a section name points at its star, and the other way round. */
+    navLinks.forEach(function (link, i) {
+      var star = orionStars[i];
+      if (!star) return;
+      [[link, star], [star, link]].forEach(function (pair) {
+        pair[0].addEventListener('pointerenter', function () { pair[1].classList.add('is-pointed'); });
+        pair[0].addEventListener('pointerleave', function () { pair[1].classList.remove('is-pointed'); });
+      });
+    });
 
     window.addEventListener('scroll', updateActiveNav, { passive: true });
     window.addEventListener('resize', updateActiveNav);
     updateActiveNav();
   })();
 </script>
+<script src="/assets/js/portrait.js" defer></script>
+<script src="/assets/js/sky.js" defer></script>
 
 </body>
 </html>

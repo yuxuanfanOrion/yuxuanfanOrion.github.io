@@ -25,20 +25,45 @@
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Dark mode is a night sky: the base is a blue-black taken from the
+   portrait, lifted slightly towards the top left where the portrait sits. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0a0a0a;
-    --surface: #0a0a0a;
-    --text-primary: #ffffff;
-    --text-secondary: #9ca3af;
-    --text-tertiary: #4b5563;
-    --border: #1f2937;
+    --bg: #070b18;
+    --surface: transparent;
+    --text-primary: #f3f6fc;
+    --text-secondary: #a4aec4;
+    --text-tertiary: #65718d;
+    --border: #1b2440;
 
-    --accent: #60a5fa;
-    --accent-hover: #93c5fd;
-    --accent-light: #172554;
+    --accent: #7aa9ff;
+    --accent-hover: #a5c5ff;
+    --accent-light: #12214a;
 
-    --muted-bg: #111827;
+    --muted-bg: #0d152c;
+  }
+
+  body {
+    background-image: radial-gradient(120% 90% at 18% 0%, #0d1838 0%, #070b18 52%, #05070f 100%);
+    background-attachment: fixed;
+  }
+}
+
+/* The sky canvas (see /assets/js/sky.js) sits behind everything and is only
+   used in dark mode. */
+.page-sky {
+  display: none;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-sky {
+    display: block;
   }
 }
 
@@ -88,7 +113,7 @@ a:hover {
   gap: 80px;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 100px 24px;
+  padding: 72px 24px 100px;
 }
 
 /* ── Sidebar ── */
@@ -106,17 +131,94 @@ a:hover {
   align-items: flex-start;
 }
 
-.portrait-editorial {
+/* ── Portrait ──
+   The painting is the <img>; /assets/js/portrait.js draws an animated copy
+   on the canvas above it, and the photograph lies on top, hidden until the
+   portrait is hovered or pressed. */
+.portrait {
   display: block;
-  width: 220px;
-  max-width: 100%;
+  width: 100%;
   margin-bottom: 24px;
 }
 
-.portrait-editorial img {
+.portrait-frame {
+  position: relative;
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 1122 / 1402;
+  overflow: hidden;
+  background: #01235c;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.portrait-frame:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.portrait-art,
+.portrait-gl,
+.portrait-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait-gl {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.portrait.has-gl .portrait-gl {
+  opacity: 1;
+}
+
+/* The photograph comes in like an exposure: washed out and soft at first,
+   then settling. */
+.portrait-photo {
+  object-fit: cover;
+  opacity: 0;
+  filter: brightness(1.9) saturate(0.35) blur(5px);
+  transform: scale(1.04);
+  transition: opacity 0.55s ease, filter 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portrait.is-flipped .portrait-photo {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+@media (hover: hover) {
+  .portrait:not(.is-flipped) .portrait-frame:hover .portrait-photo {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-photo {
+    filter: none;
+    transform: none;
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* At night the picture has no frame: its sky runs out into the page. */
+@media (prefers-color-scheme: dark) {
+  .portrait-frame {
+    background: transparent;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent), linear-gradient(to bottom, transparent, #000 11%, #000 95%, transparent);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent), linear-gradient(to bottom, transparent, #000 11%, #000 95%, transparent);
+    mask-composite: intersect;
+  }
 }
 
 .sidebar-identity {
@@ -402,6 +504,37 @@ a:hover {
   color: var(--accent);
 }
 
+/* ── Nebula band (narrow screens) ──
+   The same picture as the strip, cropped to a short band around its
+   brightest star (--y, percent of the picture height). */
+.nebula-band {
+  display: none;
+}
+
+.nebula-band-sky {
+  height: 136px;
+  overflow: hidden;
+  background: #0b1226;
+}
+
+.nebula-band-sky img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(calc(var(--y) * -1% + 68px));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nebula-band-sky img {
+    animation: nebula-band-drift 40s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes nebula-band-drift {
+  from { transform: translateY(calc((var(--y) - 2.2) * -1% + 68px)); }
+  to   { transform: translateY(calc((var(--y) + 2.2) * -1% + 68px)); }
+}
+
 /* Exposure sequence: set up by the inline script, so without JS the tiles
    are simply shown. Each tile fills top to bottom, overexposed and soft,
    then settles. */
@@ -541,6 +674,10 @@ a:hover {
     position: static;
     height: 100%;
   }
+
+  .orion--mini {
+    display: none;
+  }
 }
 
 .sidebar h1 {
@@ -611,11 +748,129 @@ a:hover {
   .status-dot { animation: none; }
 }
 
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 32px 0;
+}
+
 .vertical-nav {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin: 40px 0;
+}
+
+/* Orion, one star per section. Unlit stars and lines are faint; they light
+   up to the current section, whose star takes the accent colour. */
+.orion {
+  flex: none;
+  width: 96px;
+  height: auto;
+  margin-right: 8px;
+  overflow: visible;
+}
+
+.orion path {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.orion-base path {
+  stroke: var(--text-tertiary);
+  stroke-width: 0.7;
+  stroke-dasharray: 1.2 2.6;
+  opacity: 0.6;
+}
+
+.orion-lines path {
+  stroke: var(--text-secondary);
+  stroke-width: 0.8;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orion-lines path.is-lit {
+  stroke-dashoffset: 0;
+}
+
+.orion-hit {
+  fill: transparent;
+}
+
+.orion-dot {
+  fill: var(--text-tertiary);
+  transition: fill 0.3s ease;
+}
+
+.orion-ring {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 0.8;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.6);
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.orion-star.is-lit .orion-dot {
+  fill: var(--text-primary);
+}
+
+.orion-star.is-current .orion-dot,
+.orion-star.is-pointed .orion-dot,
+.orion-star:hover .orion-dot {
+  fill: var(--accent);
+}
+
+.orion-star.is-current .orion-ring,
+.orion-star.is-pointed .orion-ring,
+.orion-star:hover .orion-ring {
+  opacity: 0.55;
+  transform: none;
+}
+
+.vertical-nav a.is-pointed {
+  color: var(--accent);
+}
+
+/* The small copy beside the nebula strip, like a finder chart. It is added
+   by the script in home.html and shown while the section list is out of
+   view. */
+.orion--mini {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 4px;
+  width: 44px;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.orion--mini.is-shown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.orion--mini path {
+  stroke-width: 1.5;
+}
+
+.orion--mini .orion-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(1.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orion-lines path,
+  .orion-ring {
+    transition: none;
+  }
 }
 
 .vertical-nav a {
@@ -1016,6 +1271,18 @@ footer {
     display: none;
   }
 
+  .nebula-band {
+    display: block;
+    margin: 0 -24px;
+  }
+
+  .nebula-band .nebula-caption {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 10px 24px 0;
+  }
+
   .sidebar-top {
     display: grid;
     grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
@@ -1023,15 +1290,22 @@ footer {
     gap: 32px;
   }
 
-  .portrait-editorial {
+  .portrait {
     margin-bottom: 0;
+  }
+
+  .nav-row {
+    margin: 28px 0;
+  }
+
+  .orion {
+    display: none;
   }
 
   .vertical-nav {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 18px;
-    margin: 28px 0;
   }
 
   .vertical-nav a:hover,

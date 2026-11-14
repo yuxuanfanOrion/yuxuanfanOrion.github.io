@@ -16,7 +16,7 @@ layout: compress
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/css/home.css">
+  <link rel="stylesheet" href="/assets/css/home.css?v={{ site.time | date: '%Y%m%d%H%M%S' }}">
 </head>
 <body>
 
@@ -194,9 +194,9 @@ layout: compress
     updateActiveNav();
   })();
 </script>
-<script src="/assets/js/portrait.js" defer></script>
-<script src="/assets/js/sky.js" defer></script>
-<script src="/assets/js/stardust.js" defer></script>
+<script src="/assets/js/portrait.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+<script src="/assets/js/sky.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
+<script src="/assets/js/stardust.js?v={{ site.time | date: '%Y%m%d%H%M%S' }}" defer></script>
 
 </body>
 </html>

@@ -89,6 +89,23 @@ layout: compress
     {{ content }}
   </main>
 
+  {% comment %}
+    Light mode, wide screens: a window onto the real sky in the right
+    margin, drawn by /assets/js/sky.js. In dark mode the whole page is that
+    sky, so the window is not shown.
+  {% endcomment %}
+  <div class="sky-rail">
+    <figure class="sky-window">
+      <div class="sky-window-frame">
+        <canvas role="img" aria-label="The stars and constellations above Singapore right now"></canvas>
+      </div>
+      <figcaption class="nebula-caption">
+        <span class="sky-window-title">Night sky</span>
+        <span class="sky-window-note">Live over Singapore</span>
+      </figcaption>
+    </figure>
+  </div>
+
 </div>
 
 <footer>

@@ -906,6 +906,64 @@ a:hover {
   color: var(--accent);
 }
 
+/* ── Sky window ──
+   Light mode on wide screens: a tall window in the right margin showing the
+   real sky (see /assets/js/sky.js). It mirrors the nebula strip on the left:
+   same pinned position, same height, same caption. Its left edge is 32px
+   from the text; the width is what the margin leaves, less 24px. */
+.sky-rail {
+  display: none;
+}
+
+@media (min-width: 1348px) and (prefers-color-scheme: light) {
+  .app-container {
+    position: relative;
+  }
+
+  .sky-rail {
+    display: block;
+    position: absolute;
+    top: 72px;
+    bottom: 100px;
+    left: calc(100% - 4px);
+    width: clamp(104px, calc(50vw - 570px), 200px);
+  }
+
+  .sky-window {
+    position: sticky;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    height: min(calc(100vh - 80px), 860px);
+    min-height: 200px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .sky-window.is-live {
+    opacity: 1;
+  }
+
+  .sky-window-frame {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    background: #070b18;
+  }
+
+  .sky-window-frame canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .sky-window-note {
+    font-weight: 500;
+  }
+}
+
 /* ── Main content ── */
 .content {
   max-width: 680px;

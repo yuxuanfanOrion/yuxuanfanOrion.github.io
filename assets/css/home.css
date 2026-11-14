@@ -1314,16 +1314,26 @@ footer {
   letter-spacing: 0.08em;
 }
 
-/* ── Pointer stardust ──
-   The canvas /assets/js/stardust.js draws on: above everything, never in
-   the way of the pointer. */
-.stardust {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  pointer-events: none;
+/* ── Star cursor ──
+   With a mouse or trackpad the cursor is a four-point star whose centre is
+   the hot spot, pale with a dark edge so it reads on white and on the
+   night sky alike; over anything clickable it is a brighter blue one.
+   /assets/js/stardust.js adds the moving parts around it. */
+@media (hover: hover) and (pointer: fine) {
+  html {
+    cursor: url("/images/cursor-star.png") 16 16, auto;
+    cursor: -webkit-image-set(url("/images/cursor-star.png") 1x, url("/images/cursor-star@2x.png") 2x) 16 16, auto;
+    cursor: image-set(url("/images/cursor-star.png") 1x, url("/images/cursor-star@2x.png") 2x) 16 16, auto;
+  }
+
+  a,
+  button,
+  .portrait-frame,
+  .orion-star {
+    cursor: url("/images/cursor-star-link.png") 16 16, pointer;
+    cursor: -webkit-image-set(url("/images/cursor-star-link.png") 1x, url("/images/cursor-star-link@2x.png") 2x) 16 16, pointer;
+    cursor: image-set(url("/images/cursor-star-link.png") 1x, url("/images/cursor-star-link@2x.png") 2x) 16 16, pointer;
+  }
 }
 
 /* ── Meteor tracks ──

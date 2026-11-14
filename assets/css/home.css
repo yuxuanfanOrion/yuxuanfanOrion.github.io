@@ -22,6 +22,7 @@
   --accent-light: #eff6ff;
 
   --muted-bg: #f9fafb;
+  --meteor-head: #1d4ed8;
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -41,6 +42,7 @@
     --accent-light: #12214a;
 
     --muted-bg: #0d152c;
+    --meteor-head: #ffffff;
   }
 
   body {
@@ -1310,6 +1312,68 @@ footer {
   color: var(--text-tertiary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+/* ── Pointer stardust ──
+   The canvas /assets/js/stardust.js draws on: above everything, never in
+   the way of the pointer. */
+.stardust {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Meteor tracks ──
+   The rules of the page carry meteors: one runs along the line under a
+   section title the first time it comes into view (.is-seen is added by
+   stardust.js), and one along the bottom of a list row when it is hovered.
+   The streak is a short gradient moved across a 1px strip. */
+.section-title,
+.pub-item,
+.news-item,
+.timeline-item {
+  position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .section-title::after,
+  .pub-item::after,
+  .news-item::after,
+  .timeline-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, var(--accent) 72%, var(--meteor-head)) no-repeat -180px 0 / 180px 100%;
+  }
+
+  .section-title::after {
+    height: 2px;
+    bottom: -1.5px;
+  }
+
+  .section-title.is-seen::after {
+    animation: meteor-track 1.25s cubic-bezier(0.3, 0, 0.2, 1) 0.15s both;
+  }
+
+  @media (hover: hover) {
+    .pub-item:hover::after,
+    .news-item:hover::after,
+    .timeline-item:hover::after {
+      animation: meteor-track 0.8s cubic-bezier(0.3, 0, 0.2, 1) both;
+    }
+  }
+}
+
+@keyframes meteor-track {
+  from { background-position: -180px 0; }
+  to   { background-position: calc(100% + 180px) 0; }
 }
 
 /* ── Responsive ── */

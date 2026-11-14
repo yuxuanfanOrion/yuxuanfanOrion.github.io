@@ -26,29 +26,34 @@
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Dark mode is a night sky: the base is a blue-black taken from the
+/* The theme is the data-theme attribute on <html>, set before first paint
+   by the script in the head of home.html: the visitor's saved choice, or
+   else what the system asks for. The button in the top right corner
+   switches it.
+
+   Dark mode is a night sky: the base is a blue-black taken from the
    portrait, lifted slightly towards the top left where the portrait sits. */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #070b18;
-    --surface: transparent;
-    --text-primary: #f3f6fc;
-    --text-secondary: #a4aec4;
-    --text-tertiary: #65718d;
-    --border: #1b2440;
+html[data-theme="dark"] {
+  color-scheme: dark;
 
-    --accent: #7aa9ff;
-    --accent-hover: #a5c5ff;
-    --accent-light: #12214a;
+  --bg: #070b18;
+  --surface: transparent;
+  --text-primary: #f3f6fc;
+  --text-secondary: #a4aec4;
+  --text-tertiary: #65718d;
+  --border: #1b2440;
 
-    --muted-bg: #0d152c;
-    --meteor-head: #ffffff;
-  }
+  --accent: #7aa9ff;
+  --accent-hover: #a5c5ff;
+  --accent-light: #12214a;
 
-  body {
-    background-image: radial-gradient(120% 90% at 18% 0%, #0d1838 0%, #070b18 52%, #05070f 100%);
-    background-attachment: fixed;
-  }
+  --muted-bg: #0d152c;
+  --meteor-head: #ffffff;
+}
+
+html[data-theme="dark"] body {
+  background-image: radial-gradient(120% 90% at 18% 0%, #0d1838 0%, #070b18 52%, #05070f 100%);
+  background-attachment: fixed;
 }
 
 /* The sky canvas (see /assets/js/sky.js) sits behind everything and is only
@@ -63,10 +68,69 @@
   pointer-events: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  .page-sky {
-    display: block;
-  }
+html[data-theme="dark"] .page-sky {
+  display: block;
+}
+
+/* ── Theme switch ──
+   Top right corner of the page. It shows where a click leads: the moon by
+   day, the sun at night. */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--muted-bg);
+  color: var(--text-secondary);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle .icon-sun,
+html[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+/* Switching: the new theme opens as a circle from the button (the script
+   animates the clip); the default cross-fade is turned off. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 html {
@@ -213,14 +277,12 @@ a:hover {
 }
 
 /* At night the picture has no frame: its sky runs out into the page. */
-@media (prefers-color-scheme: dark) {
-  .portrait-frame {
-    background: transparent;
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent), linear-gradient(to bottom, transparent, #000 11%, #000 95%, transparent);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent), linear-gradient(to bottom, transparent, #000 11%, #000 95%, transparent);
-    mask-composite: intersect;
-  }
+html[data-theme="dark"] .portrait-frame {
+  background: transparent;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent), linear-gradient(to bottom, transparent, #000 11%, #000 95%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 13%, #000 87%, transparent), linear-gradient(to bottom, transparent, #000 11%, #000 95%, transparent);
+  mask-composite: intersect;
 }
 
 .sidebar-identity {
@@ -917,12 +979,12 @@ a:hover {
   display: none;
 }
 
-@media (min-width: 1348px) and (prefers-color-scheme: light) {
+@media (min-width: 1348px) {
   .app-container {
     position: relative;
   }
 
-  .sky-rail {
+  html:not([data-theme="dark"]) .sky-rail {
     display: block;
     position: absolute;
     top: 72px;

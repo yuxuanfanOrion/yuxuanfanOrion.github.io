@@ -19,7 +19,9 @@
   var windowEl = document.querySelector('.sky-window');
   if (!pageCanvas || !pageCanvas.getContext || !window.fetch) return;
 
-  var dark = window.matchMedia('(prefers-color-scheme: dark)');
+  /* The theme is the data-theme attribute on <html>; the switch in the
+     corner announces a change with a themechange event. */
+  function isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
   var still = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var RAD = Math.PI / 180;
@@ -361,7 +363,7 @@
   var COMPASS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
 
   function paneOn() {
-    return !!pane.canvas && !dark.matches && windowEl.offsetParent !== null;
+    return !!pane.canvas && !isDark() && windowEl.offsetParent !== null;
   }
 
   /* Looks towards azimuth `azDeg`, `upDeg` above the horizon; stereographic.
@@ -523,7 +525,7 @@
 
   function frame(ms) {
     raf = null;
-    var pageOn = dark.matches;
+    var pageOn = isDark();
     var windowOn = paneOn() && pane.W > 0;
     if (!stars || (!pageOn && !windowOn)) return;
     raf = requestAnimationFrame(frame);
@@ -533,7 +535,7 @@
   }
 
   function wake() {
-    if (!dark.matches && !(paneOn() && pane.W > 0)) return;
+    if (!isDark() && !(paneOn() && pane.W > 0)) return;
     load(function () {
       page.dirty = true;
       pane.dirty = true;
@@ -555,7 +557,7 @@
   }
 
   window.addEventListener('resize', resizePage);
-  dark.addEventListener('change', function () {
+  window.addEventListener('themechange', function () {
     resizePane();
     wake();
   });

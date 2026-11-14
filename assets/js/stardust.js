@@ -45,12 +45,14 @@
   var ctx = canvas.getContext('2d');
   if (!ctx) return;
 
-  var dark = window.matchMedia('(prefers-color-scheme: dark)');
+  /* The theme is the data-theme attribute on <html>; the switch in the
+     corner announces a change with a themechange event. */
+  function isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
   /* On the white page the dust is ink and accent blue with a little amber;
      at night it is starlight. */
   var INK = ['37,99,235', '37,99,235', '11,27,77', '217,119,6'];
   var LIGHT = ['255,255,255', '190,212,255', '190,212,255', '255,214,160'];
-  function tones() { return dark.matches ? LIGHT : INK; }
+  function tones() { return isDark() ? LIGHT : INK; }
 
   var W = 0;
   var H = 0;
@@ -145,7 +147,7 @@
     last = ms;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
-    ctx.globalCompositeOperation = dark.matches ? 'lighter' : 'source-over';
+    ctx.globalCompositeOperation = isDark() ? 'lighter' : 'source-over';
 
     for (var r = rings.length - 1; r >= 0; r--) {
       var ring = rings[r];
@@ -186,7 +188,7 @@
     moon.reach += ((pointer.over ? 21 : 17) - moon.reach) * 0.15;
     moon.angle += dt * (pointer.over ? 5.2 : 2.6);
     if (moon.alpha > 0.01) {
-      var tone = pointer.over ? tones()[0] : (dark.matches ? '255,255,255' : '11,27,77');
+      var tone = pointer.over ? tones()[0] : (isDark() ? '255,255,255' : '11,27,77');
       for (var k = 5; k >= 0; k--) {
         var a = moon.angle - k * 0.2;
         var mx = pointer.x + Math.cos(a) * moon.reach;

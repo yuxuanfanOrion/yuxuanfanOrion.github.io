@@ -313,8 +313,10 @@ html[data-theme="dark"] .portrait-frame {
 }
 
 /* ── Nebula strip ──
-   A JWST mosaic: eight tiles, each slightly offset and tilted, all showing
-   the same sky. This is the CSS fallback; with WebGL2 a canvas draws it.
+   A JWST mosaic. With WebGL2 a canvas draws it as a column of NIRCam
+   pointings, about sixty small square detectors exposed one by one (see
+   /assets/js/nebula.js). What follows is the CSS fallback: eight larger
+   tiles, each slightly offset and tilted, all showing the same sky.
    Every tile holds a full-size copy of the strip
    (.nebula-sky), counter-rotated so the picture lines up across seams and
    only the tile edges look stitched. Sizes use container units of
@@ -344,8 +346,8 @@ html[data-theme="dark"] .portrait-frame {
   container-type: size;
 }
 
-/* WebGL path: the canvas draws the whole mosaic (see /assets/js/nebula.js);
-   the tile elements stay on top only for their corner marks. */
+/* WebGL path: the canvas draws the whole mosaic, corner marks included, so
+   the tile elements are not shown. */
 .nebula-gl {
   display: none;
   position: absolute;
@@ -359,12 +361,6 @@ html[data-theme="dark"] .portrait-frame {
 }
 
 .nebula.has-gl .nebula-tile {
-  background: transparent;
-  box-shadow: none;
-  filter: none;
-}
-
-.nebula.has-gl .nebula-fill {
   display: none;
 }
 

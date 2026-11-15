@@ -1,13 +1,22 @@
 /*
  * Sidebar nebula strip: scroll descent, exposure sequence, meteors and,
- * when WebGL2 is available, a shader that draws the whole mosaic from one
- * texture and lets the gas drift slowly while the stars stay put.
+ * when WebGL2 is available, a shader that draws the strip the way JWST's
+ * near-infrared camera builds a mosaic.
+ *
+ * NIRCam exposes two modules side by side, each a 2 x 2 block of square
+ * detectors with narrow gaps between them and a wider gap between the
+ * modules. The shader lays the strip out as a column of such pointings
+ * (four detectors across, two rows each), every pointing slightly shifted
+ * and tilted, with a few detectors missing along the outline. Detectors
+ * are exposed one after another: a grainy monochrome frame first, then
+ * colour as further filters come in. Once all are in, a dither closes the
+ * gaps. The gas drifts slowly while the stars stay put.
  *
  * The inline script in _includes/nebula-strip.html runs first: it picks the
  * nebula (stored on the element as .nebula), builds the twinkle layer and
  * adds .is-armed (motion allowed) and .has-gl (WebGL2 context available).
- * Without .has-gl the tiles fall back to their own <img> copies and CSS
- * animations.
+ * Without .has-gl the eight tile elements fall back to their own <img>
+ * copies and CSS animations.
  */
 (function () {
   var nebula = document.querySelector('.nebula');
@@ -16,7 +25,8 @@
   var rail = nebula.parentElement;
   var frame = nebula.querySelector('.nebula-frame');
   var tiles = Array.prototype.slice.call(nebula.querySelectorAll('.nebula-tile'));
-  var glowStage = nebula.querySelector('.nebula-glow .nebula-stage');
+  var glow = nebula.querySelector('.nebula-glow');
+  var glowStage = glow.querySelector('.nebula-stage');
   var meteor = nebula.querySelector('.meteor');
   var variant = nebula.nebula;
 
@@ -57,11 +67,13 @@
 
   /* ── Occasional events ── */
   function reexpose() {
-    var i = Math.floor(Math.random() * tiles.length);
-    var tile = tiles[i];
-    tile.classList.add('is-reexposing');
-    if (gl) gl.reexpose[i] = now();
-    setTimeout(function () { tile.classList.remove('is-reexposing'); }, 1900);
+    if (gl) {
+      gl.reexposePointing();
+    } else {
+      var tile = tiles[Math.floor(Math.random() * tiles.length)];
+      tile.classList.add('is-reexposing');
+      setTimeout(function () { tile.classList.remove('is-reexposing'); }, 1900);
+    }
     scheduleReexpose();
   }
 
@@ -114,6 +126,10 @@
     'in vec2 aPos;\n' +
     'void main() { gl_Position = vec4(aPos, 0.0, 1.0); }\n';
 
+  var MAX_POINTINGS = 16;
+  var STEP = 0.055;        /* seconds between one detector and the next */
+  var EXPOSURE = 1.5;      /* seconds one detector takes to come in */
+
   var FRAG = '#version 300 es\n' +
     'precision highp float;\n' +
     'uniform sampler2D uTex;\n' +
@@ -124,9 +140,12 @@
     'uniform float uTexW;\n' +
     'uniform float uDescent;\n' +
     'uniform vec3 uDrift;\n' +        /* scale, translate x, y (fraction of stage) */
-    'uniform vec4 uTileA[8];\n' +     /* x, y, w, h in CSS px */
-    'uniform vec4 uTileB[8];\n' +     /* tilt (rad), tone, delay (s), re-exposure start (s) */
+    'uniform int uCount;\n' +         /* pointings in use */
+    'uniform vec3 uCell;\n' +         /* detector size, gap between detectors, gap between modules (CSS px) */
+    'uniform vec4 uPointA[16];\n' +   /* centre x, top y, tilt (rad), rows (1 or 2) */
+    'uniform vec4 uPointB[16];\n' +   /* tone, delay of its first detector (s), re-exposure start (s), missing detectors (bit mask) */
     'uniform float uExposedAt;\n' +
+    'uniform float uFillAt;\n' +      /* seconds after uExposedAt when the dither starts closing gaps */
     'uniform float uFlow;\n' +        /* gas displacement, CSS px */
     'out vec4 outColor;\n' +
     'float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }\n' +
@@ -140,6 +159,7 @@
     '  return v;\n' +
     '}\n' +
     'float lum(vec3 c) { return dot(c, vec3(0.299, 0.587, 0.114)); }\n' +
+    'float bump(float x, float at, float width) { float d = (x - at) / width; return exp(-d * d); }\n' +
     'void main() {\n' +
     '  vec2 p = vec2(gl_FragCoord.x, uRes.y * uDpr - gl_FragCoord.y) / uDpr;\n' +
     /* Same geometry as .nebula-stage in CSS, so the twinkle layer lines up. */
@@ -159,35 +179,73 @@
     '  vec2 flow = vec2(fbm(np + vec2(t * 0.035, -t * 0.02)), fbm(np + vec2(13.1, 7.7) + vec2(-t * 0.025, t * 0.03))) - 0.5;\n' +
     '  vec2 suv = uv + flow * 2.0 * uFlow * gas / vec2(sw, sh);\n' +
     '  float breathe = 1.0 + 0.07 * (fbm(np * 0.7 + vec2(t * 0.02, t * 0.015)) - 0.5) * 2.0 * gas;\n' +
-    '  float texPerPx = uTexW / sw;\n' +
-    '  float baseLod = log2(max(1.0, texPerPx / uDpr));\n' +
+    '  float baseLod = log2(max(1.0, uTexW / sw / uDpr));\n' +
+    '  vec3 sky = textureLod(uTex, suv, baseLod).rgb * breathe;\n' +
+    /* Read noise: one value per device pixel, new every frame. */
+    '  float grainAt = hash(floor(p * uDpr) + fract(t * 7.3) * vec2(37.0, 91.0)) - 0.5;\n' +
+    '  float c = uCell.x, g = uCell.y, G = uCell.z;\n' +
+    '  float since = uExposedAt < 0.0 ? -1.0 : t - uExposedAt;\n' +
+    '  float wp = 4.0 * c + 2.0 * g + G;\n' +
+    '  float module = 2.0 * c + g;\n' +
     '  vec4 acc = vec4(0.0);\n' +
-    '  for (int i = 0; i < 8; i++) {\n' +
-    '    vec4 a = uTileA[i];\n' +
-    '    vec4 b = uTileB[i];\n' +
-    '    vec2 d = p - (a.xy + a.zw * 0.5);\n' +
-    '    float cr = cos(b.x), sr = sin(b.x);\n' +
-    '    vec2 lp = vec2(cr * d.x + sr * d.y, -sr * d.x + cr * d.y);\n' +
-    '    vec2 e = abs(lp) - a.zw * 0.5;\n' +
-    '    float cov = clamp(0.5 - max(e.x, e.y) * uDpr, 0.0, 1.0);\n' +
+    '  for (int i = 0; i < 16; i++) {\n' +
+    '    if (i >= uCount) break;\n' +
+    '    vec4 a = uPointA[i];\n' +
+    '    vec4 b = uPointB[i];\n' +
+    '    float hp = a.w * c + (a.w - 1.0) * g;\n' +
+    '    vec2 d = p - vec2(a.x, a.y + hp * 0.5);\n' +
+    '    float cr = cos(a.z), sr = sin(a.z);\n' +
+    '    vec2 l = vec2(cr * d.x + sr * d.y, -sr * d.x + cr * d.y) + vec2(wp, hp) * 0.5;\n' +
+    '    if (l.x < -G || l.x > wp + G || l.y < -g || l.y > hp + g) continue;\n' +
+    /* The dither: each detector grows into half of every gap around it. */
+    '    float grow = since < 0.0 ? 0.0 : 0.5 * smoothstep(0.0, 0.9, since - uFillAt - float(i) * 0.14);\n' +
+    /* Which detector: module (left or right), column inside it, row. */
+    '    float m = step(module + G * 0.5, l.x);\n' +
+    '    float lx = l.x - m * (module + G);\n' +
+    '    float col = clamp(floor((lx + g * 0.5) / (c + g)), 0.0, 1.0);\n' +
+    '    float row = clamp(floor((l.y + g * 0.5) / (c + g)), 0.0, a.w - 1.0);\n' +
+    '    float inx = lx - col * (c + g);\n' +
+    '    float iny = l.y - row * (c + g);\n' +
+    '    float gapLeft = (m > 0.5 && col < 0.5) ? G : g;\n' +
+    '    float gapRight = (m < 0.5 && col > 0.5) ? G : g;\n' +
+    '    float edge = min(min(inx + gapLeft * grow, c + gapRight * grow - inx), min(iny + g * grow, c + g * grow - iny));\n' +
+    '    float cov = clamp(edge * uDpr + 0.5, 0.0, 1.0);\n' +
     '    if (cov <= 0.0) continue;\n' +
-    /* Exposure: fill top to bottom, overexposed and soft, then settle. */
-    '    float pe = uExposedAt < 0.0 ? 0.0 : clamp((t - uExposedAt - b.z) / 1.6, 0.0, 1.0);\n' +
-    '    float k = 1.0 - pow(1.0 - pe, 2.2);\n' +
-    '    float reveal = clamp(k / 0.45, 0.0, 1.0) * (1.0 + 6.0 / a.w);\n' +
-    '    float shown = clamp((reveal - (lp.y + a.w * 0.5) / a.w) * a.w / 3.0, 0.0, 1.0);\n' +
-    '    float br, sat, blur;\n' +
-    '    if (k < 0.45) { float u = k / 0.45; br = mix(2.6, 1.7, u); sat = mix(0.3, 0.6, u); blur = mix(4.0, 1.5, u); }\n' +
-    '    else { float u = (k - 0.45) / 0.55; br = mix(1.7, 1.0, u); sat = mix(0.6, 1.0, u); blur = mix(1.5, 0.0, u); }\n' +
-    '    float rk = (t - b.w) / 1.8;\n' +
+    '    float det = row * 4.0 + m * 2.0 + col;\n' +
+    '    if (mod(floor(b.w / exp2(det)), 2.0) > 0.5) continue;\n' +
+    /* Exposure, detector by detector. The first frame is monochrome and
+       grainy; two more filters bring the colour in, each with a short
+       flash, and the grain settles. */
+    '    float pe = since < 0.0 ? 0.0 : clamp((since - b.y - det * ' + STEP.toFixed(3) + ') / ' + EXPOSURE.toFixed(2) + ', 0.0, 1.0);\n' +
+    '    float second = smoothstep(0.30, 0.38, pe);\n' +
+    '    float third = smoothstep(0.62, 0.70, pe);\n' +
+    '    float sat = 0.5 * second + 0.5 * third;\n' +
+    '    float grain = 0.30 * (1.0 - 0.45 * second - 0.40 * third) * (1.0 - smoothstep(0.82, 1.0, pe));\n' +
+    '    float br = 1.0 + 0.5 * (1.0 - smoothstep(0.0, 0.28, pe)) + 0.3 * bump(pe, 0.34, 0.04) + 0.3 * bump(pe, 0.66, 0.04);\n' +
+    '    float marks = pe > 0.0 ? 1.0 - smoothstep(0.84, 1.0, pe) : 0.0;\n' +
+    /* A pointing taken again: its detectors flash, lose colour and grain
+       up for a moment, one after another. */
+    '    float rk = (t - b.z - det * 0.05) / 1.7;\n' +
     '    if (rk >= 0.0 && rk <= 1.0) {\n' +
-    '      float bump = rk < 0.18 ? rk / 0.18 : 1.0 - (rk - 0.18) / 0.82;\n' +
-    '      br *= 1.0 + 0.9 * bump; sat = mix(sat, 0.55, bump); blur = max(blur, 1.5 * bump);\n' +
+    '      float again = rk < 0.15 ? rk / 0.15 : 1.0 - (rk - 0.15) / 0.85;\n' +
+    '      br *= 1.0 + 0.7 * again;\n' +
+    '      sat = mix(sat, 0.3, again);\n' +
+    '      grain = max(grain, 0.2 * again);\n' +
+    '      marks = max(marks, smoothstep(0.0, 0.1, rk) * (1.0 - smoothstep(0.75, 1.0, rk)));\n' +
     '    }\n' +
-    '    vec3 col = textureLod(uTex, suv, max(baseLod, log2(max(1.0, blur * texPerPx)))).rgb * breathe;\n' +
-    '    col = clamp(mix(vec3(lum(col)), col, sat) * br * b.y, 0.0, 1.0);\n' +
-    '    col = mix(vec3(0.043, 0.071, 0.149), col, shown);\n' +
-    '    acc = acc * (1.0 - cov) + vec4(col, 1.0) * cov;\n' +
+    /* Each detector has its own response: a few percent lighter or darker. */
+    '    float tone = b.x * (1.0 + 0.06 * (hash(vec2(float(i) + 3.0, det + 7.0)) - 0.5));\n' +
+    '    vec3 rgb = mix(vec3(lum(sky)), sky, sat) * br * tone + grainAt * grain;\n' +
+    '    rgb = mix(vec3(0.043, 0.071, 0.149), rgb, smoothstep(0.0, 0.03, pe));\n' +
+    /* Detector edges are a touch darker, so seams stay readable after the
+       gaps have closed. */
+    '    rgb *= 1.0 - 0.2 * (1.0 - smoothstep(0.0, 1.5, edge));\n' +
+    /* Corner brackets while a detector is being read out. */
+    '    float mx = min(inx, c - inx), my = min(iny, c - iny);\n' +
+    '    float bracket = max(step(mx, 1.0) * step(my, 6.5), step(my, 1.0) * step(mx, 6.5)) * step(0.0, min(mx, my));\n' +
+    '    rgb = mix(rgb, vec3(1.0), 0.8 * bracket * marks);\n' +
+    '    rgb = clamp(rgb, 0.0, 1.0);\n' +
+    '    acc = acc * (1.0 - cov) + vec4(rgb, 1.0) * cov;\n' +
     '  }\n' +
     '  outColor = acc;\n' +
     '}\n';
@@ -220,14 +278,14 @@
     ctx.vertexAttribPointer(aPos, 2, ctx.FLOAT, false, 0, 0);
 
     var u = {};
-    ['uTex', 'uRes', 'uDpr', 'uTime', 'uAr', 'uTexW', 'uDescent', 'uDrift', 'uTileA', 'uTileB', 'uExposedAt', 'uFlow'].forEach(function (name) {
+    ['uTex', 'uRes', 'uDpr', 'uTime', 'uAr', 'uTexW', 'uDescent', 'uDrift', 'uCount', 'uCell', 'uPointA', 'uPointB', 'uExposedAt', 'uFillAt', 'uFlow'].forEach(function (name) {
       u[name] = ctx.getUniformLocation(prog, name);
     });
 
     var r = {
       ready: false,
       exposedAt: -1,
-      reexpose: tiles.map(function () { return -10; }),
+      reexposePointing: null,
       start: null
     };
 
@@ -251,8 +309,29 @@
     };
     img.src = variant.src;
 
-    var tileA = new Float32Array(32);
-    var tileB = new Float32Array(32);
+    /* ── Mosaic layout ──
+       Fixed for the visit: how far each pointing is shifted and tilted, its
+       tone, and which detectors are missing. Bit n of the mask is detector
+       n, counted left to right, top row first. */
+    var CELL_GAP = 3;
+    var MODULE_GAP = 7;
+    var MARGIN = 7;
+    var shifts = [];
+    for (var k = 0; k < MAX_POINTINGS; k++) {
+      shifts.push({
+        x: (Math.random() * 2 - 1) * (MARGIN - 1.5),
+        y: (Math.random() * 2 - 1) * 1.2,
+        tilt: (Math.random() * 2 - 1) * 0.011,
+        tone: 0.975 + Math.random() * 0.05
+      });
+    }
+    var leftFirst = Math.random() < 0.5;
+
+    var pointA = new Float32Array(MAX_POINTINGS * 4);
+    var pointB = new Float32Array(MAX_POINTINGS * 4);
+    var count = 0;
+    var cell = 0;
+    var fillAt = 0;
     var W = 0;
     var H = 0;
     var dpr = 1;
@@ -264,19 +343,66 @@
       canvas.width = Math.max(1, Math.round(W * dpr));
       canvas.height = Math.max(1, Math.round(H * dpr));
       ctx.viewport(0, 0, canvas.width, canvas.height);
-      tiles.forEach(function (tile, i) {
-        var st = tile.style;
-        var num = function (name) { return parseFloat(st.getPropertyValue(name)) || 0; };
-        tileA[i * 4] = num('--x') * W / 100;
-        tileA[i * 4 + 1] = num('--y') * H / 100;
-        tileA[i * 4 + 2] = num('--w') * W / 100;
-        tileA[i * 4 + 3] = num('--h') * H / 100;
-        tileB[i * 4] = num('--r') * Math.PI / 180;
-        tileB[i * 4 + 1] = parseFloat(st.getPropertyValue('--tone')) || 1;
-        tileB[i * 4 + 2] = num('--d');
-      });
+
+      cell = (W - 2 * MARGIN - 2 * CELL_GAP - MODULE_GAP) / 4;
+      var pitch = cell + CELL_GAP;
+      var rows = Math.max(1, Math.min(MAX_POINTINGS * 2, Math.floor((H - 4 + CELL_GAP) / pitch)));
+      count = Math.ceil(rows / 2);
+      var top = (H - (rows * pitch - CELL_GAP)) / 2;
+      var wide = 4 * cell + 2 * CELL_GAP + MODULE_GAP;
+      var quads = '';
+
+      for (var i = 0; i < count; i++) {
+        var own = Math.min(2, rows - i * 2);
+        var last = own === 2 ? 4 : 0;       /* first detector of its bottom row */
+        /* The outline: a corner missing at each end of the strip, and one
+           outer detector missing on each side part of the way down. */
+        var mask = 0;
+        if (i === 0) mask |= 1 << (leftFirst ? 0 : 3);
+        if (i === count - 1) mask |= 1 << (last + (leftFirst ? 3 : 0));
+        if (count > 3 && i === Math.floor(count * 0.32)) mask |= 1 << (last + (leftFirst ? 3 : 0));
+        if (count > 3 && i === Math.floor(count * 0.66)) mask |= 1 << (leftFirst ? 0 : 3);
+
+        var sh = shifts[i];
+        var cx = W / 2 + sh.x;
+        var y = top + i * 2 * pitch + sh.y;
+        var high = own * cell + (own - 1) * CELL_GAP;
+        pointA.set([cx, y, sh.tilt, own], i * 4);
+        pointB[i * 4] = sh.tone;
+        pointB[i * 4 + 1] = i * 8 * STEP;
+        pointB[i * 4 + 2] = pointB[i * 4 + 2] || -10;
+        pointB[i * 4 + 3] = mask;
+
+        /* The same footprint as a clip path for the twinkle layer, so no
+           star glows over a missing detector. Each detector is one
+           quadrilateral, grown to meet its neighbours. */
+        var cos = Math.cos(sh.tilt);
+        var sin = Math.sin(sh.tilt);
+        var cy = y + high / 2;
+        for (var det = 0; det < own * 4; det++) {
+          if (mask & (1 << det)) continue;
+          var col = det % 4;
+          var row = (det - col) / 4;
+          var x0 = col * pitch + (col > 1 ? MODULE_GAP - CELL_GAP : 0) - (col === 2 ? MODULE_GAP / 2 : CELL_GAP / 2);
+          var x1 = col * pitch + (col > 1 ? MODULE_GAP - CELL_GAP : 0) + cell + (col === 1 ? MODULE_GAP / 2 : CELL_GAP / 2);
+          var y0 = row * pitch - CELL_GAP / 2;
+          var y1 = row * pitch + cell + CELL_GAP / 2;
+          [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].forEach(function (pt, n) {
+            var lx = pt[0] - wide / 2;
+            var ly = pt[1] - high / 2;
+            quads += (n ? 'L' : 'M') + (cx + cos * lx - sin * ly).toFixed(1) + ' ' + (cy + sin * lx + cos * ly).toFixed(1);
+          });
+          quads += 'Z';
+        }
+      }
+      fillAt = count * 8 * STEP + EXPOSURE + 0.4;
+      glow.style.clipPath = 'path("' + quads + '")';
       r.start();
     }
+
+    r.reexposePointing = function () {
+      if (count) pointB[Math.floor(Math.random() * count) * 4 + 2] = now();
+    };
 
     /* Same 48s back-and-forth drift as the CSS nebula-drift keyframes. */
     function drift(t) {
@@ -302,7 +428,6 @@
       var d = drift(t);
       glowStage.style.transform = 'scale(' + d[0].toFixed(4) + ') translate3d(' + (d[1] * 100).toFixed(3) + '%,' + (d[2] * 100).toFixed(3) + '%,0)';
 
-      for (var i = 0; i < tiles.length; i++) tileB[i * 4 + 3] = r.reexpose[i];
       ctx.uniform1i(u.uTex, 0);
       ctx.uniform2f(u.uRes, W, H);
       ctx.uniform1f(u.uDpr, dpr);
@@ -311,9 +436,12 @@
       ctx.uniform1f(u.uTexW, texW);
       ctx.uniform1f(u.uDescent, descent);
       ctx.uniform3f(u.uDrift, d[0], d[1], d[2]);
-      ctx.uniform4fv(u.uTileA, tileA);
-      ctx.uniform4fv(u.uTileB, tileB);
+      ctx.uniform1i(u.uCount, count);
+      ctx.uniform3f(u.uCell, cell, CELL_GAP, MODULE_GAP);
+      ctx.uniform4fv(u.uPointA, pointA);
+      ctx.uniform4fv(u.uPointB, pointB);
       ctx.uniform1f(u.uExposedAt, r.exposedAt);
+      ctx.uniform1f(u.uFillAt, fillAt);
       ctx.uniform1f(u.uFlow, 3.0);
       ctx.clearColor(0, 0, 0, 0);
       ctx.clear(ctx.COLOR_BUFFER_BIT);
@@ -333,6 +461,7 @@
   function fallBack() {
     gl = null;
     nebula.classList.remove('has-gl');
+    glow.style.clipPath = '';
     glowStage.style.transform = '';
     onScroll();
   }
@@ -341,6 +470,9 @@
     try {
       gl = createRenderer();
     } catch (err) {
+      /* A shader that fails to compile ends up here; say why, then use the
+         tile fallback. */
+      if (window.console) console.warn('Nebula strip: WebGL renderer unavailable.', err);
       gl = null;
     }
     if (!gl) fallBack();

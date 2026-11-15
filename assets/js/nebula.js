@@ -11,7 +11,10 @@
  * are exposed one after another: a grainy monochrome frame first, then
  * colour as further filters come in. Once all are in, a dither closes the
  * gaps and the pointings merge into one picture with a ragged outline; no
- * seams stay inside it. The gas drifts slowly while the stars stay put.
+ * seams stay inside it. A second, offset set of pointings lies underneath
+ * and shows only where it sticks out past the first: a dimmer, grainier
+ * fringe, like the shallow coverage at the border of a real mosaic. The
+ * gas drifts slowly while the stars stay put.
  *
  * The inline script in _includes/nebula-strip.html runs first: it picks the
  * nebula (stored on the element as .nebula), builds the twinkle layer and
@@ -145,8 +148,9 @@
     'uniform vec3 uCell;\n' +         /* detector size, gap between detectors, gap between modules (CSS px) */
     'uniform vec4 uPointA[16];\n' +   /* centre x, top y, tilt (rad), rows (1 or 2) */
     'uniform vec4 uPointB[16];\n' +   /* tone, delay of its first detector (s), re-exposure start (s), missing detectors (bit mask) */
+    'uniform vec2 uPointC[16];\n' +   /* seconds after uExposedAt when its gaps start closing, depth (1 deep, 0 shallow) */
+    'uniform float uPad;\n' +         /* how far the canvas reaches past the frame on each side, CSS px */
     'uniform float uExposedAt;\n' +
-    'uniform float uFillAt;\n' +      /* seconds after uExposedAt when the dither starts closing gaps */
     'uniform float uFlow;\n' +        /* gas displacement, CSS px */
     'out vec4 outColor;\n' +
     'float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }\n' +
@@ -162,9 +166,9 @@
     'float lum(vec3 c) { return dot(c, vec3(0.299, 0.587, 0.114)); }\n' +
     'float bump(float x, float at, float width) { float d = (x - at) / width; return exp(-d * d); }\n' +
     'void main() {\n' +
-    '  vec2 p = vec2(gl_FragCoord.x, uRes.y * uDpr - gl_FragCoord.y) / uDpr;\n' +
+    '  vec2 p = vec2(gl_FragCoord.x / uDpr - uPad, uRes.y - gl_FragCoord.y / uDpr);\n' +
     /* Same geometry as .nebula-stage in CSS, so the twinkle layer lines up. */
-    '  float sw = max(uRes.x, uRes.y * 1.35 / uAr);\n' +
+    '  float sw = max(uRes.x + 2.0 * uPad, uRes.y * 1.35 / uAr);\n' +
     '  float sh = sw * uAr;\n' +
     '  vec2 s0 = vec2((uRes.x - sw) * 0.5, (uRes.y - sh) * uDescent);\n' +
     '  vec2 o = s0 + vec2(0.5 * sw, 0.42 * sh);\n' +
@@ -184,6 +188,9 @@
     '  vec3 sky = textureLod(uTex, suv, baseLod).rgb * breathe;\n' +
     /* Read noise: one value per device pixel, new every frame. */
     '  float grainAt = hash(floor(p * uDpr) + fract(t * 7.3) * vec2(37.0, 91.0)) - 0.5;\n' +
+    /* Grain that stays: the shallow fringe never gets enough exposures to
+       lose it. It changes slowly, a few times a second. */
+    '  float grainKept = hash(floor(p * uDpr) + floor(t * 3.0) * vec2(17.0, 53.0)) - 0.5;\n' +
     '  float c = uCell.x, g = uCell.y, G = uCell.z;\n' +
     '  float since = uExposedAt < 0.0 ? -1.0 : t - uExposedAt;\n' +
     '  float wp = 4.0 * c + 2.0 * g + G;\n' +
@@ -193,6 +200,7 @@
     '    if (i >= uCount) break;\n' +
     '    vec4 a = uPointA[i];\n' +
     '    vec4 b = uPointB[i];\n' +
+    '    float depth = uPointC[i].y;\n' +
     '    float hp = a.w * c + (a.w - 1.0) * g;\n' +
     '    vec2 d = p - vec2(a.x, a.y + hp * 0.5);\n' +
     '    float cr = cos(a.z), sr = sin(a.z);\n' +
@@ -204,7 +212,7 @@
        between pointings leave no cracks, and seams and tone differences
        fade out. While a pointing is being taken again it comes apart
        into its detectors for a moment. */
-    '    float after = since < 0.0 ? -1.0 : since - uFillAt - float(i) * 0.14;\n' +
+    '    float after = since < 0.0 ? -1.0 : since - uPointC[i].x;\n' +
     '    float grow = 0.5 * smoothstep(0.0, 0.9, after);\n' +
     '    float ra = (t - b.z) / 2.1;\n' +
     '    float apart = (ra >= 0.0 && ra <= 1.0) ? smoothstep(0.0, 0.1, ra) * (1.0 - smoothstep(0.8, 1.0, ra)) : 0.0;\n' +
@@ -247,7 +255,9 @@
     /* Until it merges, each detector has its own response: a few percent
        lighter or darker. */
     '    float tone = mix(b.x * (1.0 + 0.06 * (hash(vec2(float(i) + 3.0, det + 7.0)) - 0.5)), 1.0, merged);\n' +
-    '    vec3 rgb = mix(vec3(lum(sky)), sky, sat) * br * tone + grainAt * grain;\n' +
+    /* Shallow pointings end up dimmer, less saturated and still grainy. */
+    '    float dim = mix(0.6, 1.0, depth);\n' +
+    '    vec3 rgb = mix(vec3(lum(sky)), sky, sat * mix(0.7, 1.0, depth)) * br * tone * dim + grainAt * grain + grainKept * 0.065 * (1.0 - depth);\n' +
     '    rgb = mix(vec3(0.043, 0.071, 0.149), rgb, smoothstep(0.0, 0.03, pe));\n' +
     /* Detector edges are a touch darker until the pointing merges. */
     '    rgb *= 1.0 - 0.2 * (1.0 - merged) * (1.0 - smoothstep(0.0, 1.5, edge));\n' +
@@ -289,7 +299,7 @@
     ctx.vertexAttribPointer(aPos, 2, ctx.FLOAT, false, 0, 0);
 
     var u = {};
-    ['uTex', 'uRes', 'uDpr', 'uTime', 'uAr', 'uTexW', 'uDescent', 'uDrift', 'uCount', 'uCell', 'uPointA', 'uPointB', 'uExposedAt', 'uFillAt', 'uFlow'].forEach(function (name) {
+    ['uTex', 'uRes', 'uDpr', 'uTime', 'uAr', 'uTexW', 'uDescent', 'uDrift', 'uCount', 'uCell', 'uPointA', 'uPointB', 'uPointC', 'uPad', 'uExposedAt', 'uFlow'].forEach(function (name) {
       u[name] = ctx.getUniformLocation(prog, name);
     });
 
@@ -326,26 +336,40 @@
        n, counted left to right, top row first. */
     var CELL_GAP = 3;
     var MODULE_GAP = 7;
-    var MARGIN = 13;
+    var MARGIN = 9;
+    var PAD = 24;            /* the canvas reaches this far past the frame, left and right */
+    var DEEP = MAX_POINTINGS / 2;
     var shifts = [];
-    for (var k = 0; k < MAX_POINTINGS; k++) {
+    var under = [];          /* the shallow pointings underneath, one per deep one */
+    for (var k = 0; k < DEEP; k++) {
       shifts.push({
         x: (Math.random() * 2 - 1) * (MARGIN - 2.5),
         y: (Math.random() * 2 - 1) * 1.2,
-        tilt: (Math.random() * 2 - 1) * 0.015,
+        tilt: (Math.random() * 2 - 1) * 0.013,
         tone: 0.975 + Math.random() * 0.05
+      });
+      /* Pushed 10 to 24px to one side and up to 0.45 of a row up or down,
+         tilted more, with two or three of its eight detectors missing. */
+      var holes = 0;
+      for (var bit = 0; bit < 8; bit++) if (Math.random() < 0.3) holes |= 1 << bit;
+      under.push({
+        x: (Math.random() < 0.5 ? -1 : 1) * (10 + Math.random() * (PAD - 10)),
+        y: (Math.random() * 2 - 1) * 0.45,
+        tilt: (Math.random() * 2 - 1) * 0.034,
+        tone: 0.95 + Math.random() * 0.1,
+        mask: holes
       });
     }
     /* The outline: for every row, whether its outer detector is missing on
-       the left, on the right, or on both sides. About a third of the rows
+       the left, on the right, or on both sides. About a quarter of the rows
        lose one on each side, never more than two rows running, and rarely
        both sides at once. */
     var notches = [];
     var runLeft = 0;
     var runRight = 0;
     for (var n = 0; n < MAX_POINTINGS * 2; n++) {
-      var left = Math.random() < 0.36 && runLeft < 2;
-      var right = Math.random() < 0.36 && runRight < 2;
+      var left = Math.random() < 0.27 && runLeft < 2;
+      var right = Math.random() < 0.27 && runRight < 2;
       if (left && right && Math.random() < 0.8) {
         if (Math.random() < 0.5) left = false; else right = false;
       }
@@ -357,7 +381,8 @@
 
     var pointA = new Float32Array(MAX_POINTINGS * 4);
     var pointB = new Float32Array(MAX_POINTINGS * 4);
-    var count = 0;
+    var pointC = new Float32Array(MAX_POINTINGS * 2);
+    var count = 0;           /* deep pointings; as many shallow ones come before them */
     var cell = 0;
     var fillAt = 0;
     var W = 0;
@@ -368,14 +393,15 @@
       W = frame.clientWidth;
       H = frame.clientHeight;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.max(1, Math.round(W * dpr));
+      canvas.width = Math.max(1, Math.round((W + 2 * PAD) * dpr));
       canvas.height = Math.max(1, Math.round(H * dpr));
       ctx.viewport(0, 0, canvas.width, canvas.height);
 
       cell = (W - 2 * MARGIN - 2 * CELL_GAP - MODULE_GAP) / 4;
       var pitch = cell + CELL_GAP;
-      var rows = Math.max(1, Math.min(MAX_POINTINGS * 2, Math.floor((H - 4 + CELL_GAP) / pitch)));
+      var rows = Math.max(1, Math.min(DEEP * 2, Math.floor((H - 4 + CELL_GAP) / pitch)));
       count = Math.ceil(rows / 2);
+      fillAt = count * 8 * STEP + EXPOSURE + 0.4;
       var top = (H - (rows * pitch - CELL_GAP)) / 2;
       var wide = 4 * cell + 2 * CELL_GAP + MODULE_GAP;
       var quads = '';
@@ -398,11 +424,28 @@
         var cx = W / 2 + sh.x;
         var y = top + i * 2 * pitch + sh.y;
         var high = own * cell + (own - 1) * CELL_GAP;
-        pointA.set([cx, y, sh.tilt, own], i * 4);
-        pointB[i * 4] = sh.tone;
-        pointB[i * 4 + 1] = i * 8 * STEP;
+        /* Deep pointings are drawn after the shallow ones, so on top. */
+        var at = count + i;
+        pointA.set([cx, y, sh.tilt, own], at * 4);
+        pointB[at * 4] = sh.tone;
+        pointB[at * 4 + 1] = i * 8 * STEP;
+        pointB[at * 4 + 2] = pointB[at * 4 + 2] || -10;
+        pointB[at * 4 + 3] = mask;
+        pointC[at * 2] = fillAt + i * 0.14;
+        pointC[at * 2 + 1] = 1;
+
+        /* Its shallow companion: taken during the dither, kept inside the
+           strip top and bottom. */
+        var un = under[i];
+        var uy = Math.min(Math.max(top + i * 2 * pitch + un.y * pitch, 2), H - (2 * cell + CELL_GAP) - 2);
+        var first = fillAt + 0.2 + i * 4 * STEP;
+        pointA.set([W / 2 + un.x, uy, un.tilt, 2], i * 4);
+        pointB[i * 4] = un.tone;
+        pointB[i * 4 + 1] = first;
         pointB[i * 4 + 2] = pointB[i * 4 + 2] || -10;
-        pointB[i * 4 + 3] = mask;
+        pointB[i * 4 + 3] = un.mask;
+        pointC[i * 2] = first + 8 * STEP + EXPOSURE + 0.2;
+        pointC[i * 2 + 1] = 0;
 
         /* The same footprint as a clip path for the twinkle layer, so no
            star glows over a missing detector. Each detector is one
@@ -426,13 +469,12 @@
           quads += 'Z';
         }
       }
-      fillAt = count * 8 * STEP + EXPOSURE + 0.4;
       glow.style.clipPath = 'path("' + quads + '")';
       r.start();
     }
 
     r.reexposePointing = function () {
-      if (count) pointB[Math.floor(Math.random() * count) * 4 + 2] = now();
+      if (count) pointB[Math.floor(Math.random() * count * 2) * 4 + 2] = now();
     };
 
     /* Same 48s back-and-forth drift as the CSS nebula-drift keyframes. */
@@ -467,12 +509,13 @@
       ctx.uniform1f(u.uTexW, texW);
       ctx.uniform1f(u.uDescent, descent);
       ctx.uniform3f(u.uDrift, d[0], d[1], d[2]);
-      ctx.uniform1i(u.uCount, count);
+      ctx.uniform1i(u.uCount, count * 2);
       ctx.uniform3f(u.uCell, cell, CELL_GAP, MODULE_GAP);
       ctx.uniform4fv(u.uPointA, pointA);
       ctx.uniform4fv(u.uPointB, pointB);
+      ctx.uniform2fv(u.uPointC, pointC);
+      ctx.uniform1f(u.uPad, PAD);
       ctx.uniform1f(u.uExposedAt, r.exposedAt);
-      ctx.uniform1f(u.uFillAt, fillAt);
       ctx.uniform1f(u.uFlow, 3.0);
       ctx.clearColor(0, 0, 0, 0);
       ctx.clear(ctx.COLOR_BUFFER_BIT);

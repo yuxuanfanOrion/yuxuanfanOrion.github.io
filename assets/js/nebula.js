@@ -10,7 +10,8 @@
  * and tilted, with a few detectors missing along the outline. Detectors
  * are exposed one after another: a grainy monochrome frame first, then
  * colour as further filters come in. Once all are in, a dither closes the
- * gaps. The gas drifts slowly while the stars stay put.
+ * gaps and the pointings merge into one picture with a ragged outline; no
+ * seams stay inside it. The gas drifts slowly while the stars stay put.
  *
  * The inline script in _includes/nebula-strip.html runs first: it picks the
  * nebula (stored on the element as .nebula), builds the twinkle layer and
@@ -197,8 +198,18 @@
     '    float cr = cos(a.z), sr = sin(a.z);\n' +
     '    vec2 l = vec2(cr * d.x + sr * d.y, -sr * d.x + cr * d.y) + vec2(wp, hp) * 0.5;\n' +
     '    if (l.x < -G || l.x > wp + G || l.y < -g || l.y > hp + g) continue;\n' +
-    /* The dither: each detector grows into half of every gap around it. */
-    '    float grow = since < 0.0 ? 0.0 : 0.5 * smoothstep(0.0, 0.9, since - uFillAt - float(i) * 0.14);\n' +
+    /* The dither: each detector grows into half of every gap around it.
+       After that the pointing merges into the mosaic: detectors overlap
+       their neighbours by a few pixels, so the small shifts and tilts
+       between pointings leave no cracks, and seams and tone differences
+       fade out. While a pointing is being taken again it comes apart
+       into its detectors for a moment. */
+    '    float after = since < 0.0 ? -1.0 : since - uFillAt - float(i) * 0.14;\n' +
+    '    float grow = 0.5 * smoothstep(0.0, 0.9, after);\n' +
+    '    float ra = (t - b.z) / 2.1;\n' +
+    '    float apart = (ra >= 0.0 && ra <= 1.0) ? smoothstep(0.0, 0.1, ra) * (1.0 - smoothstep(0.8, 1.0, ra)) : 0.0;\n' +
+    '    float merged = smoothstep(0.7, 2.1, after) * (1.0 - apart);\n' +
+    '    float over = 4.0 * merged;\n' +
     /* Which detector: module (left or right), column inside it, row. */
     '    float m = step(module + G * 0.5, l.x);\n' +
     '    float lx = l.x - m * (module + G);\n' +
@@ -208,7 +219,7 @@
     '    float iny = l.y - row * (c + g);\n' +
     '    float gapLeft = (m > 0.5 && col < 0.5) ? G : g;\n' +
     '    float gapRight = (m < 0.5 && col > 0.5) ? G : g;\n' +
-    '    float edge = min(min(inx + gapLeft * grow, c + gapRight * grow - inx), min(iny + g * grow, c + g * grow - iny));\n' +
+    '    float edge = over + min(min(inx + gapLeft * grow, c + gapRight * grow - inx), min(iny + g * grow, c + g * grow - iny));\n' +
     '    float cov = clamp(edge * uDpr + 0.5, 0.0, 1.0);\n' +
     '    if (cov <= 0.0) continue;\n' +
     '    float det = row * 4.0 + m * 2.0 + col;\n' +
@@ -233,13 +244,13 @@
     '      grain = max(grain, 0.2 * again);\n' +
     '      marks = max(marks, smoothstep(0.0, 0.1, rk) * (1.0 - smoothstep(0.75, 1.0, rk)));\n' +
     '    }\n' +
-    /* Each detector has its own response: a few percent lighter or darker. */
-    '    float tone = b.x * (1.0 + 0.06 * (hash(vec2(float(i) + 3.0, det + 7.0)) - 0.5));\n' +
+    /* Until it merges, each detector has its own response: a few percent
+       lighter or darker. */
+    '    float tone = mix(b.x * (1.0 + 0.06 * (hash(vec2(float(i) + 3.0, det + 7.0)) - 0.5)), 1.0, merged);\n' +
     '    vec3 rgb = mix(vec3(lum(sky)), sky, sat) * br * tone + grainAt * grain;\n' +
     '    rgb = mix(vec3(0.043, 0.071, 0.149), rgb, smoothstep(0.0, 0.03, pe));\n' +
-    /* Detector edges are a touch darker, so seams stay readable after the
-       gaps have closed. */
-    '    rgb *= 1.0 - 0.2 * (1.0 - smoothstep(0.0, 1.5, edge));\n' +
+    /* Detector edges are a touch darker until the pointing merges. */
+    '    rgb *= 1.0 - 0.2 * (1.0 - merged) * (1.0 - smoothstep(0.0, 1.5, edge));\n' +
     /* Corner brackets while a detector is being read out. */
     '    float mx = min(inx, c - inx), my = min(iny, c - iny);\n' +
     '    float bracket = max(step(mx, 1.0) * step(my, 6.5), step(my, 1.0) * step(mx, 6.5)) * step(0.0, min(mx, my));\n' +
@@ -315,15 +326,32 @@
        n, counted left to right, top row first. */
     var CELL_GAP = 3;
     var MODULE_GAP = 7;
-    var MARGIN = 7;
+    var MARGIN = 13;
     var shifts = [];
     for (var k = 0; k < MAX_POINTINGS; k++) {
       shifts.push({
-        x: (Math.random() * 2 - 1) * (MARGIN - 1.5),
+        x: (Math.random() * 2 - 1) * (MARGIN - 2.5),
         y: (Math.random() * 2 - 1) * 1.2,
-        tilt: (Math.random() * 2 - 1) * 0.011,
+        tilt: (Math.random() * 2 - 1) * 0.015,
         tone: 0.975 + Math.random() * 0.05
       });
+    }
+    /* The outline: for every row, whether its outer detector is missing on
+       the left, on the right, or on both sides. About a third of the rows
+       lose one on each side, never more than two rows running, and rarely
+       both sides at once. */
+    var notches = [];
+    var runLeft = 0;
+    var runRight = 0;
+    for (var n = 0; n < MAX_POINTINGS * 2; n++) {
+      var left = Math.random() < 0.36 && runLeft < 2;
+      var right = Math.random() < 0.36 && runRight < 2;
+      if (left && right && Math.random() < 0.8) {
+        if (Math.random() < 0.5) left = false; else right = false;
+      }
+      runLeft = left ? runLeft + 1 : 0;
+      runRight = right ? runRight + 1 : 0;
+      notches.push((left ? 1 : 0) | (right ? 2 : 0));
     }
     var leftFirst = Math.random() < 0.5;
 
@@ -354,14 +382,17 @@
 
       for (var i = 0; i < count; i++) {
         var own = Math.min(2, rows - i * 2);
-        var last = own === 2 ? 4 : 0;       /* first detector of its bottom row */
-        /* The outline: a corner missing at each end of the strip, and one
-           outer detector missing on each side part of the way down. */
+        /* Missing detectors, row by row. The first and the last row of the
+           strip always lose a corner. */
         var mask = 0;
-        if (i === 0) mask |= 1 << (leftFirst ? 0 : 3);
-        if (i === count - 1) mask |= 1 << (last + (leftFirst ? 3 : 0));
-        if (count > 3 && i === Math.floor(count * 0.32)) mask |= 1 << (last + (leftFirst ? 3 : 0));
-        if (count > 3 && i === Math.floor(count * 0.66)) mask |= 1 << (leftFirst ? 0 : 3);
+        for (var rr = 0; rr < own; rr++) {
+          var absolute = i * 2 + rr;
+          var notch = notches[absolute];
+          if (absolute === 0 && !notch) notch = leftFirst ? 1 : 2;
+          if (absolute === rows - 1 && !notch) notch = leftFirst ? 2 : 1;
+          if (notch & 1) mask |= 1 << (rr * 4);
+          if (notch & 2) mask |= 1 << (rr * 4 + 3);
+        }
 
         var sh = shifts[i];
         var cx = W / 2 + sh.x;

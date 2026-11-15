@@ -348,9 +348,8 @@ html[data-theme="dark"] .portrait-frame {
 
 /* WebGL path: the canvas draws the whole mosaic, corner marks included, so
    the tile elements are not shown. The canvas is 24px wider than the frame
-   on each side (PAD in nebula.js): room for the shallow fringe. It casts a
-   soft shadow on the white page and a faint glow at night, both following
-   the ragged outline. */
+   on each side (PAD in nebula.js): room for the shallow fringe. On the
+   white page it casts a soft shadow that follows the ragged outline. */
 .nebula-gl {
   display: none;
   position: absolute;
@@ -361,8 +360,10 @@ html[data-theme="dark"] .portrait-frame {
   filter: drop-shadow(0 10px 22px rgba(11, 18, 38, 0.24));
 }
 
+/* No glow at night: it filled the notches with haze and made them read as
+   solid blocks. */
 html[data-theme="dark"] .nebula-gl {
-  filter: drop-shadow(0 0 20px rgba(110, 150, 255, 0.13));
+  filter: none;
 }
 
 /* The twinkle layer is clipped to the mosaic's footprint by the script. */

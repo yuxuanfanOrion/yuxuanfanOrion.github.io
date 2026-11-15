@@ -232,6 +232,10 @@
     '    if (cov <= 0.0) continue;\n' +
     '    float det = row * 4.0 + m * 2.0 + col;\n' +
     '    if (mod(floor(b.w / exp2(det)), 2.0) > 0.5) continue;\n' +
+    /* Deep detectors show as empty dark panels before they are read out;
+       shallow ones are simply absent until then. */
+    '    cov *= mix(smoothstep(0.0, 0.03, since < 0.0 ? 0.0 : (since - b.y - det * ' + STEP.toFixed(3) + ') / ' + EXPOSURE.toFixed(2) + '), 1.0, depth);\n' +
+    '    if (cov <= 0.0) continue;\n' +
     /* Exposure, detector by detector. The first frame is monochrome and
        grainy; two more filters bring the colour in, each with a short
        flash, and the grain settles. */
@@ -348,12 +352,12 @@
         tilt: (Math.random() * 2 - 1) * 0.013,
         tone: 0.975 + Math.random() * 0.05
       });
-      /* Pushed 10 to 24px to one side and up to 0.45 of a row up or down,
+      /* Pushed 8 to 20px to one side and up to 0.45 of a row up or down,
          tilted more, with two or three of its eight detectors missing. */
       var holes = 0;
       for (var bit = 0; bit < 8; bit++) if (Math.random() < 0.3) holes |= 1 << bit;
       under.push({
-        x: (Math.random() < 0.5 ? -1 : 1) * (10 + Math.random() * (PAD - 10)),
+        x: (Math.random() < 0.5 ? -1 : 1) * (8 + Math.random() * 12),
         y: (Math.random() * 2 - 1) * 0.45,
         tilt: (Math.random() * 2 - 1) * 0.034,
         tone: 0.95 + Math.random() * 0.1,
@@ -361,20 +365,17 @@
       });
     }
     /* The outline: for every row, whether its outer detector is missing on
-       the left, on the right, or on both sides. About a quarter of the rows
-       lose one on each side, never more than two rows running, and rarely
-       both sides at once. */
+       the left or on the right. About one row in eight loses one on each
+       side: never two rows running on the same side, never both sides of
+       one row. The shallow fringe does the rest. */
     var notches = [];
-    var runLeft = 0;
-    var runRight = 0;
+    var wasLeft = false;
+    var wasRight = false;
     for (var n = 0; n < MAX_POINTINGS * 2; n++) {
-      var left = Math.random() < 0.27 && runLeft < 2;
-      var right = Math.random() < 0.27 && runRight < 2;
-      if (left && right && Math.random() < 0.8) {
-        if (Math.random() < 0.5) left = false; else right = false;
-      }
-      runLeft = left ? runLeft + 1 : 0;
-      runRight = right ? runRight + 1 : 0;
+      var left = !wasLeft && Math.random() < 0.13;
+      var right = !wasRight && !left && Math.random() < 0.13;
+      wasLeft = left;
+      wasRight = right;
       notches.push((left ? 1 : 0) | (right ? 2 : 0));
     }
     var leftFirst = Math.random() < 0.5;
